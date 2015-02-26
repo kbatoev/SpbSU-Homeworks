@@ -1,0 +1,66 @@
+#include "linkedList.h"
+
+LinkedList::ListElement::ListElement()
+{
+    this->value = 0;
+    this->next = nullptr;
+}
+
+LinkedList::ListElement::ListElement(int nValue, LinkedList::ListElement *nNext)
+{
+    value = nValue;
+    next = nNext;
+}
+
+LinkedList::LinkedList()
+{
+    head = new ListElement;
+}
+
+LinkedList::~LinkedList()
+{
+    ListElement *current = head->next;
+    ListElement *previous = head;
+    while (current != nullptr)
+    {
+        delete previous;
+        previous = current;
+        current = current->next;
+    }
+}
+
+void LinkedList::add(int value)
+{
+    ListElement *newElement = new ListElement(value, head->next);
+    head->next = newElement;
+}
+
+bool LinkedList::remove(int value)
+{
+    ListElement *previous = head;
+    ListElement *current = head->next;
+    while (current != nullptr && current->value != value)
+    {
+        previous = current;
+        current = current->next;
+    }
+
+    if (current == nullptr)
+        return false;
+    else
+    {
+        previous->next = current->next;
+        delete current;
+        return true;
+    }
+}
+
+void LinkedList::printList()
+{
+    ListElement *current = head->next;
+    while (current != nullptr)
+    {
+        cout << current->value << " ";
+        current = current->next;
+    }
+}
