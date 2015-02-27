@@ -6,7 +6,6 @@ using namespace std;
 
 int main()
 {
-    /*
     LinkedList *list = new LinkedList;
     list->add(15);
     list->add(90);
@@ -14,7 +13,7 @@ int main()
         cout << "True" << endl;
     list->printList();
     list->add(56);
-    */
+    delete list;
 
     DoublyLinkedList *doubleList = new DoublyLinkedList;
 
@@ -26,6 +25,7 @@ int main()
     doubleList->printList();
     doubleList->remove(3);
     doubleList->printList();
+    delete doubleList;
 
 
     return 0;
