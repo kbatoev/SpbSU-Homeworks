@@ -60,7 +60,7 @@ void LinkedList::printList()
     ListElement *current = head->next;
     while (current != nullptr)
     {
-        cout << current->value << " ";
+        std::cout << current->value << " ";
         current = current->next;
     }
 }

@@ -1,10 +1,9 @@
 #pragma once
 
 #include "list.h"
-
 #include <iostream>
 
-class LinkedList : List
+class DoublyLinkedList : List
 {
 private:
     class ListElement
@@ -12,15 +11,17 @@ private:
     public:
         int value;
         ListElement *next;
+        ListElement *previous;
         ListElement();
-        ListElement(int nValue, ListElement *nNext);
+        ListElement(int nValue, ListElement *nNext, ListElement *nPrevious);
     };
-    ListElement *head;
 
+    ListElement *head;
 public:
-    LinkedList();
-    ~LinkedList();
+    DoublyLinkedList();
+    ~DoublyLinkedList();
     void add(int value);
     bool remove(int value);
     void printList();
 };
+

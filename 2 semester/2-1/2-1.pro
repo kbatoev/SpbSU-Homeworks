@@ -5,12 +5,14 @@ CONFIG -= qt
 CONFIG += c++11
 
 SOURCES += main.cpp \
-    linkedList.cpp
+    linkedList.cpp \
+    doublyLinkedList.cpp
 
 include(deployment.pri)
 qtcAddDeployment()
 
 HEADERS += \
     list.h \
-    linkedList.h
+    linkedList.h \
+    doublyLinkedList.h
 
