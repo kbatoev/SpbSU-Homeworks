@@ -11,7 +11,7 @@ private:
         int value;
         StackElement *next;
         StackElement();
-        StackElement(int value, StackElement *next);
+        StackElement(int newValue, StackElement *newNext);
     };
     StackElement *head;
 

@@ -7,7 +7,7 @@ class ArrayStack : Stack
 private:
     int index;
     int *array;
-    int size;
+    int maxSize;
 public:
     ArrayStack();
     ~ArrayStack();

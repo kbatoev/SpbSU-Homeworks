@@ -6,7 +6,10 @@ CONFIG += c++11
 
 SOURCES += main.cpp \
     linkedStack.cpp \
-    arrayStack.cpp
+    arrayStack.cpp \
+    converterToPostfix.cpp \
+    calculator.cpp \
+    countPostfix.cpp
 
 include(deployment.pri)
 qtcAddDeployment()
@@ -14,5 +17,8 @@ qtcAddDeployment()
 HEADERS += \
     stack.h \
     linkedStack.h \
-    arrayStack.h
+    arrayStack.h \
+    converterToPostfix.h \
+    calculator.h \
+    countPostfix.h
 

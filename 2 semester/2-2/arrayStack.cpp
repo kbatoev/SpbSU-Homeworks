@@ -3,8 +3,8 @@
 ArrayStack::ArrayStack()
 {
     index = 0;
-    size = 1000;
-    array = new int[size];
+    maxSize = 1000;
+    array = new int[maxSize];
 }
 
 ArrayStack::~ArrayStack()
@@ -14,11 +14,11 @@ ArrayStack::~ArrayStack()
 
 void ArrayStack::push(int value)
 {
-    if (index == size)
+    if (index == maxSize)
     {
-        size *= 2;
-        int *newArray = new int[size];
-        for (int i = 0; i < size; i++)
+        maxSize *= 2;
+        int *newArray = new int[maxSize];
+        for (int i = 0; i < maxSize; i++)
             newArray[i] = array[i];
         delete array;
         array = newArray;
@@ -44,8 +44,3 @@ bool ArrayStack::isEmpty()
 {
     return index == 0;
 }
-
-
-
-
-

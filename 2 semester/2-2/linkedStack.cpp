@@ -46,14 +46,9 @@ bool LinkedStack::isEmpty()
     return head->next == nullptr;
 }
 
-LinkedStack::StackElement::StackElement()
-{
-    next = nullptr;
-    value = 0;
-}
+LinkedStack::StackElement::StackElement() : value(0), next(nullptr)
+{}
 
-LinkedStack::StackElement::StackElement(int value, LinkedStack::StackElement *next)
-{
-    this->value = value;
-    this->next = next;
-}
+LinkedStack::StackElement::StackElement(int newValue, LinkedStack::StackElement *newNext)
+    : value(newValue), next(newNext)
+{}
