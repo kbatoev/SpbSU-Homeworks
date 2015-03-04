@@ -1,16 +1,11 @@
 #include "linkedList.h"
 
-LinkedList::ListElement::ListElement()
-{
-    this->value = 0;
-    this->next = nullptr;
-}
+LinkedList::ListElement::ListElement() : value(0), next(nullptr)
+{}
 
-LinkedList::ListElement::ListElement(int nValue, LinkedList::ListElement *nNext)
-{
-    value = nValue;
-    next = nNext;
-}
+LinkedList::ListElement::ListElement(int newValue, LinkedList::ListElement *newNext)
+    : value(newValue), next(newNext)
+{}
 
 LinkedList::LinkedList()
 {

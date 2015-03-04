@@ -60,16 +60,10 @@ void DoublyLinkedList::printList()
 }
 
 DoublyLinkedList::ListElement::ListElement()
-{
-    value = 0;
-    next = nullptr;
-    previous = nullptr;
-}
+    : value(0), next(nullptr), previous(nullptr)
+{}
 
-DoublyLinkedList::ListElement::ListElement(int nValue, DoublyLinkedList::ListElement *nNext,
-                                           ListElement *nPrevious)
-{
-    value = nValue;
-    next = nNext;
-    previous = nPrevious;
-}
+DoublyLinkedList::ListElement::ListElement(int newValue, DoublyLinkedList::ListElement *newNext,
+                                           ListElement *newPrevious)
+    : value(newValue), next(newNext), previous(newPrevious)
+{}

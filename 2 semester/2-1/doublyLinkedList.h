@@ -13,7 +13,7 @@ private:
         ListElement *next;
         ListElement *previous;
         ListElement();
-        ListElement(int nValue, ListElement *nNext, ListElement *nPrevious);
+        ListElement(int newValue, ListElement *newNext, ListElement *newPrevious);
     };
 
     ListElement *head;
