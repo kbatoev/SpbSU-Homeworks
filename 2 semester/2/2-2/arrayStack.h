@@ -4,10 +4,6 @@
 
 class ArrayStack : Stack
 {
-private:
-    int index;
-    int *array;
-    int maxSize;
 public:
     ArrayStack();
     ~ArrayStack();
@@ -15,5 +11,10 @@ public:
     int top();
     void pop();
     bool isEmpty();
+
+private:
+    int index;
+    int *array;
+    int maxSize;
 };
 
