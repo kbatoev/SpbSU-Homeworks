@@ -34,6 +34,8 @@ int main()
 
     set->printSet();
 
+    delete set;
+
     return 0;
 }
 
