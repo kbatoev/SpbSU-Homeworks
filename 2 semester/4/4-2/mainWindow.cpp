@@ -2,64 +2,49 @@
 #include "ui_mainWindow.h"
 #include <QMessageBox>
 
-Calculator::Calculator(QWidget *parent) :
+MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    calculator = new Calculator;
     ui->resultLine->setText("0");
-    connect(ui->firstOperand, SIGNAL(valueChanged(int)), this, SLOT(countExpression()));
-    connect(ui->secondOperand, SIGNAL(valueChanged(int)), this, SLOT(countExpression()));
-    connect(ui->comboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(countExpression()));
 }
 
-Calculator::~Calculator()
+MainWindow::~MainWindow()
 {
     delete ui;
+    delete calculator;
 }
 
-void Calculator::countExpression()
+void MainWindow::on_firstOperand_valueChanged(int arg1)
 {
-    int firstOperand = ui->firstOperand->value();
-    int secondOperand = ui->secondOperand->value();
-    Operations operation = transformOperation(ui->comboBox->currentText());
+    calculator->changeFirstArgument(arg1);
+    outputResults();
+}
 
-    int expressionResult = 0;
-    switch (operation)
+void MainWindow::on_secondOperand_valueChanged(int arg2)
+{
+    calculator->changeSecondArgument(arg2);
+    outputResults();
+}
+
+void MainWindow::on_comboBox_currentIndexChanged(const QString &arg1)
+{
+    calculator->changeAction(arg1);
+    outputResults();
+}
+
+void MainWindow::outputResults()
+{
+    if (calculator->isCorrectExpression())
     {
-    case plus: expressionResult = firstOperand + secondOperand;
-        break;
-
-    case minus: expressionResult = firstOperand - secondOperand;
-        break;
-
-    case multiplication: expressionResult = firstOperand * secondOperand;
-        break;
-
-    case division:
-        if (secondOperand)
-            expressionResult = firstOperand / secondOperand;
-        else
-            QMessageBox::information(this, "Be Attentive", "No 0 division available!!!");
-
-        break;
-    default:
-        break;
+        calculator->countExpression();
+        emit ui->resultLine->setText(QString::number(calculator->getResult()));
     }
-
-    QString resultString = QString::number(expressionResult);
-    emit ui->resultLine->setText(resultString);
+    else
+    {
+        QMessageBox::information(this, "Be attentive!", "No 0 division available!!!");
+        emit ui->resultLine->setText("ERROR");
+    }
 }
-
-Calculator::Operations Calculator::transformOperation(QString operation)
-{
-    if (operation == "+")
-        return plus;
-    if (operation == "-")
-        return minus;
-    if (operation == "*")
-        return multiplication;
-    if (operation == "/")
-        return division;
-}
-
