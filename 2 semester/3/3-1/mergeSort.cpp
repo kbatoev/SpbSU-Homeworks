@@ -12,7 +12,6 @@ void MergeSort::sort(int* array, int sizeOfArray)
     delete[] sortedArray;
 }
 
-
 int* merge(int *firstHalf, int *secondHalf, int firstSize, int secondSize)
 {
     int i = 0;
