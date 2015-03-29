@@ -1,9 +1,7 @@
 #include "sortedSet.h"
 
-SortedSet::SortedSet()
-{
-    top = new SetElement;
-}
+SortedSet::SortedSet() : top(new SetElement)
+{}
 
 SortedSet::~SortedSet()
 {

@@ -3,17 +3,11 @@
 LinkedList::ListElement::ListElement() : value(0), next(nullptr)
 {}
 
-LinkedList::ListElement::ListElement(int value, LinkedList::ListElement *next)
-{
-    this->value = value;
-    this->next = next;
-}
+LinkedList::ListElement::ListElement(int value, LinkedList::ListElement *next) : value(value), next(next)
+{}
 
-LinkedList::LinkedList()
-{
-    size = 0;
-    head = new ListElement;
-}
+LinkedList::LinkedList() : size(0), head(new ListElement)
+{}
 
 LinkedList::~LinkedList()
 {
@@ -77,13 +71,14 @@ LinkedList *LinkedList::cloneYourself()
     return nList;
 }
 
+
 int LinkedList::compareTo(Comparable *that)
 {
     if (this->getSize() < that->getSize())
-        return -1;
+        return less;
     if (this->getSize() > that->getSize())
-        return 1;
-    return 0;
+        return more;
+    return equal;
 }
 
 int LinkedList::getSize()
