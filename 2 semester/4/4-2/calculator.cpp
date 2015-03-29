@@ -41,8 +41,8 @@ void Calculator::countExpression()
     case division:
         if (secondArgument)
             result = firstArgument / secondArgument;
-
         break;
+
     default:
         break;
     }

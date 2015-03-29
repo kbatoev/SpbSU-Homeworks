@@ -3,21 +3,53 @@
 
 #include <QMainWindow>
 
+/**
+ * @brief The Calculator class
+ * Realization of simple calculator
+ */
+
+
 class Calculator
 {
 public:
+    /**
+     * @brief Calculator. Constructor
+     */
     Calculator();
 
-    // changes
+    /**
+     * @brief changeFirstArgument. Set new value to first operand
+     * @param value
+     */
     void changeFirstArgument(int value);
-    void changeSecondArgument(int value);
-    void changeAction(QString arg);
 
-    // recount
+    /**
+     * @brief changeSecondArgument. Set new value to second operand.
+     * @param value
+     */
+    void changeSecondArgument(int value);
+
+    /**
+     * @brief changeAction. Set new action to operation
+     * @param action
+     */
+    void changeAction(QString action);
+
+    /**
+     * @brief countExpression. Gets a result from expression given
+     */
     void countExpression();
 
-    // functions for work with files mainWindow
+    /**
+     * @brief isCorrectExpression
+     * @return true if math's expression is valid, and false otherwise
+     */
     bool isCorrectExpression();
+
+    /**
+     * @brief getResult
+     * @return result of math expression
+     */
     int getResult();
 
 private:
