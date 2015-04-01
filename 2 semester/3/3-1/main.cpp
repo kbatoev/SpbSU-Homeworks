@@ -7,21 +7,31 @@ using namespace std;
 
 int main()
 {
-    int array[10];
-    for (int i = 0; i < 10; i++)
+    int size = 0;
+    cout << "Enter a size of array: ";
+    cin >> size;
+
+    int *array = new int[size];
+
+    cout << "Enter an array: " << endl;
+    for (int i = 0; i < size; i++)
         cin >> array[i];
 
     QuickSort qSort;
-    //qSort.sort(array, 10);
+    //qSort.sort(array, size);
 
     MergeSort mSort;
-    //mSort.sort(array, 10);
+    mSort.sort(array, size);
 
     HeapSort hSort;
-    hSort.sort(array, 10);
+    //hSort.sort(array, size);
 
-    for (int i = 0; i < 10; i++)
+
+    cout << "Sorted array is: " << endl;
+    for (int i = 0; i < size; i++)
         cout << array[i] << " ";
+
+    delete[] array;
 
     return 0;
 }
