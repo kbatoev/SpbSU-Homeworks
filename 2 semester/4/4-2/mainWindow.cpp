@@ -9,6 +9,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     calculator = new Calculator;
     ui->resultLine->setText("0");
+
+    connect(ui->firstOperand, SIGNAL(valueChanged(int)), this, SLOT(firstValueChanged(int)));
+    connect(ui->secondOperand, SIGNAL(valueChanged(int)), this, SLOT(secondValueChanged(int)));
+    connect(ui->comboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(operationChanged(QString)));
 }
 
 MainWindow::~MainWindow()
@@ -17,19 +21,19 @@ MainWindow::~MainWindow()
     delete calculator;
 }
 
-void MainWindow::on_firstOperand_valueChanged(int arg1)
+void MainWindow::firstValueChanged(int value1)
 {
-    calculator->changeFirstArgument(arg1);
+    calculator->changeFirstArgument(value1);
     outputResults();
 }
 
-void MainWindow::on_secondOperand_valueChanged(int arg2)
+void MainWindow::secondValueChanged(int value2)
 {
-    calculator->changeSecondArgument(arg2);
+    calculator->changeSecondArgument(value2);
     outputResults();
 }
 
-void MainWindow::on_comboBox_currentIndexChanged(const QString &arg1)
+void MainWindow::operationChanged(const QString &arg1)
 {
     calculator->changeAction(arg1);
     outputResults();
@@ -40,11 +44,11 @@ void MainWindow::outputResults()
     if (calculator->isCorrectExpression())
     {
         calculator->countExpression();
-        emit ui->resultLine->setText(QString::number(calculator->getResult()));
+        ui->resultLine->setText(QString::number(calculator->getResult()));
     }
     else
     {
         QMessageBox::information(this, "Be attentive!", "No 0 division available!!!");
-        emit ui->resultLine->setText("ERROR");
+        ui->resultLine->setText("ERROR");
     }
 }

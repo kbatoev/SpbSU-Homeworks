@@ -17,23 +17,24 @@ public:
     ~MainWindow();
 
 private slots:
-    /**
-     * @brief on_firstOperand_valueChanged. Slot for signal valueChanged(int) on first spinbox.
-     * @param arg1 - new value
-     */
-    void on_firstOperand_valueChanged(int arg1);
 
     /**
-     * @brief on_secondOperand_valueChanged. Slot for signal valueChanged(int) on second spinbox.
-     * @param arg2 - new value
+     * @brief firstValueChanged.
+     * Slot for signal valueChanged(int) on first spinBox.
      */
-    void on_secondOperand_valueChanged(int arg2);
+    void firstValueChanged(int value1);
 
     /**
-     * @brief on_comboBox_currentIndexChanged. Slot for signal currentIndexChanged on comboBox.
-     * @param arg1 - new operation
+     * @brief secondValueChanged.
+     * Slot for signal valueChanged(int) on second spinBox.
      */
-    void on_comboBox_currentIndexChanged(const QString &arg1);
+    void secondValueChanged(int value2);
+
+    /**
+     * @brief operationChanged.
+     * Slot for signal currentIndexChanged on comboBox.
+     */
+    void operationChanged(const QString &arg1);
 
 private:
 

@@ -5,27 +5,25 @@
 
 /**
  * @brief The Calculator class
- * Realization of simple calculator
+ * Implementation of simple calculator
  */
 
 
 class Calculator
 {
 public:
-    /**
-     * @brief Calculator. Constructor
-     */
+
     Calculator();
 
     /**
-     * @brief changeFirstArgument. Set new value to first operand
-     * @param value
+     * @brief changeFirstArgument.
+     * Set new value to first operand
      */
     void changeFirstArgument(int value);
 
     /**
-     * @brief changeSecondArgument. Set new value to second operand.
-     * @param value
+     * @brief changeSecondArgument.
+     * Set new value to second operand.
      */
     void changeSecondArgument(int value);
 
@@ -33,10 +31,10 @@ public:
      * @brief changeAction. Set new action to operation
      * @param action
      */
-    void changeAction(QString action);
+    void changeAction(const QString &action);
 
     /**
-     * @brief countExpression. Gets a result from expression given
+     * @brief countExpression. Gets a result from given expression
      */
     void countExpression();
 
@@ -46,10 +44,6 @@ public:
      */
     bool isCorrectExpression();
 
-    /**
-     * @brief getResult
-     * @return result of math expression
-     */
     int getResult();
 
 private:

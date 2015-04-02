@@ -13,7 +13,7 @@ void Calculator::changeSecondArgument(int value)
     secondArgument = value;
 }
 
-void Calculator::changeAction(QString arg)
+void Calculator::changeAction(const QString &arg)
 {
     if (arg == "+")
         action = plus;
