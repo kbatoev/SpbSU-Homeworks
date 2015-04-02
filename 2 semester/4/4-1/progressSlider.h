@@ -15,12 +15,6 @@ public:
     explicit ProgressSlider(QWidget *parent = 0);
     ~ProgressSlider();
 
-public slots:
-    void on_progressBar_valueChanged(int value);
-
-signals:
-    void on_horizontalSlider_valueChanged(int value);
-
 private:
     Ui::ProgressSlider *ui;
 };

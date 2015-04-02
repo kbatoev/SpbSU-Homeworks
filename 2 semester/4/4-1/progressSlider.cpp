@@ -13,8 +13,3 @@ ProgressSlider::~ProgressSlider()
 {
     delete ui;
 }
-
-void ProgressSlider::on_progressBar_valueChanged(int value)
-{
-    ui->progressBar->setValue(value);
-}
