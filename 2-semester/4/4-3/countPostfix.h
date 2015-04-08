@@ -11,10 +11,7 @@ class CountPostfix
 {
 public:
 
-    /// constructor
     CountPostfix();
-
-    /// destructor
     ~CountPostfix();
 
     /**
@@ -22,7 +19,7 @@ public:
      * @param postfix
      * @return value
      */
-    double countPostfix(QString postfix);
+    double countPostfix(const QString &postfix);
 
 private:
     LinkedStack *stack;

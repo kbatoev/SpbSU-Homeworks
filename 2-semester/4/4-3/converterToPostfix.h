@@ -12,18 +12,14 @@ class ConverterToPostfix
 {
 public:
 
-    /// constructor
     ConverterToPostfix();
-
-    /// destructor
     ~ConverterToPostfix();
 
     /**
      * @brief convertToPostfix
-     * @param infix
-     * @return postfix string
+     * transforms to postfix notation because it's easy to count
      */
-    QString convertToPostfix(QString infix);
+    QString convertToPostfix(const QString &infix);
 
 private:
     LinkedStack *stack;

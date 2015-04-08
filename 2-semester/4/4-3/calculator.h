@@ -11,17 +11,16 @@
 class Calculator
 {
 public:
-    /**
-     * @brief Calculator - constructor
-     */
+
     Calculator();
+    ~Calculator();
 
     /**
      * @brief count - function that counts maths expression's value
      * @param expression - maths expression
      * @return - result of calculation
      */
-    double count(QString expression);
+    double count(const QString &expression);
 
 private:
     /**

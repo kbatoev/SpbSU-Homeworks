@@ -39,10 +39,10 @@ bool isNumber(QChar symbol)
     return symbol >= '0' && symbol <= '9';
 }
 
-double CountPostfix::countPostfix(QString postfix)
+double CountPostfix::countPostfix(const QString &postfix)
 {
     int i = 0;
-    while (postfix[i] != '\0')
+    while (i < postfix.size())
     {
         if (postfix[i] != space)
         {

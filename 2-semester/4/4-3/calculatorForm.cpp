@@ -78,7 +78,7 @@ void CalculatorForm::clicked(const QString &text)
     }
 }
 
-void CalculatorForm::connectButtonWithMapper(QPushButton *button, QString text)
+void CalculatorForm::connectButtonWithMapper(QPushButton *button, const QString &text)
 {
    connect(button, SIGNAL(clicked()), signalMapper, SLOT(map()));
    signalMapper->setMapping(button, text);

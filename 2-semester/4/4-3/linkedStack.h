@@ -7,10 +7,7 @@
 class LinkedStack
 {
 public:
-    /// constructor
     LinkedStack();
-
-    /// destructor
     ~LinkedStack();
 
     /**

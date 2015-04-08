@@ -3,7 +3,13 @@
 Calculator::Calculator() : converter(new ConverterToPostfix), counter(new CountPostfix)
 {}
 
-double Calculator::count(QString expression)
+Calculator::~Calculator()
+{
+    delete converter;
+    delete counter;
+}
+
+double Calculator::count(const QString &expression)
 {
     return counter->countPostfix(converter->convertToPostfix(expression));
 }

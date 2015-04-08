@@ -34,7 +34,7 @@ private:
      * @param button - button to be connected
      * @param text - set text that this button will emit
      */
-    void connectButtonWithMapper(QPushButton *button, QString text);
+    void connectButtonWithMapper(QPushButton *button, const QString &text);
 
     Ui::CalculatorForm *ui;
     QSignalMapper *signalMapper;

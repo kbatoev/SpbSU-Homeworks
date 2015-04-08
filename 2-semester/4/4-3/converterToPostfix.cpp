@@ -57,13 +57,13 @@ char transformTokenToChar(int currentToken)
     }
 }
 
-QString ConverterToPostfix::convertToPostfix(QString infix)
+QString ConverterToPostfix::convertToPostfix(const QString &infix)
 {
     QString postfix = "";
 
     int current = 0;
     int i = 0;
-    while (infix[i] != '\0')
+    while (i < infix.size())
     {
         Token token = determineToken(infix[i]);
         switch (token)
@@ -111,8 +111,6 @@ QString ConverterToPostfix::convertToPostfix(QString infix)
         postfix[current++] = space;
         stack->pop();
     }
-
-    postfix[current] = '\0';
 
     return postfix;
 }
