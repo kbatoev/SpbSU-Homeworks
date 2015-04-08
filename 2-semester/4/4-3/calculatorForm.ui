@@ -6,9 +6,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>728</width>
-    <height>387</height>
+    <width>386</width>
+    <height>386</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>386</width>
+    <height>386</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>386</width>
+    <height>386</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>CalculatorForm</string>
@@ -20,10 +32,10 @@
    <widget class="QWidget" name="gridLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>170</x>
-      <y>30</y>
-      <width>320</width>
-      <height>297</height>
+      <x>9</x>
+      <y>0</y>
+      <width>371</width>
+      <height>331</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout">
@@ -413,7 +425,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>728</width>
+     <width>386</width>
      <height>21</height>
     </rect>
    </property>
