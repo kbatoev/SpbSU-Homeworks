@@ -12,12 +12,7 @@ class LinkedList : public Comparable
 {
 public:
 
-    /**
-     * @brief LinkedList. Constructor
-     */
     LinkedList();
-
-    /// destructor
     ~LinkedList();
 
     /**
@@ -38,22 +33,12 @@ public:
      */
     void print();
 
-    /**
-     * @brief cloneYourself
-     * @return pointer to a new section of memory
-     */
     LinkedList* cloneYourself();
 
     /**
      * @brief compareTo. Compares list with something that can be compared by its size
-     * @param that
      */
     int compareTo(Comparable *that);
-
-    /**
-     * @brief getSize
-     * @return amount of elements in LinkedList
-     */
     int getSize();
 
 private:

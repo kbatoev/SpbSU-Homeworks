@@ -11,30 +11,17 @@
 class SortedSet
 {
 public:
-    /**
-     * @brief SortedSet. Constructor
-     */
-    SortedSet();
 
-    /// destructor
+    SortedSet();
     ~SortedSet();
 
-    /**
-     * @brief add. Adds new element to a SortedSet
-     * @param newElement - adding new element
-     */
+    /// add something that can be compared to
     void add(Comparable *newElement);
 
-    /**
-     * @brief print. Method prints every element in set
-     */
     void print();
 
 private:
-    /**
-     * @brief The SetElement class
-     * realization of class
-     */
+
     class SetElement
     {
     public:
