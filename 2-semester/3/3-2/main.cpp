@@ -3,30 +3,13 @@
 #include "consolePrinter.h"
 #include "filePrinter.h"
 
-using namespace std;
+#include "matrixTest.h"
 
 int main()
 {
-    int sizeOfMatrix = 0;
-    cout << "Enter an odd size of matrix: ";
-    cin >> sizeOfMatrix;
+    MatrixTest test;
+    QTest::qExec(&test);
 
-    Matrix *matrix = new Matrix(sizeOfMatrix);
-    matrix->fill();
-    cout << "That's your matrix: \n";
-    matrix->show();
-
-    int *spiralArray = matrix->transformSpirally();
-    int arraySize = sizeOfMatrix * sizeOfMatrix;
-
-    ConsolePrinter consoleWriter(spiralArray, arraySize);
-    consoleWriter.print();
-
-    FilePrinter fileWriter(spiralArray, arraySize);
-    fileWriter.print();
-
-    delete[] spiralArray;
-    delete matrix;
     return 0;
 }
 
