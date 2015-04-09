@@ -2,10 +2,8 @@
 
 const char space = ' ';
 
-CountPostfix::CountPostfix()
-{
-    stack = new LinkedStack;
-}
+CountPostfix::CountPostfix() : stack(new LinkedStack)
+{}
 
 CountPostfix::~CountPostfix()
 {
@@ -15,7 +13,7 @@ CountPostfix::~CountPostfix()
 int createIntNumber(char *postfix, int& i)
 {
     int number = 0;
-    while (postfix[i] != space)
+    while (postfix[i] != space && postfix[i] != '\0')
         number = number * 10 + postfix[i++] - '0';
     return number;
 }
@@ -47,6 +45,7 @@ int CountPostfix::countPostfix(char *postfix)
             {
                 int number = createIntNumber(postfix, i);
                 stack->push(number);
+                i--;
             }
             else
             {

@@ -1,7 +1,10 @@
+QT += core
+QT -= gui
+QT += testlib
+
 TEMPLATE = app
 CONFIG += console
 CONFIG -= app_bundle
-CONFIG -= qt
 CONFIG += c++11
 
 SOURCES += main.cpp \
@@ -11,8 +14,6 @@ SOURCES += main.cpp \
     calculator.cpp \
     countPostfix.cpp
 
-include(deployment.pri)
-qtcAddDeployment()
 
 HEADERS += \
     stack.h \
@@ -20,5 +21,9 @@ HEADERS += \
     arrayStack.h \
     converterToPostfix.h \
     calculator.h \
-    countPostfix.h
-
+    countPostfix.h \
+    arrayStackTest.h \
+    linkedStackTest.h \
+    counterTest.h \
+    postfixConverterTest.h \
+    calculatorTest.h

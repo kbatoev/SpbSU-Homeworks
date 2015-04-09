@@ -5,6 +5,7 @@ ArrayStack::ArrayStack()
     index = 0;
     maxSize = 1000;
     array = new int[maxSize];
+
 }
 
 ArrayStack::~ArrayStack()
