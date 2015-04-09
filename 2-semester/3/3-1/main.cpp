@@ -3,35 +3,23 @@
 #include "mergeSort.h"
 #include "heapSort.h"
 
-using namespace std;
+#include "quickSortTest.h"
+#include "mergeSortTest.h"
+#include "heapSortTest.h"
+
 
 int main()
 {
-    int size = 0;
-    cout << "Enter a size of array: ";
-    cin >> size;
+    QuickSortTest quickSortTest;
+    QTest::qExec(&quickSortTest);
 
-    int *array = new int[size];
+    std::cout << "\n\n";
+    MergeSortTest mergeSortTest;
+    QTest::qExec(&mergeSortTest);
 
-    cout << "Enter an array: " << endl;
-    for (int i = 0; i < size; i++)
-        cin >> array[i];
-
-    QuickSort qSort;
-    //qSort.sort(array, size);
-
-    MergeSort mSort;
-    mSort.sort(array, size);
-
-    HeapSort hSort;
-    //hSort.sort(array, size);
-
-
-    cout << "Sorted array is: " << endl;
-    for (int i = 0; i < size; i++)
-        cout << array[i] << " ";
-
-    delete[] array;
+    std::cout << "\n\n";
+    HeapSortTest heapSortTest;
+    QTest::qExec(&heapSortTest);
 
     return 0;
 }
