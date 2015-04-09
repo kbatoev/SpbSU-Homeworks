@@ -42,7 +42,8 @@ bool DoublyLinkedList::remove(int value)
     {
         ListElement *next = current->next;
         previous->next = next;
-        next->previous = previous;
+        if (next != nullptr)
+            next->previous = previous;
         delete current;
         return true;
     }
