@@ -5,7 +5,10 @@
 #-------------------------------------------------
 
 QT       += core gui
-CONFIG += c++11
+QT       += opengl
+CONFIG   += c++11
+
+LIBS += -lGL
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 

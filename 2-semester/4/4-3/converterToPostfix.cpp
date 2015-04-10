@@ -35,7 +35,7 @@ Token determineToken(QChar symbol)
     return figure;
 }
 
-void checkSpaceInPostfix(QString postfix, int &current)
+void checkSpaceInPostfix(QString &postfix, int &current)
 {
     if (postfix[current - 1] != space)
         postfix[current++] = space;

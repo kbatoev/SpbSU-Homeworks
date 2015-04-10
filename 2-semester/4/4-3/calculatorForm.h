@@ -1,6 +1,7 @@
 #ifndef CALCULATORFORM_H
 #define CALCULATORFORM_H
 
+#include <QtOpenGL>
 #include <QMainWindow>
 #include <QPushButton>
 #include <QString>
