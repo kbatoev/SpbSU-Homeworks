@@ -1,5 +1,9 @@
 #pragma once
 
+/**
+ * @brief The Set template class
+ */
+
 template <typename T>
 class Set
 {
@@ -7,12 +11,19 @@ public:
     Set();
     ~Set();
 
+    /// creates new SetElement with given value, if this value doesn't exist
     void add(T element);
+
+    /// deletes value, maintaining order
     void remove(const T &element);
     bool exists(const T &element);
+
+    /// returns amount of elements in set
     int getSize() const;
 
+    /// add elements, which are in both sets
     Set<T>* intersectSets(Set<T> *anotherSet);
+    /// add elementts, which are in any set
     Set<T>* uniteSets(Set<T> *anotherSet);
 
 private:
