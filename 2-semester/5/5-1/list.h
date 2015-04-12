@@ -3,21 +3,36 @@
 #include <QString>
 #include <iostream>
 
+/**
+ * Template of LinkedList.
+ * Added some functions related to QString.
+ */
+
 template <typename T>
 class LinkedList
 {
 public:
     LinkedList();
     ~LinkedList();
+
+    /// standard functions
     void add(T value);
     bool remove(T value);
-    bool find(T value);
     void printList();
+
+    /// added function special for hashTable
+    bool find(T value);
+
+    /// functions for statistics
     int getSize();
     int getCollisionsNumber();
+
+    /// functions for refreshing hashTable
     T getFirstElement();
 
 private:
+
+    /// compare 2 strings
     static bool areEqual(QString first, QString second);
 
     class ListElement

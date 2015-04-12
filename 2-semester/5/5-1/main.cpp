@@ -16,7 +16,6 @@ enum Choice
     quit
 };
 
-
 int main()
 {
     /*
@@ -26,6 +25,7 @@ int main()
     HashTableTest tableTest;
     QTest::qExec(&tableTest);
     */
+
 
     HashTable *table = new HashTable;
 
@@ -83,10 +83,9 @@ int main()
             isRunning = false;
             break;
         }
-
-
     }
 
+    delete table;
 
     return 0;
 }

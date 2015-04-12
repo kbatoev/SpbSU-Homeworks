@@ -25,12 +25,13 @@ private slots:
 
     void countPolynom()
     {
-        // default hash function
+        /// default hash function - polynom
         QVERIFY(function->hashFunction("ab", 100) == 55);
     }
 
     void countSum()
     {
+        /// sets 1 hashFunction. It's countHashSum
         function->changeHashFunction(1);
         QVERIFY(function->hashFunction("1234", 500) == 202);
     }
