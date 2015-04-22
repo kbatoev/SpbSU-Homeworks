@@ -10,9 +10,9 @@ int main()
     TreeTest test;
     QTest::qExec(&test);
 
-
     QTextStream in(stdin);
-    std::cout << "Enter expression:\n";
+    std::cout << "\nEnter expression in this order (<operation> <operand> <operand>)\n";
+    std::cout << "where operands can be also trees:\n";
     QString expression = in.readLine();
 
     Tree *tree = new Tree(expression);

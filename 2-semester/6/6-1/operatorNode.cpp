@@ -20,7 +20,7 @@ OperatorNode::OperatorNode(QChar symbol)
 
 OperatorNode::~OperatorNode()
 {
-    delete leftChild; // что будет, если не удалить их собственные ссылки ?
+    delete leftChild;
     delete rightChild;
 }
 
@@ -46,7 +46,6 @@ QChar OperatorNode::transformToQChar()
         if (operation == operationList[i])
             return charOperations[i];
 }
-
 
 int OperatorNode::countOperator(int operand1, int operand2)
 {

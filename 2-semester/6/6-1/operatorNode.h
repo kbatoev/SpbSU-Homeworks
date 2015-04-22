@@ -1,6 +1,5 @@
 #pragma once
 
-#include <QChar>
 #include <iostream>
 #include <QString>
 #include "treeNode.h"
