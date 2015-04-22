@@ -5,7 +5,7 @@ OperatorNode::OperatorNode()
     way = left;
     leftChild = nullptr;
     rightChild = nullptr;
-    operation = addition;
+    operation = none;
 }
 
 OperatorNode::OperatorNode(QChar symbol)
@@ -34,7 +34,8 @@ void OperatorNode::print()
 {
     std::cout << "(";
     leftChild->print();
-    std::cout << " " << (transformToQChar()).unicode() << " ";
+    char action = (char)this->transformToQChar().unicode();
+    std::cout << " " << action << " ";
     rightChild->print();
     std::cout << ")";
 }

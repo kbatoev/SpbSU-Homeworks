@@ -1,8 +1,13 @@
 #pragma once
 
+#include <QChar>
 #include <iostream>
 #include <QString>
 #include "treeNode.h"
+
+/**
+ * @brief The OperatorNode class
+ */
 
 class OperatorNode : public TreeNode
 {
@@ -23,6 +28,7 @@ public:
         none
     };
 
+    /// arrays for finding equivalence between 'QChar' and 'Operations'
     QChar charOperations[4] = {'+', '-', '*', '/'};
     Operations operationList[4] = {addition, subtraction, multiplication, division};
 

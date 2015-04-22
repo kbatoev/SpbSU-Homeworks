@@ -5,13 +5,23 @@
 #include "operandNode.h"
 #include "operatorNode.h"
 
+/**
+ * @brief The Tree class
+ */
+
 class Tree
 {
 public:
     Tree();
+
+    /// creation of tree using inputted expression
     Tree(const QString &expression);
     ~Tree();
+
+    /// adding number
     void add(int value);
+
+    /// adding operation
     void add(QChar action);
 
     int count();

@@ -17,7 +17,9 @@ int main()
 
     Tree *tree = new Tree(expression);
 
+    std::cout << "Result is: ";
     std::cout << tree->count() << "\n";
+    tree->print();
 
     delete tree;
 

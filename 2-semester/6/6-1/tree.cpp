@@ -101,6 +101,7 @@ int Tree::count()
 void Tree::print()
 {
     head->print();
+    std::cout << "\n";
 }
 
 void Tree::add(TreeNode *&current, QChar action)

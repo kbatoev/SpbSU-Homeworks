@@ -1,5 +1,9 @@
 #pragma once
 
+/**
+ * @brief The TreeNode class - virtual class, it's used in Tree Class
+ */
+
 class TreeNode
 {
 public:
@@ -14,7 +18,9 @@ public:
         noWay
     };
 
+    /// shows which descendant is available
     Direction way;
+
     TreeNode *leftChild;
     TreeNode *rightChild;
 };
