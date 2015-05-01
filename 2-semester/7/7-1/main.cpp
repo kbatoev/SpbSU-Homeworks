@@ -32,6 +32,21 @@ private:
 };
 
 
+class Wrapper
+{
+public:
+    Wrapper()
+    {
+        throw "exception";
+    }
+
+    ~Wrapper() {}
+
+private:
+    DynamicArray stackArray;
+};
+
+
 int main()
 {
     try
@@ -46,7 +61,17 @@ int main()
         std::cout << "Exception's code is: " << error << "\n";
     }
 
-    std::cout << "\n";
+    std::cout << "\n\n";
+
+    try
+    {
+        Wrapper test;
+    }
+
+    catch(...)
+    {
+        std::cout << "Something bad happened :(\nBut memory is ok\n";
+    }
 
     return 0;
 }
