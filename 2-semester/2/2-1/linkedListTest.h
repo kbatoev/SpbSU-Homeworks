@@ -24,6 +24,11 @@ private slots:
         delete linkedList;
     }
 
+    void existFunction()
+    {
+        QVERIFY(!linkedList->exists(89));
+    }
+
     void addOneElement()
     {
         linkedList->add(3);
@@ -34,7 +39,7 @@ private slots:
     {
         linkedList->add(-100500);
         linkedList->add(100500);
-        QVERIFY(linkedList->getFirst() == 100500);
+        QVERIFY(linkedList->getFirst() == 100500 && linkedList->exists(-100500));
     }
 
     void addManyElements()
@@ -44,7 +49,8 @@ private slots:
         linkedList->add(78);
         linkedList->add(123);
         linkedList->add(-198989);
-        QVERIFY(linkedList->getFirst() == -198989);
+        QVERIFY(linkedList->getFirst() == -198989 && linkedList->exists(123) && linkedList->exists(78)
+                && linkedList->exists(0) && linkedList->exists(1));
     }
 
     void removeFromNothing()

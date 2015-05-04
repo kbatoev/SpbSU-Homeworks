@@ -66,6 +66,18 @@ int DoublyLinkedList::getFirst()
         return head->next->value;
 }
 
+bool DoublyLinkedList::exists(int value)
+{
+    ListElement *current = head->next;
+    while (current != nullptr)
+    {
+        if (current->value == value)
+            return true;
+        current = current->next;
+    }
+    return false;
+}
+
 DoublyLinkedList::ListElement::ListElement()
     : value(0), next(nullptr), previous(nullptr)
 {}

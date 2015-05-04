@@ -13,6 +13,7 @@ public:
     bool remove(int value);
     void printList();
     int getFirst();
+    bool exists(int value);
 
 private:
     class ListElement

@@ -23,6 +23,11 @@ private slots:
         delete doublyList;
     }
 
+    void existFunction()
+    {
+        QVERIFY(!doublyList->exists(100));
+    }
+
     void addOneElement()
     {
         doublyList->add(3);
@@ -33,7 +38,7 @@ private slots:
     {
         doublyList->add(-100500);
         doublyList->add(100500);
-        QVERIFY(doublyList->getFirst() == 100500);
+        QVERIFY(doublyList->getFirst() == 100500 && doublyList->exists(-100500));
     }
 
     void addManyElements()
@@ -43,7 +48,8 @@ private slots:
         doublyList->add(78);
         doublyList->add(123);
         doublyList->add(-198989);
-        QVERIFY(doublyList->getFirst() == -198989);
+        QVERIFY(doublyList->getFirst() == -198989 && doublyList->exists(123)
+                && doublyList->exists(78) && doublyList->exists(0) && doublyList->exists(1));
     }
 
     void removeFromNothing()
