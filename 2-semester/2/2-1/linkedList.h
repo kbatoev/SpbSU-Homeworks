@@ -12,6 +12,7 @@ public:
     void add(int value);
     bool remove(int value);
     void printList();
+    int getFirst();
 
 private:
     class ListElement

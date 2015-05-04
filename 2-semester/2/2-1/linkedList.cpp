@@ -59,3 +59,9 @@ void LinkedList::printList()
         current = current->next;
     }
 }
+
+int LinkedList::getFirst()
+{
+    if (head->next != nullptr)
+        return head->next->value;
+}

@@ -26,12 +26,14 @@ private slots:
     void addOneElement()
     {
         doublyList->add(3);
+        QVERIFY(doublyList->getFirst() == 3);
     }
 
     void addTwoElements()
     {
         doublyList->add(-100500);
         doublyList->add(100500);
+        QVERIFY(doublyList->getFirst() == 100500);
     }
 
     void addManyElements()
@@ -41,6 +43,7 @@ private slots:
         doublyList->add(78);
         doublyList->add(123);
         doublyList->add(-198989);
+        QVERIFY(doublyList->getFirst() == -198989);
     }
 
     void removeFromNothing()

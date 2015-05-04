@@ -60,6 +60,12 @@ void DoublyLinkedList::printList()
     std::cout << std::endl;
 }
 
+int DoublyLinkedList::getFirst()
+{
+    if (head->next != nullptr)
+        return head->next->value;
+}
+
 DoublyLinkedList::ListElement::ListElement()
     : value(0), next(nullptr), previous(nullptr)
 {}
