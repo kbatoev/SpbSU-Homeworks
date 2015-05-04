@@ -6,6 +6,7 @@ CalculatorForm::CalculatorForm(QWidget *parent) :
     ui(new Ui::CalculatorForm)
 {
     ui->setupUi(this);
+    ui->centralWidget->setLayout(ui->gridLayout);
     calc = new Calculator;
     expression = "";
 
@@ -31,6 +32,10 @@ CalculatorForm::CalculatorForm(QWidget *parent) :
     connectButtonWithMapper(ui->countButton, "=");
 
     connect(signalMapper, SIGNAL(mapped(QString)), this, SLOT(clicked(QString)));
+
+    QFont font("Times", 45, QFont::Bold, true);
+    ui->lineEdit->setFont(font);
+    ui->gridLayout->addWidget(ui->lineEdit, 0, 0, 1, 4);
 }
 
 CalculatorForm::~CalculatorForm()
@@ -45,7 +50,6 @@ bool isOperator(QString text)
     int i = text.size() - 1;
     return text[i] == '+' || text[i] == '-' || text[i] == '*' || text[i] == '/';
 }
-
 
 
 void CalculatorForm::clicked(const QString &text)
