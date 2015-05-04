@@ -12,7 +12,7 @@ public:
     ~Set();
 
     /// creates new SetElement with given value, if this value doesn't exist
-    void add(T element);
+    void add(const T &element);
 
     /// deletes value, maintaining order
     void remove(const T &element);
@@ -65,7 +65,7 @@ Set<T>::~Set()
 }
 
 template <typename T>
-void Set<T>::add(T element)
+void Set<T>::add(const T &element)
 {
     if (!exists(element))
         head->next = new SetElement(head->next, element);
