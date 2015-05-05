@@ -20,7 +20,9 @@ TEMPLATE = app
 SOURCES += main.cpp
 
 HEADERS += \
-    list.h \
     repetitionError.h \
     elementLackError.h \
-    uniqueListTest.h
+    uniqueListTest.h \
+    uniqueList.h \
+    linkedList.h \
+    list.h

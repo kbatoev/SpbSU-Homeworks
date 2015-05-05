@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "list.h"
+#include "uniqueList.h"
 #include "uniqueListTest.h"
 
 int main()

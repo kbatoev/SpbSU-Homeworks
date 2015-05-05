@@ -3,7 +3,7 @@
 #include <QtCore/QObject>
 #include <QtTest/QtTest>
 
-#include "list.h"
+#include "uniqueList.h"
 #include "elementLackError.h"
 #include "repetitionError.h"
 
@@ -21,11 +21,36 @@ private slots:
         list = new UniqueList<int>;
     }
 
+    void cleanup()
+    {
+        delete list;
+    }
+
+    void addOneElement()
+    {
+        list->add(123);
+        QVERIFY(list->exists(123));
+    }
+
+    void checkSize()
+    {
+        list->add(78);
+        QVERIFY(list->getSize() == 1);
+    }
+
+    void removeOneElement()
+    {
+        list->add(123);
+        list->remove(123);
+        QVERIFY(!list->exists(123));
+    }
+
     void checkEmptyList()
     {
         try
         {
             list->remove(42);
+            QVERIFY(false);
         }
         catch(ElementLackError &error)
         {
@@ -39,6 +64,7 @@ private slots:
         {
             list->add(75);
             list->add(75);
+            QVERIFY(false);
         }
         catch(RepetitionError &error)
         {
@@ -48,10 +74,10 @@ private slots:
 
     void addDifferentElements()
     {
-
         for (int i = 0; i < 100; i++)
             list->add(i);
-
+        for (int i = 0; i < 100; i++)
+            QVERIFY(list->exists(i));
     }
 
     void addAndRemove()
@@ -60,11 +86,7 @@ private slots:
             list->add(i);
         for (int i = 99; i >= 0; --i)
             list->remove(i);
-    }
-
-    void cleanup()
-    {
-        delete list;
+        QVERIFY(!list->getSize());
     }
 
 private:
