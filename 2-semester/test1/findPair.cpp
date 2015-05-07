@@ -18,12 +18,17 @@ FindPair::FindPair(QWidget *parent) :
 FindPair::~FindPair()
 {
     delete ui;
+    delete signalMapper;
+    delete[] values;
+    for (int i = 0; i < size; i++)
+        delete[] field;
+    delete[] field;
 }
 
 void FindPair::generateField(int n)
 {
     size = n;
-    if (size && size % 2 == 0)
+    if (!((size + 2) % 2))
     {
         ui->gridLayout->removeWidget(ui->spinBox);
         ui->spinBox->setVisible(false);
