@@ -1,5 +1,4 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#pragma once
 
 #include <QMainWindow>
 #include <QSpinBox>
@@ -17,13 +16,13 @@ namespace Ui {
 class MainWindow;
 }
 
-class MainWindow : public QMainWindow
+class FindPair : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = 0);
-    ~MainWindow();
+    explicit FindPair(QWidget *parent = 0);
+    ~FindPair();
 
 private slots:
     void generateField(int n);
@@ -41,5 +40,3 @@ private:
     int count;
     int *values;
 };
-
-#endif // MAINWINDOW_H

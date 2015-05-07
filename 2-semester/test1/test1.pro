@@ -12,9 +12,11 @@ TARGET = test1
 TEMPLATE = app
 
 
-SOURCES += main.cpp\
-        mainwindow.cpp
+SOURCES += main.cpp \
+    findPair.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += \
+    findPair.h
 
-FORMS    += mainwindow.ui
+FORMS    += \
+    findPair.ui
