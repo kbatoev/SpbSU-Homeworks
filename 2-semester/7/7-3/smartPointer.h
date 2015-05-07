@@ -1,0 +1,5 @@
+#ifndef SMARTPOINTER_H
+#define SMARTPOINTER_H
+
+#endif // SMARTPOINTER_H
+
