@@ -8,6 +8,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     ui->centralWidget->setLayout(ui->gridLayout);
     count = 0;
+    isFirst = true;
 
     ui->gridLayout->addWidget(ui->spinBox, 0, 0);
     connect(ui->spinBox, SIGNAL(valueChanged(int)), this, SLOT(generateField(int)));
@@ -81,6 +82,7 @@ void MainWindow::clicked(QString sIndex)
     {
         this->iFirst = i;
         this->jFirst = j;
+        this->isFirst = false;
     }
     else
     {
@@ -101,5 +103,6 @@ void MainWindow::clicked(QString sIndex)
             field[i][j].setText("");
             field[iFirst][jFirst].setText("");
         }
+        isFirst = true;
     }
 }
