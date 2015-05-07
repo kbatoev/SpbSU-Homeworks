@@ -21,7 +21,7 @@ FindPair::~FindPair()
     delete signalMapper;
     delete[] values;
     for (int i = 0; i < size; i++)
-        delete[] field;
+        delete[] field[i];
     delete[] field;
 }
 
@@ -43,19 +43,16 @@ void FindPair::generateField(int n)
             }
 
         values = new int[size * size];
-        int zeroAmount = 0;
-        int oneAmount = 0;
+        int onesAmount = 0;
 
         srand(time(0));
         for (int i = 0; i < size * size; i++)
             {
                 values[i] = rand() % 2;
                 if (values[i])
-                    oneAmount++;
-                else
-                    zeroAmount++;
+                    onesAmount++;
             }
-        if (oneAmount % 2)
+        if (onesAmount % 2)
             values[size * size - 1] = (values[size * size - 1] + 1) % 2;
 
         signalMapper = new QSignalMapper;
@@ -78,9 +75,10 @@ void FindPair::clicked(QString sIndex)
     field[i][j].setText(value);
     if (isFirst)
     {
-        this->iFirst = i;
-        this->jFirst = j;
-        this->isFirst = false;
+        iFirst = i;
+        jFirst = j;
+        isFirst = false;
+        field[i][j].setEnabled(false);
     }
     else
     {
@@ -91,15 +89,16 @@ void FindPair::clicked(QString sIndex)
             field[i][j].setEnabled(false);
             field[iFirst][jFirst].setEnabled(false);
             count += 2;
-            if (count == size)
+            if (count == size * size)
             {
-                return;
+                ui->gridLayoutWidget->setVisible(false);
             }
         }
         else
         {
             field[i][j].setText("");
             field[iFirst][jFirst].setText("");
+            field[iFirst][jFirst].setEnabled(true);
         }
         isFirst = true;
     }
