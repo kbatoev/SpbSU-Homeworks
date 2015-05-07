@@ -40,4 +40,5 @@ private:
     int size;
     int count;
     int *values;
+    QLineEdit *win;
 };
