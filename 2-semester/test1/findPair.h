@@ -3,7 +3,7 @@
 #include <QMainWindow>
 #include <QSpinBox>
 
-#include <QMessageBox>
+#include <QLineEdit>
 #include <QSignalMapper>
 #include <QWidget>
 #include <QPushButton>

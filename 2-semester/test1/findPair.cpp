@@ -12,7 +12,6 @@ FindPair::FindPair(QWidget *parent) :
 
     ui->gridLayout->addWidget(ui->spinBox, 0, 0);
     connect(ui->spinBox, SIGNAL(valueChanged(int)), this, SLOT(generateField(int)));
-
 }
 
 FindPair::~FindPair()
@@ -91,7 +90,8 @@ void FindPair::clicked(QString sIndex)
             count += 2;
             if (count == size * size)
             {
-                ui->gridLayoutWidget->setVisible(false);
+                QLineEdit *win = new QLineEdit("WIN!!!");
+                ui->gridLayout->addWidget(win, 0, 0, size, size);
             }
         }
         else
