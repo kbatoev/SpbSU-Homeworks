@@ -35,12 +35,16 @@ private slots:
     void pushOneElement()
     {
         arrayStack->push(2);
+        QVERIFY(arrayStack->top() == 2);
     }
 
     void pushTwoElements()
     {
         arrayStack->push(2);
         arrayStack->push(90);
+        int topElement = arrayStack->top();
+        arrayStack->pop();
+        QVERIFY(topElement == 90 && arrayStack->top() == 2);
     }
 
     void pushAndTop()
@@ -55,6 +59,11 @@ private slots:
     {
         for (int i = 0; i < 100; ++i)
             arrayStack->push(i);
+        for (int i = 99; i >= 0; i--)
+        {
+            QVERIFY(arrayStack->top() == i);
+            arrayStack->pop();
+        }
     }
 
     void pushAndDeleteManyElements()

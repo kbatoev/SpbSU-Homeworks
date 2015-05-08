@@ -13,7 +13,7 @@ ArrayStack::~ArrayStack()
     delete[] array;
 }
 
-void ArrayStack::push(int value)
+void ArrayStack::push(const int &value)
 {
     if (index == maxSize)
     {
@@ -45,3 +45,4 @@ bool ArrayStack::isEmpty()
 {
     return index == 0;
 }
+

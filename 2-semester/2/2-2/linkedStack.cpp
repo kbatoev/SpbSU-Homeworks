@@ -18,7 +18,7 @@ LinkedStack::~LinkedStack()
     delete previous;
 }
 
-void LinkedStack::push(int value)
+void LinkedStack::push(const int &value)
 {
     head->next = new StackElement(value, head->next);
 }
