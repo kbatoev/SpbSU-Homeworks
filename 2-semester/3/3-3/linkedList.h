@@ -19,14 +19,14 @@ public:
      * @brief add. Method adding new ListElement
      * @param number - value of new ListElement
      */
-    void add(int number);
+    void add(const int &number);
 
     /**
      * @brief remove. It removes a ListElement which value is number
      * @param number
      * @return true, if he could find such element, and false otherwise
      */
-    bool remove(int number);
+    bool remove(const int &number);
 
     /**
      * @brief print. Method shows List's Elements

@@ -22,13 +22,13 @@ LinkedList::~LinkedList()
     delete previous;
 }
 
-void LinkedList::add(int number)
+void LinkedList::add(const int &number)
 {
     head->next = new ListElement(number, head->next);
     size++;
 }
 
-bool LinkedList::remove(int number)
+bool LinkedList::remove(const int &number)
 {
     ListElement *previous = head;
     ListElement *current = head->next;
