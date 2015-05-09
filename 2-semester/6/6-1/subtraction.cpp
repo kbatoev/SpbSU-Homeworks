@@ -1,12 +1,15 @@
 #include "subtraction.h"
 
-Subtraction::Subtraction()
+int SubtractionNode::count()
 {
-
+    return leftChild->count() - rightChild->count();
 }
 
-Subtraction::~Subtraction()
+void SubtractionNode::print()
 {
-
+    std::cout << "(";
+    leftChild->print();
+    std::cout << " - ";
+    rightChild->print();
+    std::cout << ")";
 }
-

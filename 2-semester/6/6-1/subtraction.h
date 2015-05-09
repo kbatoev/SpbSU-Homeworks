@@ -1,12 +1,15 @@
-#ifndef SUBTRACTION_H
-#define SUBTRACTION_H
+#pragma once
 
+#include "treeNode.h"
 
-class Subtraction
+class SubtractionNode : public TreeNode
 {
 public:
-    Subtraction();
-    ~Subtraction();
+
+    SubtractionNode() : TreeNode(left) {}
+    ~SubtractionNode() {}
+    int count();
+    void print();
 };
 
-#endif // SUBTRACTION_H
+

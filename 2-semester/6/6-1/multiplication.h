@@ -1,12 +1,13 @@
-#ifndef MULTIPLICATION_H
-#define MULTIPLICATION_H
+#pragma once
 
+#include "treeNode.h"
 
-class Multiplication
+class MultiplicationNode : public TreeNode
 {
 public:
-    Multiplication();
-    ~Multiplication();
+    MultiplicationNode() : TreeNode(left) {}
+    ~MultiplicationNode() {}
+    int count();
+    void print();
 };
 
-#endif // MULTIPLICATION_H

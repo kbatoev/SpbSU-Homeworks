@@ -1,12 +1,15 @@
 #include "multiplication.h"
 
-Multiplication::Multiplication()
+int MultiplicationNode::count()
 {
-
+    return leftChild->count() * rightChild->count();
 }
 
-Multiplication::~Multiplication()
+void MultiplicationNode::print()
 {
-
+    std::cout << "(";
+    leftChild->print();
+    std::cout << " * ";
+    rightChild->print();
+    std::cout << ")";
 }
-

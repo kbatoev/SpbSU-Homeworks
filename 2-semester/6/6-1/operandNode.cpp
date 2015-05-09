@@ -1,12 +1,7 @@
 #include "operandNode.h"
 
-OperandNode::OperandNode(int value)
-{
-    operand = value;
-    way = noWay;
-    leftChild = nullptr;
-    rightChild = nullptr;
-}
+OperandNode::OperandNode(int value) : TreeNode(), operand(value)
+{}
 
 OperandNode::~OperandNode()
 {}

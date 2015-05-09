@@ -20,12 +20,18 @@ TEMPLATE = app
 
 SOURCES += main.cpp \
     operandNode.cpp \
-    operatorNode.cpp \
-    tree.cpp
+    tree.cpp \
+    addition.cpp \
+    multiplication.cpp \
+    subtraction.cpp \
+    division.cpp
 
 HEADERS += \
     treeNode.h \
     operandNode.h \
-    operatorNode.h \
     treeTest.h \
-    tree.h
+    tree.h \
+    addition.h \
+    multiplication.h \
+    subtraction.h \
+    division.h

@@ -7,8 +7,8 @@ Tree::Tree()
 
 bool Tree::isNumber(const QString &expression, int i)
 {
-    return (expression[i].isDigit() || i < expression.size() - 1 && expression[i] == (QChar)'-'
-            && expression[i + 1].isDigit());
+    return (expression[i].isDigit() || (i < expression.size() - 1 && expression[i] == (QChar)'-'
+            && expression[i + 1].isDigit()));
 }
 
 int Tree::convertNumber(const QString &expression, int &i)
@@ -59,12 +59,12 @@ Tree::~Tree()
     delete head;
 }
 
-void Tree::add(int value)
+void Tree::add(const int &value)
 {
     add(head, value);
 }
 
-void Tree::add(TreeNode* &current, int value)
+void Tree::add(TreeNode* &current, const int &value)
 {
     if (current == nullptr)
         current = new OperandNode(value);
@@ -87,7 +87,7 @@ void Tree::add(TreeNode* &current, int value)
     }
 }
 
-void Tree::add(QChar action)
+void Tree::add(const QChar &action)
 {
     add(head, action);
 }
@@ -104,10 +104,22 @@ void Tree::print()
     std::cout << "\n";
 }
 
-void Tree::add(TreeNode *&current, QChar action)
+TreeNode* Tree::determineOperation(const QChar &action)
+{
+    if (action == '+')
+        return new AdditionNode;
+    if (action == '-')
+        return new SubtractionNode;
+    if (action == '*')
+        return new MultiplicationNode;
+
+    return new DivisionNode;
+}
+
+void Tree::add(TreeNode *&current, const QChar &action)
 {
     if (current == nullptr)
-        current = new OperatorNode(action);
+        current = determineOperation(action);
     else
     {
         if (current->way == TreeNode::Direction::left)

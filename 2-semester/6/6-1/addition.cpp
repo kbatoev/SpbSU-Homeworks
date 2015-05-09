@@ -1,12 +1,15 @@
 #include "addition.h"
 
-Addition::Addition()
+int AdditionNode::count()
 {
-
+    return leftChild->count() + rightChild->count();
 }
 
-Addition::~Addition()
+void AdditionNode::print()
 {
-
+    std::cout << "(";
+    leftChild->print();
+    std::cout << " + ";
+    rightChild->print();
+    std::cout << ")";
 }
-

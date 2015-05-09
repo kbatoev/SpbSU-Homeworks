@@ -1,12 +1,15 @@
 #include "division.h"
 
-Division::Division()
+int DivisionNode::count()
 {
-
+    return leftChild->count() / rightChild->count();
 }
 
-Division::~Division()
+void DivisionNode::print()
 {
-
+    std::cout << "(";
+    leftChild->print();
+    std::cout << " / ";
+    rightChild->print();
+    std::cout << ")";
 }
-

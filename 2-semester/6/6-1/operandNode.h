@@ -1,6 +1,4 @@
 #pragma once
-
-#include <iostream>
 #include "treeNode.h"
 
 /**
@@ -10,6 +8,7 @@
 class OperandNode : public TreeNode
 {
 public:
+
     /// creates a node with no descendant
     OperandNode(int value);
     ~OperandNode();

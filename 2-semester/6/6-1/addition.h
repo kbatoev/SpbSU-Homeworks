@@ -1,12 +1,12 @@
-#ifndef ADDITION_H
-#define ADDITION_H
+#pragma once
 
+#include "treeNode.h"
 
-class Addition
+class AdditionNode : public TreeNode
 {
 public:
-    Addition();
-    ~Addition();
+    AdditionNode() : TreeNode(left) {}
+    ~AdditionNode() {}
+    int count();
+    void print();
 };
-
-#endif // ADDITION_H

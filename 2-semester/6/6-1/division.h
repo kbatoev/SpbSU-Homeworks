@@ -1,12 +1,13 @@
-#ifndef DIVISION_H
-#define DIVISION_H
+#pragma once
 
+#include "treeNode.h"
 
-class Division
+class DivisionNode : public TreeNode
 {
 public:
-    Division();
-    ~Division();
+    DivisionNode() : TreeNode(left) {}
+    ~DivisionNode() {}
+    int count();
+    void print();
 };
 
-#endif // DIVISION_H
