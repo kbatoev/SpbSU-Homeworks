@@ -5,6 +5,7 @@
 #include "hashTableTest.h"
 #include "list.h"
 #include "hashFunctionTesting.h"
+#include "hashTable.h"
 
 enum Choice
 {
@@ -22,10 +23,10 @@ int main()
     HashFunctionTest hashTest;
     QTest::qExec(&hashTest);
 
+
     HashTableTest tableTest;
     QTest::qExec(&tableTest);
     */
-
 
     HashTable *table = new HashTable;
 
@@ -40,12 +41,11 @@ int main()
         int command = 0;
         std::cout << "Enter next command: ";
         std::cin >> command;
-        Choice current = (Choice)command;
 
         QTextStream qtin(stdin);
         QString text;
 
-        switch(current)
+        switch(command)
         {
         case addString:
             std::cout << "Enter string: ";

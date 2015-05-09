@@ -1,17 +1,9 @@
 #include "hashTable.h"
 
+
 HashTable::HashTable()
 {
-    function = new HashFunction;
-    hashTableSize = 1000;
-    hashTable = createTable(hashTableSize);
-}
-
-HashTable::HashTable(int hash(const QString &, int))
-{
-    function = new HashFunction;
-    function->addUsersHashFunction(hash);
-    function->setLastFunction();
+    function = new SumHash;
     hashTableSize = 1000;
     hashTable = createTable(hashTableSize);
 }
@@ -24,36 +16,61 @@ HashTable::~HashTable()
     delete hashTable;
 }
 
-void HashTable::addString(QString stringToAdd)
+void HashTable::addString(const QString &stringToAdd)
 {
-    int index = function->hashFunction(stringToAdd, hashTableSize);
+    int index = function->countHash(stringToAdd, hashTableSize);
     hashTable[index]->add(stringToAdd);
 }
 
 bool HashTable::deleteString(const QString &stringToDelete)
 {
-    int index = function->hashFunction(stringToDelete, hashTableSize);
+    int index = function->countHash(stringToDelete, hashTableSize);
     bool isRemoved = hashTable[index]->remove(stringToDelete);
     return isRemoved;
 }
 
 bool HashTable::findString(const QString &stringToFind)
 {
-    int index = function->hashFunction(stringToFind, hashTableSize);
+    int index = function->countHash(stringToFind, hashTableSize);
     bool isFound = hashTable[index]->find(stringToFind);
     return isFound;
 }
 
 void HashTable::chooseHashFunction()
 {
-    function->changeHashFunction();
+    enum Choice
+    {
+        sum = 0,
+        polynom,
+        odd
+    };
+
+    int number = 0;
+    std::cout << "Enter:\n0 - sumHash\n1 - PolynomHash\n2 - OddFunction\n";
+    std::cin >> number;
+    delete function;
+
+    switch (number)
+    {
+    case sum:
+        function = new SumHash;
+        break;
+
+    case polynom:
+        function = new PolynomHash;
+        break;
+    case odd:
+        function = new OddFUNction;
+        break;
+    }
+
     refreshTable();
 }
 
-void HashTable::changeHashFunction(int hash(const QString &, int))
+void HashTable::changeHashFunction(HashFunction *newFunction)
 {
-    function->addUsersHashFunction(hash);
-    function->setLastFunction();
+    delete function;
+    function = newFunction;
     refreshTable();
 }
 
@@ -92,7 +109,7 @@ void HashTable::refreshTable()
         {
             QString currentString = hashTable[i]->getFirstElement();
             hashTable[i]->remove(currentString);
-            int index = function->hashFunction(currentString, hashTableSize);
+            int index = function->countHash(currentString, hashTableSize);
             newHashTable[index]->add(currentString);
         }
     }

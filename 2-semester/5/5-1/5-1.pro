@@ -20,11 +20,16 @@ TEMPLATE = app
 
 SOURCES += main.cpp \
     hashTable.cpp \
-    hashFunction.cpp
+    sumHash.cpp \
+    polynomHash.cpp \
+    oddFUNction.cpp
 
 HEADERS += \
     hashTable.h \
     list.h \
     hashTableTest.h \
     hashFunction.h \
-    hashFunctionTesting.h
+    hashFunctionTesting.h \
+    sumHash.h \
+    polynomHash.h \
+    oddFUNction.h

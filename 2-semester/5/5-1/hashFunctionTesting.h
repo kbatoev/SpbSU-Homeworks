@@ -4,6 +4,9 @@
 #include <QtTest/QtTest>
 #include <QtCore/QObject>
 #include "hashFunction.h"
+#include "sumHash.h"
+#include "polynomHash.h"
+#include "oddFUNction.h"
 
 class HashFunctionTest : public QObject
 {
@@ -14,9 +17,7 @@ public:
 private slots:
 
     void init()
-    {
-        function = new HashFunction;
-    }
+    {}
 
     void cleanup()
     {
@@ -25,46 +26,23 @@ private slots:
 
     void countPolynom()
     {
-        /// default hash function - polynom
-        QVERIFY(function->hashFunction("ab", 100) == 55);
+        function = new PolynomHash;
+        QVERIFY(function->countHash("ab", 100) == 55);
     }
 
     void countSum()
     {
-        /// sets 1 hashFunction. It's countHashSum
-        function->changeHashFunction(1);
-        QVERIFY(function->hashFunction("1234", 500) == 202);
+        function = new SumHash;
+        QVERIFY(function->countHash("1234", 500) == 202);
     }
 
     void addHashFunction()
     {
-        function->addUsersHashFunction(answerUniverseQuestionHash);
-        function->changeHashFunction(2);
-        QVERIFY(function->hashFunction("kverty, how many chin-ups required ?", 43) == 42);
-    }
-
-    void simpleFunction()
-    {
-        function->addUsersHashFunction(answerUniverseQuestionHash);
-        function->addUsersHashFunction(countStringLength);
-        function->changeHashFunction(3);
-        QVERIFY(function->hashFunction("testing", 10) == 7);
+        function = new OddFUNction;
+        QVERIFY(function->countHash("kverty, how many chin-ups required ?", 43) == 42);
     }
 
 private:
     HashFunction *function;
-
-    static int answerUniverseQuestionHash(const QString &stringToCount, int module)
-    {
-        if (module > 42)
-            return 42;
-        else
-            return 0;
-    }
-
-    static int countStringLength(const QString &stringToCount, int module)
-    {
-        return stringToCount.size() % module;
-    }
-
 };
+

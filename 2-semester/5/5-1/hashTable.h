@@ -3,6 +3,9 @@
 #include <QString>
 #include "list.h"
 #include "hashFunction.h"
+#include "sumHash.h"
+#include "polynomHash.h"
+#include "oddFUNction.h"
 
 /**
  * @brief The HashTable class
@@ -14,11 +17,9 @@ class HashTable
 public:
 
     HashTable();
-    /// constructor that sets hash function
-    HashTable(int hash(const QString &, int));
     ~HashTable();
 
-    void addString(QString stringToAdd);
+    void addString(const QString &stringToAdd);
     bool deleteString(const QString &stringToDelete);
     bool findString(const QString &stringToFind);
 
@@ -26,13 +27,11 @@ public:
     void chooseHashFunction();
 
     /// sets new function and refreshes hashTable
-    void changeHashFunction(int hash(const QString &, int));
+    void changeHashFunction(HashFunction *newFunction);
 
 
     /// prints on console some data: load factor, number of collisions, words added ...
     void showStatistics();
-
-
 
 private:
 
@@ -42,6 +41,5 @@ private:
     HashFunction *function;
     LinkedList<QString> **hashTable;
     int hashTableSize;
-
 };
 

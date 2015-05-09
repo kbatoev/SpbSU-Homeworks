@@ -2,7 +2,10 @@
 
 #include <QtCore/QObject>
 #include <QtTest/QtTest>
+
 #include "hashTable.h"
+#include "hashFunction.h"
+#include "polynomHash.h"
 
 class HashTableTest : public QObject
 {
@@ -25,12 +28,15 @@ private slots:
     void addOneWord()
     {
         table->addString("there's a book on the hashTable");
+        QVERIFY(table->findString("there's a book on the hashTable"));
     }
 
     void addIdenticalWords()
     {
         for (int i = 0; i < 100; i++)
             table->addString(".9qwerTY12'kk");
+        for (int i = 0; i < 100; i++)
+            QVERIFY(table->deleteString(".9qwerTY12'kk"));
     }
 
     void deleteFromEmptyHashTable()
@@ -68,6 +74,13 @@ private slots:
     void chooseFunction()
     {
         table->chooseHashFunction();
+    }
+    void changeFunction()
+    {
+        table->addString("test");
+        HashFunction *polynom = new PolynomHash;
+        table->changeHashFunction(polynom);
+        QVERIFY(table->findString("test"));
     }
 
 private:

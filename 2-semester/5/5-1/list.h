@@ -16,12 +16,12 @@ public:
     ~LinkedList();
 
     /// standard functions
-    void add(T value);
-    bool remove(T value);
+    void add(const T &value);
+    bool remove(const T &value);
     void printList();
 
     /// added function special for hashTable
-    bool find(T value);
+    bool find(const T &value);
 
     /// functions for statistics
     int getSize();
@@ -67,18 +67,17 @@ LinkedList<T>::LinkedList() : head(new ListElement), numberOfAddedWords(0),
 template <typename T>
 LinkedList<T>::~LinkedList()
 {
-    ListElement *current = head->next;
-    ListElement *previous = head;
+    ListElement *current = head;
     while (current != nullptr)
     {
-        delete previous;
-        previous = current;
+        ListElement *toDelete = current;
         current = current->next;
+        delete toDelete;
     }
 }
 
 template <typename T>
-void LinkedList<T>::add(T value)
+void LinkedList<T>::add(const T &value)
 {
     numberOfAddedWords++;
     ListElement *current = head->next;
@@ -99,7 +98,7 @@ void LinkedList<T>::add(T value)
 }
 
 template <typename T>
-bool LinkedList<T>::remove(T value)
+bool LinkedList<T>::remove(const T &value)
 {
     ListElement *previous = head;
     ListElement *current = head->next;
@@ -127,7 +126,7 @@ bool LinkedList<T>::remove(T value)
 }
 
 template <typename T>
-bool LinkedList<T>::find(T value)
+bool LinkedList<T>::find(const T &value)
 {
     ListElement *current = head->next;
     while (current != nullptr)
