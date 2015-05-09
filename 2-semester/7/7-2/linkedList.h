@@ -9,9 +9,9 @@ class LinkedList : public List<T>
 public:
     LinkedList();
     ~LinkedList();
-    void add(T value);
-    void remove(T value);
-    bool exists(T value);
+    void add(const T &value);
+    void remove(const T &value);
+    bool exists(const T &value);
     void printList();
     int getSize() const;
 
@@ -49,15 +49,14 @@ LinkedList<T>::~LinkedList()
 }
 
 template <typename T>
-void LinkedList<T>::add(T value)
+void LinkedList<T>::add(const T &value)
 {
-    ListElement *newElement = new ListElement(value, head->next);
-    head->next = newElement;
+    head->next = new ListElement(value, head->next);
     this->size++;
 }
 
 template <typename T>
-void LinkedList<T>::remove(T value)
+void LinkedList<T>::remove(const T &value)
 {
     ListElement *previous = head;
     ListElement *current = head->next;
@@ -76,7 +75,7 @@ void LinkedList<T>::remove(T value)
 }
 
 template <typename T>
-bool LinkedList<T>::exists(T value)
+bool LinkedList<T>::exists(const T &value)
 {
     ListElement *current = head;
     while (current != nullptr)

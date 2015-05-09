@@ -15,21 +15,21 @@ template <typename T>
 class UniqueList : public LinkedList<T>
 {
 public:
-    void add(T value);
-    void remove(T value);
+    void add(const T &value);
+    void remove(const T &value);
 };
 
 template <typename T>
-void UniqueList<T>::add(T value)
+void UniqueList<T>::add(const T &value)
 {
-    if (this->exists(value))
+    if (LinkedList<T>::exists(value))
         throw RepetitionError("There is such element");
 
-    this->LinkedList<T>::add(value);
+    LinkedList<T>::add(value);
 }
 
 template <typename T>
-void UniqueList<T>::remove(T value)
+void UniqueList<T>::remove(const T &value)
 {
     if (!this->exists(value))
         throw ElementLackError();
