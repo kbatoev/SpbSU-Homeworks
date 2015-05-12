@@ -11,8 +11,12 @@ QT       -= gui
 TARGET = 7-3
 CONFIG   += console
 CONFIG   -= app_bundle
+CONFIG   += c++11
 
 TEMPLATE = app
 
 
 SOURCES += main.cpp
+
+HEADERS += \
+    smartPointer.h
