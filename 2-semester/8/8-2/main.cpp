@@ -1,7 +1,7 @@
 #include <iostream>
 
 #include "vector.h"
-#include "vectortest.h"
+#include "vectorTest.h"
 
 int main()
 {

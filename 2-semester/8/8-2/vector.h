@@ -3,6 +3,10 @@
 #include <iostream>
 #include <ostream>
 
+/**
+ *  Template class Vector
+ */
+
 template <typename T>
 class Vector
 {
@@ -10,16 +14,24 @@ public:
 
     Vector();
     Vector(int newDimension, T *newCoordinates);
+
+    /// copy-constructor
     Vector(Vector<T> &that);
 
+    /// coordinate-wise operations
     Vector<T> &operator +(const Vector<T> &that);
     Vector<T> &operator -(const Vector<T> &that);
+
+    /// scalar multiplication
     T &operator *(const Vector<T> &that);
-    bool operator == (const Vector<T> &that);
+
+    /// comparing of arrays
+    bool operator ==(const Vector<T> &that);
 
     bool isZeroVector();
 
-    friend std::ostream & operator<<(std::ostream &os, Vector<T> &that)
+
+    friend std::ostream & operator <<(std::ostream &os, Vector<T> &that)
     {
         for (int i = 0; i < that.dimension; i++)
             os << that.coordinates[i] << " ";

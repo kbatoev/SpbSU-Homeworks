@@ -23,4 +23,4 @@ SOURCES += main.cpp
 
 HEADERS += \
     vector.h \
-    vectortest.h
+    vectorTest.h
