@@ -20,4 +20,5 @@ HEADERS  += \
     xsAndOsUIi.h \
     xoGame.h
 
-FORMS    += xsandosui.ui
+FORMS    += \
+    xsAndOsUI.ui

@@ -22,7 +22,6 @@ private slots:
     void play(int id);
 
 private:
-
     XOGame::Move move;
     int fieldSize;
     XOGame *game;

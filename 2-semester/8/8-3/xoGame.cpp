@@ -14,24 +14,28 @@ XOGame::XOGame(int size)
 
 XOGame::~XOGame()
 {
-
+    for (int i = 0; i < fieldSize; i++)
+        delete[] matrix[i];
+    delete[] matrix;
 }
 
 XOGame::Move XOGame::checkPosition()
 {
-    Move hor = horizontalBypass();
-    Move ver = verticalBypass();
+    Move horizontal = horizontalBypass();
+    Move vertical = verticalBypass();
     Move diagonalSum = sumBypass();
     Move diagonalSubtract = subtractBypass();
 
-    if (hor != none)
-        return hor;
-    if (ver != none)
-        return ver;
+    if (horizontal != none)
+        return horizontal;
+    if (vertical != none)
+        return vertical;
     if (diagonalSum != none)
         return diagonalSum;
     if (diagonalSubtract != none)
         return diagonalSubtract;
+
+    return XOGame::none;
 }
 
 void XOGame::makeMove(XOGame::Move move, int i, int j)
@@ -41,7 +45,7 @@ void XOGame::makeMove(XOGame::Move move, int i, int j)
 
 bool XOGame::isFinished(int repetitions, XOGame::Move previousButton)
 {
-    return (repetitions >= 3 && previousButton != -1);
+    return (repetitions >= 3 && previousButton != XOGame::none);
 }
 
 XOGame::Move XOGame::horizontalBypass()
