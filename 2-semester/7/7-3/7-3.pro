@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT       += core
+QT       += testlib
 
 QT       -= gui
 
@@ -19,4 +20,5 @@ TEMPLATE = app
 SOURCES += main.cpp
 
 HEADERS += \
-    smartPointer.h
+    smartPointer.h \
+    smartPointerTest.h

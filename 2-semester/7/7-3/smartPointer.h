@@ -2,68 +2,87 @@
 
 #include <iostream>
 
+/**
+ * SmartPointer class improves effectiveness of cleaning memory.
+ * According to RAII
+ */
+
 template <typename T>
 class SmartPointer
 {
 public:
-    SmartPointer();
-    SmartPointer(T *element);
-    SmartPointer(const SmartPointer &elementToCopy);
+    /// counter-linksNumber begins with 1
+    SmartPointer(T* element);
 
-    ~SmartPointer();
+    /// increases counter
+    SmartPointer(const SmartPointer<T> &elementToCopy);
 
-    T& operator * ()
-    {
-        return *pointer;
-    }
+    /// decreases counter and if it's zero frees memory
+    ~SmartPointer() { cleanUsedMemory(); }
 
-    SmartPointer& operator = (SmartPointer &that)
-    {
-        pointer = that.pointer;
-        pointerNumber = that.pointerNumber;
-        (*pointerNumber)++;
-        return *this;
-    }
+    /// it lets use initial object
+    T* getOriginPointer();
 
-    void showNumber();
+    /// before assignment frees "old memory"
+    SmartPointer<T> & operator = (SmartPointer<T> &that);
+
+    int getNumberOfLinks();
 
 private:
-    T *pointer;
-    int *pointerNumber;
-};
 
-template <typename T>
-SmartPointer<T>::SmartPointer()
-{}
+    void cleanUsedMemory();
+
+    T *pointer;
+    int *linksNumber;
+};
 
 template <typename T>
 SmartPointer<T>::SmartPointer(T *element)
 {
-    pointerNumber = new int(1);
+    linksNumber = new int(1);
     pointer = element;
 }
 
 template <typename T>
-SmartPointer<T>::SmartPointer(const SmartPointer &elementToCopy)
+SmartPointer<T>::SmartPointer(const SmartPointer<T> &elementToCopy)
 {
-    pointerNumber = elementToCopy.pointerNumber;
-    (*pointerNumber)++;
+    linksNumber = elementToCopy.linksNumber;
+    (*linksNumber)++;
     pointer = elementToCopy.pointer;
 }
 
 template <typename T>
-SmartPointer<T>::~SmartPointer()
+int SmartPointer<T>::getNumberOfLinks()
 {
-    (*pointerNumber)--;
-    if (!(*pointerNumber))
+    return *linksNumber;
+}
+
+template <typename T>
+void SmartPointer<T>::cleanUsedMemory()
+{
+    if (linksNumber)
     {
-        delete pointerNumber;
-        delete pointer;
+        *linksNumber -= 1;
+        if (!*linksNumber)
+        {
+            delete linksNumber;
+            delete[] pointer;
+        }
     }
 }
 
 template <typename T>
-void SmartPointer<T>::showNumber()
+T *SmartPointer<T>::getOriginPointer()
 {
-    std::cout << "Links number is " << *pointerNumber << "\n";
+    return pointer;
+}
+
+template <typename T>
+SmartPointer<T> &SmartPointer<T>::operator =(SmartPointer<T> &that)
+{
+    cleanUsedMemory();
+    pointer = that.pointer;
+    linksNumber = that.linksNumber;
+    (*linksNumber)++;
+    return *this;
 }
