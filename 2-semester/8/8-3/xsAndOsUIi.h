@@ -26,7 +26,6 @@ private:
     int fieldSize;
     XOGame *game;
 
-
     Ui::XsAndOsUI *ui;
     QSignalMapper *signalMapper;
     QPushButton **field;
