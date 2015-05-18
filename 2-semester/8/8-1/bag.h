@@ -17,9 +17,9 @@ public:
 
     /// cheking what element is in root
     T getTopValue();
-    void addElement(int valueToAdd) {Bag::Node::addElement(root, valueToAdd);}
-    bool exists(int valueToFind) {return Bag::Node::exists(root, valueToFind);}
-    void deleteElement(int valueToDelete) {Bag::Node::deleteElement(root, valueToDelete);}
+    void addElement(const int &valueToAdd) {Bag::Node::addElement(root, valueToAdd);}
+    bool exists(const int &valueToFind) {return Bag::Node::exists(root, valueToFind);}
+    void deleteElement(const int &valueToDelete) {Bag::Node::deleteElement(root, valueToDelete);}
 
 private:
     class Node
@@ -39,9 +39,9 @@ private:
         /// deletes Node, but not its children
         ~Node() {}
 
-        static void addElement(Node* &node, int valueToAdd);
-        static bool exists(Node *node, int valueToFind);
-        static void deleteElement(Node* &node, int valueToDelete);
+        static void addElement(Node* &node, const int &valueToAdd);
+        static bool exists(Node *node, const int &valueToFind);
+        static void deleteElement(Node* &node, const int &valueToDelete);
 
         /// deletes Node, and its children
         static void deleteNode(Node* &node);
@@ -165,7 +165,7 @@ void Bag<T>::Node::deleteNode(Bag::Node *&node)
 }
 
 template <typename T>
-void Bag<T>::Node::addElement(Bag::Node* &node, int valueToAdd)
+void Bag<T>::Node::addElement(Bag::Node* &node, const int &valueToAdd)
 {
     if (!node)
         node = new Bag::Node(valueToAdd);
@@ -182,7 +182,7 @@ void Bag<T>::Node::addElement(Bag::Node* &node, int valueToAdd)
 }
 
 template <typename T>
-bool Bag<T>::Node::exists(Bag::Node *node, int valueToFind)
+bool Bag<T>::Node::exists(Bag::Node *node, const int &valueToFind)
 {
     if (node)
     {
@@ -196,7 +196,7 @@ bool Bag<T>::Node::exists(Bag::Node *node, int valueToFind)
 }
 
 template <typename T>
-void Bag<T>::Node::deleteElement(Bag::Node* &node, int valueToDelete)
+void Bag<T>::Node::deleteElement(Bag::Node* &node, const int &valueToDelete)
 {
     if (node != nullptr)
     {
