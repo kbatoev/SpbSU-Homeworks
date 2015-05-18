@@ -2,19 +2,19 @@
 
 #include <QtCore/QObject>
 #include <QtTest/QtTest>
-#include "avlTree.h"
+#include "bag.h"
 
-class AVLTreeTest : public QObject
+class BagTest : public QObject
 {
     Q_OBJECT
 public:
-    AVLTreeTest(QObject *parent = 0) : QObject(parent) {}
+    BagTest(QObject *parent = 0) : QObject(parent) {}
 
 private slots:
 
     void init()
     {
-        tree = new AVLTree;
+        tree = new Bag<int>;
     }
 
     void cleanup()
@@ -101,5 +101,5 @@ private slots:
 
 
 private:
-    AVLTree *tree;
+    Bag<int> *tree;
 };

@@ -18,9 +18,8 @@ CONFIG   += c++11
 TEMPLATE = app
 
 
-SOURCES += main.cpp \
-    avlTree.cpp
+SOURCES += main.cpp
 
 HEADERS += \
-    avlTree.h \
-    avlTreeTest.h
+    bag.h \
+    bagTest.h

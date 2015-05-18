@@ -1,9 +1,11 @@
 #include <iostream>
-#include "avlTreeTest.h"
+#include "bagTest.h"
+
+#include "bag.h"
 
 int main()
 {
-    AVLTreeTest test;
+    BagTest test;
     QTest::qExec(&test);
 
     return 0;
