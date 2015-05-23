@@ -59,3 +59,21 @@ void LinkedList::printList()
         current = current->next;
     }
 }
+
+int LinkedList::getFirst()
+{
+    if (head->next != nullptr)
+        return head->next->value;
+}
+
+bool LinkedList::exists(int value)
+{
+    ListElement *current = head->next;
+    while (current != nullptr)
+    {
+        if (current->value == value)
+            return true;
+        current = current->next;
+    }
+    return false;
+}

@@ -11,7 +11,6 @@ class HeapSort : Sorter
 {
 public:
 
-    /// constructor
     HeapSort();
 
     /// sort function

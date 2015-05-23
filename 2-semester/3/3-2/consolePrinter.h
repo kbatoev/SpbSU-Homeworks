@@ -13,11 +13,8 @@ class ConsolePrinter : public Printer
 {
 public:
 
-    /// constructors
     ConsolePrinter();
     ConsolePrinter(int *newArray, int newSize);
-
-    /// destructor
     ~ConsolePrinter();
 
     /// realization of inherited method

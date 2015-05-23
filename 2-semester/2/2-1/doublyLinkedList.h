@@ -5,6 +5,15 @@
 
 class DoublyLinkedList : List
 {
+public:
+    DoublyLinkedList();
+    ~DoublyLinkedList();
+    void add(int value);
+    bool remove(int value);
+    void printList();
+    int getFirst();
+    bool exists(int value);
+
 private:
     class ListElement
     {
@@ -17,11 +26,5 @@ private:
     };
 
     ListElement *head;
-public:
-    DoublyLinkedList();
-    ~DoublyLinkedList();
-    void add(int value);
-    bool remove(int value);
-    void printList();
 };
 

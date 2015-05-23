@@ -42,7 +42,8 @@ bool DoublyLinkedList::remove(int value)
     {
         ListElement *next = current->next;
         previous->next = next;
-        next->previous = previous;
+        if (next != nullptr)
+            next->previous = previous;
         delete current;
         return true;
     }
@@ -57,6 +58,24 @@ void DoublyLinkedList::printList()
         current = current->next;
     }
     std::cout << std::endl;
+}
+
+int DoublyLinkedList::getFirst()
+{
+    if (head->next != nullptr)
+        return head->next->value;
+}
+
+bool DoublyLinkedList::exists(int value)
+{
+    ListElement *current = head->next;
+    while (current != nullptr)
+    {
+        if (current->value == value)
+            return true;
+        current = current->next;
+    }
+    return false;
 }
 
 DoublyLinkedList::ListElement::ListElement()

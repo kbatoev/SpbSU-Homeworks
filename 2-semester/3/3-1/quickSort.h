@@ -11,7 +11,6 @@ class QuickSort : Sorter
 {
 public:
 
-    /// constructor
     QuickSort();
 
     /// realization of function in Sorter

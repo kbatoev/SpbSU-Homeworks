@@ -12,48 +12,33 @@ class LinkedList : public Comparable
 {
 public:
 
-    /**
-     * @brief LinkedList. Constructor
-     */
     LinkedList();
-
-    /// destructor
     ~LinkedList();
 
     /**
      * @brief add. Method adding new ListElement
      * @param number - value of new ListElement
      */
-    void add(int number);
+    void add(const int &number);
 
     /**
      * @brief remove. It removes a ListElement which value is number
      * @param number
      * @return true, if he could find such element, and false otherwise
      */
-    bool remove(int number);
+    bool remove(const int &number);
 
     /**
      * @brief print. Method shows List's Elements
      */
     void print();
 
-    /**
-     * @brief cloneYourself
-     * @return pointer to a new section of memory
-     */
     LinkedList* cloneYourself();
 
     /**
      * @brief compareTo. Compares list with something that can be compared by its size
-     * @param that
      */
     int compareTo(Comparable *that);
-
-    /**
-     * @brief getSize
-     * @return amount of elements in LinkedList
-     */
     int getSize();
 
 private:

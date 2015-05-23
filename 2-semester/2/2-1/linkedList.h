@@ -6,6 +6,15 @@
 
 class LinkedList : List
 {
+public:
+    LinkedList();
+    ~LinkedList();
+    void add(int value);
+    bool remove(int value);
+    void printList();
+    int getFirst();
+    bool exists(int value);
+
 private:
     class ListElement
     {
@@ -16,11 +25,4 @@ private:
         ListElement(int newValue, ListElement *newNext);
     };
     ListElement *head;
-
-public:
-    LinkedList();
-    ~LinkedList();
-    void add(int value);
-    bool remove(int value);
-    void printList();
 };

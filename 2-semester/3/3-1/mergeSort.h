@@ -11,7 +11,6 @@ class MergeSort : Sorter
 {
 public:
 
-    /// constructor
     MergeSort();
 
     /// realization of function in Sorter

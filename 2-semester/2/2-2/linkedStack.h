@@ -7,7 +7,7 @@ class LinkedStack : Stack
 public:
     LinkedStack();
     ~LinkedStack();
-    void push(int value);
+    void push(const int &value);
     int top();
     void pop();
     bool isEmpty();

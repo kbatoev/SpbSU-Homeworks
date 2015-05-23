@@ -1,8 +1,7 @@
 #include "heapSort.h"
 
 HeapSort::HeapSort()
-{
-}
+{}
 
 void HeapSort::sort(int *array, int sizeOfArray)
 {

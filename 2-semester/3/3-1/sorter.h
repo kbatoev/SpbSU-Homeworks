@@ -9,7 +9,6 @@ class Sorter
 {
 public:
 
-    /// virtual destructor
     virtual ~Sorter() {}
 
     /// virtual method sort
