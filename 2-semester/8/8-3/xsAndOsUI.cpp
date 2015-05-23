@@ -6,11 +6,20 @@ XsAndOsUI::XsAndOsUI(QWidget *parent) :
     ui(new Ui::XsAndOsUI)
 {
     ui->setupUi(this);
-    ui->lineEdit->setText("Xs - move");
+
+    statusLine = new QLineEdit;
+    ui->centralWidget->setLayout(ui->gridLayout);
+
+    delete ui->lineEdit;
+
+    fieldSize = 3;
+
+    ui->gridLayout->addWidget(statusLine, 0, 0, 1, fieldSize);
+    statusLine->setText("Xs - move");
 
     signalMapper = new QSignalMapper(this);
     move = XOGame::xs;
-    fieldSize = 5;
+
     game = new XOGame(fieldSize);
 
     field = new QPushButton*[fieldSize];
@@ -22,13 +31,15 @@ XsAndOsUI::XsAndOsUI(QWidget *parent) :
         {
             connect(&field[i][j], SIGNAL(clicked()), signalMapper, SLOT(map()));
             signalMapper->setMapping(&field[i][j], fieldSize * i + j);
-            ui->gridLayout->addWidget(&field[i][j], i, j);
+            ui->gridLayout->addWidget(&field[i][j], i + 1, j);
         }
     connect(signalMapper, SIGNAL(mapped(int)), this, SLOT(play(int)));
+
 }
 
 XsAndOsUI::~XsAndOsUI()
 {
+    delete statusLine;
     delete signalMapper;
     for (int i = 0; i < fieldSize; i++)
         delete[] field[i];
@@ -45,13 +56,13 @@ void XsAndOsUI::play(int id)
     if (!move)
     {
         field[i][j].setText("O");
-        ui->lineEdit->setText("Xs - move");
+        statusLine->setText("Xs - move");
         move = XOGame::xs;
     }
     else
     {
         field[i][j].setText("X");
-        ui->lineEdit->setText("Os - move");
+        statusLine->setText("Os - move");
         move = XOGame::os;
     }
 
@@ -62,9 +73,14 @@ void XsAndOsUI::play(int id)
     if (resultOfGame != XOGame::none)
     {
         if (resultOfGame == XOGame::xs)
-            ui->lineEdit->setText("Xs - winner!!!");
+            statusLine->setText("Xs - winner!!!");
         else
-            ui->lineEdit->setText("Os - winner!!!");
+        if (resultOfGame == XOGame::os)
+            statusLine->setText("Os - winner!!!");
+        else
+            statusLine->setText("Draw!!!");
+
+
         for (int i = 0; i < fieldSize; i++)
             for (int j = 0; j < fieldSize; j++)
                 field[i][j].setEnabled(false);

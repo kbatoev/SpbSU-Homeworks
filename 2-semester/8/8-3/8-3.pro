@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui testlib
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -18,7 +18,8 @@ SOURCES += main.cpp \
 
 HEADERS  += \
     xsAndOsUIi.h \
-    xoGame.h
+    xoGame.h \
+    xoGameTest.h
 
 FORMS    += \
     xsAndOsUI.ui

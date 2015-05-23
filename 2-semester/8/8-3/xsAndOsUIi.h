@@ -1,5 +1,6 @@
 #pragma once
 
+#include <QLineEdit>
 #include <QMainWindow>
 #include <QPushButton>
 #include <QSignalMapper>
@@ -26,6 +27,7 @@ private:
     int fieldSize;
     XOGame *game;
 
+    QLineEdit *statusLine;
     Ui::XsAndOsUI *ui;
     QSignalMapper *signalMapper;
     QPushButton **field;

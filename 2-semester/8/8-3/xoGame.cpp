@@ -2,6 +2,7 @@
 
 XOGame::XOGame(int size)
 {
+    numberOfMoves = 0;
     fieldSize = size;
     matrix = new Move*[fieldSize];
     for (int i = 0; i < fieldSize; i++)
@@ -35,12 +36,17 @@ XOGame::Move XOGame::checkPosition()
     if (diagonalSubtract != none)
         return diagonalSubtract;
 
+    if (numberOfMoves == fieldSize * fieldSize)
+        return XOGame::draw;
+
     return XOGame::none;
 }
 
 void XOGame::makeMove(XOGame::Move move, int i, int j)
 {
     matrix[i][j] = move;
+    if (move != none)
+        numberOfMoves++;
 }
 
 bool XOGame::isFinished(int repetitions, XOGame::Move previousButton)

@@ -16,7 +16,8 @@ public:
     {
         none = -1,
         os = 0,
-        xs = 1
+        xs = 1,
+        draw
     };
     /// returns a winner of current position, if it's not NONE
     Move checkPosition();
@@ -35,6 +36,7 @@ private:
     Move sumBypass();
     Move subtractBypass();
 
+    int numberOfMoves;
     int fieldSize;
     Move **matrix;
 };
