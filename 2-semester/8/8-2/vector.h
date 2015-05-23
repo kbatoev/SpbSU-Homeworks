@@ -13,17 +13,18 @@ class Vector
 public:
 
     Vector();
+    ~Vector();
     Vector(int newDimension, T *newCoordinates);
 
     /// copy-constructor
-    Vector(Vector<T> &that);
+    Vector(const Vector<T> &that);
 
     /// coordinate-wise operations
-    Vector<T> &operator +(const Vector<T> &that);
-    Vector<T> &operator -(const Vector<T> &that);
+    Vector<T> operator +(const Vector<T> &that);
+    Vector<T> operator -(const Vector<T> &that);
 
     /// scalar multiplication
-    T &operator *(const Vector<T> &that);
+    T operator *(const Vector<T> &that);
 
     /// comparing of arrays
     bool operator ==(const Vector<T> &that);
@@ -51,6 +52,12 @@ Vector<T>::Vector() : dimension(1)
 }
 
 template <typename T>
+Vector<T>::~Vector()
+{
+    delete[] coordinates;
+}
+
+template <typename T>
 Vector<T>::Vector(int newDimension, T *newCoordinates)
 {
     dimension = newDimension;
@@ -60,7 +67,7 @@ Vector<T>::Vector(int newDimension, T *newCoordinates)
 }
 
 template <typename T>
-Vector<T>::Vector(Vector<T> &that)
+Vector<T>::Vector(const Vector<T> &that)
 {
     dimension = that.dimension;
     coordinates = new T[dimension];
@@ -70,27 +77,25 @@ Vector<T>::Vector(Vector<T> &that)
 }
 
 template <typename T>
-Vector<T> &Vector<T>::operator+(const Vector<T> &that)
+Vector<T> Vector<T>::operator+(const Vector<T> &that)
 {
     T *newCoordinates = new T[dimension];
     for (int i = 0; i < dimension; i++)
         newCoordinates[i] = coordinates[i] + that.coordinates[i];
-    Vector<T> sumVector(dimension, newCoordinates);
-    return sumVector;
+    return Vector<T>(dimension, newCoordinates);
 }
 
 template <typename T>
-Vector<T> &Vector<T>::operator-(const Vector<T> &that)
+Vector<T> Vector<T>::operator-(const Vector<T> &that)
 {
     T *newCoordinates = new T[dimension];
     for (int i = 0; i < dimension; i++)
         newCoordinates[i] = coordinates[i] - that.coordinates[i];
-    Vector<T> difference(dimension, newCoordinates);
-    return difference;
+    return Vector<T>(dimension, newCoordinates);
 }
 
 template <typename T>
-T &Vector<T>::operator *(const Vector<T> &that)
+T Vector<T>::operator *(const Vector<T> &that)
 {
     T scalarProduct = 0;
     for (int i = 0; i < dimension; i++)
