@@ -24,6 +24,7 @@ public:
     ~Client();
 
 private slots:
+    void disconnectFromServer();
     void connectToServer();
     void writeMessageToServer();
     void readMessageFromServer();
@@ -31,6 +32,10 @@ private slots:
     void enableConnectButton();
 
 private:
+    const QString destroyedConnection = "CONNECTION DESTROYED";
+    const QString establishedConnection = "CONNECTION ESTABLISHED";
+
+    void writeMessageToServer(const QString &message);
     void enableSendButton();
     void disableSendButton();
 

@@ -11,6 +11,7 @@ Client::Client(QWidget *parent)
 
     connect(connectButton, SIGNAL(clicked()), this, SLOT(connectToServer()));
 
+    connect(quitButton, SIGNAL(clicked()), this, SLOT(disconnectFromServer()));
     connect(quitButton, SIGNAL(clicked()), this, SLOT(close()));
     connect(tcpSocket, SIGNAL(readyRead()), this, SLOT(readMessageFromServer()));
     connect(sendButton, SIGNAL(clicked()), this, SLOT(writeMessageToServer()));
@@ -32,6 +33,12 @@ Client::~Client()
     delete sendButton;
     delete tcpSocket;
     delete mainLayout;
+}
+
+void Client::disconnectFromServer()
+{
+    if (tcpSocket->isOpen())
+        writeMessageToServer("CONNECTION DESTROYED");
 }
 
 void Client::drawWindow()
@@ -59,16 +66,19 @@ void Client::drawWindow()
     portLabel->setBuddy(portLineEdit);
 
     quitButton = new QPushButton(tr("Quit"));
+    quitButton->setAutoDefault(false);
     connectButton = new QPushButton(tr("Connect"));
+    connectButton->setAutoDefault(false);
     connectButton->setEnabled(false);
+
+    sendButton = new QPushButton("&Send");
+    sendButton->setAutoDefault(true);
+    sendButton->setEnabled(false);
 
     chat = new QTextEdit();
     chat->setReadOnly(true);
     messageLine = new QLineEdit;
     messageLine->setEnabled(false);
-
-    sendButton = new QPushButton("&Send");
-    sendButton->setEnabled(false);
 
     mainLayout = new QGridLayout;
     mainLayout->addWidget(hostLabel, 0, 0);
@@ -91,28 +101,32 @@ void Client::drawWindow()
 void Client::enableConnectButton()
 {
     connectButton->setEnabled(!hostCombo->currentText().isEmpty() && !portLineEdit->text().isEmpty());
-    //if (!connectButton->isEnabled())
-      //  disableSendButton();
 }
 
 void Client::connectToServer()
 {
     tcpSocket->abort();
     tcpSocket->connectToHost(hostCombo->currentText(), portLineEdit->text().toInt());
-    enableSendButton();
 }
 
 void Client::writeMessageToServer()
 {
+    writeMessageToServer("Client: " + messageLine->text());
+}
+
+void Client::writeMessageToServer(const QString &message)
+{
+    messageLine->setText("");
     QByteArray block;
     QDataStream out(&block, QIODevice::WriteOnly);
     out.setVersion(QDataStream::Qt_4_0);
 
     out << (quint16)0;
-    out << "Client: " + messageLine->text();
+    out << message;
     out.device()->seek(0);
     out << (quint16)(block.size() - sizeof(quint16));
 
+    chat->append(message);
     tcpSocket->write(block);
 }
 
@@ -134,6 +148,11 @@ void Client::readMessageFromServer()
     QString message;
     in >> message;
     chat->append(message);
+
+    if (!message.compare(destroyedConnection))
+        disableSendButton();
+    if (!message.compare(establishedConnection))
+        enableSendButton();
 
     blockSize = 0;
 }
@@ -174,6 +193,7 @@ void Client::enableSendButton()
 
 void Client::disableSendButton()
 {
+    connectButton->setEnabled(true);
     sendButton->setEnabled(false);
     messageLine->setEnabled(false);
 }
