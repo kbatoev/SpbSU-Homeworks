@@ -84,7 +84,7 @@ void Server::disableSendWidgets()
 
 void Server::rememberClientSocket()
 {
-    tcpSocket = tcpServer->nextPendingConnection(); // incoming connection
+    tcpSocket = tcpServer->nextPendingConnection();
     connect(tcpSocket, SIGNAL(disconnected()), tcpSocket, SLOT(deleteLater()));
     connect(tcpSocket, SIGNAL(readyRead()), this, SLOT(readMessageFromClient()));
     enableSendWidgets();
