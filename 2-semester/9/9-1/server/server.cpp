@@ -37,7 +37,8 @@ Server::~Server()
 
 void Server::disconnectFromClient()
 {
-    sendMessageToClient(destroyedConnection);
+    if (tcpSocket && tcpSocket->isOpen())
+        sendMessageToClient(destroyedConnection);
 }
 
 void Server::drawWindow()

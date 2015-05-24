@@ -37,7 +37,7 @@ Client::~Client()
 
 void Client::disconnectFromServer()
 {
-    if (tcpSocket->isOpen())
+    if (tcpSocket && tcpSocket->isOpen())
         writeMessageToServer("CONNECTION DESTROYED");
 }
 
