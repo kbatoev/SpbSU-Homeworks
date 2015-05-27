@@ -24,8 +24,17 @@ public:
     ~BashViewer();
 
 private slots:
+
+    /// at the beginning downloads site-page
+    /// and then page at index of currentPage
     void loadQuotes();
+
+    /// shows a quote if it's possible
+    /// otherwise downloals new Page
     void showNextQuote();
+
+    ///after downloading creates lists of Quotes and Ratings
+    /// at first call - finds number of pages available
     void createQuotesList();
 
 private:

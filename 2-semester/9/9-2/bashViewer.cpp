@@ -8,7 +8,7 @@ BashViewer::BashViewer(QWidget *parent) :
     mainLayout(new QGridLayout),
     textEdit(new QTextEdit),
     nextButton(new QPushButton),
-    loadButton(new QPushButton),
+    loadButton(new QPushButton(tr("Load Next Page"))),
     ratingEdit(new QLineEdit),
     page(new QWebPage),
     currentPage(0)
@@ -80,7 +80,6 @@ void BashViewer::drawWindow()
     ratingLabel = new QLabel(tr("Rating:"));
     mainLayout->addWidget(ratingLabel, 1, 1, 1, 2);
     mainLayout->addWidget(loadButton, 0, 0, 1, 2);
-    loadButton->setText("Load");
     mainLayout->addWidget(nextButton, 0, 2, 1, 3);
     nextButton->setText("Next");
     nextButton->setEnabled(false);
