@@ -21,5 +21,6 @@ TEMPLATE = app
 SOURCES += main.cpp
 
 HEADERS += \
-    bag.h \
-    bagTest.h
+    bagTest.h \
+    avlTree.h \
+    bag.h

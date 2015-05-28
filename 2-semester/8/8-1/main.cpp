@@ -1,7 +1,8 @@
 #include <iostream>
-#include "bagTest.h"
 
+#include "bagTest.h"
 #include "bag.h"
+#include "avlTree.h"
 
 int main()
 {

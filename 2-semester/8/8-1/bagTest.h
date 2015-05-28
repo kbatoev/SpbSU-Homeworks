@@ -14,92 +14,93 @@ private slots:
 
     void init()
     {
-        tree = new Bag<int>;
+        bag = new Bag<int>;
     }
 
     void cleanup()
     {
-        delete tree;
+        delete bag;
     }
 
     void checkEmptyBag()
     {
         for (int i = 0; i < 1000; i++)
-            QVERIFY(!tree->exists(i));
+            QVERIFY(!bag->exists(i));
     }
 
     void addElement()
     {
-        tree->addElement(90);
-        QVERIFY(tree->exists(90));
+        bag->addElement(90);
+        QVERIFY(bag->exists(90));
     }
+
 
     void deleteElementWithNoChildren()
     {
-        tree->addElement(78);
-        tree->deleteElement(78);
-        QVERIFY(!tree->exists(78));
+        bag->addElement(78);
+        bag->deleteElement(78);
+        QVERIFY(!bag->exists(78));
     }
     void deleteElementWithRightChild()
     {
-        tree->addElement(5);
-        tree->addElement(10);
-        tree->deleteElement(5);
-        QVERIFY(tree->exists(10) && tree->getTopValue() == 10);
+        bag->addElement(5);
+        bag->addElement(10);
+        bag->deleteElement(5);
+        QVERIFY(bag->exists(10) && bag->getTopValue() == 10);
     }
 
     void deleteElementWithLeftChild()
     {
-        tree->addElement(5);
-        tree->addElement(4);
-        tree->deleteElement(5);
-        QVERIFY(tree->exists(4) && tree->getTopValue() == 4);
+        bag->addElement(5);
+        bag->addElement(4);
+        bag->deleteElement(5);
+        QVERIFY(bag->exists(4) && bag->getTopValue() == 4);
     }
 
     void deleteElementWithTwoChildren()
     {
-        tree->addElement(5);
-        tree->addElement(10);
-        tree->addElement(4);
-        tree->deleteElement(5);
-        QVERIFY(tree->exists(10) && tree->exists(4) &&
-                !tree->exists(5) && tree->getTopValue() == 10);
+        bag->addElement(5);
+        bag->addElement(10);
+        bag->addElement(4);
+        bag->deleteElement(5);
+        QVERIFY(bag->exists(10) && bag->exists(4) &&
+                !bag->exists(5) && bag->getTopValue() == 10);
     }
 
     void addTwoCopiesOfElementAndDeleteThem()
     {
-        tree->addElement(42);
-        tree->addElement(42);
-        tree->deleteElement(42);
-        tree->deleteElement(42);
-        QVERIFY(!tree->exists(42));
+        bag->addElement(42);
+        bag->addElement(42);
+        bag->deleteElement(42);
+        bag->deleteElement(42);
+        QVERIFY(!bag->exists(42));
     }
 
     void addTwoCopiesOfElementAndSaveOne()
     {
-        tree->addElement(42);
-        tree->addElement(42);
-        tree->deleteElement(42);
-        QVERIFY(tree->exists(42));
+        bag->addElement(42);
+        bag->addElement(42);
+        bag->deleteElement(42);
+        QVERIFY(bag->exists(42));
     }
 
     void rightRotation()
     {
-        tree->addElement(7);
-        tree->addElement(6);
-        tree->addElement(5);
-        QVERIFY(tree->getTopValue() == 6);
+        bag->addElement(7);
+        bag->addElement(6);
+        bag->addElement(5);
+        QVERIFY(bag->getTopValue() == 6);
     }
 
     void leftRotation()
     {
-        tree->addElement(7);
-        tree->addElement(8);
-        tree->addElement(9);
-        QVERIFY(tree->getTopValue() == 8);
+        bag->addElement(7);
+        bag->addElement(8);
+        bag->addElement(9);
+        QVERIFY(bag->getTopValue() == 8);
     }
 
-
 private:
-    Bag<int> *tree;
+    Bag<int> *bag;
 };
+
