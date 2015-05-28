@@ -78,6 +78,9 @@ int BashViewer::searchNumberOfPages()
 void BashViewer::drawWindow()
 {
     ratingLabel = new QLabel(tr("Rating:"));
+    textEdit->setReadOnly(true);
+    ratingEdit->setReadOnly(true);
+
     mainLayout->addWidget(ratingLabel, 1, 1, 1, 2);
     mainLayout->addWidget(loadButton, 0, 0, 1, 2);
     mainLayout->addWidget(nextButton, 0, 2, 1, 3);
