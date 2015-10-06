@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT       += core
+QT       += testlib
 
 QT       -= gui
 
@@ -24,4 +25,6 @@ HEADERS += \
     localnet.h \
     wsystem.h \
     lsystem.h \
-    msystem.h
+    msystem.h \
+    state.h \
+    localnettest.h

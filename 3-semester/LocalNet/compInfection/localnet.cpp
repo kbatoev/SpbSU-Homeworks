@@ -3,7 +3,7 @@
 #include "lsystem.h"
 #include "wsystem.h"
 
-LocalNet::LocalNet(int computers, int **matrix, int *os) : computers(computers)
+LocalNet::LocalNet(int computers, int **matrix, int *os) : computers(computers), addingProbability(0)
 {
     map = new int*[computers];
     for (int i = 0; i < computers; ++i)
@@ -18,8 +18,8 @@ LocalNet::LocalNet(int computers, int **matrix, int *os) : computers(computers)
     arrayOfSystems = new ISystem*[computers];
     for (int i = 0; i < computers; i++)
     {
-        OS current = OS(os[i]);
-        switch (current)
+        OS currentSystem = OS(os[i]);
+        switch (currentSystem)
         {
         case MOS:
             arrayOfSystems[i] = new MSystem();
@@ -32,8 +32,11 @@ LocalNet::LocalNet(int computers, int **matrix, int *os) : computers(computers)
             break;
         }
     }
-    for (int i = 1; i < computers; i++) // only first computer is infected in the beginning
-        numbersOfUninfected.append(i);
+}
+
+LocalNet::LocalNet(int computers, int **matrix, int *os, int addition) : LocalNet(computers, matrix, os)
+{
+    addingProbability = addition;
 }
 
 LocalNet::~LocalNet()
@@ -47,43 +50,83 @@ LocalNet::~LocalNet()
     delete[] arrayOfSystems;
 }
 
-void LocalNet::startExperiment()
+void LocalNet::startExperimentWithOutput()
 {
-    arrayOfSystems[0]->tryToInfectYorself(1000); // made first computer infected
-    int uninfectedComputers = computers - 1;
+    arrayOfSystems[firstComputer]->makeInfected(); // made first computer infected
+    numbersOfInfected.append(firstComputer);
 
-    int iteration = 0;
-    while (uninfectedComputers)
+    iteration = 1;
+    while (numbersOfInfected.size() < computers)
     {
-        showStatistics(iteration++);
-        for (int i = 0; i < numbersOfUninfected.size(); i++)
+        showStatistics();
+        renewSystemsStatus();
+        for (int i = 0; i < numbersOfInfected.size(); i++)
         {
-            int number = numbersOfUninfected.at(i);
+            int number = numbersOfInfected.at(i);
             ISystem *system = arrayOfSystems[number];
 
             int j = 0;
-            while (!system->getStatus() && j < computers)
+            while (j < computers)
             {
-                if (map[number][j] && arrayOfSystems[j]->getStatus())
-                {
-                    system->tryToInfectYorself(arrayOfSystems[j]->getInfectionAbility());
-                    if (system->getStatus())
-                        uninfectedComputers--;
-
-                }
+                if (map[number][j] && arrayOfSystems[j]->isHealthy())
+                    system->tryToInfectNeighbour(arrayOfSystems[j], addingProbability);
                 j++;
             }
         }
+        iteration++;
     }
-    showStatistics(iteration++);
+    showStatistics();
 }
 
-void LocalNet::showStatistics(int iteration)
+void LocalNet::startExperiment()
+{
+    arrayOfSystems[firstComputer]->makeInfected(); // made first computer infected
+    numbersOfInfected.append(firstComputer);
+
+    iteration = 1;
+    while (numbersOfInfected.size() < computers)
+    {
+        for (int i = 0; i < numbersOfInfected.size(); i++)
+        {
+            int number = numbersOfInfected.at(i);
+            ISystem *system = arrayOfSystems[number];
+
+            int j = 0;
+            while (j < computers)
+            {
+                if (map[number][j] && arrayOfSystems[j]->isHealthy())
+                    system->tryToInfectNeighbour(arrayOfSystems[j], addingProbability);
+                j++;
+            }
+        }
+        renewSystemsStatus();
+        iteration++;
+    }
+}
+
+int LocalNet::getIterationNumber()
+{
+    return iteration;
+}
+
+void LocalNet::showStatistics()
 {
     std::cout << "Iteration " << iteration << ":\n";
     for (int i = 0; i < computers; i++)
         std::cout << i + 1 << ": " << "os: " << arrayOfSystems[i]->getName().toStdString()
                   << " " << arrayOfSystems[i]->getQStringStatus().toStdString() << "\n";
     std::cout << "\n\n";
+}
+
+void LocalNet::renewSystemsStatus()
+{
+    for (int i = 0; i < computers; i++)
+    {
+        if (arrayOfSystems[i]->isJustInfected())
+        {
+            arrayOfSystems[i]->makeInfected();
+            numbersOfInfected.append(i);
+        }
+    }
 }
 
