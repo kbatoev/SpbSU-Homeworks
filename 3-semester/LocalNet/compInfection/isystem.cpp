@@ -1,14 +1,15 @@
 #include "isystem.h"
 
-ISystem::ISystem() : State()
+ISystem::ISystem()
 {
     srand(time(NULL));
+    state = Healthy;
 }
 
-void ISystem::tryToInfectNeighbour(ISystem *neighbour, int split)
+void ISystem::tryToInfectNeighbour(ISystem *neighbour, int shift)
 {
     int chance = rand() % 100 + 1;
-    if (2 * chance <= neighbour->getInfectionAbility() + infectionAbility + split)
+    if (2 * chance <= neighbour->getInfectionAbility() + infectionAbility + shift)
         neighbour->makeJustInfected();
 }
 

@@ -26,5 +26,4 @@ HEADERS += \
     wsystem.h \
     lsystem.h \
     msystem.h \
-    state.h \
     localnettest.h
