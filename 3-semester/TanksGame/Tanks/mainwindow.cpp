@@ -6,9 +6,20 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    game = new Game();
+
+    ui->graphicsView->setGeometry(0, 0, 1000, 700);
+    ui->graphicsView->setScene(game->getScene());
+
+
+    //ui->graphicsView->mapToScene(polygon);
+    //ui->graphicsView->show();
+    //ui->centralWidget->set
+    //painter.drawPolygon(polygon);
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete game;
 }

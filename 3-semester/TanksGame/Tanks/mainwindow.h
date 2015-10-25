@@ -2,6 +2,8 @@
 
 #include <QMainWindow>
 
+#include "game.h"
+
 namespace Ui {
 class MainWindow;
 }
@@ -16,5 +18,6 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    Game *game;
 };
 
