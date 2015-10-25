@@ -15,10 +15,13 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     game.cpp \
-    landscape.cpp
+    landscape.cpp \
+    tank.cpp
 
 HEADERS  += mainwindow.h \
     game.h \
-    landscape.h
+    landscape.h \
+    burstable.h \
+    tank.h
 
 FORMS    += mainwindow.ui

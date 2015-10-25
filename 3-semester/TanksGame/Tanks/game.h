@@ -3,6 +3,7 @@
 #include <QGraphicsScene>
 
 #include "landscape.h"
+#include "tank.h"
 
 class Game
 {
@@ -14,7 +15,6 @@ public:
 private:
     QGraphicsScene *scene;
     Landscape *landscape;
-
-    //Tank *tank
+    Tank *tank;
 };
 
