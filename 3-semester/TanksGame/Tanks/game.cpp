@@ -4,10 +4,11 @@ Game::Game()
 {
     scene = new QGraphicsScene();
     landscape = new Landscape();
-    tank = new Tank();
+    tank = new Tank(10, 10);
     scene->addItem(landscape);
     scene->addItem(tank);
     //landscape->setFlags(QGraphicsItem::ItemIsMovable);
+
 }
 
 Game::~Game()

@@ -9,7 +9,7 @@
 class Tank : public Burstable
 {
 public:
-    Tank();
+    Tank(int rx, int ry);
     ~Tank();
     QGraphicsEllipseItem *getGeometry();
 
@@ -19,7 +19,7 @@ public:
 
 private:
     QPointF center;
-    const int rx = 25;
-    const int ry = 25;
+    int widthOfEllipse;
+    int heightOfEllipse;
 };
 

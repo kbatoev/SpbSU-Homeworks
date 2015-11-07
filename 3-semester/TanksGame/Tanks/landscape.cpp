@@ -1,24 +1,8 @@
 #include "landscape.h"
 
-Landscape::Landscape()
+Landscape::Landscape() : numberPoints(25)
 {
-    srand(time(0));
-    numberPoints = 50;
-    int length = 20;
-    points.resize(numberPoints);
-    for (int i = 0; i < numberPoints; ++i)
-    {
-        points[i].setX(length * i);
-        if (!i)
-        {
-            points[i].setY(rand() % 500 + 150);
-        }
-        else
-        do
-        {
-            points[i].setY(rand() % 500 + 150);
-        } while(abs(points[i - 1].y() - points[i].y()) > 50);
-    }
+    generateRandomLandscape();
 }
 
 Landscape::~Landscape()
@@ -28,7 +12,7 @@ Landscape::~Landscape()
 QRectF Landscape::boundingRect() const
 {
     QPointF topLeft(0, 0);
-    QPointF bottomRight(1000, 700);
+    QPointF bottomRight(widthOfFrame, lengthOfFrame);
     return QRectF(topLeft, bottomRight);
 }
 
@@ -41,6 +25,21 @@ void Landscape::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
     for (int i = 1; i < numberPoints; i++)
     {
         painter->drawLine(points[i - 1], points[i]);
+    }
+}
+
+void Landscape::generateRandomLandscape()
+{
+    srand(time(0));
+    int length = widthOfFrame / numberPoints;
+    points.resize(numberPoints);
+    for (int i = 0; i < numberPoints; ++i)
+    {
+        points[i].setX(length * i);
+        do
+        {
+            points[i].setY(rand() % moduleForYCoordinate + yCoordinateAdding);
+        } while(i && abs(points[i - 1].y() - points[i].y()) > maxDistanceBetweenTwoYCoordinates);
     }
 }
 
