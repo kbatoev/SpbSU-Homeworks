@@ -23,3 +23,9 @@ MainWindow::~MainWindow()
     delete ui;
     delete game;
 }
+
+bool MainWindow::event(QEvent *qEvent)
+{
+    if (qEvent->type() == QEvent::KeyPress || qEvent->type() == QEvent::MouseButtonPress)
+        return game->event(qEvent);
+}

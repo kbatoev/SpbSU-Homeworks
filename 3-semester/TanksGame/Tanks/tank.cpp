@@ -1,8 +1,9 @@
 #include "tank.h"
 
-Tank::Tank(int rx, int ry) : widthOfEllipse(rx), heightOfEllipse(ry)
+Tank::Tank(int xCoordiante, int yCoordinate)
 {
-    center = QPointF(50, 50);
+    center = QPointF(xCoordiante, yCoordinate);
+    speed = 1;
 }
 
 Tank::~Tank()
@@ -16,7 +17,8 @@ QGraphicsEllipseItem *Tank::getGeometry()
 
 QRectF Tank::boundingRect() const
 {
-    return QRectF(0, 0, 200, 300);
+    return QRectF(center.x() - radius, center.y() - radius,
+                  center.x() + radius, center.y() + radius);
 }
 
 void Tank::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -25,7 +27,7 @@ void Tank::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     pen.setColor(Qt::yellow);
     pen.setWidth(4);
     painter->setPen(pen);
-    painter->drawEllipse(center, widthOfEllipse, heightOfEllipse);
+    painter->drawEllipse(center, radius, radius);
 }
 
 void Tank::drawBurst()

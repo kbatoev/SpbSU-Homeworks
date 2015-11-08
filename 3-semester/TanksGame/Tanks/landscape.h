@@ -9,7 +9,7 @@
 #include <QGraphicsItem>
 
 const int widthOfFrame = 1000;
-const int lengthOfFrame = 700;
+const int heightOfFrame = 700;
 
 const int yCoordinateAdding = 150;
 const int maxDistanceBetweenTwoYCoordinates = 70;
@@ -26,7 +26,6 @@ public:
 
 private:
     void generateRandomLandscape();
-
 
     QVector<QPointF> points;
     int numberPoints;

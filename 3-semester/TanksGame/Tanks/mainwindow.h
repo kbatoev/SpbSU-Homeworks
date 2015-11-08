@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QMainWindow>
+#include <QEvent>
 
 #include "game.h"
 
@@ -15,6 +16,9 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+
+    bool event(QEvent *qEvent);
+    //bool eventFilter(QObject *qObject, QEvent *qEvent);
 
 private:
     Ui::MainWindow *ui;

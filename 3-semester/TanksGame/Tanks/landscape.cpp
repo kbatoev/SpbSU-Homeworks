@@ -12,7 +12,7 @@ Landscape::~Landscape()
 QRectF Landscape::boundingRect() const
 {
     QPointF topLeft(0, 0);
-    QPointF bottomRight(widthOfFrame, lengthOfFrame);
+    QPointF bottomRight(widthOfFrame, heightOfFrame);
     return QRectF(topLeft, bottomRight);
 }
 
