@@ -18,7 +18,9 @@ TEMPLATE = app
 
 SOURCES += main.cpp \
     isystem.cpp \
-    localnet.cpp
+    localnet.cpp \
+    randomNumberGenerator.cpp \
+    statistics.cpp
 
 HEADERS += \
     isystem.h \
@@ -26,4 +28,7 @@ HEADERS += \
     wsystem.h \
     lsystem.h \
     msystem.h \
-    localnettest.h
+    localnettest.h \
+    iNumberGenerator.h \
+    randomNumberGenerator.h \
+    statistics.h

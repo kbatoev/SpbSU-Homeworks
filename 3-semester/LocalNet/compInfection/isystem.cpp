@@ -1,15 +1,21 @@
 #include "isystem.h"
 
-ISystem::ISystem()
+ISystem::ISystem(INumberGenerator *generator)
 {
-    srand(time(NULL));
+    numberGenerator = generator;
     state = Healthy;
 }
 
-void ISystem::tryToInfectNeighbour(ISystem *neighbour, int shift)
+ISystem::~ISystem()
 {
-    int chance = rand() % 100 + 1;
-    if (2 * chance <= neighbour->getInfectionAbility() + infectionAbility + shift)
+    if (numberGenerator)
+        delete numberGenerator;
+}
+
+void ISystem::tryToInfectNeighbour(ISystem *neighbour)
+{
+    int chance = numberGenerator->generateNumber();
+    if (2 * chance <= neighbour->getInfectionAbility() + infectionAbility)
         neighbour->makeJustInfected();
 }
 

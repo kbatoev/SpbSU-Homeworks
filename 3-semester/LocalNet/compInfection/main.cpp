@@ -2,7 +2,7 @@
 #include <fstream>
 
 #include "localnet.h"
-#include "localnettest.h"
+//#include "localnettest.h"
 
 void inputFromFile(int &computers, int** &matrix, int* &os)
 {
@@ -54,8 +54,8 @@ void emptyMemory(LocalNet *localNet, int computers, int **matrix, int *os)
 
 int main()
 {
-    LocalNetTest test;
-    QTest::qExec(&test);
+    //LocalNetTest test;
+    //QTest::qExec(&test);
 
 
     int inputChoice = 0;
@@ -71,9 +71,9 @@ int main()
     else
         inputFromSTD(computers, matrix, os);
 
-    int addingProbability = 0;
-    LocalNet *localNet = new LocalNet(computers, matrix, os, addingProbability);
-    localNet->startExperimentWithOutput();
+    LocalNet *localNet = new LocalNet(computers, matrix, os);
+    localNet->startExperiment();
+    localNet->showStatistics();
 
     emptyMemory(localNet, computers, matrix, os);
 

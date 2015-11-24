@@ -5,7 +5,7 @@
 class MSystem : public ISystem
 {
 public:
-    MSystem() : ISystem()
+    MSystem(INumberGenerator *generator) : ISystem(generator)
     {
         this->infectionAbility = 50;
         this->name = QString("MacOS");

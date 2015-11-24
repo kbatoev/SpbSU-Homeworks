@@ -1,3 +1,5 @@
+/*
+
 #pragma once
 
 #include <QtCore/QObject>
@@ -79,3 +81,4 @@ private:
     int* os;
     LocalNet *net;
 };
+*/

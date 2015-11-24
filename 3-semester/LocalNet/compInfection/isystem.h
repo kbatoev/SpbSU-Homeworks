@@ -1,8 +1,7 @@
 #pragma once
 
-#include <stdlib.h>
-#include <time.h>
 #include <QString>
+#include "iNumberGenerator.h"
 
 /**
  * @brief The ISystem class
@@ -12,10 +11,11 @@
 class ISystem
 {
 public:
-    ISystem();
-    ~ISystem() {}
+    ISystem(INumberGenerator *generator);
+    ~ISystem();
 
-    void tryToInfectNeighbour(ISystem *neighbour, int shift);
+    void tryToInfectNeighbour(ISystem *neighbour);
+
     void makeJustInfected();
     void makeInfected();
 
@@ -38,5 +38,6 @@ protected:
     HealthState state;
     QString name;
     int infectionAbility;
+    INumberGenerator *numberGenerator;
 };
 

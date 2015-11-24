@@ -5,7 +5,7 @@
 class LSystem : public ISystem
 {
 public:
-    LSystem() : ISystem()
+    LSystem(INumberGenerator *generator) : ISystem(generator)
     {
         this->infectionAbility = 20;
         this->name = QString("LinuxOS");

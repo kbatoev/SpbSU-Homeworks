@@ -2,29 +2,26 @@
 
 #include <iostream>
 #include <QList>
+
 #include "isystem.h"
+#include "msystem.h"
+#include "lsystem.h"
+#include "wsystem.h"
+
+#include "randomNumberGenerator.h"
+#include "statistics.h"
 
 const int firstComputer = 0;
-const int probabilityOfExactInfection = 200;
 
 class LocalNet
 {
 public:
     LocalNet(int computers, int **matrix, int *os);
-    /**
-     * @brief LocalNet
-     * @param addition - can increase probability of infection
-     */
-    LocalNet(int computers, int **matrix, int *os, int addition); // for Tests
     ~LocalNet();
 
-    void startExperimentWithOutput();
     void startExperiment();
+    void showStatistics();
 
-    /**
-     * @brief getIterationNumber - used for Tests
-     */
-    int getIterationNumber();
     enum OS
     {
         MOS = 1,
@@ -33,17 +30,13 @@ public:
     };
 
 private:
-    void showStatistics();
-    /**
-     * @brief renewSystemsStatus
-     * switches Systems from JustInfected to Infected
-     */
-    void renewSystemsStatus();
+    void addStatistics(int iteration);
+    void renewStatusOfSystems();
+    void makeMap(int **matrix);
 
+    Statistics *statistics;
     ISystem **arrayOfSystems;
-    int iteration;
     int computers;
-    int addingProbability;
     int **map;
     QList<int> numbersOfInfected;
 };

@@ -5,7 +5,7 @@
 class WSystem : public ISystem
 {
 public:
-    WSystem() : ISystem()
+    WSystem(INumberGenerator *generator) : ISystem(generator)
     {
         this->infectionAbility = 70;
         this->name = QString("WindowsOS");
