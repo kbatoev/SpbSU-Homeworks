@@ -11,6 +11,7 @@ QT       -= gui
 
 TARGET = compInfection
 CONFIG   += console
+CONFIG   += c++11
 CONFIG   -= app_bundle
 
 TEMPLATE = app
@@ -20,7 +21,8 @@ SOURCES += main.cpp \
     isystem.cpp \
     localnet.cpp \
     randomNumberGenerator.cpp \
-    statistics.cpp
+    statistics.cpp \
+    constrandomgenerator.cpp
 
 HEADERS += \
     isystem.h \
@@ -31,4 +33,5 @@ HEADERS += \
     localnettest.h \
     iNumberGenerator.h \
     randomNumberGenerator.h \
-    statistics.h
+    statistics.h \
+    constrandomgenerator.h

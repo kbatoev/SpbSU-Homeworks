@@ -11,7 +11,7 @@
 class ISystem
 {
 public:
-    ISystem(INumberGenerator *generator);
+    ISystem(INumberGenerator* &generator);
     ~ISystem();
 
     void tryToInfectNeighbour(ISystem *neighbour);

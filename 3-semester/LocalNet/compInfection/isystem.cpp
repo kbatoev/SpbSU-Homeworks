@@ -1,6 +1,6 @@
 #include "isystem.h"
 
-ISystem::ISystem(INumberGenerator *generator)
+ISystem::ISystem(INumberGenerator* &generator)
 {
     numberGenerator = generator;
     state = Healthy;
@@ -9,7 +9,10 @@ ISystem::ISystem(INumberGenerator *generator)
 ISystem::~ISystem()
 {
     if (numberGenerator)
+    {
         delete numberGenerator;
+        numberGenerator = nullptr;
+    }
 }
 
 void ISystem::tryToInfectNeighbour(ISystem *neighbour)

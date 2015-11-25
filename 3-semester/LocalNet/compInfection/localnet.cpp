@@ -1,8 +1,10 @@
 #include "localnet.h"
 
 LocalNet::LocalNet(int computers, int **matrix, int *os, INumberGenerator *generator)
-    : computers(computers), statistics(new Statistics)
 {
+    this->computers = computers;
+    statistics = new Statistics();
+
     makeMap(matrix);
     if (!generator)
         generator = new RandomNumberGenerator();
@@ -69,6 +71,11 @@ void LocalNet::startExperiment()
 void LocalNet::showStatistics()
 {
     statistics->show();
+}
+
+int LocalNet::getIterationsCount()
+{
+    return statistics->getIterationsCount();
 }
 
 void LocalNet::addStatistics(int iteration)

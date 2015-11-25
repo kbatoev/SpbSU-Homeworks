@@ -1,11 +1,10 @@
-/*
-
 #pragma once
 
 #include <QtCore/QObject>
 #include <QtTest/QtTest>
 
 #include "localnet.h"
+#include "constrandomgenerator.h"
 
 class LocalNetTest : public QObject
 {
@@ -20,10 +19,10 @@ private slots:
         createArraysWithGivenSize(size);
         matrix[0][0] = 0;
         os[0] = 1;
-        net = new LocalNet(size, matrix, os);
+        LocalNet *net = new LocalNet(size, matrix, os, new ConstRandomGenerator());
         net->startExperiment();
+        QVERIFY(net->getIterationsCount() == 1);
         emptyMemory(size);
-        QVERIFY(net->getIterationNumber() == 1);
     }
 
     void checkNetConsistingOfTwoSystems()
@@ -33,10 +32,11 @@ private slots:
         matrix[0][0] = matrix[1][1] = 0;
         matrix[0][1] = matrix[1][0] = 1;
         os[0] = os[1] = 2;
-        net = new LocalNet(size, matrix, os, probabilityOfExactInfection);
+        LocalNet *net = new LocalNet(size, matrix, os, new ConstRandomGenerator());
         net->startExperiment();
+
+        QVERIFY(net->getIterationsCount() == 2);
         emptyMemory(size);
-        QVERIFY(net->getIterationNumber() == 2);
     }
 
     void checkBigNet()
@@ -54,17 +54,19 @@ private slots:
         for (int i = 0; i < size; i++)
             for (int j = 0; j < size; j++)
                 matrix[i][j] = stackArray[i][j];
-        net = new LocalNet(size, matrix, os, probabilityOfExactInfection);
+
+        LocalNet *net = new LocalNet(size, matrix, os, new ConstRandomGenerator());
         net->startExperiment();
+
+        QVERIFY(net->getIterationsCount() == 3);
         emptyMemory(size);
-        QVERIFY(net->getIterationNumber() == 3);
     }
 
 private:
     void createArraysWithGivenSize(int size)
     {
-        matrix = new int*[size];
         os = new int[size];
+        matrix = new int*[size];
         for (int i = 0; i < size; i++)
             matrix[i] = new int[size];
     }
@@ -79,6 +81,4 @@ private:
 
     int** matrix;
     int* os;
-    LocalNet *net;
 };
-*/

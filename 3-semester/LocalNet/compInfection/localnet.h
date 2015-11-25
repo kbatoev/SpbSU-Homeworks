@@ -22,6 +22,7 @@ public:
 
     void startExperiment();
     void showStatistics();
+    int getIterationsCount();
 
     enum OS
     {
@@ -35,6 +36,7 @@ private:
     void renewStatusOfSystems();
     void makeMap(int **matrix);
 
+    INumberGenerator *generator;
     Statistics *statistics;
     ISystem **arrayOfSystems;
     int computers;

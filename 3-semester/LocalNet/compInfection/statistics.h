@@ -10,8 +10,10 @@ public:
     Statistics();
     ~Statistics();
     void addNote(const QString &note);
+    int getIterationsCount();
     void show();
 
 private:
     QList<QString> *notes;
+    int iterations;
 };
