@@ -8,6 +8,7 @@
 #include "lsystem.h"
 #include "wsystem.h"
 
+#include "iNumberGenerator.h"
 #include "randomNumberGenerator.h"
 #include "statistics.h"
 
@@ -16,7 +17,7 @@ const int firstComputer = 0;
 class LocalNet
 {
 public:
-    LocalNet(int computers, int **matrix, int *os);
+    LocalNet(int computers, int **matrix, int *os, INumberGenerator *generator = 0);
     ~LocalNet();
 
     void startExperiment();
