@@ -15,11 +15,11 @@ ISystem::~ISystem()
     }
 }
 
-void ISystem::tryToInfectNeighbour(ISystem *neighbour)
+void ISystem::wasAttacked()
 {
     int chance = numberGenerator->generateNumber();
-    if (2 * chance <= neighbour->getInfectionAbility() + infectionAbility)
-        neighbour->makeJustInfected();
+    if (chance <= infectionAbility)
+        this->makeJustInfected();
 }
 
 void ISystem::makeJustInfected()
@@ -45,11 +45,6 @@ bool ISystem::isHealthy()
 bool ISystem::isJustInfected()
 {
     return state == JustInfected;
-}
-
-int ISystem::getInfectionAbility()
-{
-    return infectionAbility;
 }
 
 QString ISystem::getQStringStatus()

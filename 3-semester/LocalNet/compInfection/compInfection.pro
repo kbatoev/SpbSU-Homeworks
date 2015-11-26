@@ -22,7 +22,8 @@ SOURCES += main.cpp \
     localnet.cpp \
     randomNumberGenerator.cpp \
     statistics.cpp \
-    constrandomgenerator.cpp
+    constrandomgenerator.cpp \
+    windowsinfectorgenerator.cpp
 
 HEADERS += \
     isystem.h \
@@ -34,4 +35,6 @@ HEADERS += \
     iNumberGenerator.h \
     randomNumberGenerator.h \
     statistics.h \
-    constrandomgenerator.h
+    constrandomgenerator.h \
+    windowsinfectorgenerator.h \
+    stableneterror.h

@@ -14,7 +14,7 @@ public:
     ISystem(INumberGenerator* &generator);
     ~ISystem();
 
-    void tryToInfectNeighbour(ISystem *neighbour);
+    void wasAttacked();
 
     void makeJustInfected();
     void makeInfected();
@@ -23,7 +23,6 @@ public:
     bool isHealthy();
     bool isJustInfected();
 
-    int getInfectionAbility();
     QString getQStringStatus();
     QString getName();
 
@@ -35,6 +34,7 @@ public:
     };
 
 protected:
+
     HealthState state;
     QString name;
     int infectionAbility;

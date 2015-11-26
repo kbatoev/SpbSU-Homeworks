@@ -5,6 +5,8 @@
 
 #include "localnet.h"
 #include "constrandomgenerator.h"
+#include "stableneterror.h"
+#include "windowsinfectorgenerator.h"
 
 class LocalNetTest : public QObject
 {
@@ -13,15 +15,24 @@ public:
     LocalNetTest(QObject *parent = 0) : QObject(parent) {}
 
 private slots:
-    void checkNetConsistingOfOneSystem()
+
+    void checkStableSystem()
     {
-        int size = 1;
+        int size = 2;
         createArraysWithGivenSize(size);
-        matrix[0][0] = 0;
-        os[0] = 1;
-        LocalNet *net = new LocalNet(size, matrix, os, new ConstRandomGenerator());
-        net->startExperiment();
-        QVERIFY(net->getIterationsCount() == 1);
+        matrix[0][0] = matrix[1][1] = 0;
+        matrix[0][1] = matrix[1][0] = 1;
+        os[0] = os[1] = 2;
+        LocalNet *net = new LocalNet(size, matrix, os, new WindowsInfectorGenerator());
+        try
+        {
+            net->startExperiment();
+        }
+        catch(StableNetError error)
+        {
+            error.comment();
+        }
+        QVERIFY(!net->isInfected());
         emptyMemory(size);
     }
 
@@ -36,6 +47,18 @@ private slots:
         net->startExperiment();
 
         QVERIFY(net->getIterationsCount() == 2);
+        emptyMemory(size);
+    }
+
+    void checkNetConsistingOfOneSystem()
+    {
+        int size = 1;
+        createArraysWithGivenSize(size);
+        matrix[0][0] = 0;
+        os[0] = 1;
+        LocalNet *net = new LocalNet(size, matrix, os, new ConstRandomGenerator());
+        net->startExperiment();
+        QVERIFY(net->getIterationsCount() == 1);
         emptyMemory(size);
     }
 

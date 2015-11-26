@@ -3,6 +3,7 @@
 LocalNet::LocalNet(int computers, int **matrix, int *os, INumberGenerator *generator)
 {
     this->computers = computers;
+    infected = false;
     statistics = new Statistics();
 
     makeMap(matrix);
@@ -12,7 +13,7 @@ LocalNet::LocalNet(int computers, int **matrix, int *os, INumberGenerator *gener
     arrayOfSystems = new ISystem*[computers];
     for (int i = 0; i < computers; i++)
     {
-        OS currentSystem = OS(os[i]);
+        OS currentSystem = (OS)os[i];
         switch (currentSystem)
         {
         case MOS:
@@ -50,22 +51,22 @@ void LocalNet::startExperiment()
         for (int i = 0; i < numbersOfInfected.size(); i++)
         {
             int number = numbersOfInfected.at(i);
-            ISystem *system = arrayOfSystems[number];
-
             int j = 0;
             while (j < computers)
             {
                 if (map[number][j] && arrayOfSystems[j]->isHealthy())
-                    system->tryToInfectNeighbour(arrayOfSystems[j]);
+                    arrayOfSystems[j]->wasAttacked();
                 j++;
             }
         }
         addStatistics(iteration);
         renewStatusOfSystems();
         iteration++;
+        if (iteration == maxIterations)
+            throw StableNetError("Too many iterations!!!");
     }
     addStatistics(iteration);
-
+    infected = true;
 }
 
 void LocalNet::showStatistics()
@@ -76,6 +77,11 @@ void LocalNet::showStatistics()
 int LocalNet::getIterationsCount()
 {
     return statistics->getIterationsCount();
+}
+
+bool LocalNet::isInfected()
+{
+    return infected;
 }
 
 void LocalNet::addStatistics(int iteration)

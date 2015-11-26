@@ -12,7 +12,10 @@
 #include "randomNumberGenerator.h"
 #include "statistics.h"
 
+#include "stableneterror.h"
+
 const int firstComputer = 0;
+const int maxIterations = 1e+5;
 
 class LocalNet
 {
@@ -23,6 +26,7 @@ public:
     void startExperiment();
     void showStatistics();
     int getIterationsCount();
+    bool isInfected();
 
     enum OS
     {
@@ -36,6 +40,7 @@ private:
     void renewStatusOfSystems();
     void makeMap(int **matrix);
 
+    bool infected;
     INumberGenerator *generator;
     Statistics *statistics;
     ISystem **arrayOfSystems;
