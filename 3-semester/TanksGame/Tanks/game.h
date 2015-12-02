@@ -18,6 +18,8 @@ public:
     bool event(QEvent *qEvent);
     QGraphicsScene *getScene();
 
+    void keyPressEvent(QKeyEvent *keyEvent);
+
 public slots:
     void update();
 

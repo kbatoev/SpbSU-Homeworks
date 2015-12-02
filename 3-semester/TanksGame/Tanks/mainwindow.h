@@ -4,6 +4,7 @@
 #include <QEvent>
 
 #include "game.h"
+#include "gameview.h"
 
 namespace Ui {
 class MainWindow;
@@ -18,10 +19,10 @@ public:
     ~MainWindow();
 
     bool event(QEvent *qEvent);
-    //bool eventFilter(QObject *qObject, QEvent *qEvent);
 
 private:
     Ui::MainWindow *ui;
-    Game *game;
+    //Game *game;
+    GameView *gameView;
 };
 

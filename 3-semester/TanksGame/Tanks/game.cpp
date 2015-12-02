@@ -26,6 +26,7 @@ bool Game::event(QEvent *qEvent)
 {
     if (qEvent->type() == QEvent::KeyPress)
     {
+        tank1->setPos(200, 200);
     }
     if (qEvent->type() == QEvent::MouseButtonPress)
     {
@@ -46,6 +47,21 @@ bool Game::event(QEvent *qEvent)
 QGraphicsScene *Game::getScene()
 {
     return scene;
+}
+
+void Game::keyPressEvent(QKeyEvent *keyEvent)
+{
+    int speed = 6;
+    if (keyEvent->key() == 65)
+    {
+        QPointF point = tank1->pos();
+        point.setX(point.x() + speed);
+        tank1->setPos(point);
+    }
+    if (keyEvent->key() == 66)
+    {
+        tank1->setPos(150, 500);
+    }
 }
 
 void Game::update()

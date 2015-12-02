@@ -17,13 +17,15 @@ SOURCES += main.cpp\
     game.cpp \
     landscape.cpp \
     tank.cpp \
-    updater.cpp
+    updater.cpp \
+    gameview.cpp
 
 HEADERS  += mainwindow.h \
     game.h \
     landscape.h \
     burstable.h \
     tank.h \
-    updater.h
+    updater.h \
+    gameview.h
 
 FORMS    += mainwindow.ui
