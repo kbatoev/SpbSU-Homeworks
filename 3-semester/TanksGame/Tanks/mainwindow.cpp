@@ -6,10 +6,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ui->centralWidget->setVisible(false);
+    //ui->centralWidget->setVisible(false);
     gameView = new GameView(parent, new Game());
     //setCentralWidget(gameView->getQGraphicsView());
     //ui->centralWidget
+
 
 
     //ui->graphicsView->setGeometry(0, 0, 1000, 700);
@@ -24,7 +25,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
-    //delete ui;
+    delete ui;
+    delete gameView;
 }
 
 /*
@@ -42,6 +44,11 @@ bool MainWindow::event(QEvent *qEvent)
     if (qEvent->type() == QEvent::KeyPress)
     {
         gameView->keyPressEvent(dynamic_cast<QKeyEvent *>(qEvent));
+        return true;
+    }
+    if(qEvent->type() == QEvent::KeyRelease)
+    {
+        gameView->keyReleaseEvent(dynamic_cast<QKeyEvent *>(qEvent));
         return true;
     }
 }

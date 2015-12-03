@@ -2,22 +2,36 @@
 
 Game::Game()
 {
+    //std::string release = "outRelease";
+    QFile *file = new QFile("123123.txt");
+    if (file->open(QIODevice::WriteOnly))
+    {
+        stream = new QTextStream(file);
+    }
+
     scene = new QGraphicsScene();
     scene->setSceneRect(0, 0, widthOfFrame, heightOfFrame);
     landscape = new Landscape();
     tank1 = new Tank(100, 100);
+    tank2 = new Tank(500, 200);
     scene->addItem(landscape);
     scene->addItem(tank1);
+    scene->addItem(tank2);
     //landscape->setFlags(QGraphicsItem::ItemIsMovable);
     updater = new Updater();
 
     connect(updater, SIGNAL(doUpdate()), this, SLOT(update()));
-    updater->execute();
+    //updater->execute();
 
 }
 
 Game::~Game()
 {
+    //outPress->close();
+    //outRelease->close();
+
+    //delete outPress;
+    //delete outRelease;
     delete landscape;
     delete scene;
 }
@@ -52,16 +66,35 @@ QGraphicsScene *Game::getScene()
 void Game::keyPressEvent(QKeyEvent *keyEvent)
 {
     int speed = 6;
-    if (keyEvent->key() == 65)
+    QString str = keyEvent->text();
+
+    //stream->operator <<(str);
+    std::cout << press++ << " PRESS \n";
+    std::cout << str.toStdString() << "\n";
+
+    //if (keyEvent->matches())
+    {
+
+    }
+    if (keyEvent->key() == Qt::Key_D)
     {
         QPointF point = tank1->pos();
         point.setX(point.x() + speed);
         tank1->setPos(point);
     }
-    if (keyEvent->key() == 66)
+    if (keyEvent->key() == Qt::Key_Left)
     {
-        tank1->setPos(150, 500);
+        QPointF point = tank2->pos();
+        point.setX(point.x() - speed);
+        tank2->setPos(point);
     }
+}
+
+void Game::keyReleaseEvent(QKeyEvent *keyEvent)
+{
+    QString str = keyEvent->text();
+    std::cout << release++ << " Release\n";
+    std::cout << str.toStdString() << "\n";
 }
 
 void Game::update()

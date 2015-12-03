@@ -12,6 +12,7 @@ public:
     explicit GameView(QWidget *parent, Game *newGame);
 
     void keyPressEvent(QKeyEvent *keyEvent);
+    void keyReleaseEvent(QKeyEvent *keyEvent);
 
     QGraphicsView *getQGraphicsView();
 
