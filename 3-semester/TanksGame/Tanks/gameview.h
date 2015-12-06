@@ -14,8 +14,6 @@ public:
     void keyPressEvent(QKeyEvent *keyEvent);
     void keyReleaseEvent(QKeyEvent *keyEvent);
 
-    QGraphicsView *getQGraphicsView();
-
 private:
     Game *game;
     QGraphicsView *graphicsView;

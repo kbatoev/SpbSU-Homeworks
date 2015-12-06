@@ -17,11 +17,12 @@ public:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     void drawBurst();
 
+    int getSpeed() const;
+
 private:
     QPointF center;
     static const int radius = 15;
 
     int speed;
-
 };
 

@@ -11,6 +11,7 @@
 #include "landscape.h"
 #include "tank.h"
 #include "updater.h"
+#include "keyController.h"
 
 class Game : public QObject
 {
@@ -19,7 +20,6 @@ public:
     Game();
     ~Game();
 
-    bool event(QEvent *qEvent);
     QGraphicsScene *getScene();
 
     void keyPressEvent(QKeyEvent *keyEvent);
@@ -29,13 +29,10 @@ public slots:
     void update();
 
 private:
-    QTextStream *stream;
-    int release = 0;
-    int press = 0;
-
+    KeyController *keyController;
     QGraphicsScene *scene;
     Landscape *landscape;
-    Tank *tank1, *tank2;
+    Tank *tank;
     Updater *updater;
 };
 

@@ -28,6 +28,20 @@ void Landscape::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
     }
 }
 
+QPointF Landscape::getPointWithXCoordinate(qreal x)
+{
+    int j = 1;
+    while (points[j].x() > x)
+    {
+        j++;
+    }
+    QPointF firstPoint = points[j - 1];
+    QPointF secondPoint = points[j];
+    qreal y = firstPoint.y() +
+            (secondPoint.y() - firstPoint.y()) * (x - firstPoint.x()) / (secondPoint.x() - firstPoint.x());
+    return QPointF(x, y);
+}
+
 void Landscape::generateRandomLandscape()
 {
     srand(time(0));

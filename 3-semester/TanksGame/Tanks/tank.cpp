@@ -3,7 +3,7 @@
 Tank::Tank(int xCoordiante, int yCoordinate)
 {
     center = QPointF(xCoordiante, yCoordinate);
-    speed = 1;
+    speed = 5;
 }
 
 Tank::~Tank()
@@ -33,5 +33,10 @@ void Tank::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
 void Tank::drawBurst()
 {
 
+}
+
+int Tank::getSpeed() const
+{
+    return speed;
 }
 

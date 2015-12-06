@@ -20,7 +20,8 @@ SOURCES += main.cpp\
     landscape.cpp \
     tank.cpp \
     updater.cpp \
-    gameview.cpp
+    gameview.cpp \
+    keyController.cpp
 
 HEADERS  += mainwindow.h \
     game.h \
@@ -28,6 +29,7 @@ HEADERS  += mainwindow.h \
     burstable.h \
     tank.h \
     updater.h \
-    gameview.h
+    gameview.h \
+    keyController.h
 
 FORMS    += mainwindow.ui
