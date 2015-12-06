@@ -10,6 +10,7 @@ class Tank : public Burstable
 {
 public:
     Tank(int xCoordiante, int yCoordinate);
+    Tank(QPointF point);
     ~Tank();
     QGraphicsEllipseItem *getGeometry();
 
@@ -18,6 +19,8 @@ public:
     void drawBurst();
 
     int getSpeed() const;
+    QPointF getCenter() const;
+    void setCenter(QPointF newCenter);
 
 private:
     QPointF center;

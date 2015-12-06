@@ -31,7 +31,7 @@ void Landscape::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 QPointF Landscape::getPointWithXCoordinate(qreal x)
 {
     int j = 1;
-    while (points[j].x() > x)
+    while (!(x >= points[j - 1].x() && x <= points[j].x()))
     {
         j++;
     }

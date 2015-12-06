@@ -3,7 +3,13 @@
 Tank::Tank(int xCoordiante, int yCoordinate)
 {
     center = QPointF(xCoordiante, yCoordinate);
-    speed = 5;
+    speed = 10;
+}
+
+Tank::Tank(QPointF point)
+{
+    center = point;
+    speed = 10;
 }
 
 Tank::~Tank()
@@ -38,5 +44,15 @@ void Tank::drawBurst()
 int Tank::getSpeed() const
 {
     return speed;
+}
+
+QPointF Tank::getCenter() const
+{
+    return center;
+}
+
+void Tank::setCenter(QPointF newCenter)
+{
+    center = newCenter;
 }
 

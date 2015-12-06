@@ -8,16 +8,18 @@ KeyController::KeyController(Tank *currentTank, Landscape *currentLandscape)
 
 void KeyController::handleKey(QKeyEvent *keyEvent)
 {
-    QPointF point = controllableTank->pos();
+    QPointF oldPoint = controllableTank->getCenter();
+    QPointF point = oldPoint;
     if (keyEvent->key() == Qt::Key_A)
     {
-        point = landscape->getPointWithXCoordinate(controllableTank->x() - controllableTank->getSpeed());
+        point = landscape->getPointWithXCoordinate(oldPoint.x() - controllableTank->getSpeed());
     }
 
     if (keyEvent->key() == Qt::Key_D)
     {
-        point = landscape->getPointWithXCoordinate(controllableTank->x() + controllableTank->getSpeed());
+        point = landscape->getPointWithXCoordinate(oldPoint.x() + controllableTank->getSpeed());
     }
-    controllableTank->setPos(point);
+    controllableTank->setCenter(point);
+    controllableTank->setPos(point - oldPoint);
 }
 

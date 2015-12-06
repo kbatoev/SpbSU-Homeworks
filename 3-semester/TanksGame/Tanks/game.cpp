@@ -4,7 +4,10 @@ Game::Game()
 {
     scene = new QGraphicsScene();
     landscape = new Landscape();
-    tank = new Tank(100, 100);
+    qreal x = 100;
+    QPointF center = landscape->getPointWithXCoordinate(x);
+    tank = new Tank(center);
+
     keyController = new KeyController(tank, landscape);
 
     scene->setSceneRect(0, 0, widthOfFrame, heightOfFrame);
