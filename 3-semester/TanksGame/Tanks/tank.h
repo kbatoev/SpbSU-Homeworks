@@ -20,12 +20,11 @@ public:
 
     int getSpeed() const;
     QPointF getCenter() const;
-    void setCenter(QPointF newCenter);
+    //void setCenter(QPointF newCenter);
 
 private:
     QPointF center;
     static const int radius = 15;
-
     int speed;
 };
 

@@ -51,8 +51,8 @@ QPointF Tank::getCenter() const
     return center;
 }
 
-void Tank::setCenter(QPointF newCenter)
+/*void Tank::setCenter(QPointF newCenter)
 {
     center = newCenter;
-}
+}*/
 

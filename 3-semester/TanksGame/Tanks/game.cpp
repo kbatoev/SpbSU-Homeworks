@@ -5,8 +5,8 @@ Game::Game()
     scene = new QGraphicsScene();
     landscape = new Landscape();
     qreal x = 100;
-    QPointF center = landscape->getPointWithXCoordinate(x);
-    tank = new Tank(center);
+    tankPointOnScene = landscape->getPointWithXCoordinate(x);
+    tank = new Tank(tankPointOnScene);
 
     keyController = new KeyController(tank, landscape);
 
@@ -28,12 +28,20 @@ QGraphicsScene *Game::getScene()
 
 void Game::keyPressEvent(QKeyEvent *keyEvent)
 {
-    QPointF point = tank->pos();
-    keyController->handleKey(keyEvent);
+    if (keyEvent->key() == Qt::Key_D)
+    {
+        QPointF point = landscape->getPointWithXCoordinate(tankPointOnScene.x() + tank->getSpeed());
+        QPointF newPoint = point;
+        point.setX(point.x() - tank->getCenter().x());
+        point.setY(point.y() - tank->getCenter().y());
+        tankPointOnScene = newPoint;
+        tank->setPos(point);
+    }
 }
 
 void Game::keyReleaseEvent(QKeyEvent *keyEvent)
 {
+
 }
 
 void Game::update()

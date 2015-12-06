@@ -29,6 +29,8 @@ public slots:
     void update();
 
 private:
+    QPointF tankPointOnScene;
+
     KeyController *keyController;
     QGraphicsScene *scene;
     Landscape *landscape;
