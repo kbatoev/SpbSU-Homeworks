@@ -28,15 +28,8 @@ QGraphicsScene *Game::getScene()
 
 void Game::keyPressEvent(QKeyEvent *keyEvent)
 {
-    if (keyEvent->key() == Qt::Key_D)
-    {
-        QPointF point = landscape->getPointWithXCoordinate(tankPointOnScene.x() + tank->getSpeed());
-        QPointF newPoint = point;
-        point.setX(point.x() - tank->getCenter().x());
-        point.setY(point.y() - tank->getCenter().y());
-        tankPointOnScene = newPoint;
-        tank->setPos(point);
-    }
+    keyController->handleKey(keyEvent);
+    update();
 }
 
 void Game::keyReleaseEvent(QKeyEvent *keyEvent)

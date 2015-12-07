@@ -19,7 +19,7 @@ void KeyController::handleKey(QKeyEvent *keyEvent)
     {
         point = landscape->getPointWithXCoordinate(oldPoint.x() + controllableTank->getSpeed());
     }
-    //controllableTank->setCenter(point);
-    //controllableTank->setPos(point - oldPoint);
+    point.setY(point.y() - 15);
+    controllableTank->setCenter(point);
 }
 
