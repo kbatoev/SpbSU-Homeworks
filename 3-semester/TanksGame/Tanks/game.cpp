@@ -13,6 +13,10 @@ Game::Game()
     scene->setSceneRect(0, 0, widthOfFrame, heightOfFrame);
     scene->addItem(landscape);
     scene->addItem(tank);
+
+    gameTimer = new QTimer();
+    connect(gameTimer, SIGNAL(timeout()), this, SLOT(updateScene()));
+    gameTimer->start(30);
 }
 
 Game::~Game()
@@ -29,7 +33,14 @@ QGraphicsScene *Game::getScene()
 void Game::keyPressEvent(QKeyEvent *keyEvent)
 {
     keyController->handleKey(keyEvent);
-    update();
+    if (keyEvent->key() == Qt::Key_Space)
+    {
+        Bullet *bullet = new Bullet(tank->getCenter(), pi / 4.0);
+        scene->addItem(bullet);
+        bullet->fly();
+    }
+
+    updateScene();
 }
 
 void Game::keyReleaseEvent(QKeyEvent *keyEvent)
@@ -37,7 +48,7 @@ void Game::keyReleaseEvent(QKeyEvent *keyEvent)
 
 }
 
-void Game::update()
+void Game::updateScene()
 {
     QList<QGraphicsItem* > listOfItems = scene->items();
     for (int i = 0; i < listOfItems.size(); i++)

@@ -7,11 +7,15 @@
 #include <QEvent>
 #include <QKeyEvent>
 #include <QTextStream>
+#include <QTimer>
 
 #include "landscape.h"
 #include "tank.h"
 #include "updater.h"
 #include "keyController.h"
+#include "bullet.h"
+
+const qreal pi = 3.141592653;
 
 class Game : public QObject
 {
@@ -26,7 +30,7 @@ public:
     void keyReleaseEvent(QKeyEvent *keyEvent);
 
 public slots:
-    void update();
+    void updateScene();
 
 private:
     QPointF tankPointOnScene;
@@ -36,5 +40,6 @@ private:
     Landscape *landscape;
     Tank *tank;
     Updater *updater;
+    QTimer *gameTimer;
 };
 

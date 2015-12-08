@@ -56,3 +56,8 @@ void Tank::setCenter(QPointF newCenter)
     center = newCenter;
 }
 
+int Tank::getRadius()
+{
+    return radius;
+}
+

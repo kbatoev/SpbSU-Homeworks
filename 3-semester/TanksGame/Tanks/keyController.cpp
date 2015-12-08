@@ -13,13 +13,15 @@ void KeyController::handleKey(QKeyEvent *keyEvent)
     if (keyEvent->key() == Qt::Key_A)
     {
         point = landscape->getPointWithXCoordinate(oldPoint.x() - controllableTank->getSpeed());
+        point.setY(point.y() - controllableTank->getRadius());
+        controllableTank->setCenter(point);
     }
 
     if (keyEvent->key() == Qt::Key_D)
     {
         point = landscape->getPointWithXCoordinate(oldPoint.x() + controllableTank->getSpeed());
+        point.setY(point.y() - controllableTank->getRadius());
+        controllableTank->setCenter(point);
     }
-    point.setY(point.y() - 15);
-    controllableTank->setCenter(point);
 }
 

@@ -22,6 +22,8 @@ public:
     QPointF getCenter() const;
     void setCenter(QPointF newCenter);
 
+    static int getRadius();
+
 private:
     QPointF center;
     static const int radius = 15;

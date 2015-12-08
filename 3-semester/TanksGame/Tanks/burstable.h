@@ -6,6 +6,6 @@ class Burstable : public QGraphicsItem
 {
 public:
     virtual void drawBurst() = 0;
-private:
+protected:
     int radiusOfBurst;
 };

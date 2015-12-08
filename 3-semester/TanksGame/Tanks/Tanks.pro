@@ -21,7 +21,8 @@ SOURCES += main.cpp\
     tank.cpp \
     updater.cpp \
     gameview.cpp \
-    keyController.cpp
+    keyController.cpp \
+    bullet.cpp
 
 HEADERS  += mainwindow.h \
     game.h \
@@ -30,6 +31,7 @@ HEADERS  += mainwindow.h \
     tank.h \
     updater.h \
     gameview.h \
-    keyController.h
+    keyController.h \
+    bullet.h
 
 FORMS    += mainwindow.ui
