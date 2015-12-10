@@ -6,6 +6,8 @@
 #include <QPen>
 #include <QPainter>
 
+const qreal PI = 3.141592653;
+
 class Tank : public Burstable
 {
 public:
@@ -25,8 +27,13 @@ public:
     static int getRadius();
 
 private:
+    void drawGun(QPainter *painter);
+
+
     QPointF center;
     static const int radius = 15;
     int speed;
+
+    qreal gunAngle;
 };
 

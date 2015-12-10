@@ -15,7 +15,7 @@
 #include "keyController.h"
 #include "bullet.h"
 
-const qreal pi = 3.141592653;
+//const qreal PI = 3.141592653;
 
 class Game : public QObject
 {
