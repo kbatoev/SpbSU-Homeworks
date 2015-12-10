@@ -22,9 +22,14 @@ public:
 
     int getSpeed() const;
     QPointF getCenter() const;
-    void setCenter(QPointF newCenter);
+    qreal getGunAngleInRadians() const;
 
+    void setCenter(QPointF newCenter);
+    void increaseAngle();
+    void decreaseAngle();
     static int getRadius();
+
+
 
 private:
     void drawGun(QPainter *painter);

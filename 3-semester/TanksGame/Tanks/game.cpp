@@ -35,7 +35,7 @@ void Game::keyPressEvent(QKeyEvent *keyEvent)
     keyController->handleKey(keyEvent);
     if (keyEvent->key() == Qt::Key_Space)
     {
-        Bullet *bullet = new Bullet(tank->getCenter(), PI / 4.0);
+        Bullet *bullet = new Bullet(tank->getCenter(), tank->getGunAngleInRadians());
         scene->addItem(bullet);
         bullet->fly();
     }

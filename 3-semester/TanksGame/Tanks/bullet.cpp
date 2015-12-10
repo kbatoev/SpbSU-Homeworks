@@ -43,8 +43,8 @@ void Bullet::updatePosition()
 {
     iteration++;
     qreal t = iteration / 10.0;
-    qreal x = initialCenter.x() + speed * t * ::cos(angle);
-    qreal y = initialCenter.y() - speed * t * ::sin(angle)
+    qreal x = initialCenter.x() + speed * t * ::cos(-angle);
+    qreal y = initialCenter.y() - speed * t * ::sin(-angle)
             + 5.0 * t * t;
     bulletCenter = QPointF(x, y);
 }

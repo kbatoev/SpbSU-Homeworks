@@ -56,9 +56,26 @@ QPointF Tank::getCenter() const
     return center;
 }
 
+qreal Tank::getGunAngleInRadians() const
+{
+    return gunAngle * PI / 180.0;
+}
+
 void Tank::setCenter(QPointF newCenter)
 {
     center = newCenter;
+}
+
+void Tank::increaseAngle()
+{
+    if (gunAngle > -180.0)
+        gunAngle -= 7.0;
+}
+
+void Tank::decreaseAngle()
+{
+    if (gunAngle < 0.0)
+        gunAngle += 7.0;
 }
 
 int Tank::getRadius()
@@ -91,4 +108,3 @@ void Tank::drawGun(QPainter *painter)
     painter->drawLine(p3, p4);
     painter->drawLine(p4, p1);
 }
-
