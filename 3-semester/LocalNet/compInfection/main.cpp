@@ -3,6 +3,7 @@
 
 #include "localnet.h"
 #include "localnettest.h"
+#include "randomNumberGenerator.h"
 
 void inputFromFile(int &computers, int** &matrix, int* &os)
 {
@@ -71,11 +72,14 @@ int main()
     else
         inputFromSTD(computers, matrix, os);
 
-    LocalNet *localNet = new LocalNet(computers, matrix, os);
+
+    RandomNumberGenerator *generator = new RandomNumberGenerator();
+    LocalNet *localNet = new LocalNet(computers, matrix, os, generator);
     localNet->startExperiment();
     localNet->showStatistics();
 
     emptyMemory(localNet, computers, matrix, os);
+    delete generator;
 
     return 0;
 }

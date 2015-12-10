@@ -20,7 +20,7 @@ const int maxIterations = 1e+5;
 class LocalNet
 {
 public:
-    LocalNet(int computers, int **matrix, int *os, INumberGenerator *generator = 0);
+    LocalNet(int computers, int **matrix, int *os, INumberGenerator *currentGenerator);
     ~LocalNet();
 
     void startExperiment();

@@ -1,15 +1,13 @@
 #include "localnet.h"
 
-LocalNet::LocalNet(int computers, int **matrix, int *os, INumberGenerator *generator)
+LocalNet::LocalNet(int computers, int **matrix, int *os, INumberGenerator *currentGenerator)
 {
     this->computers = computers;
     infected = false;
     statistics = new Statistics();
+    generator = currentGenerator;
 
     makeMap(matrix);
-    if (!generator)
-        generator = new RandomNumberGenerator();
-
     arrayOfSystems = new ISystem*[computers];
     for (int i = 0; i < computers; i++)
     {

@@ -3,16 +3,11 @@
 ISystem::ISystem(INumberGenerator* &generator)
 {
     numberGenerator = generator;
-    state = Healthy;
+    state = healthy;
 }
 
 ISystem::~ISystem()
 {
-    if (numberGenerator)
-    {
-        delete numberGenerator;
-        numberGenerator = nullptr;
-    }
 }
 
 void ISystem::wasAttacked()
@@ -24,38 +19,40 @@ void ISystem::wasAttacked()
 
 void ISystem::makeJustInfected()
 {
-    state = JustInfected;
+    state = justInfected;
 }
 
 void ISystem::makeInfected()
 {
-    state = Infected;
+    state = infected;
 }
 
 bool ISystem::isInfected()
 {
-    return state == Infected;
+    return state == infected;
 }
 
 bool ISystem::isHealthy()
 {
-    return state == Healthy;
+    return state == healthy;
 }
 
 bool ISystem::isJustInfected()
 {
-    return state == JustInfected;
+    return state == justInfected;
 }
 
 QString ISystem::getQStringStatus()
 {
     switch (state)
     {
-        case Healthy:
+        case healthy:
             return QString("Healthy");
-        case JustInfected:
+
+        case justInfected:
             return QString("Just Infected");
-        case Infected:
+
+        case infected:
             return QString("Infected");
     }
 }

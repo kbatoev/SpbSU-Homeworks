@@ -28,9 +28,9 @@ public:
 
     enum HealthState
     {
-        Healthy = 1,
-        JustInfected,
-        Infected
+        healthy = 1,
+        justInfected,
+        infected
     };
 
 protected:
