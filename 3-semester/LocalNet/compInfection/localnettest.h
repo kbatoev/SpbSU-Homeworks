@@ -12,14 +12,33 @@ class LocalNetTest : public QObject
 {
     Q_OBJECT
 public:
-    LocalNetTest(QObject *parent = 0) : QObject(parent) {}
+    LocalNetTest(QObject *parent = 0) : QObject(parent)
+    {
+        index = 0;
+    }
 
 private slots:
 
+    void init()
+    {
+        os = new int[sizes[index]];
+        matrix = new int*[sizes[index]];
+        for (int i = 0; i < sizes[index]; i++)
+            matrix[i] = new int[sizes[index]];
+    }
+
+    void cleanup()
+    {
+        for (int i = 0; i < sizes[index]; i++)
+            delete[] matrix[i];
+        delete[] matrix;
+        delete[] os;
+        index++;
+    }
+
     void checkStableSystem()
     {
-        int size = 2;
-        createArraysWithGivenSize(size);
+        int size = sizes[index];
         matrix[0][0] = matrix[1][1] = 0;
         matrix[0][1] = matrix[1][0] = 1;
         os[0] = os[1] = 2;
@@ -33,13 +52,11 @@ private slots:
             error.comment();
         }
         QVERIFY(!net->isInfected());
-        emptyMemory(size);
     }
 
     void checkNetConsistingOfTwoSystems()
     {
-        int size = 2;
-        createArraysWithGivenSize(size);
+        int size = sizes[index];
         matrix[0][0] = matrix[1][1] = 0;
         matrix[0][1] = matrix[1][0] = 1;
         os[0] = os[1] = 2;
@@ -47,25 +64,21 @@ private slots:
         net->startExperiment();
 
         QVERIFY(net->getIterationsCount() == 2);
-        emptyMemory(size);
     }
 
     void checkNetConsistingOfOneSystem()
     {
-        int size = 1;
-        createArraysWithGivenSize(size);
+        int size = sizes[index];
         matrix[0][0] = 0;
         os[0] = 1;
         LocalNet *net = new LocalNet(size, matrix, os, new ConstRandomGenerator());
         net->startExperiment();
         QVERIFY(net->getIterationsCount() == 1);
-        emptyMemory(size);
     }
 
     void checkBigNet()
     {
-        int size = 4;
-        createArraysWithGivenSize(size);
+        int size = sizes[index];
         int stackArray[4][4] = {{0, 0, 1, 1},
                                 {0, 0, 0, 1},
                                 {1, 0, 0, 0},
@@ -82,26 +95,11 @@ private slots:
         net->startExperiment();
 
         QVERIFY(net->getIterationsCount() == 3);
-        emptyMemory(size);
     }
 
 private:
-    void createArraysWithGivenSize(int size)
-    {
-        os = new int[size];
-        matrix = new int*[size];
-        for (int i = 0; i < size; i++)
-            matrix[i] = new int[size];
-    }
-
-    void emptyMemory(int size)
-    {
-        for (int i = 0; i < size; i++)
-            delete[] matrix[i];
-        delete[] matrix;
-        delete[] os;
-    }
-
+    int sizes[4] = {2, 2, 1, 4};
+    int index;
     int** matrix;
     int* os;
 };
