@@ -14,14 +14,16 @@ void KeyController::handleKey(QKeyEvent *keyEvent)
     {
         point = landscape->getPointWithXCoordinate(oldPoint.x() - controllableTank->getSpeed());
         point.setY(point.y() - controllableTank->getRadius());
-        controllableTank->setCenter(point);
+        if (point.x() > 0 && point.x() < widthOfFrame && point.y() > 0 && point.y() < heightOfFrame)
+            controllableTank->setCenter(point);
     }
 
     if (keyEvent->key() == Qt::Key_Right)
     {
         point = landscape->getPointWithXCoordinate(oldPoint.x() + controllableTank->getSpeed());
         point.setY(point.y() - controllableTank->getRadius());
-        controllableTank->setCenter(point);
+        if (point.x() > 0 && point.x() < widthOfFrame && point.y() > 0 && point.y() < heightOfFrame)
+            controllableTank->setCenter(point);
     }
 
     if (keyEvent->key() == Qt::Key_Up)

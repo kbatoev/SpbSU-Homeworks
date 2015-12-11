@@ -1,6 +1,6 @@
 #include "landscape.h"
 
-Landscape::Landscape() : numberPoints(25)
+Landscape::Landscape() : numberPoints(26)
 {
     generateRandomLandscape();
 }
@@ -45,7 +45,7 @@ QPointF Landscape::getPointWithXCoordinate(qreal x)
 void Landscape::generateRandomLandscape()
 {
     srand(time(0));
-    int length = widthOfFrame / numberPoints;
+    int length = widthOfFrame / (numberPoints - 1);
     points.resize(numberPoints);
     for (int i = 0; i < numberPoints; ++i)
     {

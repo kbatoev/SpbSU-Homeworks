@@ -39,7 +39,7 @@ private:
     QGraphicsScene *scene;
     Landscape *landscape;
     Tank *tank;
-    Updater *updater;
+    //Updater *updater;
     QTimer *gameTimer;
 };
 

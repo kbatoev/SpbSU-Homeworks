@@ -7,11 +7,13 @@
 #include <QObject>
 #include <QTimer>
 
+#include "landscape.h"
+
 class Bullet : public QObject, public Burstable
 {
     Q_OBJECT
 public:
-    Bullet(QPointF center, qreal angle);
+    Bullet(QPointF center, qreal angle, Landscape *landscape);
 
     void drawBurst();
     QRectF boundingRect() const;
@@ -23,6 +25,10 @@ public slots:
     void updatePosition();
 
 private:
+    void checkDistanceFromLandscape();
+    qreal countDistanceFromBulletCenter(QPointF point);
+
+private:
     QPointF bulletCenter;
     QPointF initialCenter;
     int iteration;
@@ -31,4 +37,5 @@ private:
     qreal angle;
     qreal speed;
     QTimer *timer;
+    Landscape *landscape;
 };

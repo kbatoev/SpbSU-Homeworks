@@ -23,12 +23,11 @@ public:
     int getSpeed() const;
     QPointF getCenter() const;
     qreal getGunAngleInRadians() const;
+    static int getRadius();
 
     void setCenter(QPointF newCenter);
     void increaseAngle();
     void decreaseAngle();
-    static int getRadius();
-
 
 
 private:

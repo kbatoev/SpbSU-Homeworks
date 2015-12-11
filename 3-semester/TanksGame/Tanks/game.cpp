@@ -5,7 +5,7 @@ Game::Game()
     scene = new QGraphicsScene();
     landscape = new Landscape();
     qreal x = 100;
-    tankPointOnScene = landscape->getPointWithXCoordinate(x);
+    tankPointOnScene = landscape->getPointWithXCoordinate(x) + QPointF(0, -tank->getRadius());
     tank = new Tank(tankPointOnScene);
 
     keyController = new KeyController(tank, landscape);
@@ -35,7 +35,7 @@ void Game::keyPressEvent(QKeyEvent *keyEvent)
     keyController->handleKey(keyEvent);
     if (keyEvent->key() == Qt::Key_Space)
     {
-        Bullet *bullet = new Bullet(tank->getCenter(), tank->getGunAngleInRadians());
+        Bullet *bullet = new Bullet(tank->getCenter(), tank->getGunAngleInRadians(), landscape);
         scene->addItem(bullet);
         bullet->fly();
     }
