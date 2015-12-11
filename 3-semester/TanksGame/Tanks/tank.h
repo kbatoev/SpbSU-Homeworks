@@ -29,12 +29,14 @@ public:
     void increaseAngle();
     void decreaseAngle();
 
+    QPointF getStartPointForBullet() const;
 
 private:
     void drawGun(QPainter *painter);
-
+    QPointF normalize(QPointF point);
 
     QPointF center;
+    QPointF startPointForBullet;
     static const int radius = 15;
     int speed;
 

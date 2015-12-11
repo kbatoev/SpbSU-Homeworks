@@ -19,8 +19,8 @@ void Bullet::drawBurst()
 
 QRectF Bullet::boundingRect() const
 {
-    return QRectF(bulletCenter.x() - bulletRadius, bulletCenter.y() + bulletRadius,
-                  bulletCenter.x() + bulletRadius, bulletCenter.y() - bulletRadius);
+    return QRectF(bulletCenter.x() - bulletRadius, bulletCenter.y() - bulletRadius,
+                  2 * bulletRadius, 2 * bulletRadius);
 }
 
 void Bullet::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -30,6 +30,7 @@ void Bullet::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
     pen.setWidth(2);
     painter->setPen(pen);
     painter->drawEllipse(bulletCenter, bulletRadius, bulletRadius);
+    //painter->drawRect(QRectF(bulletCenter.x() - bulletRadius, bulletCenter.y() - bulletRadius, 2 * bulletRadius, 2 * bulletRadius));
 }
 
 void Bullet::fly()
@@ -46,8 +47,8 @@ void Bullet::updatePosition()
     iteration++;
     qreal t = iteration / 10.0;
     qreal x = initialCenter.x() + speed * t * ::cos(-angle);
-    qreal y = initialCenter.y() - speed * t * ::sin(-angle)
-            + 5.0 * t * t;
+    qreal y = initialCenter.y() - speed * t * ::sin(-angle) + 5.0 * t * t;
+
     if (x >= 0 && x < widthOfFrame && y >= 0 && y < heightOfFrame)
     {
         bulletCenter = QPointF(x, y);
@@ -57,6 +58,7 @@ void Bullet::updatePosition()
         this->setVisible(false);
     }
     checkDistanceFromLandscape();
+
 }
 
 void Bullet::checkDistanceFromLandscape()

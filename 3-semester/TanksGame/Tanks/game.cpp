@@ -50,12 +50,14 @@ void Game::keyReleaseEvent(QKeyEvent *keyEvent)
 
 void Game::updateScene()
 {
+    /*
     QList<QGraphicsItem* > listOfItems = scene->items();
     for (int i = 0; i < listOfItems.size(); i++)
     {
         listOfItems[i]->update();
         scene->update();
     }
+    */
     scene->update();
 }
 
