@@ -1,7 +1,9 @@
 #include "keyController.h"
+#include "game.h"
 
-KeyController::KeyController(Tank *currentTank, Landscape *currentLandscape)
+KeyController::KeyController(Tank *currentTank, Landscape *currentLandscape, Game *game)
 {
+    this->game = game;
     controllableTank = currentTank;
     landscape = currentLandscape;
 }
@@ -34,6 +36,13 @@ void KeyController::handleKey(QKeyEvent *keyEvent)
     if (keyEvent->key() == Qt::Key_Down)
     {
         controllableTank->decreaseAngle();
+    }
+
+    if (keyEvent->key() == Qt::Key_Space)
+    {
+        Bullet *bullet = new Bullet(controllableTank->getCenter(), controllableTank->getGunAngleInRadians(), landscape);
+        game->getScene()->addItem(bullet);
+        bullet->fly();
     }
 }
 

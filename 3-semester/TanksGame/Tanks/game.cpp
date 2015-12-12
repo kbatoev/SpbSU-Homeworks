@@ -8,7 +8,7 @@ Game::Game()
     tankPointOnScene = landscape->getPointWithXCoordinate(x) + QPointF(0, -tank->getRadius());
     tank = new Tank(tankPointOnScene);
 
-    keyController = new KeyController(tank, landscape);
+    keyController = new KeyController(tank, landscape, this);
 
     scene->setSceneRect(0, 0, widthOfFrame, heightOfFrame);
     scene->addItem(landscape);
@@ -16,30 +16,20 @@ Game::Game()
 
     gameTimer = new QTimer();
     connect(gameTimer, SIGNAL(timeout()), this, SLOT(updateScene()));
-    gameTimer->start(30);
+    gameTimer->start(msec);
 }
 
 Game::~Game()
 {
     delete landscape;
     delete scene;
-}
-
-QGraphicsScene *Game::getScene()
-{
-    return scene;
+    delete keyController;
+    delete gameTimer;
 }
 
 void Game::keyPressEvent(QKeyEvent *keyEvent)
 {
     keyController->handleKey(keyEvent);
-    if (keyEvent->key() == Qt::Key_Space)
-    {
-        Bullet *bullet = new Bullet(tank->getCenter(), tank->getGunAngleInRadians(), landscape);
-        scene->addItem(bullet);
-        bullet->fly();
-    }
-
     updateScene();
 }
 
@@ -59,5 +49,10 @@ void Game::updateScene()
     }
     */
     scene->update();
+}
+
+QGraphicsScene *Game::getScene() const
+{
+    return scene;
 }
 

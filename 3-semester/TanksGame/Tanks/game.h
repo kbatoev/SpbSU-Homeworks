@@ -17,6 +17,8 @@
 
 //const qreal PI = 3.141592653;
 
+const int msec = 30;
+
 class Game : public QObject
 {
     Q_OBJECT
@@ -24,10 +26,11 @@ public:
     Game();
     ~Game();
 
-    QGraphicsScene *getScene();
 
     void keyPressEvent(QKeyEvent *keyEvent);
     void keyReleaseEvent(QKeyEvent *keyEvent);
+
+    QGraphicsScene *getScene() const;
 
 public slots:
     void updateScene();
