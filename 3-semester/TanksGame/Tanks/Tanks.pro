@@ -32,6 +32,7 @@ HEADERS  += mainwindow.h \
     updater.h \
     gameview.h \
     keyController.h \
-    bullet.h
+    bullet.h \
+    constants.h
 
 FORMS    += mainwindow.ui

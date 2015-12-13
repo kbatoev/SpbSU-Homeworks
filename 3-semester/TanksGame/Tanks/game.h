@@ -14,10 +14,7 @@
 #include "updater.h"
 #include "keyController.h"
 #include "bullet.h"
-
-//const qreal PI = 3.141592653;
-
-const int msec = 30;
+#include "constants.h"
 
 class Game : public QObject
 {

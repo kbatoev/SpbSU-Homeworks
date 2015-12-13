@@ -1,13 +1,15 @@
 #pragma once
 
-#include "burstable.h"
 #include <QGraphicsItem>
 #include <QPen>
 #include <QPainter>
 #include <QObject>
 #include <QTimer>
 
+#include "burstable.h"
 #include "landscape.h"
+#include "constants.h"
+
 
 class Bullet : public QObject, public Burstable
 {
@@ -33,7 +35,7 @@ private:
     QPointF initialCenter;
     int iteration;
     int bulletRadius;
-    int msec;
+    qreal coefficient;
     qreal angle;
     qreal speed;
     QTimer *timer;

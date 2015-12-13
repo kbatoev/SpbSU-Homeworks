@@ -1,12 +1,11 @@
 #pragma once
 
-#include "burstable.h"
 #include <QGraphicsEllipseItem>
-
 #include <QPen>
 #include <QPainter>
 
-const qreal PI = 3.141592653;
+#include "burstable.h"
+#include "constants.h"
 
 class Tank : public Burstable
 {

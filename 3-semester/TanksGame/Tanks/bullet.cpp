@@ -5,7 +5,7 @@ Bullet::Bullet(QPointF center, qreal angle, Landscape *landscape)
     this->bulletCenter = center;
     this->radiusOfBurst = 40;
     this->bulletRadius = 5;
-    this->msec = 16;
+    this->coefficient = 4.0;
     this->angle = angle;
     this->speed = 55;
     this->landscape = landscape;
@@ -47,7 +47,7 @@ void Bullet::updatePosition()
     iteration++;
     qreal t = iteration / 10.0;
     qreal x = initialCenter.x() + speed * t * ::cos(-angle);
-    qreal y = initialCenter.y() - speed * t * ::sin(-angle) + 5.0 * t * t;
+    qreal y = initialCenter.y() - speed * t * ::sin(-angle) + coefficient * t * t;
 
     if (x >= 0 && x < widthOfFrame && y >= 0 && y < heightOfFrame)
     {
