@@ -16,6 +16,7 @@ class Bullet : public QObject, public Burstable
     Q_OBJECT
 public:
     Bullet(QPointF center, qreal angle, Landscape *landscape);
+    ~Bullet();
 
     void drawBurst();
     QRectF boundingRect() const;

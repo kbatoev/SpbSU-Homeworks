@@ -1,17 +1,18 @@
 #include "tank.h"
 
-Tank::Tank(int xCoordiante, int yCoordinate)
+Tank::Tank(int xCoordiante, int yCoordinate) : Tank()
 {
     center = QPointF(xCoordiante, yCoordinate);
-    speed = 10;
-    gunAngle = -45.0;
 }
 
-Tank::Tank(QPointF point)
+Tank::Tank(QPointF point) : Tank()
 {
     center = point;
-    speed = 10;
-    gunAngle = -45.0;
+}
+
+Tank::Tank() : speed(10), gunAngle(-45.0)
+{
+
 }
 
 Tank::~Tank()
@@ -35,7 +36,6 @@ void Tank::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     pen.setWidth(4);
     painter->setPen(pen);
 
-    //painter->drawRect(QRectF(center.x() - radius, center.y() - radius, 2 * radius, 2 * radius));
     painter->drawEllipse(center, radius, radius);
     drawGun(painter);
 }
@@ -57,7 +57,7 @@ QPointF Tank::getCenter() const
 
 qreal Tank::getGunAngleInRadians() const
 {
-    return gunAngle * PI / 180.0;
+    return gunAngle * PI / degreesInPI;
 }
 
 void Tank::setCenter(QPointF newCenter)
@@ -67,14 +67,14 @@ void Tank::setCenter(QPointF newCenter)
 
 void Tank::increaseAngle()
 {
-    if (gunAngle > -180.0)
-        gunAngle -= 7.0;
+    if (gunAngle > -leftBorderForGun)
+        gunAngle -= addingToAngle;
 }
 
 void Tank::decreaseAngle()
 {
-    if (gunAngle < 0.0)
-        gunAngle += 7.0;
+    if (gunAngle < rightBorderForGun)
+        gunAngle += addingToAngle;
 }
 
 
@@ -85,12 +85,7 @@ int Tank::getRadius()
 
 void Tank::drawGun(QPainter *painter)
 {
-    qreal length = 23;
-    qreal width = 7;
-
-    //painter->drawLine(points[i - 1], points[i]);
-
-    qreal angle = PI / 180.0 * gunAngle;
+    qreal angle = PI / degreesInPI * gunAngle;
     QPointF p1(width * ::cos(PI / 2.0 + angle), width * ::sin(PI / 2.0 + angle));
     QPointF p2(0, 0);
     QPointF p3(length * ::cos(angle), length * ::sin(angle));

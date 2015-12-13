@@ -8,13 +8,7 @@
 #include <QPen>
 #include <QGraphicsItem>
 
-const int widthOfFrame = 1000;
-const int heightOfFrame = 700;
-
-const int yCoordinateAdding = 150;
-const int maxDistanceBetweenTwoYCoordinates = 70;
-const int moduleForYCoordinate = 500;
-
+#include "constants.h"
 
 class Landscape : public QGraphicsItem
 {

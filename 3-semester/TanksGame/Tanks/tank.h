@@ -12,6 +12,7 @@ class Tank : public Burstable
 public:
     Tank(int xCoordiante, int yCoordinate);
     Tank(QPointF point);
+    Tank();
     ~Tank();
     QGraphicsEllipseItem *getGeometry();
 

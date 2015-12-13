@@ -11,7 +11,15 @@ Bullet::Bullet(QPointF center, qreal angle, Landscape *landscape)
       timer(nullptr),
       landscape(landscape)
 {
-//    this->radiusOfBurst = 40;
+    //    this->radiusOfBurst = 40;
+}
+
+Bullet::~Bullet()
+{
+    if (timer)
+    {
+        delete timer;
+    }
 }
 
 void Bullet::drawBurst()
