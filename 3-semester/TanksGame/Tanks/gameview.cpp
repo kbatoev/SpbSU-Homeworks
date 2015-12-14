@@ -18,9 +18,3 @@ void GameView::keyPressEvent(QKeyEvent *keyEvent)
 {
     game->keyPressEvent(keyEvent);
 }
-
-void GameView::keyReleaseEvent(QKeyEvent *keyEvent)
-{
-    game->keyReleaseEvent(keyEvent);
-}
-

@@ -22,7 +22,6 @@ public:
 
 private:
     Ui::MainWindow *ui;
-    //Game *game;
     GameView *gameView;
 };
 

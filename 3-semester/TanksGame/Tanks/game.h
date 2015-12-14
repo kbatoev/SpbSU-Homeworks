@@ -11,7 +11,6 @@
 
 #include "landscape.h"
 #include "tank.h"
-#include "updater.h"
 #include "keyController.h"
 #include "bullet.h"
 #include "burst.h"
@@ -24,9 +23,7 @@ public:
     Game();
     ~Game();
 
-
     void keyPressEvent(QKeyEvent *keyEvent);
-    void keyReleaseEvent(QKeyEvent *keyEvent);
 
     void addBullet(Bullet *newBullet);
     void addBurst(Burst *newBurst);

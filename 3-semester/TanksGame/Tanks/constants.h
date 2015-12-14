@@ -5,10 +5,11 @@
 const int msec = 17;
 const qreal PI = 3.141592653;
 
+// for Game
+const qreal startXCoordinate = 100;
 
 // for Bullet
-const qreal periodOfSettingPositionOfBullet = 10.0;
-
+const qreal periodOfSettingPositionOfBullet = 8.0;
 
 // for Tank
 const qreal degreesInPI = 180.0;

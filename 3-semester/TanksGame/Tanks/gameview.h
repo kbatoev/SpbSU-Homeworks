@@ -13,7 +13,6 @@ public:
     ~GameView();
 
     void keyPressEvent(QKeyEvent *keyEvent);
-    void keyReleaseEvent(QKeyEvent *keyEvent);
 
 private:
     Game *game;

@@ -19,7 +19,6 @@ SOURCES += main.cpp\
     game.cpp \
     landscape.cpp \
     tank.cpp \
-    updater.cpp \
     gameview.cpp \
     keyController.cpp \
     bullet.cpp \
@@ -30,7 +29,6 @@ HEADERS  += mainwindow.h \
     landscape.h \
     burstable.h \
     tank.h \
-    updater.h \
     gameview.h \
     keyController.h \
     bullet.h \

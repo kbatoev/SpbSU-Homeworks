@@ -22,9 +22,4 @@ bool MainWindow::event(QEvent *qEvent)
         gameView->keyPressEvent(dynamic_cast<QKeyEvent *>(qEvent));
         return true;
     }
-    if(qEvent->type() == QEvent::KeyRelease)
-    {
-        gameView->keyReleaseEvent(dynamic_cast<QKeyEvent *>(qEvent));
-        return true;
-    }
 }

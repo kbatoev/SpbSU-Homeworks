@@ -4,7 +4,7 @@ Game::Game()
 {
     scene = new QGraphicsScene();
     landscape = new Landscape();
-    qreal x = 100;
+    qreal x = startXCoordinate;
     tankPointOnScene = landscape->getPointWithXCoordinate(x) + QPointF(0, -tank->getRadius());
     tank = new Tank(tankPointOnScene);
 
@@ -40,11 +40,6 @@ void Game::keyPressEvent(QKeyEvent *keyEvent)
 {
     keyController->handleKey(keyEvent);
     updateScene();
-}
-
-void Game::keyReleaseEvent(QKeyEvent *keyEvent)
-{
-
 }
 
 void Game::updateScene()
