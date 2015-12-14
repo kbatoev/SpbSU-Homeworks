@@ -8,6 +8,12 @@ GameView::GameView(QWidget *parent, Game *newGame) :
     graphicsView->show();
 }
 
+GameView::~GameView()
+{
+    delete game;
+    delete graphicsView;
+}
+
 void GameView::keyPressEvent(QKeyEvent *keyEvent)
 {
     game->keyPressEvent(keyEvent);

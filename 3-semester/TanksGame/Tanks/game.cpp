@@ -8,7 +8,7 @@ Game::Game()
     tankPointOnScene = landscape->getPointWithXCoordinate(x) + QPointF(0, -tank->getRadius());
     tank = new Tank(tankPointOnScene);
 
-    keyController = new KeyController(tank, landscape, this);
+    keyController = new KeyController(this);
 
     scene->setSceneRect(0, 0, widthOfFrame, heightOfFrame);
     scene->addItem(landscape);
@@ -24,6 +24,10 @@ Game::~Game()
     for (int i = 0; i < bullets.size(); i++)
     {
         delete bullets[i];
+    }
+    for (int i = 0; i < bursts.size(); i++)
+    {
+        delete bursts[i];
     }
 
     delete landscape;
@@ -56,6 +60,11 @@ void Game::updateScene()
     scene->update();
 }
 
+Tank *Game::getTank() const
+{
+    return tank;
+}
+
 Landscape *Game::getLandscape() const
 {
     return landscape;
@@ -69,5 +78,10 @@ QGraphicsScene *Game::getScene() const
 void Game::addBullet(Bullet *newBullet)
 {
     bullets.append(newBullet);
+}
+
+void Game::addBurst(Burst *newBurst)
+{
+    bursts.append(newBurst);
 }
 

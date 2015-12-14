@@ -14,6 +14,11 @@ Burst::Burst(QPointF center, QGraphicsScene *scene, int radius)
     this->scene->addItem(this);
 }
 
+Burst::~Burst()
+{
+    delete timer;
+}
+
 QRectF Burst::boundingRect() const
 {
     if (!isOver)
@@ -48,6 +53,7 @@ void Burst::incrementIteration()
     if (isOver)
     {
         timer->stop();
+        scene->removeItem(this);
     }
     iteration++;
 }

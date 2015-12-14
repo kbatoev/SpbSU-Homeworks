@@ -1,8 +1,9 @@
 #include "bullet.h"
+#include "game.h"
 
 int Bullet::numberOfCreatedBullets = 0;
 
-Bullet::Bullet(QPointF center, qreal angle, Landscape *landscape, QGraphicsScene *scene)
+Bullet::Bullet(QPointF center, qreal angle, Game *game)
     : bulletCenter(center),
       initialCenter(center),
       iteration(0),
@@ -11,12 +12,11 @@ Bullet::Bullet(QPointF center, qreal angle, Landscape *landscape, QGraphicsScene
       angle(angle),
       speed(55),
       timer(nullptr),
-      landscape(landscape),
-      scene(scene)
+      game(game)
 {
     radiusOfBurst = 40;
     numberOfCreatedBullets++;
-    this->scene->addItem(this);
+    this->game->addBullet(this);
 }
 
 Bullet::~Bullet()
@@ -31,8 +31,9 @@ void Bullet::drawBurst()
 {
     timer->stop();
     hasBurst = true;
-    this->setVisible(false);
-    Burst *burst = new Burst(this->bulletCenter, scene, radiusOfBurst);
+    setVisible(false);
+    Burst *burst = new Burst(bulletCenter, game->getScene(), radiusOfBurst);
+    game->addBurst(burst);
 }
 
 QRectF Bullet::boundingRect() const
@@ -51,6 +52,11 @@ void Bullet::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
     pen.setWidth(2);
     painter->setPen(pen);
     painter->drawEllipse(bulletCenter, bulletRadius, bulletRadius);
+}
+
+void Bullet::addYourselfToScene()
+{
+    game->getScene()->addItem(this);
 }
 
 void Bullet::fly()
@@ -82,7 +88,7 @@ void Bullet::updatePosition()
 void Bullet::checkDistanceFromLandscape()
 {
     qreal x = bulletCenter.x();
-    QPointF point = landscape->getPointWithXCoordinate(x);
+    QPointF point = game->getLandscape()->getPointWithXCoordinate(x);
     qreal distance = countDistanceFromBulletCenter(point);
     if (distance < bulletRadius)
     {

@@ -15,6 +15,7 @@ class Burst : public QObject, public QGraphicsItem
     Q_OBJECT
 public:
     Burst(QPointF center, QGraphicsScene *scene, int radius);
+    ~Burst();
 
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);

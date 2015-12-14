@@ -10,6 +10,7 @@ class GameView : public QWidget
 {
 public:
     explicit GameView(QWidget *parent, Game *newGame);
+    ~GameView();
 
     void keyPressEvent(QKeyEvent *keyEvent);
     void keyReleaseEvent(QKeyEvent *keyEvent);

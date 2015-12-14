@@ -11,12 +11,10 @@ class Game;
 class KeyController
 {
 public:
-    KeyController(Tank *currentTank, Landscape *currentLanscape, Game *game);
+    KeyController(Game *game);
 
     void handleKey(QKeyEvent *keyEvent);
 
 private:
-    Tank *controllableTank;
-    Landscape *landscape;
     Game *game;
 };

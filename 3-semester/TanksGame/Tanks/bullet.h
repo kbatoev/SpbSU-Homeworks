@@ -18,13 +18,14 @@ class Bullet : public QObject, public Burstable
 {
     Q_OBJECT
 public:
-    Bullet(QPointF center, qreal angle, Landscape *landscape, QGraphicsScene *scene);
+    Bullet(QPointF center, qreal angle, Game *game);
     ~Bullet();
 
     void drawBurst();
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
+    void addYourselfToScene();
     void fly();
 
 public slots:
@@ -46,6 +47,6 @@ private:
     qreal angle;
     qreal speed;
     QTimer *timer;
-    Landscape *landscape;
-    QGraphicsScene *scene;
+
+    Game *game;
 };

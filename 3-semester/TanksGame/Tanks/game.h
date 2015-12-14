@@ -14,6 +14,7 @@
 #include "updater.h"
 #include "keyController.h"
 #include "bullet.h"
+#include "burst.h"
 #include "constants.h"
 
 class Game : public QObject
@@ -28,9 +29,11 @@ public:
     void keyReleaseEvent(QKeyEvent *keyEvent);
 
     void addBullet(Bullet *newBullet);
+    void addBurst(Burst *newBurst);
 
     QGraphicsScene *getScene() const;
     Landscape *getLandscape() const;
+    Tank *getTank() const;
 
 public slots:
     void updateScene();
@@ -43,7 +46,7 @@ private:
     Landscape *landscape;
     Tank *tank;
     QList<Bullet *> bullets;
-    //Updater *updater;
+    QList<Burst *> bursts;
     QTimer *gameTimer;
 };
 

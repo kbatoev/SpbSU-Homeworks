@@ -1,49 +1,52 @@
 #include "keyController.h"
 #include "game.h"
 
-KeyController::KeyController(Tank *currentTank, Landscape *currentLandscape, Game *game)
+KeyController::KeyController(Game *game)
+    : game(game)
 {
-    this->game = game;
-    controllableTank = currentTank;
-    landscape = currentLandscape;
 }
 
 void KeyController::handleKey(QKeyEvent *keyEvent)
 {
-    QPointF oldPoint = controllableTank->getCenter();
+    Tank *tank = game->getTank();
+    Landscape *landscape = game->getLandscape();
+
+    QPointF oldPoint = tank->getCenter();
     QPointF point = oldPoint;
     if (keyEvent->key() == Qt::Key_Left)
     {
-        point = landscape->getPointWithXCoordinate(oldPoint.x() - controllableTank->getSpeed());
-        point.setY(point.y() - controllableTank->getRadius());
+        point = landscape->getPointWithXCoordinate(oldPoint.x() - tank->getSpeed());
+        point.setY(point.y() - tank->getRadius());
         if (point.x() > 0 && point.x() < widthOfFrame && point.y() > 0 && point.y() < heightOfFrame)
-            controllableTank->setCenter(point);
+        {
+            tank->setCenter(point);
+        }
     }
 
     if (keyEvent->key() == Qt::Key_Right)
     {
-        point = landscape->getPointWithXCoordinate(oldPoint.x() + controllableTank->getSpeed());
-        point.setY(point.y() - controllableTank->getRadius());
+        point = landscape->getPointWithXCoordinate(oldPoint.x() + tank->getSpeed());
+        point.setY(point.y() - tank->getRadius());
         if (point.x() > 0 && point.x() < widthOfFrame && point.y() > 0 && point.y() < heightOfFrame)
-            controllableTank->setCenter(point);
+        {
+            tank->setCenter(point);
+        }
     }
 
     if (keyEvent->key() == Qt::Key_Up)
     {
-        controllableTank->increaseAngle();
+        tank->increaseAngle();
     }
 
     if (keyEvent->key() == Qt::Key_Down)
     {
-        controllableTank->decreaseAngle();
+        tank->decreaseAngle();
     }
 
     if (keyEvent->key() == Qt::Key_Space)
     {
-        Bullet *bullet = new Bullet(controllableTank->getCenter(), controllableTank->getGunAngleInRadians(),
-                                    landscape, game->getScene());
-        game->addBullet(bullet);
-        //game->getScene()->addItem(bullet);
+        Bullet *bullet = new Bullet(tank->getCenter(), tank->getGunAngleInRadians(), game);
+        bullet->addYourselfToScene();
         bullet->fly();
     }
 }
