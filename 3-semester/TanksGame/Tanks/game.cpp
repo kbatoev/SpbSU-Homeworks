@@ -21,6 +21,11 @@ Game::Game()
 
 Game::~Game()
 {
+    for (int i = 0; i < bullets.size(); i++)
+    {
+        delete bullets[i];
+    }
+
     delete landscape;
     delete scene;
     delete keyController;
@@ -51,8 +56,18 @@ void Game::updateScene()
     scene->update();
 }
 
+Landscape *Game::getLandscape() const
+{
+    return landscape;
+}
+
 QGraphicsScene *Game::getScene() const
 {
     return scene;
+}
+
+void Game::addBullet(Bullet *newBullet)
+{
+    bullets.append(newBullet);
 }
 

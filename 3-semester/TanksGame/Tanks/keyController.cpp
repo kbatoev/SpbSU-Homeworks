@@ -40,8 +40,10 @@ void KeyController::handleKey(QKeyEvent *keyEvent)
 
     if (keyEvent->key() == Qt::Key_Space)
     {
-        Bullet *bullet = new Bullet(controllableTank->getCenter(), controllableTank->getGunAngleInRadians(), landscape);
-        game->getScene()->addItem(bullet);
+        Bullet *bullet = new Bullet(controllableTank->getCenter(), controllableTank->getGunAngleInRadians(),
+                                    landscape, game->getScene());
+        game->addBullet(bullet);
+        //game->getScene()->addItem(bullet);
         bullet->fly();
     }
 }

@@ -22,7 +22,8 @@ SOURCES += main.cpp\
     updater.cpp \
     gameview.cpp \
     keyController.cpp \
-    bullet.cpp
+    bullet.cpp \
+    burst.cpp
 
 HEADERS  += mainwindow.h \
     game.h \
@@ -33,6 +34,7 @@ HEADERS  += mainwindow.h \
     gameview.h \
     keyController.h \
     bullet.h \
-    constants.h
+    constants.h \
+    burst.h
 
 FORMS    += mainwindow.ui

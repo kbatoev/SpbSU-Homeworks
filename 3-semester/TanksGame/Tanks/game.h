@@ -27,7 +27,10 @@ public:
     void keyPressEvent(QKeyEvent *keyEvent);
     void keyReleaseEvent(QKeyEvent *keyEvent);
 
+    void addBullet(Bullet *newBullet);
+
     QGraphicsScene *getScene() const;
+    Landscape *getLandscape() const;
 
 public slots:
     void updateScene();
@@ -39,6 +42,7 @@ private:
     QGraphicsScene *scene;
     Landscape *landscape;
     Tank *tank;
+    QList<Bullet *> bullets;
     //Updater *updater;
     QTimer *gameTimer;
 };

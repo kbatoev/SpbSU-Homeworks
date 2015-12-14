@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QGraphicsItem>
+#include <QGraphicsScene>
 #include <QPen>
 #include <QPainter>
 #include <QObject>
@@ -8,14 +9,16 @@
 
 #include "burstable.h"
 #include "landscape.h"
+#include "burst.h"
 #include "constants.h"
 
+class Game;
 
 class Bullet : public QObject, public Burstable
 {
     Q_OBJECT
 public:
-    Bullet(QPointF center, qreal angle, Landscape *landscape);
+    Bullet(QPointF center, qreal angle, Landscape *landscape, QGraphicsScene *scene);
     ~Bullet();
 
     void drawBurst();
@@ -32,6 +35,9 @@ private:
     qreal countDistanceFromBulletCenter(QPointF point);
 
 private:
+    static int numberOfCreatedBullets;
+
+private:
     QPointF bulletCenter;
     QPointF initialCenter;
     int iteration;
@@ -41,4 +47,5 @@ private:
     qreal speed;
     QTimer *timer;
     Landscape *landscape;
+    QGraphicsScene *scene;
 };

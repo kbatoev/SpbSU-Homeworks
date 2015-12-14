@@ -1,6 +1,8 @@
 #include "bullet.h"
 
-Bullet::Bullet(QPointF center, qreal angle, Landscape *landscape)
+int Bullet::numberOfCreatedBullets = 0;
+
+Bullet::Bullet(QPointF center, qreal angle, Landscape *landscape, QGraphicsScene *scene)
     : bulletCenter(center),
       initialCenter(center),
       iteration(0),
@@ -9,9 +11,12 @@ Bullet::Bullet(QPointF center, qreal angle, Landscape *landscape)
       angle(angle),
       speed(55),
       timer(nullptr),
-      landscape(landscape)
+      landscape(landscape),
+      scene(scene)
 {
-    //    this->radiusOfBurst = 40;
+    radiusOfBurst = 40;
+    numberOfCreatedBullets++;
+    this->scene->addItem(this);
 }
 
 Bullet::~Bullet()
@@ -25,13 +30,18 @@ Bullet::~Bullet()
 void Bullet::drawBurst()
 {
     timer->stop();
-    //this->setVisible(false);
+    hasBurst = true;
+    this->setVisible(false);
+    Burst *burst = new Burst(this->bulletCenter, scene, radiusOfBurst);
 }
 
 QRectF Bullet::boundingRect() const
 {
-    return QRectF(bulletCenter.x() - bulletRadius, bulletCenter.y() - bulletRadius,
-                  2 * bulletRadius, 2 * bulletRadius);
+    if (!hasBurst)
+    {
+        return QRectF(bulletCenter.x() - bulletRadius, bulletCenter.y() - bulletRadius,
+                      2 * bulletRadius, 2 * bulletRadius);
+    }
 }
 
 void Bullet::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
