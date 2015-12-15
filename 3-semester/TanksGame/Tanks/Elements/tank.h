@@ -5,7 +5,7 @@
 #include <QPainter>
 
 #include "burstable.h"
-#include "constants.h"
+#include "../Constants/constants.h"
 
 class Tank : public Burstable
 {

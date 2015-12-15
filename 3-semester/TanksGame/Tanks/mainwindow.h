@@ -4,7 +4,7 @@
 #include <QEvent>
 
 #include "game.h"
-#include "gameview.h"
+#include "View/gameview.h"
 
 namespace Ui {
 class MainWindow;

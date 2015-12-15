@@ -10,7 +10,7 @@
 #include "burstable.h"
 #include "landscape.h"
 #include "burst.h"
-#include "constants.h"
+#include "Constants/constants.h"
 
 class Game;
 

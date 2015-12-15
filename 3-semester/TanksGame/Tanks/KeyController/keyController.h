@@ -2,10 +2,6 @@
 
 #include <QKeyEvent>
 
-#include "landscape.h"
-#include "tank.h"
-#include "bullet.h"
-
 class Game;
 
 class KeyController

@@ -9,12 +9,12 @@
 #include <QTextStream>
 #include <QTimer>
 
-#include "landscape.h"
-#include "tank.h"
-#include "keyController.h"
-#include "bullet.h"
-#include "burst.h"
-#include "constants.h"
+#include "Elements/landscape.h"
+#include "Elements/tank.h"
+#include "Elements/bullet.h"
+#include "Elements/burst.h"
+#include "Constants/constants.h"
+#include "KeyController/keyController.h"
 
 class Game : public QObject
 {

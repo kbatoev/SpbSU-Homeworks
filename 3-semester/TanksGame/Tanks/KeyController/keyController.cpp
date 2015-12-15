@@ -43,7 +43,7 @@ void KeyController::handleKey(QKeyEvent *keyEvent)
         tank->decreaseAngle();
     }
 
-    if (keyEvent->key() == Qt::Key_Space)
+    if (keyEvent->key() == Qt::Key_Enter)
     {
         Bullet *bullet = new Bullet(tank->getCenter(), tank->getGunAngleInRadians(), game);
         bullet->addYourselfToScene();

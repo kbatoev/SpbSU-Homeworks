@@ -17,22 +17,22 @@ CONFIG += c++11
 SOURCES += main.cpp\
         mainwindow.cpp \
     game.cpp \
-    landscape.cpp \
-    tank.cpp \
-    gameview.cpp \
-    keyController.cpp \
-    bullet.cpp \
-    burst.cpp
+    Elements/landscape.cpp \
+    Elements/tank.cpp \
+    View/gameview.cpp \
+    KeyController/keyController.cpp \
+    Elements/bullet.cpp \
+    Elements/burst.cpp
 
 HEADERS  += mainwindow.h \
     game.h \
-    landscape.h \
-    burstable.h \
-    tank.h \
-    gameview.h \
-    keyController.h \
-    bullet.h \
-    constants.h \
-    burst.h
+    Elements/landscape.h \
+    Elements/burstable.h \
+    Elements/tank.h \
+    View/gameview.h \
+    KeyController/keyController.h \
+    Elements/bullet.h \
+    Constants/constants.h \
+    Elements/burst.h
 
 FORMS    += mainwindow.ui

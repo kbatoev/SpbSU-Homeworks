@@ -80,6 +80,7 @@ void Bullet::updatePosition()
     else
     {
         setVisible(false);
+        timer->stop();
     }
     checkDistanceFromLandscape();
 

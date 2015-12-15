@@ -8,7 +8,7 @@
 #include <QTimer>
 #include <QPointF>
 
-#include "constants.h"
+#include "../Constants/constants.h"
 
 class Burst : public QObject, public QGraphicsItem
 {

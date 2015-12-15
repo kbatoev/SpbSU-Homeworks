@@ -8,7 +8,7 @@
 #include <QPen>
 #include <QGraphicsItem>
 
-#include "constants.h"
+#include "../Constants/constants.h"
 
 class Landscape : public QGraphicsItem
 {
