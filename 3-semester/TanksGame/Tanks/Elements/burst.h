@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QPen>
+#include <QRectF>
 #include <QPainter>
 
 #include <QGraphicsScene>

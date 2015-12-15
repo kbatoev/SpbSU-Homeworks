@@ -12,7 +12,9 @@ Bullet::Bullet(QPointF center, qreal angle, Game *game)
       angle(angle),
       speed(55),
       timer(nullptr),
-      game(game)
+      isReadyToBurst(false),
+      game(game),
+      id(numberOfCreatedBullets)
 {
     radiusOfBurst = 40;
     numberOfCreatedBullets++;
@@ -40,9 +42,17 @@ QRectF Bullet::boundingRect() const
 {
     if (!hasBurst)
     {
-        return QRectF(bulletCenter.x() - bulletRadius, bulletCenter.y() - bulletRadius,
-                      2 * bulletRadius, 2 * bulletRadius);
+        QPointF topLeft(bulletCenter.x() - 2 * bulletRadius, bulletCenter.y() - 2 * bulletRadius);
+        QPointF bottomRight(bulletCenter.x() + 2 * bulletRadius, bulletCenter.y() + 2 * bulletRadius);
+        return QRectF(topLeft, bottomRight);
     }
+}
+
+QPainterPath Bullet::shape() const
+{
+    QPainterPath painterPath;
+    painterPath.addRect(boundingRect());
+    return painterPath;
 }
 
 void Bullet::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -52,6 +62,7 @@ void Bullet::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
     pen.setWidth(2);
     painter->setPen(pen);
     painter->drawEllipse(bulletCenter, bulletRadius, bulletRadius);
+    painter->drawRect(boundingRect());
 }
 
 void Bullet::addYourselfToScene()
@@ -63,6 +74,7 @@ void Bullet::fly()
 {
     timer = new QTimer();
     connect(timer, SIGNAL(timeout()), this, SLOT(updatePosition()));
+    connect(timer, SIGNAL(timeout()), this, SLOT(updateStatus()));
     timer->start(msec);
 }
 
@@ -83,8 +95,26 @@ void Bullet::updatePosition()
         setVisible(false);
         timer->stop();
     }
+
     checkDistanceFromLandscape();
 
+}
+
+void Bullet::updateStatus()
+{
+    QList<QGraphicsItem *> collisions = collidingItems(Qt::IntersectsItemBoundingRect);
+    //std::cout << "Bullet " << id << " " << iteration << " :" << collisions.size() << "\n";
+
+    if (collisions.size() != 1 && !isReadyToBurst)
+    {
+        isReadyToBurst = true;
+        //disconnect(timer, SIGNAL(timeout()), this, SLOT(updateStatus()));
+    }
+
+    if (isReadyToBurst && collidingItems().size() > 0)
+    {
+        drawBurst();
+    }
 }
 
 void Bullet::checkDistanceFromLandscape()

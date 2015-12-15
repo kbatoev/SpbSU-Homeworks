@@ -4,7 +4,9 @@
 #include <QGraphicsScene>
 #include <QPen>
 #include <QPainter>
+#include <QPainterPath>
 #include <QObject>
+#include <QRectF>
 #include <QTimer>
 
 #include "burstable.h"
@@ -23,6 +25,7 @@ public:
 
     void drawBurst();
     QRectF boundingRect() const;
+    QPainterPath shape() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
     void addYourselfToScene();
@@ -32,6 +35,7 @@ public:
 
 public slots:
     void updatePosition();
+    void updateStatus();
 
 private:
     /// if distances is too small, calls method 'drawBurst'
@@ -52,5 +56,7 @@ private:
     qreal speed;
     QTimer *timer;
 
+    bool isReadyToBurst;
     Game *game;
+    int id;
 };

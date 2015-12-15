@@ -26,6 +26,6 @@ const qreal width = 7;
 const int widthOfFrame = 1000;
 const int heightOfFrame = 700;
 
-const int yCoordinateAdding = 150;
+const int yCoordinateAdding = 250;
 const int maxDistanceBetweenTwoYCoordinates = 70;
-const int moduleForYCoordinate = 500;
+const int moduleForYCoordinate = 450;
