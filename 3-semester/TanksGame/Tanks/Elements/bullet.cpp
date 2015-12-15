@@ -79,6 +79,7 @@ void Bullet::updatePosition()
     }
     else
     {
+        hasBurst = true;
         setVisible(false);
         timer->stop();
     }
@@ -91,7 +92,7 @@ void Bullet::checkDistanceFromLandscape()
     qreal x = bulletCenter.x();
     QPointF point = game->getLandscape()->getPointWithXCoordinate(x);
     qreal distance = countDistanceFromBulletCenter(point);
-    if (distance < bulletRadius)
+    if (distance < 2.0 * bulletRadius)
     {
         this->drawBurst();
     }
