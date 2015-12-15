@@ -19,10 +19,6 @@ Tank::~Tank()
 {
 }
 
-QGraphicsEllipseItem *Tank::getGeometry()
-{
-
-}
 
 QRectF Tank::boundingRect() const
 {

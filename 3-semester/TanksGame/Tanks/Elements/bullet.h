@@ -26,13 +26,17 @@ public:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
     void addYourselfToScene();
+
+    /// bullet starts flying
     void fly();
 
 public slots:
     void updatePosition();
 
 private:
+    /// if distances is too small, calls method 'drawBurst'
     void checkDistanceFromLandscape();
+    /// counts distance from point on Landscape
     qreal countDistanceFromBulletCenter(QPointF point);
 
 private:

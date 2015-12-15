@@ -10,11 +10,18 @@
 
 #include "../Constants/constants.h"
 
+
+/**
+ * @brief The Landscape class
+ * Generates points with Random
+ */
+
 class Landscape : public QGraphicsItem
 {
 public:
     Landscape();
     ~Landscape();
+
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 

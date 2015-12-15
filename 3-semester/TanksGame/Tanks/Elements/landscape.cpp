@@ -11,9 +11,6 @@ Landscape::~Landscape()
 
 QRectF Landscape::boundingRect() const
 {
-    //QPointF topLeft(0, 0);
-    //QPointF bottomRight(widthOfFrame, heightOfFrame);
-    //return QRectF(topLeft, bottomRight);
 }
 
 void Landscape::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
