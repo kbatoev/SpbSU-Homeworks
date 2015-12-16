@@ -31,21 +31,22 @@ Bullet::~Bullet()
 
 void Bullet::drawBurst()
 {
-    timer->stop();
-    hasBurst = true;
-    setVisible(false);
-    Burst *burst = new Burst(bulletCenter, game->getScene(), radiusOfBurst);
-    game->addBurst(burst);
+    if (isReadyToBurst && !hasBurst)
+    {
+        timer->stop();
+        hasBurst = true;
+        setVisible(false);
+        game->getScene()->removeItem(this);
+        Burst *burst = new Burst(bulletCenter, game->getScene(), radiusOfBurst);
+        game->addBurst(burst);
+    }
 }
 
 QRectF Bullet::boundingRect() const
 {
-    if (!hasBurst)
-    {
-        QPointF topLeft(bulletCenter.x() - 2 * bulletRadius, bulletCenter.y() - 2 * bulletRadius);
-        QPointF bottomRight(bulletCenter.x() + 2 * bulletRadius, bulletCenter.y() + 2 * bulletRadius);
-        return QRectF(topLeft, bottomRight);
-    }
+    QPointF topLeft(bulletCenter.x() - bulletRadius, bulletCenter.y() - bulletRadius);
+    QPointF bottomRight(bulletCenter.x() + bulletRadius, bulletCenter.y() + bulletRadius);
+    return QRectF(topLeft, bottomRight);
 }
 
 QPainterPath Bullet::shape() const
@@ -62,7 +63,7 @@ void Bullet::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
     pen.setWidth(2);
     painter->setPen(pen);
     painter->drawEllipse(bulletCenter, bulletRadius, bulletRadius);
-    painter->drawRect(boundingRect());
+    //painter->drawRect(boundingRect());
 }
 
 void Bullet::addYourselfToScene()
@@ -94,6 +95,7 @@ void Bullet::updatePosition()
         hasBurst = true;
         setVisible(false);
         timer->stop();
+        game->getScene()->removeItem(this);
     }
 
     checkDistanceFromLandscape();
@@ -102,19 +104,10 @@ void Bullet::updatePosition()
 
 void Bullet::updateStatus()
 {
-    QList<QGraphicsItem *> collisions = collidingItems(Qt::IntersectsItemBoundingRect);
+    //QList<QGraphicsItem *> collisions = game->getScene()->collidingItems(this);
     //std::cout << "Bullet " << id << " " << iteration << " :" << collisions.size() << "\n";
 
-    if (collisions.size() != 1 && !isReadyToBurst)
-    {
-        isReadyToBurst = true;
-        //disconnect(timer, SIGNAL(timeout()), this, SLOT(updateStatus()));
-    }
-
-    if (isReadyToBurst && collidingItems().size() > 0)
-    {
-        drawBurst();
-    }
+    isReadyToBurst = iteration > 7;
 }
 
 void Bullet::checkDistanceFromLandscape()
@@ -124,7 +117,7 @@ void Bullet::checkDistanceFromLandscape()
     qreal distance = countDistanceFromBulletCenter(point);
     if (distance < 2.0 * bulletRadius)
     {
-        this->drawBurst();
+        drawBurst();
     }
 }
 

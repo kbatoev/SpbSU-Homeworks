@@ -33,6 +33,7 @@ void Tank::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     painter->setPen(pen);
 
     painter->drawEllipse(center, radius, radius);
+    //painter->drawRect(boundingRect());
     drawGun(painter);
 }
 

@@ -8,6 +8,7 @@
 #include <QKeyEvent>
 #include <QTextStream>
 #include <QTimer>
+#include <QRectF>
 
 #include "Elements/landscape.h"
 #include "Elements/tank.h"

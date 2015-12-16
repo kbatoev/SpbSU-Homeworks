@@ -45,8 +45,32 @@ void Game::keyPressEvent(QKeyEvent *keyEvent)
 void Game::updateScene()
 {
     QList<QGraphicsItem* > listOfItems = scene->items();
+    QList<QRectF > rects;
     for (int i = 0; i < listOfItems.size(); i++)
     {
+        rects.append(listOfItems[i]->boundingRect());
+    }
+
+    for (int i = 0; i < rects.size(); i++)
+    {
+        for (int j = i + 1; j < rects.size(); j++)
+        {
+            if (rects[i].intersects(rects[j]))
+            {
+                Burstable *firstItem = dynamic_cast<Burstable *>(listOfItems[i]);
+                Burstable *secondItem = dynamic_cast<Burstable *>(listOfItems[j]);
+                if (firstItem)
+                    firstItem->drawBurst();
+                if (secondItem)
+                    secondItem->drawBurst();
+            }
+        }
+    }
+
+
+    for (int i = 0; i < listOfItems.size(); i++)
+    {
+        QRectF rect = listOfItems[i]->boundingRect();
         listOfItems[i]->update();
         scene->update();
     }
