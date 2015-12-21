@@ -117,6 +117,7 @@ void Bullet::checkDistanceFromLandscape()
     qreal distance = countDistanceFromBulletCenter(point);
     if (distance < 2.0 * bulletRadius)
     {
+        isReadyToBurst = true;
         drawBurst();
     }
 }
