@@ -1,11 +1,12 @@
 #include "gameview.h"
 
-GameView::GameView(QWidget *parent, Game *newGame) :
-    QWidget(parent)
+GameView::GameView(QWidget *widget) :
+    QMainWindow(widget)
 {
-    game = newGame;
-    graphicsView = new QGraphicsView(game->getScene());
-    graphicsView->show();
+    //game = new Game;
+    //graphicsView = new QGraphicsView(game->getScene());
+    //setCentralWidget(graphicsView);
+    //graphicsView->show();
 }
 
 GameView::~GameView()
@@ -14,7 +15,21 @@ GameView::~GameView()
     delete graphicsView;
 }
 
-void GameView::keyPressEvent(QKeyEvent *keyEvent)
-{
-    game->keyPressEvent(keyEvent);
-}
+//void GameView::keyPressEvent(QKeyEvent *keyEvent)
+//{
+//    game->keyPressEvent(keyEvent);
+//}
+
+//bool GameView::event(QEvent *event)
+//{
+//    int flag = 0;
+//    if (event->type() == QEvent::KeyPress)
+//    {
+//        int flag2 = 0;
+//    }
+//}
+
+//QGraphicsView *GameView::getGraphicsView() const
+//{
+//    return graphicsView;
+//}

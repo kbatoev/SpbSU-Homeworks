@@ -1,34 +1,33 @@
-#pragma once
+//#pragma once
 
-#include <QMainWindow>
-#include <QEvent>
+//#include <QMainWindow>
+//#include <QEvent>
 
-#include "game.h"
-#include "View/gameview.h"
+//#include "game.h"
 
-namespace Ui {
-class MainWindow;
-}
+//namespace Ui {
+//class MainWindow;
+//}
 
-/**
- * @brief The MainWindow class
- * The purpose of this class - to catch events
- */
+//
+// * @brief The MainWindow class
+// * The purpose of this class - to catch events
+// */
 
 
-class MainWindow : public QMainWindow
-{
-    Q_OBJECT
+//class MainWindow : public QMainWindow
+//{
+//    Q_OBJECT
 
-public:
-    explicit MainWindow(QWidget *parent = 0);
-    ~MainWindow();
+//public:
+//    explicit MainWindow(QWidget *parent = 0);
+//    ~MainWindow();
 
-    /// catches event and sends it to GameView
-    bool event(QEvent *qEvent);
+//    /// catches event and sends it to GameView
+//    bool event(QEvent *qEvent);
 
-private:
-    Ui::MainWindow *ui;
-    GameView *gameView;
-};
+//private:
+//    Ui::MainWindow *ui;
+//    GameView *gameView;
+//};
 

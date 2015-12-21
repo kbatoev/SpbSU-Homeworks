@@ -1,8 +1,8 @@
 #include "game.h"
 
-Game::Game()
+Game::Game(QMainWindow *parent)
 {
-    scene = new QGraphicsScene();
+    scene = new QGraphicsScene(parent);
     landscape = new Landscape();
     qreal x = startXCoordinate;
     tankPointOnScene = landscape->getPointWithXCoordinate(x) + QPointF(0, -tank->getRadius());

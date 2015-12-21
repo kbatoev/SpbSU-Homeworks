@@ -9,6 +9,7 @@
 #include <QTextStream>
 #include <QTimer>
 #include <QRectF>
+#include <QMainWindow>
 
 #include "Elements/landscape.h"
 #include "Elements/tank.h"
@@ -27,7 +28,7 @@ class Game : public QObject
 {
     Q_OBJECT
 public:
-    Game();
+    Game(QMainWindow *parent = 0);
     ~Game();
 
     /// delegates event to KeyController
