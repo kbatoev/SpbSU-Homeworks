@@ -49,5 +49,6 @@ void KeyController::handleKey(QKeyEvent *keyEvent)
         bullet->addYourselfToScene();
         bullet->fly();
     }
+
 }
 

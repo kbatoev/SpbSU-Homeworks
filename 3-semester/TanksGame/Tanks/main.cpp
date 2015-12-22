@@ -4,11 +4,17 @@
 #include <fstream>
 #include <ostream>
 
+#include "View/gameview.h"
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    MainWindow w;
-    w.show();
+    //a.installEventFilter();
+    //MainWindow w;
+    //w.show();
+
+    GameView view;
+    view.show();
 
     return a.exec();
 }

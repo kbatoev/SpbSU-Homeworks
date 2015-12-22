@@ -3,6 +3,10 @@
 Game::Game()
 {
     scene = new QGraphicsScene();
+    if (!scene->hasFocus())
+    {
+        scene->setFocus();
+    }
     landscape = new Landscape();
     qreal x = startXCoordinate;
     tankPointOnScene = landscape->getPointWithXCoordinate(x) + QPointF(0, -tank->getRadius());
@@ -44,6 +48,12 @@ void Game::keyPressEvent(QKeyEvent *keyEvent)
 
 void Game::updateScene()
 {
+    if (!scene->hasFocus())
+    {
+        QGraphicsItem *item = scene->focusItem();
+        scene->setFocus(Qt::ActiveWindowFocusReason);
+        scene->setFocusItem(landscape);
+    }
     QList<QGraphicsItem* > listOfItems = scene->items();
     QList<QRectF > rects;
     for (int i = 0; i < listOfItems.size(); i++)

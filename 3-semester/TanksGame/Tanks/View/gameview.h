@@ -3,6 +3,7 @@
 #include <QWidget>
 #include <QGraphicsView>
 #include <QMainWindow>
+#include <QGridLayout>
 
 #include "game.h"
 
@@ -14,13 +15,16 @@
 class GameView : public QWidget
 {
 public:
-    explicit GameView(QWidget *parent, Game *newGame);
+    GameView(QWidget *parent, Game *newGame);
+    GameView();
     ~GameView();
 
     /// delegates event to Game class
     void keyPressEvent(QKeyEvent *keyEvent);
+    bool event(QEvent *event);
 
 private:
     Game *game;
     QGraphicsView *graphicsView;
+    QGridLayout *gridLayout;
 };
