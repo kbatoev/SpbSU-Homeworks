@@ -6,17 +6,18 @@ GameView::GameView(QWidget *parent, Game *newGame) :
     game = newGame;
     graphicsView = new QGraphicsView(game->getScene());
     //graphicsView->show();
-    gridLayout = new QGridLayout;
-    gridLayout->addWidget(graphicsView, 0, 0, 5, 5);
-    this->setLayout(gridLayout);
-    this->show();
+    //gridLayout = new QGridLayout;
+    //gridLayout->addWidget(graphicsView, 0, 0, 5, 5);
+    //this->setLayout(gridLayout);
+    //this->show();
+    graphicsView->show();
 }
 
 GameView::GameView()
 {
     game = new Game();
     graphicsView = new QGraphicsView(game->getScene());
-    //graphicsView->show();
+    graphicsView->show();
 }
 
 GameView::~GameView()
@@ -35,5 +36,14 @@ bool GameView::event(QEvent *event)
     if (event->type() == QEvent::KeyPress)
     {
         int success = 1;
+    }
+}
+
+bool GameView::eventFilter(QObject *obj, QEvent *event)
+{
+    if (event->type() == QEvent::KeyPress)
+    {
+        int success = 1;
+        game->keyPressEvent(dynamic_cast<QKeyEvent *>(event));
     }
 }

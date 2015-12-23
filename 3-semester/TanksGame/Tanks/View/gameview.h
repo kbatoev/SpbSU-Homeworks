@@ -22,6 +22,7 @@ public:
     /// delegates event to Game class
     void keyPressEvent(QKeyEvent *keyEvent);
     bool event(QEvent *event);
+    bool eventFilter(QObject *obj, QEvent *event);
 
 private:
     Game *game;
