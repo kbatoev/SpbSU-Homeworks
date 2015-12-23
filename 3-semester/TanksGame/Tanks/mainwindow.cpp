@@ -14,13 +14,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->comboBox->setVisible(false);
     ui->portLineEdit->setVisible(false);
     ui->serverStatusLabel->setVisible(false);
-    //ui->graphicsView->setScene(game->getScene());
-
-    //ui->graphicsView->setVisible(false);
-    //ui->descriptionLabel->setText(tr("Keys:\nA - go left; D - go right; W,S - change gun's angle;"
-      //                               "Enter - make shot"));
-
-    //connect(ui->radioButton, SIGNAL(clicked(bool)), this, SLOT(makeInvisible()));
+    ui->connectButton->setVisible(false);
 
 }
 
@@ -34,11 +28,6 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
 {
     ui->graphicsView->setEnabled(false);
     game->keyPressEvent(event);
-}
-
-void MainWindow::makeInvisible()
-{
-    //ui->radioButton->setVisible(false);
 }
 
 void MainWindow::setServer()
@@ -57,5 +46,28 @@ void MainWindow::startConnection()
 {
     ui->serverRadio->setVisible(false);
     ui->clientRadio->setVisible(false);
-    ui->serverStatusLabel->setVisible(false);
+    if (isServer)
+    {
+        netConfiguration = new Server(this, ui->serverStatusLabel);
+        ui->serverStatusLabel->setVisible(true);
+    }
+    else
+    {
+        ui->comboBox->setVisible(true);
+        ui->portLineEdit->setVisible(true);
+        ui->connectButton->setVisible(true);
+    }
+}
+
+void MainWindow::startGame()
+{
+    if (isServer)
+    {
+        ui->serverStatusLabel->setVisible(false);
+        ui->graphicsView->setScene(game->getScene());
+    }
+    else
+    {
+
+    }
 }

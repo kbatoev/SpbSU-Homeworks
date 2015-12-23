@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += network core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -22,7 +22,8 @@ SOURCES += main.cpp\
     KeyController/keyController.cpp \
     Elements/bullet.cpp \
     Elements/burst.cpp \
-    Net/netconfiguration.cpp
+    Net/netconfiguration.cpp \
+    Net/server.cpp
 
 HEADERS  += mainwindow.h \
     game.h \
@@ -33,6 +34,7 @@ HEADERS  += mainwindow.h \
     Elements/bullet.h \
     Constants/constants.h \
     Elements/burst.h \
-    Net/netconfiguration.h
+    Net/netconfiguration.h \
+    Net/server.h
 
 FORMS    += mainwindow.ui

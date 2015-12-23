@@ -5,6 +5,7 @@
 
 #include "game.h"
 #include "Net/netconfiguration.h"
+#include "Net/server.h"
 
 namespace Ui {
 class MainWindow;
@@ -26,10 +27,11 @@ public:
     void keyPressEvent(QKeyEvent *event);
 
 private slots:
-    void makeInvisible();
     void setServer();
     void setClient();
+
     void startConnection();
+    void startGame();
 
 private:
     Ui::MainWindow *ui;

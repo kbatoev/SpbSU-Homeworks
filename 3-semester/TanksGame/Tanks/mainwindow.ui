@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>900</width>
-    <height>750</height>
+    <width>901</width>
+    <height>900</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -36,7 +36,7 @@
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout">
-     <item row="4" column="0">
+     <item row="5" column="0">
       <widget class="QGraphicsView" name="graphicsView">
        <property name="minimumSize">
         <size>
@@ -52,7 +52,7 @@
        </property>
       </widget>
      </item>
-     <item row="5" column="0">
+     <item row="6" column="0">
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
         <widget class="QPushButton" name="pushButton_2">
@@ -107,6 +107,13 @@
      </item>
      <item row="2" column="0">
       <widget class="QLineEdit" name="portLineEdit"/>
+     </item>
+     <item row="4" column="0">
+      <widget class="QPushButton" name="connectButton">
+       <property name="text">
+        <string>Connect</string>
+       </property>
+      </widget>
      </item>
     </layout>
    </widget>
