@@ -6,6 +6,15 @@ Landscape::Landscape()
     generateRandomLandscape();
 }
 
+Landscape::Landscape(QVector<QPointF> serverPoints)
+{
+    numberPoints = serverPoints.size() + 1;
+    for (int i = 0; i < serverPoints.size(); i++)
+    {
+        this->points.append(serverPoints.at(i));
+    }
+}
+
 Landscape::~Landscape()
 {
 }

@@ -31,26 +31,51 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>901</width>
+      <width>907</width>
       <height>751</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout">
-     <item row="0" column="0">
+     <item row="1" column="0">
       <widget class="QGraphicsView" name="graphicsView">
        <property name="minimumSize">
         <size>
-         <width>805</width>
+         <width>895</width>
          <height>605</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>805</width>
+         <width>895</width>
          <height>605</height>
         </size>
        </property>
       </widget>
+     </item>
+     <item row="2" column="0">
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QPushButton" name="pushButton_2">
+         <property name="text">
+          <string>PushButton</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton_3">
+         <property name="text">
+          <string>PushButton</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton">
+         <property name="text">
+          <string>PushButton</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
     </layout>
    </widget>

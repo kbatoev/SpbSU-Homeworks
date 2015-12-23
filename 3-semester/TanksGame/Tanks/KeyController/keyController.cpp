@@ -8,7 +8,7 @@ KeyController::KeyController(Game *game)
 
 void KeyController::handleKey(QKeyEvent *keyEvent)
 {
-    Tank *tank = game->getTank();
+    Tank *tank = game->getCurrentTank();
     Landscape *landscape = game->getLandscape();
 
     QPointF oldPoint = tank->getCenter();

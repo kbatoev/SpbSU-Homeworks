@@ -23,10 +23,7 @@ Bullet::Bullet(QPointF center, qreal angle, Game *game)
 
 Bullet::~Bullet()
 {
-    if (timer)
-    {
-        delete timer;
-    }
+    delete timer;
 }
 
 void Bullet::drawBurst()
@@ -39,6 +36,7 @@ void Bullet::drawBurst()
         game->getScene()->removeItem(this);
         Burst *burst = new Burst(bulletCenter, game->getScene(), radiusOfBurst);
         game->addBurst(burst);
+        game->setNextTank();
     }
 }
 
@@ -63,7 +61,6 @@ void Bullet::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
     pen.setWidth(2);
     painter->setPen(pen);
     painter->drawEllipse(bulletCenter, bulletRadius, bulletRadius);
-    //painter->drawRect(boundingRect());
 }
 
 void Bullet::addYourselfToScene()
@@ -104,9 +101,6 @@ void Bullet::updatePosition()
 
 void Bullet::updateStatus()
 {
-    //QList<QGraphicsItem *> collisions = game->getScene()->collidingItems(this);
-    //std::cout << "Bullet " << id << " " << iteration << " :" << collisions.size() << "\n";
-
     isReadyToBurst = iteration > 7;
 }
 

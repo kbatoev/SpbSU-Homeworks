@@ -1,13 +1,14 @@
 #include "tank.h"
 
-Tank::Tank(int xCoordiante, int yCoordinate) : Tank()
+Tank::Tank(int xCoordiante, int yCoordinate, QColor color) : Tank()
 {
     center = QPointF(xCoordiante, yCoordinate);
 }
 
-Tank::Tank(QPointF point) : Tank()
+Tank::Tank(QPointF point, QColor color) : Tank()
 {
     center = point;
+    pen.setColor(color);
 }
 
 Tank::Tank() : speed(10), gunAngle(-45.0)
@@ -27,8 +28,6 @@ QRectF Tank::boundingRect() const
 
 void Tank::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    QPen pen;
-    pen.setColor(Qt::yellow);
     pen.setWidth(4);
     painter->setPen(pen);
 

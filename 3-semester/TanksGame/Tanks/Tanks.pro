@@ -21,7 +21,8 @@ SOURCES += main.cpp\
     Elements/tank.cpp \
     KeyController/keyController.cpp \
     Elements/bullet.cpp \
-    Elements/burst.cpp
+    Elements/burst.cpp \
+    Net/netconfiguration.cpp
 
 HEADERS  += mainwindow.h \
     game.h \
@@ -31,6 +32,7 @@ HEADERS  += mainwindow.h \
     KeyController/keyController.h \
     Elements/bullet.h \
     Constants/constants.h \
-    Elements/burst.h
+    Elements/burst.h \
+    Net/netconfiguration.h
 
 FORMS    += mainwindow.ui

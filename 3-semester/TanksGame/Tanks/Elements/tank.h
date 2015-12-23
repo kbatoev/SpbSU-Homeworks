@@ -10,8 +10,8 @@
 class Tank : public Burstable
 {
 public:
-    Tank(int xCoordiante, int yCoordinate);
-    Tank(QPointF point);
+    Tank(int xCoordiante, int yCoordinate, QColor color);
+    Tank(QPointF point, QColor color);
     Tank();
     ~Tank();
 
@@ -35,6 +35,8 @@ public:
 
 private:
     void drawGun(QPainter *painter);
+
+    QPen pen;
 
     /// normalizes vector with the beginning - (0, 0) and end - point
     QPointF normalize(QPointF point);

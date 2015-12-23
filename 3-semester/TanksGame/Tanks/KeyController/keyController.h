@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QKeyEvent>
+#include <QObject>
 
 
 class Game;
@@ -11,8 +12,10 @@ class Game;
  *
  */
 
-class KeyController
+class KeyController : public QObject
 {
+    Q_OBJECT
+
 public:
     KeyController(Game *game);
 

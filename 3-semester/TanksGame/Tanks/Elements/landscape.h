@@ -20,6 +20,7 @@ class Landscape : public QGraphicsItem
 {
 public:
     Landscape();
+    Landscape(QVector<QPointF> serverPoints);
     ~Landscape();
 
     QRectF boundingRect() const;

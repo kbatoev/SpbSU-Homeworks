@@ -26,6 +26,7 @@
 class Game : public QObject
 {
     Q_OBJECT
+
 public:
     Game();
     ~Game();
@@ -42,16 +43,24 @@ public:
     Landscape *getLandscape() const;
     Tank *getTank() const;
 
+    Tank *getCurrentTank() const;
+    void setCurrentTank(int number);
+    void setNextTank();
+
+private:
+    void createTank(int xcoordinate, QColor color);
+
 public slots:
     void updateScene();
 
 private:
     QPointF tankPointOnScene;
+    int currentTankNumber;
 
     KeyController *keyController;
     QGraphicsScene *scene;
     Landscape *landscape;
-    Tank *tank;
+    QList<Tank *> tanks;
     QList<Bullet *> bullets;
     QList<Burst *> bursts;
     QTimer *gameTimer;

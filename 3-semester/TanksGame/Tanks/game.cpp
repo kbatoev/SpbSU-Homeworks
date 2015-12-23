@@ -8,15 +8,22 @@ Game::Game()
         scene->setFocus();
     }
     landscape = new Landscape();
-    qreal x = startXCoordinate;
-    tankPointOnScene = landscape->getPointWithXCoordinate(x) + QPointF(0, -tank->getRadius());
-    tank = new Tank(tankPointOnScene);
+
+    createTank(startXCoordinate1, Qt::blue);
+    createTank(startXCoordinate2, Qt::red);
+
+    setCurrentTank(0);
 
     keyController = new KeyController(this);
 
     scene->setSceneRect(0, 0, widthOfFrame, heightOfFrame);
     scene->addItem(landscape);
-    scene->addItem(tank);
+
+    for (int i = 0; i < tanks.size(); i++)
+    {
+        scene->addItem(tanks[i]);
+    }
+
 
     gameTimer = new QTimer();
     connect(gameTimer, SIGNAL(timeout()), this, SLOT(updateScene()));
@@ -34,6 +41,11 @@ Game::~Game()
         delete bursts[i];
     }
 
+    for (int i = 0; i < tanks.size(); i++)
+    {
+        delete tanks[i];
+    }
+
     delete landscape;
     delete scene;
     delete keyController;
@@ -48,12 +60,6 @@ void Game::keyPressEvent(QKeyEvent *keyEvent)
 
 void Game::updateScene()
 {
-    if (!scene->hasFocus())
-    {
-        QGraphicsItem *item = scene->focusItem();
-        scene->setFocus(Qt::ActiveWindowFocusReason);
-        scene->setFocusItem(landscape);
-    }
     QList<QGraphicsItem* > listOfItems = scene->items();
     QList<QRectF > rects;
     for (int i = 0; i < listOfItems.size(); i++)
@@ -70,9 +76,13 @@ void Game::updateScene()
                 Burstable *firstItem = dynamic_cast<Burstable *>(listOfItems[i]);
                 Burstable *secondItem = dynamic_cast<Burstable *>(listOfItems[j]);
                 if (firstItem)
+                {
                     firstItem->drawBurst();
+                }
                 if (secondItem)
+                {
                     secondItem->drawBurst();
+                }
             }
         }
     }
@@ -87,9 +97,25 @@ void Game::updateScene()
     scene->update();
 }
 
-Tank *Game::getTank() const
+Tank *Game::getCurrentTank() const
 {
-    return tank;
+    return tanks[currentTankNumber];
+}
+
+void Game::setCurrentTank(int number)
+{
+    currentTankNumber = number;
+}
+
+void Game::setNextTank()
+{
+    ++currentTankNumber %= tanks.size();
+}
+
+void Game::createTank(int xcoordinate, QColor color)
+{
+    tankPointOnScene = landscape->getPointWithXCoordinate(xcoordinate) + QPointF(0, -Tank::getRadius());
+    tanks.append(new Tank(tankPointOnScene, color));
 }
 
 Landscape *Game::getLandscape() const

@@ -8,6 +8,10 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->graphicsView->setScene(game->getScene());
+    ui->graphicsView->setFocus();
+    //ui->graphicsView->setVisible(false);
+    //ui->descriptionLabel->setText(tr("Keys:\nA - go left; D - go right; W,S - change gun's angle;"
+      //                               "Enter - make shot"));
 
 
 }
@@ -20,5 +24,6 @@ MainWindow::~MainWindow()
 
 void MainWindow::keyPressEvent(QKeyEvent *event)
 {
+    ui->graphicsView->setEnabled(false);
     game->keyPressEvent(event);
 }
