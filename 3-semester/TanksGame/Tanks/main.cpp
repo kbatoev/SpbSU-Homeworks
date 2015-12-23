@@ -8,13 +8,15 @@
 
 int main(int argc, char *argv[])
 {
+
     QApplication a(argc, argv);
-    //a.installEventFilter();
+    GameView *view = new GameView();
+    a.installEventFilter(view);
     //MainWindow w;
     //w.show();
 
-    GameView view;
-    view.show();
+
+    //view.show();
 
     return a.exec();
 }
