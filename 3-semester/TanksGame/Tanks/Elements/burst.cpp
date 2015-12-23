@@ -1,13 +1,14 @@
 #include "burst.h"
 
-Burst::Burst(QPointF center, QGraphicsScene *scene, int radius)
+Burst::Burst(QPointF center, QGraphicsScene *scene, int radius, int damage)
     : burstCenter(center),
       scene(scene),
       maxBurstRadius(radius),
       initialRadius(5),
       iteration(0),
       isOver(false),
-      timer(new QTimer())
+      timer(new QTimer()),
+      damage(damage)
 {
     connect(timer, SIGNAL(timeout()), this, SLOT(incrementIteration()));
     timer->start(msec);
@@ -40,6 +41,16 @@ void Burst::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
 
         painter->drawEllipse(burstCenter, initialRadius * iteration, initialRadius * iteration);
     }
+}
+
+void Burst::drawBurst(Burstable *reason)
+{
+
+}
+
+int Burst::makeDamage()
+{
+    return damage;
 }
 
 void Burst::updateStatusOfBurst()

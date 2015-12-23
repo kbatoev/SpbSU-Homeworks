@@ -3,6 +3,7 @@
 Tank::Tank(int xCoordiante, int yCoordinate, QColor color) : Tank()
 {
     center = QPointF(xCoordiante, yCoordinate);
+    pen.setColor(color);
 }
 
 Tank::Tank(QPointF point, QColor color) : Tank()
@@ -11,9 +12,14 @@ Tank::Tank(QPointF point, QColor color) : Tank()
     pen.setColor(color);
 }
 
-Tank::Tank() : speed(10), gunAngle(-45.0)
+Tank::Tank() :
+    speed(10),
+    gunAngle(-45.0),
+    hitpoints(30),
+    isJustDamaged(false),
+    damageTimer(new QTimer)
 {
-
+    connect(damageTimer, SIGNAL(timeout()), this, SLOT(readyToBeDamagedAgain()));
 }
 
 Tank::~Tank()
@@ -36,9 +42,24 @@ void Tank::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     drawGun(painter);
 }
 
-void Tank::drawBurst()
+void Tank::drawBurst(Burstable *reason)
 {
+    if (!isJustDamaged && reason->makeDamage())
+    {
+        hitpoints -= reason->makeDamage();
+        isJustDamaged = true;
+        damageTimer->start(intervalOfGettingDamage);
+    }
 
+    if (hitpoints <= 0)
+    {
+        this->setVisible(false);
+    }
+}
+
+int Tank::makeDamage()
+{
+    return 0;
 }
 
 int Tank::getSpeed() const
@@ -115,4 +136,10 @@ QPointF Tank::normalize(QPointF point)
 QPointF Tank::getStartPointForBullet() const
 {
     return startPointForBullet;
+}
+
+void Tank::readyToBeDamagedAgain()
+{
+    damageTimer->stop();
+    isJustDamaged = false;
 }

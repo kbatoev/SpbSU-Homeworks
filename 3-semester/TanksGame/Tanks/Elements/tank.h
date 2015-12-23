@@ -3,12 +3,15 @@
 #include <QGraphicsEllipseItem>
 #include <QPen>
 #include <QPainter>
+#include <QTimer>
 
 #include "burstable.h"
 #include "../Constants/constants.h"
 
-class Tank : public Burstable
+class Tank : public QObject, public Burstable
 {
+    Q_OBJECT
+
 public:
     Tank(int xCoordiante, int yCoordinate, QColor color);
     Tank(QPointF point, QColor color);
@@ -17,7 +20,8 @@ public:
 
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
-    void drawBurst();
+    void drawBurst(Burstable *reason = 0);
+    int makeDamage();
 
     /// Getters
     int getSpeed() const;
@@ -33,9 +37,11 @@ public:
     /// get the point in the end of Gun
     QPointF getStartPointForBullet() const;
 
+private slots:
+    void readyToBeDamagedAgain();
+
 private:
     void drawGun(QPainter *painter);
-
     QPen pen;
 
     /// normalizes vector with the beginning - (0, 0) and end - point
@@ -45,7 +51,10 @@ private:
     QPointF startPointForBullet;
     static const int radius = 15;
     int speed;
-
     qreal gunAngle;
+
+    int hitpoints;
+    bool isJustDamaged;
+    QTimer *damageTimer;
 };
 

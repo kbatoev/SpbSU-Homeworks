@@ -14,7 +14,8 @@ Bullet::Bullet(QPointF center, qreal angle, Game *game)
       timer(nullptr),
       isReadyToBurst(false),
       game(game),
-      id(numberOfCreatedBullets)
+      id(numberOfCreatedBullets),
+      damage(10)
 {
     radiusOfBurst = 40;
     numberOfCreatedBullets++;
@@ -26,7 +27,7 @@ Bullet::~Bullet()
     delete timer;
 }
 
-void Bullet::drawBurst()
+void Bullet::drawBurst(Burstable *reason)
 {
     if (isReadyToBurst && !hasBurst)
     {
@@ -34,10 +35,19 @@ void Bullet::drawBurst()
         hasBurst = true;
         setVisible(false);
         game->getScene()->removeItem(this);
-        Burst *burst = new Burst(bulletCenter, game->getScene(), radiusOfBurst);
+        Burst *burst = new Burst(bulletCenter, game->getScene(), radiusOfBurst, damage);
         game->addBurst(burst);
         game->setNextTank();
     }
+}
+
+int Bullet::makeDamage()
+{
+//    if (isReadyToBurst)
+//    {
+//        return damage;
+//    }
+    return 0;
 }
 
 QRectF Bullet::boundingRect() const
@@ -74,6 +84,11 @@ void Bullet::fly()
     connect(timer, SIGNAL(timeout()), this, SLOT(updatePosition()));
     connect(timer, SIGNAL(timeout()), this, SLOT(updateStatus()));
     timer->start(msec);
+}
+
+int Bullet::getDamage() const
+{
+    return damage;
 }
 
 void Bullet::updatePosition()

@@ -23,7 +23,8 @@ public:
     Bullet(QPointF center, qreal angle, Game *game);
     ~Bullet();
 
-    void drawBurst();
+    void drawBurst(Burstable *reason = 0);
+    int makeDamage();
     QRectF boundingRect() const Q_DECL_OVERRIDE;
     QPainterPath shape() const Q_DECL_OVERRIDE;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) Q_DECL_OVERRIDE;
@@ -32,6 +33,8 @@ public:
 
     /// bullet starts flying
     void fly();
+
+    int getDamage() const;
 
 public slots:
     void updatePosition();
@@ -59,4 +62,6 @@ private:
     bool isReadyToBurst;
     Game *game;
     int id;
+
+    int damage;
 };

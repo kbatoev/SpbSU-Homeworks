@@ -17,6 +17,7 @@ const qreal degreesInPI = 180.0;
 const qreal leftBorderForGun = 180.0;
 const qreal rightBorderForGun = 0.0;
 const qreal addingToAngle = 7.0;
+const int intervalOfGettingDamage = 1000;
 
 // for Gun
 const qreal length = 23;

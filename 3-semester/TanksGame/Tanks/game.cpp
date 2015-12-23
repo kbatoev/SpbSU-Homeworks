@@ -3,10 +3,6 @@
 Game::Game()
 {
     scene = new QGraphicsScene();
-    if (!scene->hasFocus())
-    {
-        scene->setFocus();
-    }
     landscape = new Landscape();
 
     createTank(startXCoordinate1, Qt::blue);
@@ -23,7 +19,6 @@ Game::Game()
     {
         scene->addItem(tanks[i]);
     }
-
 
     gameTimer = new QTimer();
     connect(gameTimer, SIGNAL(timeout()), this, SLOT(updateScene()));
@@ -75,13 +70,14 @@ void Game::updateScene()
             {
                 Burstable *firstItem = dynamic_cast<Burstable *>(listOfItems[i]);
                 Burstable *secondItem = dynamic_cast<Burstable *>(listOfItems[j]);
+
                 if (firstItem)
                 {
-                    firstItem->drawBurst();
+                    firstItem->drawBurst(secondItem);
                 }
                 if (secondItem)
                 {
-                    secondItem->drawBurst();
+                    secondItem->drawBurst(firstItem);
                 }
             }
         }
