@@ -17,13 +17,13 @@
    <property name="minimumSize">
     <size>
      <width>900</width>
-     <height>750</height>
+     <height>900</height>
     </size>
    </property>
    <property name="maximumSize">
     <size>
      <width>900</width>
-     <height>750</height>
+     <height>900</height>
     </size>
    </property>
    <widget class="QWidget" name="gridLayoutWidget">
@@ -32,11 +32,11 @@
       <x>0</x>
       <y>0</y>
       <width>907</width>
-      <height>751</height>
+      <height>812</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout">
-     <item row="1" column="0">
+     <item row="4" column="0">
       <widget class="QGraphicsView" name="graphicsView">
        <property name="minimumSize">
         <size>
@@ -52,7 +52,7 @@
        </property>
       </widget>
      </item>
-     <item row="2" column="0">
+     <item row="5" column="0">
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
         <widget class="QPushButton" name="pushButton_2">
@@ -76,6 +76,37 @@
         </widget>
        </item>
       </layout>
+     </item>
+     <item row="1" column="0">
+      <widget class="QComboBox" name="comboBox"/>
+     </item>
+     <item row="0" column="0">
+      <layout class="QHBoxLayout" name="inputLayout">
+       <item>
+        <widget class="QRadioButton" name="serverRadio">
+         <property name="text">
+          <string>Server</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QRadioButton" name="clientRadio">
+         <property name="text">
+          <string>Client</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="serverStatusLabel">
+       <property name="text">
+        <string>TextLabel</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLineEdit" name="portLineEdit"/>
      </item>
     </layout>
    </widget>

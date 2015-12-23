@@ -4,6 +4,7 @@
 #include <QEvent>
 
 #include "game.h"
+#include "Net/netconfiguration.h"
 
 namespace Ui {
 class MainWindow;
@@ -24,9 +25,17 @@ public:
 
     void keyPressEvent(QKeyEvent *event);
 
+private slots:
+    void makeInvisible();
+    void setServer();
+    void setClient();
+    void startConnection();
+
 private:
     Ui::MainWindow *ui;
     Game *game;
+    NetConfiguration *netConfiguration;
 
+    bool isServer;
 };
 
