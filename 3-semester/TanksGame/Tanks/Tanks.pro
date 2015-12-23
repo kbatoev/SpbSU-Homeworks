@@ -19,7 +19,6 @@ SOURCES += main.cpp\
     game.cpp \
     Elements/landscape.cpp \
     Elements/tank.cpp \
-    View/gameview.cpp \
     KeyController/keyController.cpp \
     Elements/bullet.cpp \
     Elements/burst.cpp
@@ -29,7 +28,6 @@ HEADERS  += mainwindow.h \
     Elements/landscape.h \
     Elements/burstable.h \
     Elements/tank.h \
-    View/gameview.h \
     KeyController/keyController.h \
     Elements/bullet.h \
     Constants/constants.h \

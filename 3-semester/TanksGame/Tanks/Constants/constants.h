@@ -23,9 +23,10 @@ const qreal width = 7;
 
 
 // for Landscape
-const int widthOfFrame = 1000;
-const int heightOfFrame = 700;
+const int widthOfFrame = 800;
+const int heightOfFrame = 600;
+const int interval = 40;
 
 const int yCoordinateAdding = 250;
 const int maxDistanceBetweenTwoYCoordinates = 70;
-const int moduleForYCoordinate = 450;
+const int moduleForYCoordinate = 350;

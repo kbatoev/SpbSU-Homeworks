@@ -1,7 +1,8 @@
 #include "landscape.h"
 
-Landscape::Landscape() : numberPoints(26)
+Landscape::Landscape()
 {
+    numberPoints = widthOfFrame / interval + 1;
     generateRandomLandscape();
 }
 

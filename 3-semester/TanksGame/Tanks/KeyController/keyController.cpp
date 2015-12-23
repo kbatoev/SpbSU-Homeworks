@@ -13,7 +13,7 @@ void KeyController::handleKey(QKeyEvent *keyEvent)
 
     QPointF oldPoint = tank->getCenter();
     QPointF point = oldPoint;
-    if (keyEvent->key() == Qt::Key_Left)
+    if (keyEvent->key() == Qt::Key_A)
     {
         point = landscape->getPointWithXCoordinate(oldPoint.x() - tank->getSpeed());
         point.setY(point.y() - tank->getRadius());
@@ -23,7 +23,7 @@ void KeyController::handleKey(QKeyEvent *keyEvent)
         }
     }
 
-    if (keyEvent->key() == Qt::Key_Right)
+    if (keyEvent->key() == Qt::Key_D)
     {
         point = landscape->getPointWithXCoordinate(oldPoint.x() + tank->getSpeed());
         point.setY(point.y() - tank->getRadius());
@@ -33,12 +33,12 @@ void KeyController::handleKey(QKeyEvent *keyEvent)
         }
     }
 
-    if (keyEvent->key() == Qt::Key_Up)
+    if (keyEvent->key() == Qt::Key_W)
     {
         tank->increaseAngle();
     }
 
-    if (keyEvent->key() == Qt::Key_Down)
+    if (keyEvent->key() == Qt::Key_S)
     {
         tank->decreaseAngle();
     }

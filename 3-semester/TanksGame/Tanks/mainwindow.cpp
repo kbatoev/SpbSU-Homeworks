@@ -3,23 +3,22 @@
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::MainWindow),
+    game(new Game)
 {
     ui->setupUi(this);
-    gameView = new GameView(parent, new Game());
+    ui->graphicsView->setScene(game->getScene());
+
+
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
-    delete gameView;
+    delete game;
 }
 
-bool MainWindow::event(QEvent *qEvent)
+void MainWindow::keyPressEvent(QKeyEvent *event)
 {
-    if (qEvent->type() == QEvent::KeyPress)
-    {
-        gameView->keyPressEvent(dynamic_cast<QKeyEvent *>(qEvent));
-        return true;
-    }
+    game->keyPressEvent(event);
 }

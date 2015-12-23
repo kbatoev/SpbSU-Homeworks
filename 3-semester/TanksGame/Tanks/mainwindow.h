@@ -4,7 +4,6 @@
 #include <QEvent>
 
 #include "game.h"
-#include "View/gameview.h"
 
 namespace Ui {
 class MainWindow;
@@ -12,7 +11,6 @@ class MainWindow;
 
 /**
  * @brief The MainWindow class
- * The purpose of this class - to catch events
  */
 
 
@@ -24,11 +22,11 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-    /// catches event and sends it to GameView
-    bool event(QEvent *qEvent);
+    void keyPressEvent(QKeyEvent *event);
 
 private:
     Ui::MainWindow *ui;
-    GameView *gameView;
+    Game *game;
+
 };
 
