@@ -45,5 +45,6 @@ private:
 
     bool isServer;
     bool myMove;
+
 };
 

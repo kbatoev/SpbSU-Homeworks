@@ -28,6 +28,8 @@ public:
     QPointF getPointWithXCoordinate(qreal x);
     QVector<QPointF> *getPoints() const;
 
+    int getNumberPoints() const;
+
 private:
     void generateRandomLandscape();
 

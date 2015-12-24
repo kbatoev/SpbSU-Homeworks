@@ -47,6 +47,8 @@ public:
     void setCurrentTank(int number);
     void setNextTank();
 
+    QString collectLandscapeInformation();
+    QString collectCurrentInformation();
 
 
 signals:

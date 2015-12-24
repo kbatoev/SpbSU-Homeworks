@@ -12,6 +12,7 @@ Client::Client(QWidget *parent, QLabel *serverStatusLabel, QComboBox *comboBox,
     connectButton(connectButton)
 {
     networkSession = nullptr;
+    hasNoMessages = true;
     // find out name of this machine
     QString name = QHostInfo::localHostName();
     if (!name.isEmpty())

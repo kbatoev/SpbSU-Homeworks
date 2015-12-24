@@ -73,7 +73,7 @@ void MainWindow::startGame()
     {
         ui->serverStatusLabel->setVisible(false);
         ui->graphicsView->setScene(game->getScene());
-        //netConfiguration->sendMessage(game);
+        netConfiguration->sendMessage(game->collectLandscapeInformation());
     }
 }
 

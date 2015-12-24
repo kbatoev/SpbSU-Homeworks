@@ -6,6 +6,7 @@ Server::Server(QWidget *parent, QLabel *serverStatusLabel, QComboBox *comboBox,
     parent(parent),
     serverStatusLabel(serverStatusLabel)
 {
+    hasNoMessages = false;
     sessionOpened();
     connect(tcpServer, SIGNAL(newConnection()), this, SLOT(sendLandscape()));
     //connect(tcpServer, SIGNAL(newConnection()), this->parent, SLOT(startGame()));

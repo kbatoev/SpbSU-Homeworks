@@ -108,6 +108,26 @@ void Game::setNextTank()
     ++currentTankNumber %= tanks.size();
 }
 
+QString Game::collectLandscapeInformation()
+{
+    const QString dot = ".";
+    QString information = "";
+    information += QString::number(landscape->getNumberPoints()) + dot;
+    QVector<QPointF> *points = landscape->getPoints();
+    for (int i = 0; i < points->size(); i++)
+    {
+        information += QString::number(points->at(i).x()) + dot;
+        information += QString::number(points->at(i).y()) + dot;
+    }
+    return information;
+}
+
+QString Game::collectCurrentInformation()
+{
+
+}
+
+
 void Game::createTank(int xcoordinate, QColor color)
 {
     tankPointOnScene = landscape->getPointWithXCoordinate(xcoordinate) + QPointF(0, -Tank::getRadius());

@@ -71,6 +71,11 @@ void Landscape::generateRandomLandscape()
     }
 }
 
+int Landscape::getNumberPoints() const
+{
+    return numberPoints;
+}
+
 QVector<QPointF> *Landscape::getPoints() const
 {
     return points;

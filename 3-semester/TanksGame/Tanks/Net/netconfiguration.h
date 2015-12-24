@@ -17,13 +17,15 @@ public:
     NetConfiguration(QWidget *parent = 0, QLabel *serverStatusLabel = 0, QComboBox *comboBox = 0,
                      QLineEdit *portLineEdit = 0, QPushButton *connectButton = 0);
 
+public slots:
+    void sendMessage(QString message);
+
 
 signals:
     void connected();
 
 protected slots:
     virtual void sessionOpened() = 0;
-    void sendMessage(QString message);
     void readMessage();
 
 protected:
@@ -31,5 +33,7 @@ protected:
     QTcpSocket *tcpSocket;
     QString receivedMessage;
     quint16 blockSize;
+
+    bool hasNoMessages;
 };
 

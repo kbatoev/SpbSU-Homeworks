@@ -25,8 +25,6 @@ private:
     QLineEdit *portLineEdit;
     QPushButton *connectButton;
 
-
-
     QString ipAddress;
     int port;
 };
