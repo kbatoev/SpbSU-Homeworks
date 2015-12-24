@@ -18,12 +18,18 @@ public:
                      QLineEdit *portLineEdit = 0, QPushButton *connectButton = 0);
 
 
+signals:
+    void connected();
+
 protected slots:
     virtual void sessionOpened() = 0;
     void sendMessage(QString message);
+    void readMessage();
 
 protected:
     QNetworkSession *networkSession;
     QTcpSocket *tcpSocket;
+    QString receivedMessage;
+    quint16 blockSize;
 };
 

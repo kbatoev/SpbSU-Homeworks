@@ -26,3 +26,17 @@ void NetConfiguration::sendMessage(QString message)
     //clientConnection->disconnectFromHost();
 }
 
+void NetConfiguration::readMessage()
+{
+    QDataStream in(tcpSocket);
+    in.setVersion(QDataStream::Qt_4_0);
+
+
+    in >> blockSize;
+
+    if (tcpSocket->bytesAvailable() < blockSize)
+        return;
+
+    in >> receivedMessage;
+}
+

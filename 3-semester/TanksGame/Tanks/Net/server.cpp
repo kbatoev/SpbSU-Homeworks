@@ -8,7 +8,7 @@ Server::Server(QWidget *parent, QLabel *serverStatusLabel, QComboBox *comboBox,
 {
     sessionOpened();
     connect(tcpServer, SIGNAL(newConnection()), this, SLOT(sendLandscape()));
-    connect(tcpServer, SIGNAL(newConnection()), this->parent, SLOT(startGame()));
+    //connect(tcpServer, SIGNAL(newConnection()), this->parent, SLOT(startGame()));
 }
 
 
@@ -49,4 +49,5 @@ void Server::sessionOpened()
 void Server::sendLandscape()
 {
     int success = 1;
+    emit connected();
 }

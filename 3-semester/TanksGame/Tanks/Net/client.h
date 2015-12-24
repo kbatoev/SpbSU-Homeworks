@@ -25,7 +25,7 @@ private:
     QLineEdit *portLineEdit;
     QPushButton *connectButton;
 
-    quint16 blockSize;
+
 
     QString ipAddress;
     int port;

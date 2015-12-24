@@ -48,6 +48,7 @@ void KeyController::handleKey(QKeyEvent *keyEvent)
         Bullet *bullet = new Bullet(tank->getCenter(), tank->getGunAngleInRadians(), game);
         bullet->addYourselfToScene();
         bullet->fly();
+        emit game->finishedMove();
     }
 
 }

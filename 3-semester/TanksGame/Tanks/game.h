@@ -47,6 +47,11 @@ public:
     void setCurrentTank(int number);
     void setNextTank();
 
+
+
+signals:
+    void finishedMove();
+
 private:
     void createTank(int xcoordinate, QColor color);
 

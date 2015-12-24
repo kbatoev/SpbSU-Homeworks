@@ -27,6 +27,7 @@ public:
 
     void keyPressEvent(QKeyEvent *event);
 
+
 private slots:
     void setServer();
     void setClient();
@@ -34,11 +35,15 @@ private slots:
     void startConnection();
     void startGame();
 
+    void finishMove();
+
+
 private:
     Ui::MainWindow *ui;
     Game *game;
     NetConfiguration *netConfiguration;
 
     bool isServer;
+    bool myMove;
 };
 

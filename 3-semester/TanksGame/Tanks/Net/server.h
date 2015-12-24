@@ -15,6 +15,8 @@ private slots:
     void sessionOpened();
     void sendLandscape();
 
+
+
 private:
     QTcpServer *tcpServer;
     QLabel *serverStatusLabel;

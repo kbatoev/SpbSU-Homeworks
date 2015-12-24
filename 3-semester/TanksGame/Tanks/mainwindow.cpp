@@ -10,6 +10,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->serverRadio, SIGNAL(clicked(bool)), this, SLOT(setServer()));
     connect(ui->clientRadio, SIGNAL(clicked(bool)), this, SLOT(setClient()));
 
+    connect(game, SIGNAL(finishedMove()), this, SLOT(finishMove()));
+
+
     ui->graphicsView->setFocus();
     ui->comboBox->setVisible(false);
     ui->portLineEdit->setVisible(false);
@@ -26,8 +29,9 @@ MainWindow::~MainWindow()
 
 void MainWindow::keyPressEvent(QKeyEvent *event)
 {
-    ui->graphicsView->setEnabled(false);
-    game->keyPressEvent(event);
+    //ui->graphicsView->setEnabled(false);
+    if (myMove)
+        game->keyPressEvent(event);
 }
 
 void MainWindow::setServer()
@@ -49,15 +53,18 @@ void MainWindow::startConnection()
     ui->serverStatusLabel->setVisible(true);
     if (isServer)
     {
+        myMove = true;
         netConfiguration = new Server(this, ui->serverStatusLabel);
     }
     else
     {
+        myMove = false;
         netConfiguration = new Client(this, ui->serverStatusLabel, ui->comboBox, ui->portLineEdit, ui->connectButton);
         ui->comboBox->setVisible(true);
         ui->portLineEdit->setVisible(true);
         ui->connectButton->setVisible(true);
     }
+    connect(netConfiguration, SIGNAL(connected()), this, SLOT(startGame()));
 }
 
 void MainWindow::startGame()
@@ -66,9 +73,11 @@ void MainWindow::startGame()
     {
         ui->serverStatusLabel->setVisible(false);
         ui->graphicsView->setScene(game->getScene());
+        //netConfiguration->sendMessage(game);
     }
-    else
-    {
+}
 
-    }
+void MainWindow::finishMove()
+{
+    myMove = false;
 }

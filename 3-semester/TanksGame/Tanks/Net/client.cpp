@@ -52,26 +52,6 @@ Client::Client(QWidget *parent, QLabel *serverStatusLabel, QComboBox *comboBox,
     connect(this->comboBox, SIGNAL(editTextChanged(QString)), this, SLOT(enableConnectButton()));
     connect(this->portLineEdit, SIGNAL(textChanged(QString)), this, SLOT(enableConnectButton()));
     connect(this->connectButton, SIGNAL(clicked()), this, SLOT(establishConnection()));
-
-//    QNetworkConfigurationManager manager;
-//    if (manager.capabilities() & QNetworkConfigurationManager::NetworkSessionRequired)
-//    {
-//        // If the saved network configuration is not currently discovered use the system default
-//        QNetworkConfiguration config = manager.configurationFromIdentifier(id);
-//        if ((config.state() & QNetworkConfiguration::Discovered) !=
-//            QNetworkConfiguration::Discovered)
-//        {
-//            config = manager.defaultConfiguration();
-//        }
-
-//        QNetworkConfiguration config = manager.defaultConfiguration();
-//        networkSession = new QNetworkSession(config, this);
-//        connect(networkSession, SIGNAL(opened()), this, SLOT(sessionOpened()));
-
-//        //getFortuneButton->setEnabled(false);
-//        //statusLabel->setText(tr("Opening network session."));
-//        networkSession->open();
-//    }
 }
 
 
