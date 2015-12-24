@@ -7,3 +7,22 @@ NetConfiguration::NetConfiguration(QWidget *parent, QLabel *serverStatusLabel, Q
 
 }
 
+void NetConfiguration::sendMessage(QString message)
+{
+    QByteArray block;
+    QDataStream out(&block, QIODevice::WriteOnly);
+    out.setVersion(QDataStream::Qt_4_0);
+
+    out << (quint16)0;
+    out << message;
+    out.device()->seek(0);
+    out << (quint16)(block.size() - sizeof(quint16));
+
+    //QTcpSocket *clientConnection = tcpServer->nextPendingConnection();
+
+    //connect(clientConnection, SIGNAL(disconnected()), clientConnection, SLOT(deleteLater()));
+
+    tcpSocket->write(block);
+    //clientConnection->disconnectFromHost();
+}
+

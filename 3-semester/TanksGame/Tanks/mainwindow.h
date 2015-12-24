@@ -6,6 +6,7 @@
 #include "game.h"
 #include "Net/netconfiguration.h"
 #include "Net/server.h"
+#include "Net/client.h"
 
 namespace Ui {
 class MainWindow;

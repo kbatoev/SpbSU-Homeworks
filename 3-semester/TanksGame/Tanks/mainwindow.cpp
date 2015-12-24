@@ -46,13 +46,14 @@ void MainWindow::startConnection()
 {
     ui->serverRadio->setVisible(false);
     ui->clientRadio->setVisible(false);
+    ui->serverStatusLabel->setVisible(true);
     if (isServer)
     {
         netConfiguration = new Server(this, ui->serverStatusLabel);
-        ui->serverStatusLabel->setVisible(true);
     }
     else
     {
+        netConfiguration = new Client(this, ui->serverStatusLabel, ui->comboBox, ui->portLineEdit, ui->connectButton);
         ui->comboBox->setVisible(true);
         ui->portLineEdit->setVisible(true);
         ui->connectButton->setVisible(true);

@@ -48,5 +48,5 @@ void Server::sessionOpened()
 
 void Server::sendLandscape()
 {
-
+    int success = 1;
 }

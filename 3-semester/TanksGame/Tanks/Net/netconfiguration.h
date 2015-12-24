@@ -6,6 +6,8 @@
 #include <QComboBox>
 #include <QLineEdit>
 #include <QPushButton>
+#include <QtWidgets>
+#include <QtNetwork>
 
 class NetConfiguration : public QDialog
 {
@@ -18,9 +20,10 @@ public:
 
 protected slots:
     virtual void sessionOpened() = 0;
-    //virtual void sendMessage() = 0;
+    void sendMessage(QString message);
 
 protected:
     QNetworkSession *networkSession;
+    QTcpSocket *tcpSocket;
 };
 

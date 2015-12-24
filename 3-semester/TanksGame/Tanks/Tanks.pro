@@ -23,7 +23,8 @@ SOURCES += main.cpp\
     Elements/bullet.cpp \
     Elements/burst.cpp \
     Net/netconfiguration.cpp \
-    Net/server.cpp
+    Net/server.cpp \
+    Net/client.cpp
 
 HEADERS  += mainwindow.h \
     game.h \
@@ -35,6 +36,7 @@ HEADERS  += mainwindow.h \
     Constants/constants.h \
     Elements/burst.h \
     Net/netconfiguration.h \
-    Net/server.h
+    Net/server.h \
+    Net/client.h
 
 FORMS    += mainwindow.ui
