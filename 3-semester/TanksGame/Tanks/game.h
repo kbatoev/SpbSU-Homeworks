@@ -28,7 +28,7 @@ class Game : public QObject
     Q_OBJECT
 
 public:
-    Game();
+    Game(QVector<QPointF> *serverPoints = 0);
     ~Game();
 
     /// delegates event to KeyController

@@ -1,17 +1,21 @@
 #include "landscape.h"
 
-Landscape::Landscape()
+Landscape::Landscape(QVector<QPointF> *serverPoints)
 {
-    numberPoints = widthOfFrame / interval + 1;
-    generateRandomLandscape();
-}
-
-Landscape::Landscape(QVector<QPointF> serverPoints)
-{
-    numberPoints = serverPoints.size() + 1;
-    for (int i = 0; i < serverPoints.size(); i++)
+    if (serverPoints)
     {
-        this->points.append(serverPoints.at(i));
+        points = new QVector<QPointF>;
+        numberPoints = serverPoints->size() + 1;
+        for (int i = 0; i < serverPoints->size(); i++)
+        {
+            this->points->append(serverPoints->at(i));
+        }
+    }
+    else
+    {
+        points = new QVector<QPointF>;
+        numberPoints = widthOfFrame / interval + 1;
+        generateRandomLandscape();
     }
 }
 
@@ -32,21 +36,21 @@ void Landscape::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
     painter->setPen(pen);
     for (int i = 1; i < numberPoints; i++)
     {
-        painter->drawLine(points[i - 1], points[i]);
+        painter->drawLine(points->at(i - 1), points->at(i));
     }
 }
 
 QPointF Landscape::getPointWithXCoordinate(qreal x)
 {
     int j = 1;
-    while (!(x >= points[j - 1].x() && x <= points[j].x()))
-    {
+    while (!(x >= points->at(j - 1).x() && x <= points->at(j).x()))
         j++;
-    }
-    QPointF firstPoint = points[j - 1];
-    QPointF secondPoint = points[j];
+
+    QPointF firstPoint = points->at(j - 1);
+    QPointF secondPoint = points->at(j);
     qreal y = firstPoint.y() +
             (secondPoint.y() - firstPoint.y()) * (x - firstPoint.x()) / (secondPoint.x() - firstPoint.x());
+
     return QPointF(x, y);
 }
 
@@ -54,14 +58,21 @@ void Landscape::generateRandomLandscape()
 {
     srand(time(0));
     int length = widthOfFrame / (numberPoints - 1);
-    points.resize(numberPoints);
+
+    QPointF currentPoint;
     for (int i = 0; i < numberPoints; ++i)
     {
-        points[i].setX(length * i);
+        currentPoint.setX(length * i);
         do
         {
-            points[i].setY(rand() % moduleForYCoordinate + yCoordinateAdding);
-        } while(i && abs(points[i - 1].y() - points[i].y()) > maxDistanceBetweenTwoYCoordinates);
+            currentPoint.setY(rand() % moduleForYCoordinate + yCoordinateAdding);
+        } while(i && abs(currentPoint.y() - points->at(i - 1).y()) > maxDistanceBetweenTwoYCoordinates);
+        points->append(currentPoint);
     }
+}
+
+QVector<QPointF> *Landscape::getPoints() const
+{
+    return points;
 }
 

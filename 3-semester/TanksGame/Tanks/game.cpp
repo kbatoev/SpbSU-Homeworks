@@ -1,9 +1,9 @@
 #include "game.h"
 
-Game::Game()
+Game::Game(QVector<QPointF> *serverPoints)
 {
     scene = new QGraphicsScene();
-    landscape = new Landscape();
+    landscape = new Landscape(serverPoints);
 
     createTank(startXCoordinate1, Qt::blue);
     createTank(startXCoordinate2, Qt::red);

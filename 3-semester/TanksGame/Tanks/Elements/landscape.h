@@ -19,18 +19,18 @@
 class Landscape : public QGraphicsItem
 {
 public:
-    Landscape();
-    Landscape(QVector<QPointF> serverPoints);
+    Landscape(QVector<QPointF> *serverPoints = 0);
     ~Landscape();
 
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
     QPointF getPointWithXCoordinate(qreal x);
+    QVector<QPointF> *getPoints() const;
 
 private:
     void generateRandomLandscape();
 
-    QVector<QPointF> points;
+    QVector<QPointF> *points;
     int numberPoints;
 };
