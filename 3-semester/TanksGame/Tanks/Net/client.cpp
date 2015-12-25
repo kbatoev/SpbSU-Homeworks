@@ -47,8 +47,6 @@ Client::Client(QWidget *parent, QLabel *serverStatusLabel, QComboBox *comboBox,
     statusLabel->setText(tr("This examples requires that you run the Server as well. "
                             "Choose ip address in comboBox and write port in LineEdit"));
 
-    tcpSocket = new QTcpSocket(this);
-
     this->connectButton->setEnabled(false);
     connect(this->comboBox, SIGNAL(editTextChanged(QString)), this, SLOT(enableConnectButton()));
     connect(this->portLineEdit, SIGNAL(textChanged(QString)), this, SLOT(enableConnectButton()));

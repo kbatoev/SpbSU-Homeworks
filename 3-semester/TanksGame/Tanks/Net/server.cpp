@@ -6,6 +6,7 @@ Server::Server(QWidget *parent, QLabel *serverStatusLabel, QComboBox *comboBox,
     parent(parent),
     serverStatusLabel(serverStatusLabel)
 {
+    tcpServer = new QTcpServer(this);
     hasNoMessages = false;
     sessionOpened();
     connect(tcpServer, SIGNAL(newConnection()), this, SLOT(sendLandscape()));
@@ -16,7 +17,6 @@ Server::Server(QWidget *parent, QLabel *serverStatusLabel, QComboBox *comboBox,
 
 void Server::sessionOpened()
 {
-    tcpServer = new QTcpServer(this);
     if (!tcpServer->listen())
     {
         QMessageBox::critical(this, tr("Tank Server"),
@@ -49,6 +49,6 @@ void Server::sessionOpened()
 
 void Server::sendLandscape()
 {
-    int success = 1;
+    tcpSocket = tcpServer->nextPendingConnection();
     emit connected();
 }

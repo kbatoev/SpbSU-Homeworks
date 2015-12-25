@@ -4,7 +4,8 @@ NetConfiguration::NetConfiguration(QWidget *parent, QLabel *serverStatusLabel, Q
                                    QLineEdit *portLineEdit, QPushButton *connectButton) :
     QDialog(parent)
 {
-
+    tcpSocket = new QTcpSocket(this);
+    connect(tcpSocket, SIGNAL(readyRead()), this, SLOT(readMessage()));
 }
 
 void NetConfiguration::sendMessage(QString message)
@@ -18,12 +19,7 @@ void NetConfiguration::sendMessage(QString message)
     out.device()->seek(0);
     out << (quint16)(block.size() - sizeof(quint16));
 
-    //QTcpSocket *clientConnection = tcpServer->nextPendingConnection();
-
-    //connect(clientConnection, SIGNAL(disconnected()), clientConnection, SLOT(deleteLater()));
-
     tcpSocket->write(block);
-    //clientConnection->disconnectFromHost();
 }
 
 void NetConfiguration::readMessage()
@@ -31,12 +27,12 @@ void NetConfiguration::readMessage()
     QDataStream in(tcpSocket);
     in.setVersion(QDataStream::Qt_4_0);
 
-
     in >> blockSize;
 
     if (tcpSocket->bytesAvailable() < blockSize)
         return;
 
     in >> receivedMessage;
+    int success = 1;
 }
 
