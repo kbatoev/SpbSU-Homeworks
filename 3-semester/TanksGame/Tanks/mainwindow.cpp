@@ -3,14 +3,11 @@
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow),
-    game(new Game)
+    ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     connect(ui->serverRadio, SIGNAL(clicked(bool)), this, SLOT(setServer()));
     connect(ui->clientRadio, SIGNAL(clicked(bool)), this, SLOT(setClient()));
-
-    connect(game, SIGNAL(finishedMove()), this, SLOT(finishMove()));
 
 
     ui->graphicsView->setFocus();
@@ -50,31 +47,54 @@ void MainWindow::startConnection()
 {
     ui->serverRadio->setVisible(false);
     ui->clientRadio->setVisible(false);
-    ui->serverStatusLabel->setVisible(true);
+
     if (isServer)
     {
+        setWindowTitle(tr("Server"));
         myMove = true;
         netConfiguration = new Server(this, ui->serverStatusLabel);
+        ui->serverStatusLabel->setVisible(true);
     }
     else
     {
+        setWindowTitle(tr("Client"));
         myMove = false;
         netConfiguration = new Client(this, ui->serverStatusLabel, ui->comboBox, ui->portLineEdit, ui->connectButton);
+
         ui->comboBox->setVisible(true);
         ui->portLineEdit->setVisible(true);
         ui->connectButton->setVisible(true);
     }
     connect(netConfiguration, SIGNAL(connected()), this, SLOT(startGame()));
+    connect(netConfiguration, SIGNAL(received(QString)), this, SLOT(makeOpponentMove(QString)));
+
 }
 
 void MainWindow::startGame()
 {
     if (isServer)
     {
+        game = new Game();
         ui->serverStatusLabel->setVisible(false);
         ui->graphicsView->setScene(game->getScene());
         netConfiguration->sendMessage(game->collectLandscapeInformation());
     }
+    else
+    {
+        ui->comboBox->setEnabled(false);
+        ui->portLineEdit->setEnabled(false);
+        ui->comboBox->setVisible(false);
+        ui->portLineEdit->setVisible(false);
+        ui->connectButton->setVisible(false);
+        game = new Game(Game::makeVectorFromQString(netConfiguration->getReceivedMessage()));
+        ui->graphicsView->setScene(game->getScene());
+    }
+    connect(game, SIGNAL(finishedMove()), this, SLOT(finishMove()));
+}
+
+void MainWindow::makeOpponentMove(QString message)
+{
+    int success = 1;
 }
 
 void MainWindow::finishMove()

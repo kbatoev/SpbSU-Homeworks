@@ -13,6 +13,7 @@ public:
 
 private slots:
     void sessionOpened();
+    void dealWithMessage(QString message);
     void sendLandscape();
 
 

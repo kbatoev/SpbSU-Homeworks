@@ -30,8 +30,11 @@ public:
 
     int getNumberPoints() const;
 
+    static QVector<QPointF> *makeVectorFromQString(QString message);
+
 private:
     void generateRandomLandscape();
+    static QString readUntilDot(QString message, int &startIndex);
 
     QVector<QPointF> *points;
     int numberPoints;

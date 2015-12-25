@@ -7,8 +7,9 @@ Server::Server(QWidget *parent, QLabel *serverStatusLabel, QComboBox *comboBox,
     serverStatusLabel(serverStatusLabel)
 {
     tcpServer = new QTcpServer(this);
-    hasNoMessages = false;
+
     sessionOpened();
+
     connect(tcpServer, SIGNAL(newConnection()), this, SLOT(sendLandscape()));
     //connect(tcpServer, SIGNAL(newConnection()), this->parent, SLOT(startGame()));
 }
@@ -45,6 +46,11 @@ void Server::sessionOpened()
                             "Run the Client now.")
                          .arg(ipAddress).arg(tcpServer->serverPort()));
 
+}
+
+void Server::dealWithMessage(QString message)
+{
+    emit received(message);
 }
 
 void Server::sendLandscape()

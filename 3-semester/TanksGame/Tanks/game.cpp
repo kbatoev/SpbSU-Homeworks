@@ -47,6 +47,11 @@ Game::~Game()
     delete gameTimer;
 }
 
+QVector<QPointF> *Game::makeVectorFromQString(QString message)
+{
+    return Landscape::makeVectorFromQString(message);
+}
+
 void Game::keyPressEvent(QKeyEvent *keyEvent)
 {
     keyController->handleKey(keyEvent);

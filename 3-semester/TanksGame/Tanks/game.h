@@ -31,6 +31,8 @@ public:
     Game(QVector<QPointF> *serverPoints = 0);
     ~Game();
 
+    static QVector<QPointF> *makeVectorFromQString(QString message);
+
     /// delegates event to KeyController
     void keyPressEvent(QKeyEvent *keyEvent);
 

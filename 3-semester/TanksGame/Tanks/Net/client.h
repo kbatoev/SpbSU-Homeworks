@@ -15,9 +15,9 @@ public:
 
 private slots:
     void sessionOpened();
+    void dealWithMessage(QString message);
     void enableConnectButton();
     void establishConnection();
-    void establishedConnection();
 
 private:
     QLabel *statusLabel;

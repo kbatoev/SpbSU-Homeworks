@@ -2,7 +2,8 @@
 
 NetConfiguration::NetConfiguration(QWidget *parent, QLabel *serverStatusLabel, QComboBox *comboBox,
                                    QLineEdit *portLineEdit, QPushButton *connectButton) :
-    QDialog(parent)
+    QDialog(parent),
+    isWaitingForFirstMessage(false)
 {
     tcpSocket = new QTcpSocket(this);
     connect(tcpSocket, SIGNAL(readyRead()), this, SLOT(readMessage()));
@@ -33,6 +34,11 @@ void NetConfiguration::readMessage()
         return;
 
     in >> receivedMessage;
-    int success = 1;
+    emit dealWithMessage(receivedMessage);
+}
+
+QString NetConfiguration::getReceivedMessage() const
+{
+    return receivedMessage;
 }
 

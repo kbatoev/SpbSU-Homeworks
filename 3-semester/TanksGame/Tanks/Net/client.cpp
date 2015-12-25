@@ -6,13 +6,13 @@
 
 Client::Client(QWidget *parent, QLabel *serverStatusLabel, QComboBox *comboBox,
                QLineEdit *portLineEdit, QPushButton *connectButton) :
-    statusLabel(serverStatusLabel),
     comboBox(comboBox),
     portLineEdit(portLineEdit),
     connectButton(connectButton)
 {
     networkSession = nullptr;
-    hasNoMessages = true;
+    isWaitingForFirstMessage = true;
+
     // find out name of this machine
     QString name = QHostInfo::localHostName();
     if (!name.isEmpty())
@@ -44,9 +44,6 @@ Client::Client(QWidget *parent, QLabel *serverStatusLabel, QComboBox *comboBox,
 
     this->portLineEdit->setValidator(new QIntValidator(1, 65535, this));
 
-    statusLabel->setText(tr("This examples requires that you run the Server as well. "
-                            "Choose ip address in comboBox and write port in LineEdit"));
-
     this->connectButton->setEnabled(false);
     connect(this->comboBox, SIGNAL(editTextChanged(QString)), this, SLOT(enableConnectButton()));
     connect(this->portLineEdit, SIGNAL(textChanged(QString)), this, SLOT(enableConnectButton()));
@@ -57,6 +54,22 @@ Client::Client(QWidget *parent, QLabel *serverStatusLabel, QComboBox *comboBox,
 void Client::sessionOpened()
 {
 
+}
+
+void Client::dealWithMessage(QString message)
+{
+    if (isWaitingForFirstMessage)
+    {
+        isWaitingForFirstMessage = false;
+        ipAddress = comboBox->currentText();
+        port = portLineEdit->text().toInt();
+
+        emit connected();
+    }
+    else
+    {
+        emit received(message);
+    }
 }
 
 void Client::enableConnectButton()
@@ -72,19 +85,5 @@ void Client::establishConnection()
     blockSize = 0;
     tcpSocket->connectToHost(comboBox->currentText(), portLineEdit->text().toInt());
 }
-
-void Client::establishedConnection()
-{
-    ipAddress = comboBox->currentText();
-    port = portLineEdit->text().toInt();
-
-    comboBox->setEnabled(false);
-    portLineEdit->setEnabled(false);
-
-    comboBox->setVisible(false);
-    portLineEdit->setVisible(false);
-    connectButton->setVisible(false);
-}
-
 
 
