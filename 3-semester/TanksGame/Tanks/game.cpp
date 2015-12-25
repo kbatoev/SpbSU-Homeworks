@@ -115,21 +115,39 @@ void Game::setNextTank()
 
 QString Game::collectLandscapeInformation()
 {
-    const QString dot = ".";
     QString information = "";
-    information += QString::number(landscape->getNumberPoints()) + dot;
+    information += QString::number(landscape->getNumberPoints()) + separator;
     QVector<QPointF> *points = landscape->getPoints();
     for (int i = 0; i < points->size(); i++)
     {
-        information += QString::number(points->at(i).x()) + dot;
-        information += QString::number(points->at(i).y()) + dot;
+        information += QString::number(points->at(i).x()) + separator;
+        information += QString::number(points->at(i).y()) + separator;
     }
     return information;
 }
 
 QString Game::collectCurrentInformation()
 {
+    QString result = "";
+    Tank *currentTank = getCurrentTank();
+    QPointF center = currentTank->getCenter();
+    result += QString::number(center.x()) + separator;
+    result += QString::number(center.y()) + separator;
+    qreal angle = currentTank->getGunAngle();
+    result += QString::number(angle) + separator;
 
+    return result;
+}
+
+void Game::setCurrentInformation(QString message)
+{
+    Tank *currentTank = getCurrentTank();
+    int index = 0;
+    qreal x = Landscape::readUntilSeparator(message, index).toFloat();
+    qreal y = Landscape::readUntilSeparator(message, ++index).toFloat();
+    qreal angle = Landscape::readUntilSeparator(message, ++index).toFloat();
+    currentTank->setCenter(QPointF(x, y));
+    currentTank->setGunAngle(angle);
 }
 
 

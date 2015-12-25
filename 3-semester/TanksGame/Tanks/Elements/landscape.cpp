@@ -80,20 +80,20 @@ QVector<QPointF> *Landscape::makeVectorFromQString(QString message)
 {
     QVector<QPointF> *resultPoints = new QVector<QPointF>;
     int currentIndex = 0;
-    int size = readUntilDot(message, currentIndex).toInt();
+    int size = readUntilSeparator(message, currentIndex).toInt();
     for (int i = 0; i < size; i++)
     {
-        float x = readUntilDot(message, ++currentIndex).toFloat();
-        float y = readUntilDot(message, ++currentIndex).toFloat();
+        float x = readUntilSeparator(message, ++currentIndex).toFloat();
+        float y = readUntilSeparator(message, ++currentIndex).toFloat();
         resultPoints->append(QPointF(x, y));
     }
     return resultPoints;
 }
 
-QString Landscape::readUntilDot(QString message, int &startIndex)
+QString Landscape::readUntilSeparator(QString message, int &startIndex)
 {
     QString result = "";
-    while (message.at(startIndex) != QChar('.'))
+    while (message.at(startIndex) != separator)
     {
         result.append(message.at(startIndex++));
     }

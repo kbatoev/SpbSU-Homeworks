@@ -43,7 +43,6 @@ public:
     /// if needed returns private fields
     QGraphicsScene *getScene() const;
     Landscape *getLandscape() const;
-    Tank *getTank() const;
 
     Tank *getCurrentTank() const;
     void setCurrentTank(int number);
@@ -51,6 +50,8 @@ public:
 
     QString collectLandscapeInformation();
     QString collectCurrentInformation();
+
+    void setCurrentInformation(QString message);
 
 
 signals:

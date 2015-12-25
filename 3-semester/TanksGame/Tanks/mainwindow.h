@@ -2,11 +2,13 @@
 
 #include <QMainWindow>
 #include <QEvent>
+#include <QTimer>
 
 #include "game.h"
 #include "Net/netconfiguration.h"
 #include "Net/server.h"
 #include "Net/client.h"
+#include "Constants/constants.h"
 
 namespace Ui {
 class MainWindow;
@@ -35,6 +37,7 @@ private slots:
     void startConnection();
     void startGame();
     void makeOpponentMove(QString message);
+    void sendMessage();
 
     void finishMove();
 
@@ -47,5 +50,6 @@ private:
     bool isServer;
     bool myMove;
 
+    QTimer *messageTransferTimer;
 };
 

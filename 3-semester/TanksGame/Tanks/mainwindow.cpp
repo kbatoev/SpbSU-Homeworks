@@ -3,14 +3,15 @@
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::MainWindow),
+    messageTransferTimer(new QTimer)
 {
     ui->setupUi(this);
     connect(ui->serverRadio, SIGNAL(clicked(bool)), this, SLOT(setServer()));
     connect(ui->clientRadio, SIGNAL(clicked(bool)), this, SLOT(setClient()));
 
-
     ui->graphicsView->setFocus();
+
     ui->comboBox->setVisible(false);
     ui->portLineEdit->setVisible(false);
     ui->serverStatusLabel->setVisible(false);
@@ -22,11 +23,11 @@ MainWindow::~MainWindow()
 {
     delete ui;
     delete game;
+    delete messageTransferTimer;
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *event)
 {
-    //ui->graphicsView->setEnabled(false);
     if (myMove)
         game->keyPressEvent(event);
 }
@@ -90,11 +91,22 @@ void MainWindow::startGame()
         ui->graphicsView->setScene(game->getScene());
     }
     connect(game, SIGNAL(finishedMove()), this, SLOT(finishMove()));
+    connect(messageTransferTimer, SIGNAL(timeout()), this, SLOT(sendMessage()));
+    messageTransferTimer->start(msec);
 }
 
 void MainWindow::makeOpponentMove(QString message)
 {
-    int success = 1;
+    game->setCurrentInformation(message);
+}
+
+void MainWindow::sendMessage()
+{
+    if (myMove)
+    {
+        QString message = game->collectCurrentInformation();
+        netConfiguration->sendMessage(message);
+    }
 }
 
 void MainWindow::finishMove()

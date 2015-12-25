@@ -37,6 +37,9 @@ public:
     /// get the point in the end of Gun
     QPointF getStartPointForBullet() const;
 
+    qreal getGunAngle() const;
+    void setGunAngle(const qreal &value);
+
 private slots:
     void readyToBeDamagedAgain();
 

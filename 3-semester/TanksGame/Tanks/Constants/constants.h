@@ -8,6 +8,7 @@ const qreal PI = 3.141592653;
 // for Game
 const qreal startXCoordinate1 = 100;
 const qreal startXCoordinate2 = 600;
+const QChar separator = ';';
 
 // for Bullet
 const qreal periodOfSettingPositionOfBullet = 8.0;

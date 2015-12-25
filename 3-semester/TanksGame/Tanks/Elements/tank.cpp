@@ -133,6 +133,16 @@ QPointF Tank::normalize(QPointF point)
     return QPointF(x / length, y / length);
 }
 
+qreal Tank::getGunAngle() const
+{
+    return gunAngle;
+}
+
+void Tank::setGunAngle(const qreal &value)
+{
+    gunAngle = value;
+}
+
 QPointF Tank::getStartPointForBullet() const
 {
     return startPointForBullet;
