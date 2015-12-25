@@ -22,8 +22,8 @@ public:
     QString getReceivedMessage() const;
 
 protected slots:
-    virtual void sessionOpened() = 0;
     virtual void dealWithMessage(QString message) = 0;
+    virtual void establishedConnection() = 0;
     void readMessage();
 
 signals:
@@ -31,7 +31,6 @@ signals:
     void received(QString message);
 
 protected:
-    QNetworkSession *networkSession;
     QTcpSocket *tcpSocket;
     QString receivedMessage;
     quint16 blockSize;

@@ -10,7 +10,6 @@ Client::Client(QWidget *parent, QLabel *serverStatusLabel, QComboBox *comboBox,
     portLineEdit(portLineEdit),
     connectButton(connectButton)
 {
-    networkSession = nullptr;
     isWaitingForFirstMessage = true;
 
     // find out name of this machine
@@ -50,21 +49,12 @@ Client::Client(QWidget *parent, QLabel *serverStatusLabel, QComboBox *comboBox,
     connect(this->connectButton, SIGNAL(clicked()), this, SLOT(establishConnection()));
 }
 
-
-void Client::sessionOpened()
-{
-
-}
-
 void Client::dealWithMessage(QString message)
 {
     if (isWaitingForFirstMessage)
     {
         isWaitingForFirstMessage = false;
-        ipAddress = comboBox->currentText();
-        port = portLineEdit->text().toInt();
-
-        emit connected();
+        establishedConnection();
     }
     else
     {
@@ -72,11 +62,16 @@ void Client::dealWithMessage(QString message)
     }
 }
 
+void Client::establishedConnection()
+{
+    ipAddress = comboBox->currentText();
+    port = portLineEdit->text().toInt();
+    emit connected();
+}
+
 void Client::enableConnectButton()
 {
-    connectButton->setEnabled((!networkSession || networkSession->isOpen()) &&
-                              !comboBox->currentText().isEmpty() &&
-                              !portLineEdit->text().isEmpty());
+    connectButton->setEnabled(!comboBox->currentText().isEmpty() && !portLineEdit->text().isEmpty());
 }
 
 void Client::establishConnection()

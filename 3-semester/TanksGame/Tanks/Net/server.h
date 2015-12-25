@@ -10,11 +10,13 @@ class Server : public NetConfiguration
 public:
     Server(QWidget *parent = 0, QLabel *serverStatusLabel = 0, QComboBox *comboBox = 0,
            QLineEdit *portLineEdit = 0, QPushButton *connectButton = 0);
+    ~Server();
 
 private slots:
-    void sessionOpened();
     void dealWithMessage(QString message);
-    void sendLandscape();
+    void establishedConnection();
+
+    void sessionOpened();
 
 
 
@@ -22,7 +24,6 @@ private:
     QTcpServer *tcpServer;
     QLabel *serverStatusLabel;
     QString ipAddress;
-    QWidget *parent;
 
 };
 

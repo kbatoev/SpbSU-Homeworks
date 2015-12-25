@@ -3,18 +3,19 @@
 Server::Server(QWidget *parent, QLabel *serverStatusLabel, QComboBox *comboBox,
                QLineEdit *portLineEdit, QPushButton *connectButton) :
     NetConfiguration(parent),
-    parent(parent),
     serverStatusLabel(serverStatusLabel)
 {
     tcpServer = new QTcpServer(this);
 
     sessionOpened();
 
-    connect(tcpServer, SIGNAL(newConnection()), this, SLOT(sendLandscape()));
-    //connect(tcpServer, SIGNAL(newConnection()), this->parent, SLOT(startGame()));
+    connect(tcpServer, SIGNAL(newConnection()), this, SLOT(establishedConnection()));
 }
 
-
+Server::~Server()
+{
+    delete tcpServer;
+}
 
 void Server::sessionOpened()
 {
@@ -53,7 +54,7 @@ void Server::dealWithMessage(QString message)
     emit received(message);
 }
 
-void Server::sendLandscape()
+void Server::establishedConnection()
 {
     tcpSocket = tcpServer->nextPendingConnection();
     emit connected();
