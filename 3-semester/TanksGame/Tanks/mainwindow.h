@@ -29,7 +29,6 @@ public:
 
     void keyPressEvent(QKeyEvent *event);
 
-
 private slots:
     void setServer();
     void setClient();

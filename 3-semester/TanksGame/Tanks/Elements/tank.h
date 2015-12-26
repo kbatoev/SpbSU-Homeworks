@@ -8,6 +8,7 @@
 #include "burstable.h"
 #include "../Constants/constants.h"
 #include "bullet.h"
+#include "lightbullet.h"
 
 class Game;
 

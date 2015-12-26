@@ -19,7 +19,9 @@ class Game;
 class Bullet : public QObject, public Burstable
 {
     Q_OBJECT
+
 public:
+    Bullet();
     Bullet(QPointF center, qreal angle, Game *game);
     ~Bullet();
 
@@ -40,16 +42,13 @@ public slots:
     void updatePosition();
     void updateStatus();
 
-private:
+protected:
     /// if distances is too small, calls method 'drawBurst'
     void checkDistanceFromLandscape();
     /// counts distance from point on Landscape
     qreal countDistanceFromBulletCenter(QPointF point);
 
-private:
-    static int numberOfCreatedBullets;
-
-private:
+protected:
     QPointF bulletCenter;
     QPointF initialCenter;
     int iteration;
@@ -61,7 +60,6 @@ private:
 
     bool isReadyToBurst;
     Game *game;
-    int id;
 
     int damage;
 };

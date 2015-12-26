@@ -99,7 +99,7 @@ void Tank::decreaseAngle()
 
 void Tank::shoot()
 {
-    Bullet *bullet = new Bullet(getCenter(), getGunAngleInRadians(), game);
+    Bullet *bullet = new LightBullet(getCenter(), getGunAngleInRadians(), game);
     bullet->addYourselfToScene();
     bullet->fly();
 }

@@ -1,24 +1,25 @@
 #include "bullet.h"
 #include "game.h"
 
-int Bullet::numberOfCreatedBullets = 0;
+Bullet::Bullet()
+{
+
+}
 
 Bullet::Bullet(QPointF center, qreal angle, Game *game)
-    : bulletCenter(center),
-      initialCenter(center),
-      iteration(0),
-      bulletRadius(5),
-      coefficient(4.0),
-      angle(angle),
-      speed(55),
-      timer(nullptr),
-      isReadyToBurst(false),
-      game(game),
-      id(numberOfCreatedBullets),
-      damage(10)
 {
+    bulletCenter = center;
+    initialCenter= center;
+    iteration = 0;
+    bulletRadius = 5;
+    coefficient = 4.0;
+    this->angle = angle;
+    speed = 55;
+    timer = nullptr;
+    isReadyToBurst = false;
+    this->game = game;
+    damage = 10;
     radiusOfBurst = 40;
-    numberOfCreatedBullets++;
     this->game->addBullet(this);
 }
 
@@ -37,17 +38,11 @@ void Bullet::drawBurst(Burstable *reason)
         game->getScene()->removeItem(this);
         Burst *burst = new Burst(bulletCenter, game->getScene(), radiusOfBurst, damage);
         game->addBurst(burst);
-        //game->setNextTank();
-        //game->finishedMove();
     }
 }
 
 int Bullet::makeDamage()
 {
-//    if (isReadyToBurst)
-//    {
-//        return damage;
-//    }
     return 0;
 }
 
