@@ -142,7 +142,6 @@ QString Game::collectCurrentInformation()
     result += QString::number(hasShot) + separator;
     if (hasShot)
     {
-        setNextTank();
         emit finishedMove();
     }
 
@@ -163,7 +162,6 @@ void Game::setCurrentInformation(QString message)
     if (hasShot)
     {
         currentTank->shoot();
-        setNextTank();
         emit finishedMove();
     }
 }

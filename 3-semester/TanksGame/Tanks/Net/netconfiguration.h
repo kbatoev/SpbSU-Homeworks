@@ -33,6 +33,7 @@ signals:
 protected:
     QTcpSocket *tcpSocket;
     QString receivedMessage;
+    QString lastSentMessage;
     quint16 blockSize;
 
     bool isWaitingForFirstMessage;

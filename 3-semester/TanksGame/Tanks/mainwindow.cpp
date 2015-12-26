@@ -99,8 +99,10 @@ void MainWindow::startGame()
 
 void MainWindow::makeOpponentMove(QString message)
 {
-    if (!myMove)
-        game->setCurrentInformation(message);
+    int size = message.size();
+    if (message.at(size - 2) == '1')
+        int success = 1;
+    game->setCurrentInformation(message);
 }
 
 void MainWindow::sendMessage()
@@ -115,4 +117,5 @@ void MainWindow::sendMessage()
 void MainWindow::changePlayer()
 {
     myMove = !myMove;
+    game->setNextTank();
 }

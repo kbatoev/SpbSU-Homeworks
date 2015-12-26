@@ -5,22 +5,28 @@ NetConfiguration::NetConfiguration(QWidget *parent, QLabel *serverStatusLabel, Q
     QDialog(parent),
     isWaitingForFirstMessage(false)
 {
+    lastSentMessage = "";
     tcpSocket = new QTcpSocket(this);
     connect(tcpSocket, SIGNAL(readyRead()), this, SLOT(readMessage()));
 }
 
 void NetConfiguration::sendMessage(QString message)
 {
-    QByteArray block;
-    QDataStream out(&block, QIODevice::WriteOnly);
-    out.setVersion(QDataStream::Qt_4_0);
+    if (message != lastSentMessage)
+    {
+        QByteArray block;
+        QDataStream out(&block, QIODevice::WriteOnly);
+        out.setVersion(QDataStream::Qt_4_0);
 
-    out << (quint16)0;
-    out << message;
-    out.device()->seek(0);
-    out << (quint16)(block.size() - sizeof(quint16));
+        out << (quint16)0;
+        out << message;
+        out.device()->seek(0);
+        out << (quint16)(block.size() - sizeof(quint16));
 
-    tcpSocket->write(block);
+        tcpSocket->write(block);
+        lastSentMessage = message;
+    }
+
 }
 
 void NetConfiguration::readMessage()
