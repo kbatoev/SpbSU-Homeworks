@@ -38,6 +38,8 @@ public:
 
     int getDamage() const;
 
+    int getBulletRadius() const;
+
 public slots:
     void updatePosition();
     void updateStatus();

@@ -9,6 +9,7 @@
 #include "../Constants/constants.h"
 #include "bullet.h"
 #include "lightbullet.h"
+#include "heavybullet.h"
 
 class Game;
 

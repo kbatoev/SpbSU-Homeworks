@@ -25,7 +25,8 @@ SOURCES += main.cpp\
     Net/netconfiguration.cpp \
     Net/server.cpp \
     Net/client.cpp \
-    Elements/lightbullet.cpp
+    Elements/lightbullet.cpp \
+    Elements/heavybullet.cpp
 
 HEADERS  += mainwindow.h \
     game.h \
@@ -39,6 +40,7 @@ HEADERS  += mainwindow.h \
     Net/netconfiguration.h \
     Net/server.h \
     Net/client.h \
-    Elements/lightbullet.h
+    Elements/lightbullet.h \
+    Elements/heavybullet.h
 
 FORMS    += mainwindow.ui

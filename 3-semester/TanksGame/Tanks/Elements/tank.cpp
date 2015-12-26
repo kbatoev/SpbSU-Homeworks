@@ -99,7 +99,7 @@ void Tank::decreaseAngle()
 
 void Tank::shoot()
 {
-    Bullet *bullet = new LightBullet(getCenter(), getGunAngleInRadians(), game);
+    Bullet *bullet = new HeavyBullet(getCenter(), getGunAngleInRadians(), game);
     bullet->addYourselfToScene();
     bullet->fly();
 }
@@ -118,8 +118,9 @@ void Tank::drawGun(QPainter *painter)
     QPointF p3(length * ::cos(angle), length * ::sin(angle));
     QPointF p4 = p1 + p3;
 
-    QPointF normalizedVector = normalize(p3);
     qreal bulletRadius = 5.0;
+    QPointF normalizedVector = normalize(p3);
+
     startPointForBullet = (p4 + p3) / 2.0 + normalizedVector * bulletRadius;
 
     p1 += center;

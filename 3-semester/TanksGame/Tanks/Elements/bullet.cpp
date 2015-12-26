@@ -133,3 +133,8 @@ qreal Bullet::countDistanceFromBulletCenter(QPointF point)
                 (bulletCenter.y() - point.y()) * (bulletCenter.y() - point.y()));
 }
 
+int Bullet::getBulletRadius() const
+{
+    return bulletRadius;
+}
+
