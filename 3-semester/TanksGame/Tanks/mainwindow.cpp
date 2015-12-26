@@ -90,7 +90,7 @@ void MainWindow::startGame()
         game = new Game(Game::makeVectorFromQString(netConfiguration->getReceivedMessage()));
         ui->graphicsView->setScene(game->getScene());
     }
-    connect(game, SIGNAL(finishedMove()), this, SLOT(finishMove()));
+    connect(game, SIGNAL(finishedMove()), this, SLOT(changePlayer()));
     connect(messageTransferTimer, SIGNAL(timeout()), this, SLOT(sendMessage()));
     messageTransferTimer->start(msec);
 }
@@ -109,7 +109,7 @@ void MainWindow::sendMessage()
     }
 }
 
-void MainWindow::finishMove()
+void MainWindow::changePlayer()
 {
-    myMove = false;
+    myMove = !myMove;
 }

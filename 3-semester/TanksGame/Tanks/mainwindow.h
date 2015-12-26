@@ -39,7 +39,7 @@ private slots:
     void makeOpponentMove(QString message);
     void sendMessage();
 
-    void finishMove();
+    void changePlayer();
 
 
 private:

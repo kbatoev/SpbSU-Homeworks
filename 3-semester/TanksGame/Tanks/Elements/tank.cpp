@@ -1,15 +1,18 @@
 #include "tank.h"
+#include "../game.h"
 
-Tank::Tank(int xCoordiante, int yCoordinate, QColor color) : Tank()
+Tank::Tank(Game *game, int xCoordiante, int yCoordinate, QColor color) : Tank()
 {
     center = QPointF(xCoordiante, yCoordinate);
     pen.setColor(color);
+    this->game = game;
 }
 
-Tank::Tank(QPointF point, QColor color) : Tank()
+Tank::Tank(Game *game, QPointF point, QColor color) : Tank()
 {
     center = point;
     pen.setColor(color);
+    this->game = game;
 }
 
 Tank::Tank() :
@@ -92,6 +95,13 @@ void Tank::decreaseAngle()
 {
     if (gunAngle < rightBorderForGun)
         gunAngle += addingToAngle;
+}
+
+void Tank::shoot()
+{
+    Bullet *bullet = new Bullet(getCenter(), getGunAngleInRadians(), game);
+    bullet->addYourselfToScene();
+    bullet->fly();
 }
 
 

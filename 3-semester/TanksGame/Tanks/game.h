@@ -52,6 +52,7 @@ public:
     QString collectCurrentInformation();
 
     void setCurrentInformation(QString message);
+    void currentTankShot();
 
 
 signals:
@@ -74,5 +75,6 @@ private:
     QList<Bullet *> bullets;
     QList<Burst *> bursts;
     QTimer *gameTimer;
+    bool hasShot;
 };
 

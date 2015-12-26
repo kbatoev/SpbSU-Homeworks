@@ -7,14 +7,17 @@
 
 #include "burstable.h"
 #include "../Constants/constants.h"
+#include "bullet.h"
+
+class Game;
 
 class Tank : public QObject, public Burstable
 {
     Q_OBJECT
 
 public:
-    Tank(int xCoordiante, int yCoordinate, QColor color);
-    Tank(QPointF point, QColor color);
+    Tank(Game *game, int xCoordiante, int yCoordinate, QColor color);
+    Tank(Game *game, QPointF point, QColor color);
     Tank();
     ~Tank();
 
@@ -33,6 +36,7 @@ public:
     void setCenter(QPointF newCenter);
     void increaseAngle();
     void decreaseAngle();
+    void shoot();
 
     /// get the point in the end of Gun
     QPointF getStartPointForBullet() const;
@@ -50,6 +54,7 @@ private:
     /// normalizes vector with the beginning - (0, 0) and end - point
     QPointF normalize(QPointF point);
 
+    Game *game;
     QPointF center;
     QPointF startPointForBullet;
     static const int radius = 15;
@@ -58,6 +63,7 @@ private:
 
     int hitpoints;
     bool isJustDamaged;
+    Bullet *bullet;
     QTimer *damageTimer;
 };
 

@@ -18,9 +18,7 @@ void KeyController::handleKey(QKeyEvent *keyEvent)
         point = landscape->getPointWithXCoordinate(oldPoint.x() - tank->getSpeed());
         point.setY(point.y() - tank->getRadius());
         if (point.x() > 0 && point.x() < widthOfFrame && point.y() > 0 && point.y() < heightOfFrame)
-        {
             tank->setCenter(point);
-        }
     }
 
     if (keyEvent->key() == Qt::Key_D)
@@ -28,9 +26,7 @@ void KeyController::handleKey(QKeyEvent *keyEvent)
         point = landscape->getPointWithXCoordinate(oldPoint.x() + tank->getSpeed());
         point.setY(point.y() - tank->getRadius());
         if (point.x() > 0 && point.x() < widthOfFrame && point.y() > 0 && point.y() < heightOfFrame)
-        {
             tank->setCenter(point);
-        }
     }
 
     if (keyEvent->key() == Qt::Key_W)
@@ -45,10 +41,9 @@ void KeyController::handleKey(QKeyEvent *keyEvent)
 
     if (keyEvent->key() == Qt::Key_Enter)
     {
-        Bullet *bullet = new Bullet(tank->getCenter(), tank->getGunAngleInRadians(), game);
-        bullet->addYourselfToScene();
-        bullet->fly();
-        emit game->finishedMove();
+        tank->shoot();
+        game->currentTankShot();
+        //emit game->finishedMove();
     }
 
 }
