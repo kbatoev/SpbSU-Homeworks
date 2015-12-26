@@ -46,7 +46,6 @@ public:
 
     Tank *getCurrentTank() const;
     void setCurrentTank(int number);
-    void setNextTank();
 
     QString collectLandscapeInformation();
     QString collectCurrentInformation();
@@ -63,6 +62,7 @@ private:
 
 public slots:
     void updateScene();
+    void setNextTank();
 
 private:
     QPointF tankPointOnScene;

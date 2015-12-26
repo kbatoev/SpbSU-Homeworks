@@ -37,7 +37,8 @@ void Bullet::drawBurst(Burstable *reason)
         game->getScene()->removeItem(this);
         Burst *burst = new Burst(bulletCenter, game->getScene(), radiusOfBurst, damage);
         game->addBurst(burst);
-        game->setNextTank();
+        //game->setNextTank();
+        //game->finishedMove();
     }
 }
 

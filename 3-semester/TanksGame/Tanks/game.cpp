@@ -13,6 +13,7 @@ Game::Game(QVector<QPointF> *serverPoints)
 
     keyController = new KeyController(this);
 
+
     scene->setSceneRect(0, 0, widthOfFrame, heightOfFrame);
     scene->addItem(landscape);
 
@@ -113,6 +114,7 @@ void Game::setCurrentTank(int number)
 void Game::setNextTank()
 {
     ++currentTankNumber %= tanks.size();
+    hasShot = false;
 }
 
 QString Game::collectLandscapeInformation()
@@ -139,7 +141,10 @@ QString Game::collectCurrentInformation()
     result += QString::number(angle) + separator;
     result += QString::number(hasShot) + separator;
     if (hasShot)
+    {
+        setNextTank();
         emit finishedMove();
+    }
 
     return result;
 }
@@ -151,12 +156,14 @@ void Game::setCurrentInformation(QString message)
     qreal x = Landscape::readUntilSeparator(message, index).toFloat();
     qreal y = Landscape::readUntilSeparator(message, ++index).toFloat();
     qreal angle = Landscape::readUntilSeparator(message, ++index).toFloat();
-    qreal shot = Landscape::readUntilSeparator(message, ++index).toFloat();
+    hasShot  = Landscape::readUntilSeparator(message, ++index).toFloat();
     currentTank->setCenter(QPointF(x, y));
     currentTank->setGunAngle(angle);
-    if (shot)
+
+    if (hasShot)
     {
         currentTank->shoot();
+        setNextTank();
         emit finishedMove();
     }
 }

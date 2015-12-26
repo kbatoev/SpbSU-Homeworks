@@ -26,6 +26,7 @@ public:
      */
     void handleKey(QKeyEvent *keyEvent);
 
+
 private:
     Game *game;
 };

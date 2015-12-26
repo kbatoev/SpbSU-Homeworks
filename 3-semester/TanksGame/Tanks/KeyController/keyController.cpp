@@ -43,7 +43,6 @@ void KeyController::handleKey(QKeyEvent *keyEvent)
     {
         tank->shoot();
         game->currentTankShot();
-        //emit game->finishedMove();
     }
 
 }

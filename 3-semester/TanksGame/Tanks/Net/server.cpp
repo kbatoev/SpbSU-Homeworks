@@ -32,8 +32,7 @@ void Server::sessionOpened()
     // use the first non-localhost IPv4 address
     for (int i = 0; i < ipAddressesList.size(); ++i)
     {
-        if (ipAddressesList.at(i) != QHostAddress::LocalHost &&
-            ipAddressesList.at(i).toIPv4Address())
+        if (ipAddressesList.at(i) != QHostAddress::LocalHost && ipAddressesList.at(i).toIPv4Address())
         {
             ipAddress = ipAddressesList.at(i).toString();
             break;
@@ -57,5 +56,6 @@ void Server::dealWithMessage(QString message)
 void Server::establishedConnection()
 {
     tcpSocket = tcpServer->nextPendingConnection();
+    connect(tcpSocket, SIGNAL(readyRead()), this, SLOT(readMessage()));
     emit connected();
 }

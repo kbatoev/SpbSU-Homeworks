@@ -4,7 +4,8 @@
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
-    messageTransferTimer(new QTimer)
+    messageTransferTimer(new QTimer),
+    game(nullptr)
 {
     ui->setupUi(this);
     connect(ui->serverRadio, SIGNAL(clicked(bool)), this, SLOT(setServer()));
@@ -28,7 +29,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::keyPressEvent(QKeyEvent *event)
 {
-    if (myMove)
+    if (myMove && game)
         game->keyPressEvent(event);
 }
 
@@ -90,6 +91,7 @@ void MainWindow::startGame()
         game = new Game(Game::makeVectorFromQString(netConfiguration->getReceivedMessage()));
         ui->graphicsView->setScene(game->getScene());
     }
+
     connect(game, SIGNAL(finishedMove()), this, SLOT(changePlayer()));
     connect(messageTransferTimer, SIGNAL(timeout()), this, SLOT(sendMessage()));
     messageTransferTimer->start(msec);
@@ -97,7 +99,8 @@ void MainWindow::startGame()
 
 void MainWindow::makeOpponentMove(QString message)
 {
-    game->setCurrentInformation(message);
+    if (!myMove)
+        game->setCurrentInformation(message);
 }
 
 void MainWindow::sendMessage()
