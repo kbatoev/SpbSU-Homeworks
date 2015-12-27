@@ -54,6 +54,7 @@ public:
 
 signals:
     void finishedMove();
+    //void updateBulletTypeLabel();
 
 private:
     void createTank(int xcoordinate, QColor color);

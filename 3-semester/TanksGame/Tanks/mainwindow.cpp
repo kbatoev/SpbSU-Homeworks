@@ -32,25 +32,19 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
 {
     if (myMove && game)
     {
-        Keys key = determineKey(event);
-        game->keyPressEvent(key);
+        if (event->key() == Qt::Key_A)
+            moveLeft();
+        if (event->key() == Qt::Key_D)
+            moveRight();
+        if (event->key() == Qt::Key_S)
+            rotateGunLeft();
+        if (event->key() == Qt::Key_W)
+            rotateGunRight();
+        if (event->key() == Qt::Key_Q)
+            changeBullet();
+        if (event->key() == Qt::Key_Enter)
+            shoot();
     }
-}
-
-Keys MainWindow::determineKey(QKeyEvent *event)
-{
-    if (event->key() == Qt::Key_A)
-        return leftMove;
-    if (event->key() == Qt::Key_D)
-        return rightMove;
-    if (event->key() == Qt::Key_S)
-        return leftGun;
-    if (event->key() == Qt::Key_W)
-        return rightGun;
-    if (event->key() == Qt::Key_Q)
-        return changingBullet;
-    if (event->key() == Qt::Key_Enter)
-        return shot;
 }
 
 void MainWindow::setServer()
@@ -113,6 +107,7 @@ void MainWindow::startGame()
         enableGameButtons(false);
         ui->graphicsView->setScene(game->getScene());
     }
+
     connect(ui->leftMoveButton, SIGNAL(clicked(bool)), this, SLOT(moveLeft()));
     connect(ui->rightMoveButton, SIGNAL(clicked(bool)), this, SLOT(moveRight()));
     connect(ui->leftGunButton, SIGNAL(clicked(bool)), this, SLOT(rotateGunLeft()));
@@ -121,10 +116,11 @@ void MainWindow::startGame()
     connect(ui->shotButton, SIGNAL(clicked(bool)), this, SLOT(shoot()));
     ui->bulletTypeLabel->setText(game->getBulletName());
 
-    ui->redTankLabel->setVisible(false);
-    ui->blueTankLabel->setVisible(false);
+    ui->redTankLabel->setVisible(true);
+    ui->blueTankLabel->setVisible(true);
 
     connect(game, SIGNAL(finishedMove()), this, SLOT(changePlayer()));
+    //connect(game, SIGNAL(updateBulletTypeLabel()), this, SLOT(changeBullet()));
     connect(messageTransferTimer, SIGNAL(timeout()), this, SLOT(sendMessage()));
     messageTransferTimer->start(msec);
 }
