@@ -46,7 +46,7 @@ private:
     QPointF burstCenter;
     QGraphicsScene *scene;
     int maxBurstRadius;
-    int initialRadius;
+    int currentRadius;
     int iteration;
     bool isOver;
     QTimer *timer;

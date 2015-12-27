@@ -27,4 +27,5 @@ void LightBullet::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
     pen.setWidth(2);
     painter->setPen(pen);
     painter->drawEllipse(bulletCenter, bulletRadius, bulletRadius);
+    painter->drawRect(boundingRect());
 }

@@ -70,6 +70,7 @@ void Bullet::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
     pen.setWidth(2);
     painter->setPen(pen);
     painter->drawEllipse(bulletCenter, bulletRadius, bulletRadius);
+    painter->drawRect(boundingRect());
 }
 
 void Bullet::fly()
@@ -99,6 +100,7 @@ void Bullet::updatePosition()
         }
         else
         {
+            isFlying = false;
             hasBurst = true;
             setVisible(false);
             game->getScene()->removeItem(this);

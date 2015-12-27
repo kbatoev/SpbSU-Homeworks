@@ -3,7 +3,7 @@
 Burst::Burst(QGraphicsScene *scene, int radius, int damage)
     : scene(scene),
       maxBurstRadius(radius),
-      initialRadius(5),
+      currentRadius(5),
       iteration(0),
       isOver(false),
       timer(new QTimer()),
@@ -20,12 +20,11 @@ Burst::~Burst()
 
 QRectF Burst::boundingRect() const
 {
-    if (!isOver)
-    {
-       return QRectF(burstCenter.x() - iteration * initialRadius, burstCenter.y() - iteration * initialRadius,
-                     2 * iteration * initialRadius, 2 * iteration * initialRadius);
 
-    }
+    QPointF topLeft(burstCenter.x() - currentRadius, burstCenter.y() - currentRadius);
+    QPointF bottomRight(burstCenter.x() + currentRadius, burstCenter.y() + currentRadius);
+    return QRectF(topLeft, bottomRight);
+
 }
 
 void Burst::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -36,13 +35,15 @@ void Burst::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
         pen.setColor(Qt::black);
         pen.setWidth(3);
         painter->setPen(pen);
-        painter->drawEllipse(burstCenter, initialRadius * iteration, initialRadius * iteration);
+        painter->drawEllipse(burstCenter, currentRadius, currentRadius);
+        painter->drawRect(boundingRect());
     }
 }
 
 void Burst::start()
 {
-    iteration = 0;
+    isOver = false;
+    currentRadius = 0;
     timer->start(msec);
     scene->addItem(this);
 }
@@ -59,7 +60,8 @@ int Burst::makeDamage()
 
 void Burst::updateStatusOfBurst()
 {
-    isOver = iteration * initialRadius >= maxBurstRadius;
+    currentRadius += 5;
+    isOver = currentRadius >= maxBurstRadius;
 }
 
 void Burst::incrementIteration()
@@ -70,7 +72,6 @@ void Burst::incrementIteration()
         timer->stop();
         scene->removeItem(this);
     }
-    iteration++;
 }
 
 void Burst::setBurstCenter(const QPointF &value)

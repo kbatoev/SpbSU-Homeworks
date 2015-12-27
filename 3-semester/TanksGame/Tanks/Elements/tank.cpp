@@ -44,7 +44,7 @@ void Tank::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     painter->setPen(pen);
 
     painter->drawEllipse(center, radius, radius);
-    //painter->drawRect(boundingRect());
+    painter->drawRect(boundingRect());
     drawGun(painter);
 }
 
@@ -52,6 +52,8 @@ void Tank::drawBurst(Burstable *reason)
 {
     if (!isJustDamaged && reason->makeDamage())
     {
+        QRectF rect = reason->boundingRect();
+        QRectF myRect = boundingRect();
         hitpoints -= reason->makeDamage();
         isJustDamaged = true;
         damageTimer->start(intervalOfGettingDamage);

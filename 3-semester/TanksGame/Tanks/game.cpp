@@ -71,12 +71,9 @@ void Game::updateScene()
                 Burstable *firstItem = dynamic_cast<Burstable *>(listOfItems[i]);
                 Burstable *secondItem = dynamic_cast<Burstable *>(listOfItems[j]);
 
-                if (firstItem)
+                if (firstItem && secondItem)
                 {
                     firstItem->drawBurst(secondItem);
-                }
-                if (secondItem)
-                {
                     secondItem->drawBurst(firstItem);
                 }
             }
