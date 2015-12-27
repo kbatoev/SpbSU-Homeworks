@@ -11,7 +11,6 @@ LightBullet::LightBullet(Game *game)
     damage = 10;
     radiusOfBurst = 20;
 
-    this->game = game;
     burst = new Burst(this->game->getScene(), radiusOfBurst, damage);
 }
 
@@ -26,6 +25,5 @@ void LightBullet::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
     pen.setColor(Qt::magenta);
     pen.setWidth(2);
     painter->setPen(pen);
-    painter->drawEllipse(bulletCenter, bulletRadius, bulletRadius);
-    painter->drawRect(boundingRect());
+    Bullet::paint(painter, option, widget);
 }

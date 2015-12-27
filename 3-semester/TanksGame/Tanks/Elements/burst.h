@@ -17,6 +17,8 @@
  * It is created by Bullet class
  */
 
+const int additionToRadius = 5;
+
 class Burst : public QObject, public Contactable
 {
     Q_OBJECT
@@ -35,12 +37,9 @@ public:
 
     void setBurstCenter(const QPointF &value);
 
-private:
+private slots:
     /// checks if burst is over
     void updateStatusOfBurst();
-
-private slots:
-    void incrementIteration();
 
 private:
     QPointF burstCenter;

@@ -38,7 +38,6 @@ void Bullet::isContactedBy(Contactable *reason)
         hasBurst = true;
         setVisible(false);
         game->getScene()->removeItem(this);
-        //burst = new Burst(bulletCenter, game->getScene(), radiusOfBurst, damage);
         burst->setBurstCenter(bulletCenter);
         burst->start();
     }
@@ -65,12 +64,7 @@ QPainterPath Bullet::shape() const
 
 void Bullet::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    QPen pen;
-    pen.setColor(Qt::red);
-    pen.setWidth(2);
-    painter->setPen(pen);
     painter->drawEllipse(bulletCenter, bulletRadius, bulletRadius);
-    painter->drawRect(boundingRect());
 }
 
 void Bullet::fly()
@@ -152,10 +146,5 @@ void Bullet::setCenter(const QPointF &value)
         initialCenter = value;
         hasBurst = false;
     }
-}
-
-int Bullet::getBulletRadius() const
-{
-    return bulletRadius;
 }
 

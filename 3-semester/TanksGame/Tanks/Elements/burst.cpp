@@ -3,14 +3,12 @@
 Burst::Burst(QGraphicsScene *scene, int radius, int damage)
     : scene(scene),
       maxBurstRadius(radius),
-      currentRadius(5),
-      iteration(0),
+      currentRadius(0),
       isOver(false),
       timer(new QTimer()),
       damage(damage)
 {
-    connect(timer, SIGNAL(timeout()), this, SLOT(incrementIteration()));
-    //timer->start(msec);
+    connect(timer, SIGNAL(timeout()), this, SLOT(updateStatusOfBurst()));
 }
 
 Burst::~Burst()
@@ -36,7 +34,6 @@ void Burst::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
         pen.setWidth(3);
         painter->setPen(pen);
         painter->drawEllipse(burstCenter, currentRadius, currentRadius);
-        painter->drawRect(boundingRect());
     }
 }
 
@@ -60,13 +57,8 @@ int Burst::makeDamage()
 
 void Burst::updateStatusOfBurst()
 {
-    currentRadius += 5;
+    currentRadius += additionToRadius;
     isOver = currentRadius >= maxBurstRadius;
-}
-
-void Burst::incrementIteration()
-{
-    updateStatusOfBurst();
     if (isOver)
     {
         timer->stop();
@@ -78,4 +70,3 @@ void Burst::setBurstCenter(const QPointF &value)
 {
     burstCenter = value;
 }
-

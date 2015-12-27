@@ -10,7 +10,6 @@ HeavyBullet::HeavyBullet(Game *game)
     damage = 40;
     radiusOfBurst = 60;
 
-    this->game = game;
     burst = new Burst(this->game->getScene(), radiusOfBurst, damage);
 }
 
@@ -25,5 +24,5 @@ void HeavyBullet::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
     pen.setColor(Qt::cyan);
     pen.setWidth(4);
     painter->setPen(pen);
-    painter->drawEllipse(bulletCenter, bulletRadius, bulletRadius);
+    Bullet::paint(painter, option, widget);
 }

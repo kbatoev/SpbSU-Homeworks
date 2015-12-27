@@ -33,3 +33,6 @@ const int interval = 40;
 const int yCoordinateAdding = 250;
 const int maxDistanceBetweenTwoYCoordinates = 70;
 const int moduleForYCoordinate = 350;
+
+//for Burst
+const int additionToRadius = 5;

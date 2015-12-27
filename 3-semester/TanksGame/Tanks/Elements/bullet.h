@@ -27,6 +27,7 @@ public:
 
     void isContactedBy(Contactable *reason = 0);
     int makeDamage();
+
     QRectF boundingRect() const Q_DECL_OVERRIDE;
     QPainterPath shape() const Q_DECL_OVERRIDE;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) Q_DECL_OVERRIDE;
@@ -35,8 +36,6 @@ public:
     void fly();
 
     int getDamage() const;
-
-    int getBulletRadius() const;
 
     void setAngle(const qreal &value);
     void setCenter(const QPointF &value);
@@ -52,6 +51,10 @@ protected:
     qreal countDistanceFromBulletCenter(QPointF point);
 
 protected:
+    Game *game;
+    QTimer *timer;
+    Burst *burst;
+
     QPointF bulletCenter;
     QPointF initialCenter;
     int iteration;
@@ -60,11 +63,7 @@ protected:
     qreal angle;
     qreal speed;
     int damage;
-    QTimer *timer;
 
     bool isFlying;
     bool isReadyToBurst;
-    Game *game;
-
-    Burst *burst;
 };
