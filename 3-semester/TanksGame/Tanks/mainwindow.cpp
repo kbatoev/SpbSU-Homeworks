@@ -73,9 +73,11 @@ void MainWindow::startConnection()
         setWindowTitle(tr("Client"));
         myMove = false;
 
-        netConfiguration = new Client(this, ui->serverStatusLabel, ui->comboBox, ui->portLineEdit, ui->connectButton);
+        netConfiguration = new Client(this, ui->serverStatusLabel, ui->ipLineEdit, ui->portLineEdit, ui->connectButton);
 
-        ui->comboBox->setVisible(true);
+        ui->ipLabel->setVisible(true);
+        ui->ipLineEdit->setVisible(true);
+        ui->portLabel->setVisible(true);
         ui->portLineEdit->setVisible(true);
         ui->connectButton->setVisible(true);
     }
@@ -210,7 +212,9 @@ void MainWindow::enableGameButtons(bool mode)
 
 void MainWindow::setInvisibleNetworkWidgets()
 {
-    ui->comboBox->setVisible(false);
+    ui->ipLabel->setVisible(false);
+    ui->ipLineEdit->setVisible(false);
+    ui->portLabel->setVisible(false);
     ui->portLineEdit->setVisible(false);
     ui->serverStatusLabel->setVisible(false);
     ui->connectButton->setVisible(false);

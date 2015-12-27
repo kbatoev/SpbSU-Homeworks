@@ -10,7 +10,7 @@ class Client : public NetConfiguration
     Q_OBJECT
 
 public:
-    Client(QWidget *parent = 0, QLabel *serverStatusLabel = 0, QComboBox *comboBox = 0,
+    Client(QWidget *parent = 0, QLabel *serverStatusLabel = 0, QLineEdit *ipLineEdit = 0,
            QLineEdit *portLineEdit = 0, QPushButton *connectButton = 0);
 
 private slots:
@@ -22,7 +22,7 @@ private slots:
 
 private:
     QLabel *statusLabel;
-    QComboBox *comboBox;
+    QLineEdit *ipLineEdit;
     QLineEdit *portLineEdit;
     QPushButton *connectButton;
 
