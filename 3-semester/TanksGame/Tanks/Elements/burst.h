@@ -22,15 +22,18 @@ class Burst : public QObject, public Burstable
     Q_OBJECT
 
 public:
-    Burst(QPointF center, QGraphicsScene *scene, int radius, int damage);
+    Burst(QGraphicsScene *scene, int radius, int damage);
     ~Burst();
 
     /// it depends on initialRadius and iteration
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
+    void start();
     void drawBurst(Burstable *reason);
     int makeDamage();
+
+    void setBurstCenter(const QPointF &value);
 
 private:
     /// checks if burst is over
@@ -47,7 +50,6 @@ private:
     int iteration;
     bool isOver;
     QTimer *timer;
-
 
     int damage;
 };

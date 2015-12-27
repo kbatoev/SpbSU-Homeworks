@@ -2,29 +2,22 @@
 #include "../game.h"
 
 
-LightBullet::LightBullet(QPointF center, qreal angle, Game *game)
+LightBullet::LightBullet(Game *game)
+    : Bullet(game)
 {
-    this->game = game;
-    bulletCenter = center;
-    initialCenter = center;
-    this->angle = angle;
-    iteration = 0;
     bulletRadius = 5;
     coefficient = 4.0;
     speed = 70;
-
-    timer = nullptr;
-    isReadyToBurst = false;
-
     damage = 10;
-
     radiusOfBurst = 20;
-    this->game->addBullet(this);
+
+    this->game = game;
+    burst = new Burst(this->game->getScene(), radiusOfBurst, damage);
 }
 
 LightBullet::~LightBullet()
 {
-
+    delete burst;
 }
 
 void LightBullet::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)

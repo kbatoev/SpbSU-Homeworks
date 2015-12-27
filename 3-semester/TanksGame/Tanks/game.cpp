@@ -29,15 +29,6 @@ Game::Game(QVector<QPointF> *serverPoints)
 
 Game::~Game()
 {
-    for (int i = 0; i < bullets.size(); i++)
-    {
-        delete bullets[i];
-    }
-    for (int i = 0; i < bursts.size(); i++)
-    {
-        delete bursts[i];
-    }
-
     for (int i = 0; i < tanks.size(); i++)
     {
         delete tanks[i];
@@ -46,6 +37,8 @@ Game::~Game()
     delete landscape;
     delete scene;
     delete keyController;
+
+    gameTimer->stop();
     delete gameTimer;
 }
 
@@ -57,7 +50,7 @@ QVector<QPointF> *Game::makeVectorFromQString(QString message)
 void Game::keyPressEvent(QKeyEvent *keyEvent)
 {
     keyController->handleKey(keyEvent);
-    updateScene();
+    //updateScene();
 }
 
 void Game::updateScene()
@@ -174,7 +167,7 @@ void Game::currentTankShot()
 
 void Game::createTank(int xcoordinate, QColor color)
 {
-    tankPointOnScene = landscape->getPointWithXCoordinate(xcoordinate) + QPointF(0, -Tank::getRadius());
+    QPointF tankPointOnScene = landscape->getPointWithXCoordinate(xcoordinate) + QPointF(0, -Tank::getRadius());
     tanks.append(new Tank(this, tankPointOnScene, color));
 }
 
@@ -187,14 +180,3 @@ QGraphicsScene *Game::getScene() const
 {
     return scene;
 }
-
-void Game::addBullet(Bullet *newBullet)
-{
-    bullets.append(newBullet);
-}
-
-void Game::addBurst(Burst *newBurst)
-{
-    bursts.append(newBurst);
-}
-

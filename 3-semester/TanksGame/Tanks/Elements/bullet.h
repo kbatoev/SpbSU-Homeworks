@@ -22,7 +22,7 @@ class Bullet : public QObject, public Burstable
 
 public:
     Bullet();
-    Bullet(QPointF center, qreal angle, Game *game);
+    Bullet(Game *game);
     ~Bullet();
 
     void drawBurst(Burstable *reason = 0);
@@ -31,14 +31,15 @@ public:
     QPainterPath shape() const Q_DECL_OVERRIDE;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) Q_DECL_OVERRIDE;
 
-    void addYourselfToScene();
-
     /// bullet starts flying
     void fly();
 
     int getDamage() const;
 
     int getBulletRadius() const;
+
+    void setAngle(const qreal &value);
+    void setCenter(const QPointF &value);
 
 public slots:
     void updatePosition();
@@ -58,10 +59,12 @@ protected:
     qreal coefficient;
     qreal angle;
     qreal speed;
+    int damage;
     QTimer *timer;
 
+    bool isFlying;
     bool isReadyToBurst;
     Game *game;
 
-    int damage;
+    Burst *burst;
 };

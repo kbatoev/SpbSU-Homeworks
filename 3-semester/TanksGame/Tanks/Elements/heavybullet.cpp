@@ -1,29 +1,22 @@
 #include "heavybullet.h"
 #include "../game.h"
 
-HeavyBullet::HeavyBullet(QPointF center, qreal angle, Game *game)
+HeavyBullet::HeavyBullet(Game *game)
+    : Bullet(game)
 {
-    this->game = game;
-    bulletCenter = center;
-    initialCenter = center;
-    this->angle = angle;
-    iteration = 0;
     bulletRadius = 7;
-    coefficient = 3.0;
-    speed = 55;
-
-    timer = nullptr;
-    isReadyToBurst = false;
-
+    coefficient = 4.0;
+    speed = 50;
     damage = 40;
-
     radiusOfBurst = 60;
-    this->game->addBullet(this);
+
+    this->game = game;
+    burst = new Burst(this->game->getScene(), radiusOfBurst, damage);
 }
 
 HeavyBullet::~HeavyBullet()
 {
-
+    delete burst;
 }
 
 void HeavyBullet::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)

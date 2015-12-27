@@ -65,16 +65,13 @@ public slots:
     void setNextTank();
 
 private:
-    QPointF tankPointOnScene;
-    int currentTankNumber;
-
     KeyController *keyController;
     QGraphicsScene *scene;
     Landscape *landscape;
     QList<Tank *> tanks;
-    QList<Bullet *> bullets;
-    QList<Burst *> bursts;
     QTimer *gameTimer;
+
     bool hasShot;
+    int currentTankNumber;
 };
 

@@ -13,6 +13,9 @@ Tank::Tank(Game *game, QPointF point, QColor color) : Tank()
     center = point;
     pen.setColor(color);
     this->game = game;
+    listOfBullets.append(new LightBullet(game));
+    listOfBullets.append(new HeavyBullet(game));
+    bullet = listOfBullets.at(0);
 }
 
 Tank::Tank() :
@@ -99,8 +102,9 @@ void Tank::decreaseAngle()
 
 void Tank::shoot()
 {
-    Bullet *bullet = new HeavyBullet(getCenter(), getGunAngleInRadians(), game);
-    bullet->addYourselfToScene();
+    game->getScene()->addItem(bullet);
+    bullet->setCenter(getCenter());
+    bullet->setAngle(getGunAngleInRadians());
     bullet->fly();
 }
 

@@ -65,6 +65,7 @@ private:
 
     int hitpoints;
     bool isJustDamaged;
+    QList<Bullet *> listOfBullets;
     Bullet *bullet;
     QTimer *damageTimer;
 };
