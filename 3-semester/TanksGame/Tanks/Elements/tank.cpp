@@ -14,7 +14,7 @@ Tank::Tank(Game *game, QPointF point, QColor color) : Tank()
 Tank::Tank() :
     speed(10),
     gunAngle(-45.0),
-    hitpoints(30),
+    hitpoints(initialHitPoints),
     isJustDamaged(false),
     damageTimer(new QTimer)
 {

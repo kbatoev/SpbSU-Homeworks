@@ -49,6 +49,7 @@ private slots:
 
 
     void enableGameButtons(bool mode);
+    void setInvisibleNetworkWidgets();
 
 
 private:

@@ -13,10 +13,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->graphicsView->setFocus();
 
-    ui->comboBox->setVisible(false);
-    ui->portLineEdit->setVisible(false);
-    ui->serverStatusLabel->setVisible(false);
-    ui->connectButton->setVisible(false);
+    setInvisibleNetworkWidgets();
     ui->redTankLabel->setVisible(false);
     ui->blueTankLabel->setVisible(false);
 }
@@ -88,21 +85,16 @@ void MainWindow::startConnection()
 
 void MainWindow::startGame()
 {
+    setInvisibleNetworkWidgets();
     if (isServer)
     {
         game = new Game();
         enableGameButtons(true);
-        ui->serverStatusLabel->setVisible(false);
         ui->graphicsView->setScene(game->getScene());
         netConfiguration->sendMessage(game->collectLandscapeInformation());
     }
     else
     {
-        ui->comboBox->setEnabled(false);
-        ui->portLineEdit->setEnabled(false);
-        ui->comboBox->setVisible(false);
-        ui->portLineEdit->setVisible(false);
-        ui->connectButton->setVisible(false);
         game = new Game(Game::makeVectorFromQString(netConfiguration->getReceivedMessage()));
         enableGameButtons(false);
         ui->graphicsView->setScene(game->getScene());
@@ -117,7 +109,9 @@ void MainWindow::startGame()
     ui->bulletTypeLabel->setText(game->getBulletName());
 
     ui->redTankLabel->setVisible(true);
+    ui->redTankLabel->setText(tr("Red Tank HitPoints: %1").arg(QString::number(initialHitPoints)));
     ui->blueTankLabel->setVisible(true);
+    ui->blueTankLabel->setText(tr("Blue Tank HitPoints: %1").arg(QString::number(initialHitPoints)));
 
     connect(game, SIGNAL(finishedMove()), this, SLOT(changePlayer()));
     connect(game, SIGNAL(changedHealth(int)), this, SLOT(updateLabels(int)));
@@ -193,5 +187,13 @@ void MainWindow::enableGameButtons(bool mode)
     ui->rightGunButton->setEnabled(mode);
     ui->shotButton->setEnabled(mode);
     ui->changeBulletButton->setEnabled(mode);
+}
+
+void MainWindow::setInvisibleNetworkWidgets()
+{
+    ui->comboBox->setVisible(false);
+    ui->portLineEdit->setVisible(false);
+    ui->serverStatusLabel->setVisible(false);
+    ui->connectButton->setVisible(false);
 }
 
