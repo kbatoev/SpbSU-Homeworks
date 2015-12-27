@@ -55,23 +55,30 @@
      <item row="6" column="0">
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
-        <widget class="QPushButton" name="pushButton_2">
+        <widget class="QPushButton" name="leftMoveButton">
          <property name="text">
-          <string>PushButton</string>
+          <string>moveLeft (A)</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_3">
+        <widget class="QPushButton" name="rightMoveButton">
          <property name="text">
-          <string>PushButton</string>
+          <string>moveRight (D)</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton">
+        <widget class="QPushButton" name="leftGunButton">
          <property name="text">
-          <string>PushButton</string>
+          <string>leftGun (S)</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="rightGunButton">
+         <property name="text">
+          <string>rightGun (W)</string>
          </property>
         </widget>
        </item>

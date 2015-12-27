@@ -48,6 +48,9 @@ private slots:
     void rotateGunLeft();
 
 
+    void enableButtons(bool mode);
+
+
 private:
     Ui::MainWindow *ui;
     Game *game;

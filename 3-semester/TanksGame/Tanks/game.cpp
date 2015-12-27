@@ -87,11 +87,11 @@ void Game::keyPressEvent(Keys key)
         break;
 
     case leftGun:
-        tank->decreaseAngle();
+        tank->increaseAngle();
         break;
 
     case rightGun:
-        tank->increaseAngle();
+        tank->decreaseAngle();
         break;
 
     case changingBullet:

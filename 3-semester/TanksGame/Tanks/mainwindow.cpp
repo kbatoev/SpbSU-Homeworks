@@ -80,6 +80,7 @@ void MainWindow::startConnection()
     {
         setWindowTitle(tr("Client"));
         myMove = false;
+
         netConfiguration = new Client(this, ui->serverStatusLabel, ui->comboBox, ui->portLineEdit, ui->connectButton);
 
         ui->comboBox->setVisible(true);
@@ -88,8 +89,6 @@ void MainWindow::startConnection()
     }
     connect(netConfiguration, SIGNAL(connected()), this, SLOT(startGame()));
     connect(netConfiguration, SIGNAL(received(QString)), this, SLOT(makeOpponentMove(QString)));
-    //connect();
-
 }
 
 void MainWindow::startGame()
@@ -97,6 +96,7 @@ void MainWindow::startGame()
     if (isServer)
     {
         game = new Game();
+        enableButtons(true);
         ui->serverStatusLabel->setVisible(false);
         ui->graphicsView->setScene(game->getScene());
         netConfiguration->sendMessage(game->collectLandscapeInformation());
@@ -109,8 +109,13 @@ void MainWindow::startGame()
         ui->portLineEdit->setVisible(false);
         ui->connectButton->setVisible(false);
         game = new Game(Game::makeVectorFromQString(netConfiguration->getReceivedMessage()));
+        enableButtons(false);
         ui->graphicsView->setScene(game->getScene());
     }
+    connect(ui->leftMoveButton, SIGNAL(clicked(bool)), this, SLOT(moveLeft()));
+    connect(ui->rightMoveButton, SIGNAL(clicked(bool)), this, SLOT(moveRight()));
+    connect(ui->leftGunButton, SIGNAL(clicked(bool)), this, SLOT(rotateGunLeft()));
+    connect(ui->rightGunButton, SIGNAL(clicked(bool)), this, SLOT(rotateGunRight()));
 
     connect(game, SIGNAL(finishedMove()), this, SLOT(changePlayer()));
     connect(messageTransferTimer, SIGNAL(timeout()), this, SLOT(sendMessage()));
@@ -135,24 +140,33 @@ void MainWindow::changePlayer()
 {
     myMove = !myMove;
     game->setNextTank();
+    enableButtons(myMove);
 }
 
 void MainWindow::moveRight()
 {
-
+    game->keyPressEvent(rightMove);
 }
 
 void MainWindow::moveLeft()
 {
-
+    game->keyPressEvent(leftMove);
 }
 
 void MainWindow::rotateGunRight()
 {
-
+    game->keyPressEvent(rightGun);
 }
 
 void MainWindow::rotateGunLeft()
 {
+    game->keyPressEvent(leftGun);
+}
 
+void MainWindow::enableButtons(bool mode)
+{
+    ui->leftMoveButton->setEnabled(mode);
+    ui->rightMoveButton->setEnabled(mode);
+    ui->leftGunButton->setEnabled(mode);
+    ui->rightGunButton->setEnabled(mode);
 }
