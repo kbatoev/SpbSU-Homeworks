@@ -4,7 +4,7 @@
 Tank::Tank(Game *game, QPointF point, QColor color) : Tank()
 {
     center = point;
-    pen.setColor(color);
+    this->color = color;
     this->game = game;
     typesOfbullets.append(new LightBullet(game));
     typesOfbullets.append(new HeavyBullet(game));
@@ -33,6 +33,8 @@ QRectF Tank::boundingRect() const
 
 void Tank::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+    QPen pen;
+    pen.setColor(color);
     pen.setWidth(4);
     painter->setPen(pen);
 
@@ -47,13 +49,13 @@ void Tank::isContactedBy(Contactable *reason)
         hitpoints -= reason->makeDamage();
         isJustDamaged = true;
         damageTimer->start(intervalOfGettingDamage);
-        emit changedHealth(hitpoints);
+        emit changedHealth(hitpoints, color);
     }
 
     if (hitpoints <= 0)
     {
         this->setVisible(false);
-        emit gameIsOver(pen.color());
+        emit gameIsOver(color);
     }
 }
 

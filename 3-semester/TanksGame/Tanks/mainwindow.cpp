@@ -114,7 +114,7 @@ void MainWindow::startGame()
     ui->blueTankLabel->setText(tr("Blue Tank HitPoints: %1").arg(QString::number(initialHitPoints)));
 
     connect(game, SIGNAL(finishedMove()), this, SLOT(changePlayer()));
-    connect(game, SIGNAL(changedHealth(int)), this, SLOT(updateLabels(int)));
+    connect(game, SIGNAL(changedHealth(int, QColor)), this, SLOT(updateLabels(int, QColor)));
     connect(game, SIGNAL(gameIsOver(QColor)), this, SLOT(endGame(QColor)));
     connect(messageTransferTimer, SIGNAL(timeout()), this, SLOT(sendMessage()));
     messageTransferTimer->start(msec);
@@ -140,9 +140,9 @@ void MainWindow::makeOpponentMove(QString message)
     game->setCurrentInformation(message);
 }
 
-void MainWindow::updateLabels(int health)
+void MainWindow::updateLabels(int health, QColor color)
 {
-    if (isServer && myMove || !isServer && !myMove)
+    if (color == Qt::blue)
         ui->blueTankLabel->setText(tr("Blue Tank HitPoints: %1").arg(QString::number(health)));
     else
         ui->redTankLabel->setText(tr("Red Tank HitPoints: %1").arg(QString::number(health)));

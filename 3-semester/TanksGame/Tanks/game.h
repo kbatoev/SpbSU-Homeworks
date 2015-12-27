@@ -54,7 +54,7 @@ public:
 
 signals:
     void finishedMove();
-    void changedHealth(int health);
+    void changedHealth(int health, QColor color);
     void gameIsOver(QColor color);
 
 private:

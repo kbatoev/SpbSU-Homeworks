@@ -57,12 +57,12 @@ private slots:
     void readyToBeDamagedAgain();
 
 signals:
-    void changedHealth(int health);
+    void changedHealth(int health, QColor color);
     void gameIsOver(QColor color);
 
 private:
     void drawGun(QPainter *painter);
-    QPen pen;
+    QColor color;
 
     /// normalizes vector with the beginning - (0, 0) and end - point
     QPointF normalize(QPointF point);
