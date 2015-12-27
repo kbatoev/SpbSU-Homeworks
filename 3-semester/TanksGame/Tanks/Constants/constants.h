@@ -20,6 +20,7 @@ const qreal rightBorderForGun = 0.0;
 const qreal addingToAngle = 7.0;
 const int intervalOfGettingDamage = 1000;
 const int initialHitPoints = 40;
+const int tankRadius = 15;
 
 // for Gun
 const qreal length = 23;

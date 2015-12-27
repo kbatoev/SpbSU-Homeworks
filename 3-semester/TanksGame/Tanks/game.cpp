@@ -219,7 +219,7 @@ QString Game::getBulletName() const
 
 void Game::createTank(int xcoordinate, QColor color)
 {
-    QPointF tankPointOnScene = landscape->getPointWithXCoordinate(xcoordinate) + QPointF(0, -Tank::getRadius());
+    QPointF tankPointOnScene = landscape->getPointWithXCoordinate(xcoordinate) + QPointF(0, -tankRadius);
     tanks.append(new Tank(this, tankPointOnScene, color));
     connect(tanks.last(), SIGNAL(changedHealth(int, QColor)), this, SIGNAL(changedHealth(int, QColor)));
     connect(tanks.last(), SIGNAL(gameIsOver(QColor)), this, SIGNAL(gameIsOver(QColor)));

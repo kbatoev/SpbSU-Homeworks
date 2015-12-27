@@ -16,7 +16,8 @@ Tank::Tank() :
     gunAngle(-45.0),
     hitpoints(initialHitPoints),
     isJustDamaged(false),
-    damageTimer(new QTimer)
+    damageTimer(new QTimer),
+    radius(tankRadius)
 {
     connect(damageTimer, SIGNAL(timeout()), this, SLOT(readyToBeDamagedAgain()));
 }
@@ -111,7 +112,7 @@ void Tank::changeBullet()
 }
 
 
-int Tank::getRadius()
+int Tank::getRadius() const
 {
     return radius;
 }

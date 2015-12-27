@@ -34,7 +34,7 @@ public:
     int getSpeed() const;
     QPointF getCenter() const;
     qreal getGunAngleInRadians() const;
-    static int getRadius();
+    int getRadius() const;
 
     /// changes position of tank in QGraphicsScene
     void setCenter(QPointF newCenter);
@@ -66,7 +66,7 @@ private:
 
     Game *game;
     QPointF center;
-    static const int radius = 15;
+    int radius;
     int speed;
     qreal gunAngle;
 
