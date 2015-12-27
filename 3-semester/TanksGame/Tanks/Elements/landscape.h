@@ -30,9 +30,6 @@ public:
 
     int getNumberPoints() const;
 
-    static QVector<QPointF> *makeVectorFromQString(QString message);
-    static QString readUntilSeparator(QString message, int &startIndex);
-
 private:
     void generateRandomLandscape();
 

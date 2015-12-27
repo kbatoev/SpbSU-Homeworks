@@ -76,30 +76,6 @@ int Landscape::getNumberPoints() const
     return numberPoints;
 }
 
-QVector<QPointF> *Landscape::makeVectorFromQString(QString message)
-{
-    QVector<QPointF> *resultPoints = new QVector<QPointF>;
-    int currentIndex = 0;
-    int size = readUntilSeparator(message, currentIndex).toInt();
-    for (int i = 0; i < size; i++)
-    {
-        float x = readUntilSeparator(message, ++currentIndex).toFloat();
-        float y = readUntilSeparator(message, ++currentIndex).toFloat();
-        resultPoints->append(QPointF(x, y));
-    }
-    return resultPoints;
-}
-
-QString Landscape::readUntilSeparator(QString message, int &startIndex)
-{
-    QString result = "";
-    while (message.at(startIndex) != separator)
-    {
-        result.append(message.at(startIndex++));
-    }
-    return result;
-}
-
 QVector<QPointF> *Landscape::getPoints() const
 {
     return points;

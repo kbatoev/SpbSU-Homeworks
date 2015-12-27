@@ -32,6 +32,7 @@ public:
     ~Game();
 
     static QVector<QPointF> *makeVectorFromQString(QString message);
+    static QString readUntilSeparator(QString message, int &startIndex);
 
     /// delegates event to KeyController
     void keyPressEvent(QKeyEvent *keyEvent);

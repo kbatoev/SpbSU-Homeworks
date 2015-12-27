@@ -44,7 +44,26 @@ Game::~Game()
 
 QVector<QPointF> *Game::makeVectorFromQString(QString message)
 {
-    return Landscape::makeVectorFromQString(message);
+    QVector<QPointF> *resultPoints = new QVector<QPointF>;
+    int currentIndex = 0;
+    int size = readUntilSeparator(message, currentIndex).toInt();
+    for (int i = 0; i < size; i++)
+    {
+        float x = readUntilSeparator(message, ++currentIndex).toFloat();
+        float y = readUntilSeparator(message, ++currentIndex).toFloat();
+        resultPoints->append(QPointF(x, y));
+    }
+    return resultPoints;
+}
+
+QString Game::readUntilSeparator(QString message, int &startIndex)
+{
+    QString result = "";
+    while (message.at(startIndex) != separator)
+    {
+        result.append(message.at(startIndex++));
+    }
+    return result;
 }
 
 void Game::keyPressEvent(QKeyEvent *keyEvent)
@@ -142,11 +161,11 @@ void Game::setCurrentInformation(QString message)
 {
     Tank *currentTank = getCurrentTank();
     int index = 0;
-    qreal x = Landscape::readUntilSeparator(message, index).toFloat();
-    qreal y = Landscape::readUntilSeparator(message, ++index).toFloat();
-    qreal angle = Landscape::readUntilSeparator(message, ++index).toFloat();
-    int bulletType = Landscape::readUntilSeparator(message, ++index).toInt();
-    hasShot  = Landscape::readUntilSeparator(message, ++index).toFloat();
+    qreal x = readUntilSeparator(message, index).toFloat();
+    qreal y = readUntilSeparator(message, ++index).toFloat();
+    qreal angle = readUntilSeparator(message, ++index).toFloat();
+    int bulletType = readUntilSeparator(message, ++index).toInt();
+    hasShot  = readUntilSeparator(message, ++index).toFloat();
     currentTank->setCenter(QPointF(x, y));
     currentTank->setGunAngle(angle);
     currentTank->setBulletType(bulletType);
