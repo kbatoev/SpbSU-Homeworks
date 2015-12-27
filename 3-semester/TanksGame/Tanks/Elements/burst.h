@@ -17,7 +17,6 @@
  * It is created by Bullet class
  */
 
-const int additionToRadius = 5;
 
 class Burst : public QObject, public Contactable
 {
