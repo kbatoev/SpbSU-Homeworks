@@ -142,6 +142,9 @@ void MainWindow::makeOpponentMove(QString message)
 
 void MainWindow::updateLabels(int health, QColor color)
 {
+    if (health < 0)
+        health = 0;
+
     if (color == Qt::blue)
         ui->blueTankLabel->setText(tr("Blue Tank HitPoints: %1").arg(QString::number(health)));
     else
