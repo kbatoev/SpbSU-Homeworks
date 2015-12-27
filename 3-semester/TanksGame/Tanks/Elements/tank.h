@@ -51,6 +51,8 @@ public:
     int getBulletType() const;
     void setBulletType(int value);
 
+    QString getBulletName() const;
+
 private slots:
     void readyToBeDamagedAgain();
 

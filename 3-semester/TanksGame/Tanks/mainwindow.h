@@ -46,9 +46,11 @@ private slots:
     void moveLeft();
     void rotateGunRight();
     void rotateGunLeft();
+    void changeBullet();
+    void shoot();
 
 
-    void enableButtons(bool mode);
+    void enableGameButtons(bool mode);
 
 
 private:

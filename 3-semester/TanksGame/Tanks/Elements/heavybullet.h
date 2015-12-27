@@ -12,5 +12,6 @@ public:
     HeavyBullet(Game *game);
     ~HeavyBullet();
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    QString getName();
 };
 

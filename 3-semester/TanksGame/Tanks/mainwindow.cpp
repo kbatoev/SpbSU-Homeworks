@@ -17,7 +17,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->portLineEdit->setVisible(false);
     ui->serverStatusLabel->setVisible(false);
     ui->connectButton->setVisible(false);
-
+    ui->redTankLabel->setVisible(false);
+    ui->blueTankLabel->setVisible(false);
 }
 
 MainWindow::~MainWindow()
@@ -96,7 +97,7 @@ void MainWindow::startGame()
     if (isServer)
     {
         game = new Game();
-        enableButtons(true);
+        enableGameButtons(true);
         ui->serverStatusLabel->setVisible(false);
         ui->graphicsView->setScene(game->getScene());
         netConfiguration->sendMessage(game->collectLandscapeInformation());
@@ -109,13 +110,19 @@ void MainWindow::startGame()
         ui->portLineEdit->setVisible(false);
         ui->connectButton->setVisible(false);
         game = new Game(Game::makeVectorFromQString(netConfiguration->getReceivedMessage()));
-        enableButtons(false);
+        enableGameButtons(false);
         ui->graphicsView->setScene(game->getScene());
     }
     connect(ui->leftMoveButton, SIGNAL(clicked(bool)), this, SLOT(moveLeft()));
     connect(ui->rightMoveButton, SIGNAL(clicked(bool)), this, SLOT(moveRight()));
     connect(ui->leftGunButton, SIGNAL(clicked(bool)), this, SLOT(rotateGunLeft()));
     connect(ui->rightGunButton, SIGNAL(clicked(bool)), this, SLOT(rotateGunRight()));
+    connect(ui->changeBulletButton, SIGNAL(clicked(bool)), this, SLOT(changeBullet()));
+    connect(ui->shotButton, SIGNAL(clicked(bool)), this, SLOT(shoot()));
+    ui->bulletTypeLabel->setText(game->getBulletName());
+
+    ui->redTankLabel->setVisible(false);
+    ui->blueTankLabel->setVisible(false);
 
     connect(game, SIGNAL(finishedMove()), this, SLOT(changePlayer()));
     connect(messageTransferTimer, SIGNAL(timeout()), this, SLOT(sendMessage()));
@@ -140,7 +147,7 @@ void MainWindow::changePlayer()
 {
     myMove = !myMove;
     game->setNextTank();
-    enableButtons(myMove);
+    enableGameButtons(myMove);
 }
 
 void MainWindow::moveRight()
@@ -163,10 +170,24 @@ void MainWindow::rotateGunLeft()
     game->keyPressEvent(leftGun);
 }
 
-void MainWindow::enableButtons(bool mode)
+void MainWindow::changeBullet()
+{
+    game->keyPressEvent(changingBullet);
+    ui->bulletTypeLabel->setText(game->getBulletName());
+}
+
+void MainWindow::shoot()
+{
+    game->keyPressEvent(shot);
+}
+
+void MainWindow::enableGameButtons(bool mode)
 {
     ui->leftMoveButton->setEnabled(mode);
     ui->rightMoveButton->setEnabled(mode);
     ui->leftGunButton->setEnabled(mode);
     ui->rightGunButton->setEnabled(mode);
+    ui->shotButton->setEnabled(mode);
+    ui->changeBulletButton->setEnabled(mode);
 }
+

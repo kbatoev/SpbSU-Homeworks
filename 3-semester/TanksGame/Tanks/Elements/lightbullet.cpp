@@ -27,3 +27,8 @@ void LightBullet::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
     painter->setPen(pen);
     Bullet::paint(painter, option, widget);
 }
+
+QString LightBullet::getName()
+{
+    return "Light bullet";
+}

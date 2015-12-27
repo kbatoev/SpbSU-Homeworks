@@ -40,6 +40,8 @@ public:
     void setAngle(const qreal &value);
     void setCenter(const QPointF &value);
 
+    virtual QString getName() = 0;
+
 public slots:
     void updatePosition();
     void updateStatus();

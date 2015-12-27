@@ -10,4 +10,5 @@ public:
     LightBullet(Game *game);
     ~LightBullet();
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    QString getName();
 };

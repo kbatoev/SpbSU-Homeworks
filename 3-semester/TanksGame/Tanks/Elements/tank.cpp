@@ -155,6 +155,11 @@ void Tank::setBulletType(int value)
     bulletType = value;
 }
 
+QString Tank::getBulletName() const
+{
+    return typesOfbullets.at(bulletType)->getName();
+}
+
 qreal Tank::getGunAngle() const
 {
     return gunAngle;

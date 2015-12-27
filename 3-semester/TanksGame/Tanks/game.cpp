@@ -218,6 +218,11 @@ void Game::currentTankShot()
     hasShot = true;
 }
 
+QString Game::getBulletName() const
+{
+    return tanks.at(currentTankNumber)->getBulletName();
+}
+
 void Game::createTank(int xcoordinate, QColor color)
 {
     QPointF tankPointOnScene = landscape->getPointWithXCoordinate(xcoordinate) + QPointF(0, -Tank::getRadius());

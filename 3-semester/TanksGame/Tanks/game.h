@@ -49,6 +49,8 @@ public:
     void setCurrentInformation(QString message);
     void currentTankShot();
 
+    QString getBulletName() const;
+
 
 signals:
     void finishedMove();
