@@ -53,6 +53,7 @@ void Tank::isContactedBy(Contactable *reason)
     if (hitpoints <= 0)
     {
         this->setVisible(false);
+        emit gameIsOver(pen.color());
     }
 }
 

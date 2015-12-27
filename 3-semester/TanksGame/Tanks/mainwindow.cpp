@@ -115,8 +115,24 @@ void MainWindow::startGame()
 
     connect(game, SIGNAL(finishedMove()), this, SLOT(changePlayer()));
     connect(game, SIGNAL(changedHealth(int)), this, SLOT(updateLabels(int)));
+    connect(game, SIGNAL(gameIsOver(QColor)), this, SLOT(endGame(QColor)));
     connect(messageTransferTimer, SIGNAL(timeout()), this, SLOT(sendMessage()));
     messageTransferTimer->start(msec);
+}
+
+void MainWindow::endGame(QColor color)
+{
+    QMessageBox msgBox;
+    if (color == Qt::red && isServer || color == Qt::blue && !isServer)
+        msgBox.setText(tr("You are winner!"));
+    else
+        msgBox.setText(tr("You lost :("));
+
+    msgBox.setWindowTitle(isServer? "Server" : "Client");
+    messageTransferTimer->start(msec);
+    myMove = false;
+    enableGameButtons(false);
+    msgBox.exec();
 }
 
 void MainWindow::makeOpponentMove(QString message)

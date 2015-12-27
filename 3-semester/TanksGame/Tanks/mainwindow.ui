@@ -145,14 +145,14 @@
        <item>
         <widget class="QPushButton" name="shotButton">
          <property name="text">
-          <string>Shot</string>
+          <string>Shot (Enter)</string>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QPushButton" name="changeBulletButton">
          <property name="text">
-          <string>Change Type of Bullet</string>
+          <string>Change Type of Bullet (Q)</string>
          </property>
         </widget>
        </item>

@@ -35,6 +35,7 @@ private slots:
 
     void startConnection();
     void startGame();
+    void endGame(QColor color);
     void makeOpponentMove(QString message);
     void updateLabels(int health);
     void sendMessage();

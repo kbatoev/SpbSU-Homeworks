@@ -58,6 +58,7 @@ private slots:
 
 signals:
     void changedHealth(int health);
+    void gameIsOver(QColor color);
 
 private:
     void drawGun(QPainter *painter);

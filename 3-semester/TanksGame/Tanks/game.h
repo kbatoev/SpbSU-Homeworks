@@ -55,6 +55,7 @@ public:
 signals:
     void finishedMove();
     void changedHealth(int health);
+    void gameIsOver(QColor color);
 
 private:
     void createTank(int xcoordinate, QColor color);
