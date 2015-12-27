@@ -16,6 +16,7 @@ class MainWindow;
 
 /**
  * @brief The MainWindow class
+ * Sets Widgets, gets key events, buttons events.
  */
 
 
@@ -30,15 +31,23 @@ public:
     void keyPressEvent(QKeyEvent *event);
 
 private slots:
+    /// sets user's choice and connects Net Signals
     void setServer();
     void setClient();
-
     void startConnection();
+
+    /// game starts after connecting with another application
     void startGame();
-    void endGame(QColor color);
+
+    /// receives state done in another application and sets it
     void makeOpponentMove(QString message);
-    void updateLabels(int health, QColor color);
+
+    /// gets state and sends it to another app
     void sendMessage();
+
+    /// color is used for determining tank
+    void endGame(QColor colorOfLostTank);
+    void updateLabels(int health, QColor color);
 
     void changePlayer();
     void moveRight();

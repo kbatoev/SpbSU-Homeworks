@@ -18,7 +18,7 @@
 
 /**
  * @brief The Game class is a model.
- * It keeps all elements and interacts with KeyController
+ * It keeps scene, tanks, landscape
  *
  */
 
@@ -33,24 +33,25 @@ public:
     static QVector<QPointF> *makeVectorFromQString(QString message);
     static QString readUntilSeparator(QString message, int &startIndex);
 
-    /// delegates event to KeyController
+    /// deals with tank accorrding to key
     void keyPressEvent(Keys key);
 
-    /// if needed returns private fields
     QGraphicsScene *getScene() const;
     QPointF getPointWithXCoordinate(qreal x);
 
     Tank *getCurrentTank() const;
     void setCurrentTank(int number);
 
+    /// collect info for transmission
     QString collectLandscapeInformation();
     QString collectCurrentInformation();
 
+    /// sets info after transmission
     void setCurrentInformation(QString message);
     void currentTankShot();
 
+    /// Label sets bullet name
     QString getBulletName() const;
-
 
 signals:
     void finishedMove();

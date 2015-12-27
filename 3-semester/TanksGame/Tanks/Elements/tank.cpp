@@ -161,11 +161,6 @@ void Tank::setGunAngle(const qreal &value)
     gunAngle = value;
 }
 
-QPointF Tank::getStartPointForBullet() const
-{
-    return startPointForBullet;
-}
-
 void Tank::readyToBeDamagedAgain()
 {
     damageTimer->stop();

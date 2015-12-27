@@ -122,10 +122,10 @@ void MainWindow::startGame()
     messageTransferTimer->start(msec);
 }
 
-void MainWindow::endGame(QColor color)
+void MainWindow::endGame(QColor colorOfLostTank)
 {
     QMessageBox msgBox;
-    if (color == Qt::red && isServer || color == Qt::blue && !isServer)
+    if (colorOfLostTank == Qt::red && isServer || colorOfLostTank == Qt::blue && !isServer)
         msgBox.setText(tr("You are winner!"));
     else
         msgBox.setText(tr("You lost :("));

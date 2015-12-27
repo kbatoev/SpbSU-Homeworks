@@ -26,6 +26,7 @@ public:
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
+    /// are called when tank intersects with Bullet, Burst, Tank
     void isContactedBy(Contactable *reason = 0);
     int makeDamage();
 
@@ -42,9 +43,6 @@ public:
     void shoot();
     void changeBullet();
 
-    /// get the point in the end of Gun
-    QPointF getStartPointForBullet() const;
-
     qreal getGunAngle() const;
     void setGunAngle(const qreal &value);
 
@@ -54,9 +52,11 @@ public:
     QString getBulletName() const;
 
 private slots:
+    /// when tank is damaged it is in safe during 1 second
     void readyToBeDamagedAgain();
 
 signals:
+    /// inform Game that tank has got damage
     void changedHealth(int health, QColor color);
     void gameIsOver(QColor color);
 
@@ -64,12 +64,8 @@ private:
     void drawGun(QPainter *painter);
     QColor color;
 
-    /// normalizes vector with the beginning - (0, 0) and end - point
-    QPointF normalize(QPointF point);
-
     Game *game;
     QPointF center;
-    QPointF startPointForBullet;
     static const int radius = 15;
     int speed;
     qreal gunAngle;
