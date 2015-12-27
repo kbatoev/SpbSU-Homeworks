@@ -23,6 +23,7 @@ Tank::Tank() :
 
 Tank::~Tank()
 {
+    delete damageTimer;
 }
 
 
@@ -123,30 +124,16 @@ void Tank::drawGun(QPainter *painter)
     QPointF p3(length * ::cos(angle), length * ::sin(angle));
     QPointF p4 = p1 + p3;
 
-    qreal bulletRadius = 5.0;
-    QPointF normalizedVector = normalize(p3);
-
-    startPointForBullet = (p4 + p3) / 2.0 + normalizedVector * bulletRadius;
-
     p1 += center;
     p2 += center;
     p3 += center;
     p4 += center;
-    startPointForBullet += center;
 
     painter->drawLine(p1, p2);
     painter->drawLine(p2, p3);
     painter->drawLine(p3, p4);
     painter->drawLine(p4, p1);
 
-}
-
-QPointF Tank::normalize(QPointF point)
-{
-    qreal x = point.x();
-    qreal y = point.y();
-    qreal length = sqrt(x * x + y * y);
-    return QPointF(x / length, y / length);
 }
 
 int Tank::getBulletType() const

@@ -27,14 +27,10 @@ Game::Game(QVector<QPointF> *serverPoints)
 Game::~Game()
 {
     for (int i = 0; i < tanks.size(); i++)
-    {
         delete tanks[i];
-    }
 
     delete landscape;
     delete scene;
-
-    gameTimer->stop();
     delete gameTimer;
 }
 
@@ -65,8 +61,6 @@ QString Game::readUntilSeparator(QString message, int &startIndex)
 void Game::keyPressEvent(Keys key)
 {
     Tank *tank = getCurrentTank();
-    Landscape *landscape = getLandscape();
-
     QPointF oldPoint = tank->getCenter();
     QPointF point = oldPoint;
 
@@ -231,12 +225,12 @@ void Game::createTank(int xcoordinate, QColor color)
     connect(tanks.last(), SIGNAL(gameIsOver(QColor)), this, SIGNAL(gameIsOver(QColor)));
 }
 
-Landscape *Game::getLandscape() const
-{
-    return landscape;
-}
-
 QGraphicsScene *Game::getScene() const
 {
     return scene;
+}
+
+QPointF Game::getPointWithXCoordinate(qreal x)
+{
+    return landscape->getPointWithXCoordinate(x);
 }

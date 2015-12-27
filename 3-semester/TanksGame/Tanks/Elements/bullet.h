@@ -35,8 +35,6 @@ public:
     /// bullet starts flying
     void fly();
 
-    int getDamage() const;
-
     void setAngle(const qreal &value);
     void setCenter(const QPointF &value);
 

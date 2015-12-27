@@ -18,8 +18,6 @@ private slots:
 
     void sessionOpened();
 
-
-
 private:
     QTcpServer *tcpServer;
     QLabel *serverStatusLabel;

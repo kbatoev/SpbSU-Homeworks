@@ -7,7 +7,6 @@ Bullet::Bullet()
     bulletRadius = 5;
     coefficient = 4.0;
     speed = 55;
-    timer = nullptr;
     isReadyToBurst = false;
     damage = 10;
     radiusOfBurst = 40;
@@ -74,11 +73,6 @@ void Bullet::fly()
     isFlying = true;
 }
 
-int Bullet::getDamage() const
-{
-    return damage;
-}
-
 void Bullet::updatePosition()
 {
     if (isFlying)
@@ -114,7 +108,7 @@ void Bullet::updateStatus()
 void Bullet::checkDistanceFromLandscape()
 {
     qreal x = bulletCenter.x();
-    QPointF point = game->getLandscape()->getPointWithXCoordinate(x);
+    QPointF point = game->getPointWithXCoordinate(x);
     qreal distance = countDistanceFromBulletCenter(point);
     if (distance < 2.0 * bulletRadius)
     {

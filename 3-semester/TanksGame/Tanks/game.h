@@ -38,7 +38,7 @@ public:
 
     /// if needed returns private fields
     QGraphicsScene *getScene() const;
-    Landscape *getLandscape() const;
+    QPointF getPointWithXCoordinate(qreal x);
 
     Tank *getCurrentTank() const;
     void setCurrentTank(int number);

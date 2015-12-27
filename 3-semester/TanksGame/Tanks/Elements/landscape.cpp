@@ -7,9 +7,7 @@ Landscape::Landscape(QVector<QPointF> *serverPoints)
         points = new QVector<QPointF>;
         numberPoints = serverPoints->size();
         for (int i = 0; i < serverPoints->size(); i++)
-        {
-            this->points->append(serverPoints->at(i));
-        }
+            points->append(serverPoints->at(i));
     }
     else
     {
@@ -21,6 +19,7 @@ Landscape::Landscape(QVector<QPointF> *serverPoints)
 
 Landscape::~Landscape()
 {
+    delete points;
 }
 
 QRectF Landscape::boundingRect() const
@@ -35,9 +34,7 @@ void Landscape::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
     pen.setColor(Qt::green);
     painter->setPen(pen);
     for (int i = 1; i < numberPoints; i++)
-    {
         painter->drawLine(points->at(i - 1), points->at(i));
-    }
 }
 
 QPointF Landscape::getPointWithXCoordinate(qreal x)
@@ -48,8 +45,7 @@ QPointF Landscape::getPointWithXCoordinate(qreal x)
 
     QPointF firstPoint = points->at(j - 1);
     QPointF secondPoint = points->at(j);
-    qreal y = firstPoint.y() +
-            (secondPoint.y() - firstPoint.y()) * (x - firstPoint.x()) / (secondPoint.x() - firstPoint.x());
+    qreal y = firstPoint.y() + (secondPoint.y() - firstPoint.y()) * (x - firstPoint.x()) / (secondPoint.x() - firstPoint.x());
 
     return QPointF(x, y);
 }
