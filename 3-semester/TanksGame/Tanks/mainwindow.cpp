@@ -120,7 +120,7 @@ void MainWindow::startGame()
     ui->blueTankLabel->setVisible(true);
 
     connect(game, SIGNAL(finishedMove()), this, SLOT(changePlayer()));
-    //connect(game, SIGNAL(updateBulletTypeLabel()), this, SLOT(changeBullet()));
+    connect(game, SIGNAL(changedHealth(int)), this, SLOT(updateLabels(int)));
     connect(messageTransferTimer, SIGNAL(timeout()), this, SLOT(sendMessage()));
     messageTransferTimer->start(msec);
 }
@@ -128,6 +128,14 @@ void MainWindow::startGame()
 void MainWindow::makeOpponentMove(QString message)
 {
     game->setCurrentInformation(message);
+}
+
+void MainWindow::updateLabels(int health)
+{
+    if (isServer && myMove || !isServer && !myMove)
+        ui->blueTankLabel->setText(tr("Blue Tank HitPoints: %1").arg(QString::number(health)));
+    else
+        ui->redTankLabel->setText(tr("Red Tank HitPoints: %1").arg(QString::number(health)));
 }
 
 void MainWindow::sendMessage()

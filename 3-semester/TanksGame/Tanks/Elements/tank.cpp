@@ -47,6 +47,7 @@ void Tank::isContactedBy(Contactable *reason)
         hitpoints -= reason->makeDamage();
         isJustDamaged = true;
         damageTimer->start(intervalOfGettingDamage);
+        emit changedHealth(hitpoints);
     }
 
     if (hitpoints <= 0)

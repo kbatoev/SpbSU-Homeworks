@@ -56,6 +56,9 @@ public:
 private slots:
     void readyToBeDamagedAgain();
 
+signals:
+    void changedHealth(int health);
+
 private:
     void drawGun(QPainter *painter);
     QPen pen;

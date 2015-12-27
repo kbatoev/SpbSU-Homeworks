@@ -36,6 +36,7 @@ private slots:
     void startConnection();
     void startGame();
     void makeOpponentMove(QString message);
+    void updateLabels(int health);
     void sendMessage();
 
     void changePlayer();

@@ -227,6 +227,7 @@ void Game::createTank(int xcoordinate, QColor color)
 {
     QPointF tankPointOnScene = landscape->getPointWithXCoordinate(xcoordinate) + QPointF(0, -Tank::getRadius());
     tanks.append(new Tank(this, tankPointOnScene, color));
+    connect(tanks.last(), SIGNAL(changedHealth(int)), this, SIGNAL(changedHealth(int)));
 }
 
 Landscape *Game::getLandscape() const
