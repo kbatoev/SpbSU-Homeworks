@@ -11,9 +11,6 @@ Game::Game(QVector<QPointF> *serverPoints)
 
     setCurrentTank(0);
 
-    keyController = new KeyController(this);
-
-
     scene->setSceneRect(0, 0, widthOfFrame, heightOfFrame);
     scene->addItem(landscape);
 
@@ -36,7 +33,6 @@ Game::~Game()
 
     delete landscape;
     delete scene;
-    delete keyController;
 
     gameTimer->stop();
     delete gameTimer;
@@ -66,10 +62,50 @@ QString Game::readUntilSeparator(QString message, int &startIndex)
     return result;
 }
 
-void Game::keyPressEvent(QKeyEvent *keyEvent)
+void Game::keyPressEvent(Keys key)
 {
-    keyController->handleKey(keyEvent);
-    //updateScene();
+    Tank *tank = getCurrentTank();
+    Landscape *landscape = getLandscape();
+
+    QPointF oldPoint = tank->getCenter();
+    QPointF point = oldPoint;
+
+    switch (key)
+    {
+    case leftMove:
+        point = landscape->getPointWithXCoordinate(oldPoint.x() - tank->getSpeed());
+        point.setY(point.y() - tank->getRadius());
+        if (point.x() > 0 && point.x() < widthOfFrame && point.y() > 0 && point.y() < heightOfFrame)
+            tank->setCenter(point);
+        break;
+
+    case rightMove:
+        point = landscape->getPointWithXCoordinate(oldPoint.x() + tank->getSpeed());
+        point.setY(point.y() - tank->getRadius());
+        if (point.x() > 0 && point.x() < widthOfFrame && point.y() > 0 && point.y() < heightOfFrame)
+            tank->setCenter(point);
+        break;
+
+    case leftGun:
+        tank->decreaseAngle();
+        break;
+
+    case rightGun:
+        tank->increaseAngle();
+        break;
+
+    case changingBullet:
+        tank->changeBullet();
+        break;
+
+    case shot:
+        tank->shoot();
+        currentTankShot();
+        break;
+
+    default:
+        break;
+    }
 }
 
 void Game::updateScene()

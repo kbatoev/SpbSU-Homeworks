@@ -19,7 +19,6 @@ SOURCES += main.cpp\
     game.cpp \
     Elements/landscape.cpp \
     Elements/tank.cpp \
-    KeyController/keyController.cpp \
     Elements/bullet.cpp \
     Elements/burst.cpp \
     Net/netconfiguration.cpp \
@@ -33,7 +32,6 @@ HEADERS  += mainwindow.h \
     Elements/landscape.h \
     Elements/contactable.h \
     Elements/tank.h \
-    KeyController/keyController.h \
     Elements/bullet.h \
     Constants/constants.h \
     Elements/burst.h \

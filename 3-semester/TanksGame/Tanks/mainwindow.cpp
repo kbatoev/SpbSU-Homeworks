@@ -30,7 +30,26 @@ MainWindow::~MainWindow()
 void MainWindow::keyPressEvent(QKeyEvent *event)
 {
     if (myMove && game)
-        game->keyPressEvent(event);
+    {
+        Keys key = determineKey(event);
+        game->keyPressEvent(key);
+    }
+}
+
+Keys MainWindow::determineKey(QKeyEvent *event)
+{
+    if (event->key() == Qt::Key_A)
+        return leftMove;
+    if (event->key() == Qt::Key_D)
+        return rightMove;
+    if (event->key() == Qt::Key_S)
+        return leftGun;
+    if (event->key() == Qt::Key_W)
+        return rightGun;
+    if (event->key() == Qt::Key_Q)
+        return changingBullet;
+    if (event->key() == Qt::Key_Enter)
+        return shot;
 }
 
 void MainWindow::setServer()
@@ -69,6 +88,7 @@ void MainWindow::startConnection()
     }
     connect(netConfiguration, SIGNAL(connected()), this, SLOT(startGame()));
     connect(netConfiguration, SIGNAL(received(QString)), this, SLOT(makeOpponentMove(QString)));
+    //connect();
 
 }
 
@@ -115,4 +135,24 @@ void MainWindow::changePlayer()
 {
     myMove = !myMove;
     game->setNextTank();
+}
+
+void MainWindow::moveRight()
+{
+
+}
+
+void MainWindow::moveLeft()
+{
+
+}
+
+void MainWindow::rotateGunRight()
+{
+
+}
+
+void MainWindow::rotateGunLeft()
+{
+
 }

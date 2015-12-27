@@ -15,7 +15,6 @@
 #include "Elements/bullet.h"
 #include "Elements/burst.h"
 #include "Constants/constants.h"
-#include "KeyController/keyController.h"
 
 /**
  * @brief The Game class is a model.
@@ -35,7 +34,7 @@ public:
     static QString readUntilSeparator(QString message, int &startIndex);
 
     /// delegates event to KeyController
-    void keyPressEvent(QKeyEvent *keyEvent);
+    void keyPressEvent(Keys key);
 
     /// if needed returns private fields
     QGraphicsScene *getScene() const;
@@ -62,7 +61,6 @@ public slots:
     void setNextTank();
 
 private:
-    KeyController *keyController;
     QGraphicsScene *scene;
     Landscape *landscape;
     QList<Tank *> tanks;

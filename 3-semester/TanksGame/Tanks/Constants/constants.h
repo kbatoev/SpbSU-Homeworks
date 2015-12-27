@@ -36,3 +36,13 @@ const int moduleForYCoordinate = 350;
 
 //for Burst
 const int additionToRadius = 5;
+
+enum Keys
+{
+    leftMove = 1,
+    rightMove,
+    leftGun,
+    rightGun,
+    changingBullet,
+    shot
+};
