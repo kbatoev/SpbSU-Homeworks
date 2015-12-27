@@ -4,8 +4,8 @@
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
-    messageTransferTimer(new QTimer),
-    game(nullptr)
+    game(nullptr),
+    messageTransferTimer(new QTimer)
 {
     ui->setupUi(this);
     connect(ui->serverRadio, SIGNAL(clicked(bool)), this, SLOT(setServer()));
@@ -99,9 +99,6 @@ void MainWindow::startGame()
 
 void MainWindow::makeOpponentMove(QString message)
 {
-    int size = message.size();
-    if (message.at(size - 2) == '1')
-        int success = 1;
     game->setCurrentInformation(message);
 }
 

@@ -1,13 +1,6 @@
 #include "tank.h"
 #include "../game.h"
 
-Tank::Tank(Game *game, int xCoordiante, int yCoordinate, QColor color) : Tank()
-{
-    center = QPointF(xCoordiante, yCoordinate);
-    pen.setColor(color);
-    this->game = game;
-}
-
 Tank::Tank(Game *game, QPointF point, QColor color) : Tank()
 {
     center = point;
@@ -51,8 +44,6 @@ void Tank::isContactedBy(Contactable *reason)
 {
     if (!isJustDamaged && reason->makeDamage())
     {
-        QRectF rect = reason->boundingRect();
-        QRectF myRect = boundingRect();
         hitpoints -= reason->makeDamage();
         isJustDamaged = true;
         damageTimer->start(intervalOfGettingDamage);

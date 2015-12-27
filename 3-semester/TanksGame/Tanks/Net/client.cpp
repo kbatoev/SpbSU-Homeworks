@@ -6,6 +6,7 @@
 
 Client::Client(QWidget *parent, QLabel *serverStatusLabel, QComboBox *comboBox,
                QLineEdit *portLineEdit, QPushButton *connectButton) :
+    NetConfiguration(parent),
     comboBox(comboBox),
     portLineEdit(portLineEdit),
     connectButton(connectButton)

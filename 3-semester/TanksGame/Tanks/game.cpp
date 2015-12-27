@@ -83,7 +83,6 @@ void Game::updateScene()
 
     for (int i = 0; i < listOfItems.size(); i++)
     {
-        QRectF rect = listOfItems[i]->boundingRect();
         listOfItems[i]->update();
         scene->update();
     }

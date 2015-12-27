@@ -45,10 +45,9 @@ private:
     Ui::MainWindow *ui;
     Game *game;
     NetConfiguration *netConfiguration;
+    QTimer *messageTransferTimer;
 
     bool isServer;
     bool myMove;
-
-    QTimer *messageTransferTimer;
 };
 
