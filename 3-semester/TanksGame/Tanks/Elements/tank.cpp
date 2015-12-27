@@ -6,9 +6,9 @@ Tank::Tank(Game *game, QPointF point, QColor color) : Tank()
     center = point;
     pen.setColor(color);
     this->game = game;
-    listOfBullets.append(new LightBullet(game));
-    listOfBullets.append(new HeavyBullet(game));
-    bullet = listOfBullets.at(0);
+    typesOfbullets.append(new LightBullet(game));
+    typesOfbullets.append(new HeavyBullet(game));
+    bulletType = 0;
 }
 
 Tank::Tank() :
@@ -94,10 +94,15 @@ void Tank::decreaseAngle()
 
 void Tank::shoot()
 {
-    game->getScene()->addItem(bullet);
-    bullet->setCenter(getCenter());
-    bullet->setAngle(getGunAngleInRadians());
-    bullet->fly();
+    game->getScene()->addItem(typesOfbullets.at(bulletType));
+    typesOfbullets.at(bulletType)->setCenter(getCenter());
+    typesOfbullets.at(bulletType)->setAngle(getGunAngleInRadians());
+    typesOfbullets.at(bulletType)->fly();
+}
+
+void Tank::changeBullet()
+{
+    (++bulletType) %= typesOfbullets.size();
 }
 
 
@@ -138,6 +143,16 @@ QPointF Tank::normalize(QPointF point)
     qreal y = point.y();
     qreal length = sqrt(x * x + y * y);
     return QPointF(x / length, y / length);
+}
+
+int Tank::getBulletType() const
+{
+    return bulletType;
+}
+
+void Tank::setBulletType(int value)
+{
+    bulletType = value;
 }
 
 qreal Tank::getGunAngle() const

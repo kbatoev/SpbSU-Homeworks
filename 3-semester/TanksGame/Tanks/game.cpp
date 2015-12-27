@@ -126,9 +126,10 @@ QString Game::collectCurrentInformation()
     QPointF center = currentTank->getCenter();
     result += QString::number(center.x()) + separator;
     result += QString::number(center.y()) + separator;
-    qreal angle = currentTank->getGunAngle();
-    result += QString::number(angle) + separator;
+    result += QString::number(currentTank->getGunAngle()) + separator;
+    result += QString::number(currentTank->getBulletType()) + separator;
     result += QString::number(hasShot) + separator;
+
     if (hasShot)
     {
         emit finishedMove();
@@ -144,9 +145,11 @@ void Game::setCurrentInformation(QString message)
     qreal x = Landscape::readUntilSeparator(message, index).toFloat();
     qreal y = Landscape::readUntilSeparator(message, ++index).toFloat();
     qreal angle = Landscape::readUntilSeparator(message, ++index).toFloat();
+    int bulletType = Landscape::readUntilSeparator(message, ++index).toInt();
     hasShot  = Landscape::readUntilSeparator(message, ++index).toFloat();
     currentTank->setCenter(QPointF(x, y));
     currentTank->setGunAngle(angle);
+    currentTank->setBulletType(bulletType);
 
     if (hasShot)
     {

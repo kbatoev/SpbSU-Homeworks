@@ -40,12 +40,16 @@ public:
     void increaseAngle();
     void decreaseAngle();
     void shoot();
+    void changeBullet();
 
     /// get the point in the end of Gun
     QPointF getStartPointForBullet() const;
 
     qreal getGunAngle() const;
     void setGunAngle(const qreal &value);
+
+    int getBulletType() const;
+    void setBulletType(int value);
 
 private slots:
     void readyToBeDamagedAgain();
@@ -66,8 +70,8 @@ private:
 
     int hitpoints;
     bool isJustDamaged;
-    QList<Bullet *> listOfBullets;
-    Bullet *bullet;
+    QList<Bullet *> typesOfbullets;
+    int bulletType;
     QTimer *damageTimer;
 };
 

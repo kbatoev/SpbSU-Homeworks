@@ -45,5 +45,9 @@ void KeyController::handleKey(QKeyEvent *keyEvent)
         game->currentTankShot();
     }
 
+    if (keyEvent->key() == Qt::Key_Q)
+    {
+        tank->changeBullet();
+    }
 }
 
