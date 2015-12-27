@@ -30,7 +30,7 @@ Bullet::~Bullet()
     delete timer;
 }
 
-void Bullet::drawBurst(Burstable *reason)
+void Bullet::isContactedBy(Contactable *reason)
 {
     if (isReadyToBurst && !hasBurst)
     {
@@ -125,7 +125,7 @@ void Bullet::checkDistanceFromLandscape()
     if (distance < 2.0 * bulletRadius)
     {
         isReadyToBurst = true;
-        drawBurst();
+        isContactedBy();
     }
 }
 

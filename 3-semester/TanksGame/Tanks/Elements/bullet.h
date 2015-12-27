@@ -9,14 +9,14 @@
 #include <QRectF>
 #include <QTimer>
 
-#include "burstable.h"
+#include "contactable.h"
 #include "landscape.h"
 #include "burst.h"
 #include "Constants/constants.h"
 
 class Game;
 
-class Bullet : public QObject, public Burstable
+class Bullet : public QObject, public Contactable
 {
     Q_OBJECT
 
@@ -25,7 +25,7 @@ public:
     Bullet(Game *game);
     ~Bullet();
 
-    void drawBurst(Burstable *reason = 0);
+    void isContactedBy(Contactable *reason = 0);
     int makeDamage();
     QRectF boundingRect() const Q_DECL_OVERRIDE;
     QPainterPath shape() const Q_DECL_OVERRIDE;

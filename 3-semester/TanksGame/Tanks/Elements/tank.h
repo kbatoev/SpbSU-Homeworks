@@ -5,7 +5,7 @@
 #include <QPainter>
 #include <QTimer>
 
-#include "burstable.h"
+#include "contactable.h"
 #include "../Constants/constants.h"
 #include "bullet.h"
 #include "lightbullet.h"
@@ -13,7 +13,7 @@
 
 class Game;
 
-class Tank : public QObject, public Burstable
+class Tank : public QObject, public Contactable
 {
     Q_OBJECT
 
@@ -25,7 +25,8 @@ public:
 
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
-    void drawBurst(Burstable *reason = 0);
+
+    void isContactedBy(Contactable *reason = 0);
     int makeDamage();
 
     /// Getters

@@ -31,7 +31,7 @@ SOURCES += main.cpp\
 HEADERS  += mainwindow.h \
     game.h \
     Elements/landscape.h \
-    Elements/burstable.h \
+    Elements/contactable.h \
     Elements/tank.h \
     KeyController/keyController.h \
     Elements/bullet.h \
@@ -41,6 +41,7 @@ HEADERS  += mainwindow.h \
     Net/server.h \
     Net/client.h \
     Elements/lightbullet.h \
-    Elements/heavybullet.h
+    Elements/heavybullet.h \
+    Elements/contactable.h
 
 FORMS    += mainwindow.ui

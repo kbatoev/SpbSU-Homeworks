@@ -48,7 +48,7 @@ void Burst::start()
     scene->addItem(this);
 }
 
-void Burst::drawBurst(Burstable *reason)
+void Burst::isContactedBy(Contactable *reason)
 {
 
 }

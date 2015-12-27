@@ -68,13 +68,13 @@ void Game::updateScene()
         {
             if (rects[i].intersects(rects[j]))
             {
-                Burstable *firstItem = dynamic_cast<Burstable *>(listOfItems[i]);
-                Burstable *secondItem = dynamic_cast<Burstable *>(listOfItems[j]);
+                Contactable *firstItem = dynamic_cast<Contactable *>(listOfItems[i]);
+                Contactable *secondItem = dynamic_cast<Contactable *>(listOfItems[j]);
 
                 if (firstItem && secondItem)
                 {
-                    firstItem->drawBurst(secondItem);
-                    secondItem->drawBurst(firstItem);
+                    firstItem->isContactedBy(secondItem);
+                    secondItem->isContactedBy(firstItem);
                 }
             }
         }

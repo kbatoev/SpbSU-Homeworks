@@ -2,10 +2,10 @@
 
 #include <QGraphicsItem>
 
-class Burstable : public QGraphicsItem
+class Contactable : public QGraphicsItem
 {
 public:
-    virtual void drawBurst(Burstable *reason = 0) = 0;
+    virtual void isContactedBy(Contactable *reason = 0) = 0;
     virtual int makeDamage() = 0;
 
 protected:

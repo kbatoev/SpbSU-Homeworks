@@ -10,14 +10,14 @@
 #include <QPointF>
 
 #include "../Constants/constants.h"
-#include "burstable.h"
+#include "contactable.h"
 
 /**
  * @brief The Burst class
  * It is created by Bullet class
  */
 
-class Burst : public QObject, public Burstable
+class Burst : public QObject, public Contactable
 {
     Q_OBJECT
 
@@ -30,7 +30,7 @@ public:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
     void start();
-    void drawBurst(Burstable *reason);
+    void isContactedBy(Contactable *reason);
     int makeDamage();
 
     void setBurstCenter(const QPointF &value);

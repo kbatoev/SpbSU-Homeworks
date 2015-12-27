@@ -48,7 +48,7 @@ void Tank::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     drawGun(painter);
 }
 
-void Tank::drawBurst(Burstable *reason)
+void Tank::isContactedBy(Contactable *reason)
 {
     if (!isJustDamaged && reason->makeDamage())
     {
