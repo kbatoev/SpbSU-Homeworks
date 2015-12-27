@@ -182,7 +182,6 @@ void Game::currentTankShot()
     hasShot = true;
 }
 
-
 void Game::createTank(int xcoordinate, QColor color)
 {
     QPointF tankPointOnScene = landscape->getPointWithXCoordinate(xcoordinate) + QPointF(0, -Tank::getRadius());
