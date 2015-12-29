@@ -14,7 +14,7 @@ public:
            QLineEdit *portLineEdit = 0, QPushButton *connectButton = 0);
 
 private slots:
-    void dealWithMessage(QString message);
+    void dealWithMessage(const QString &message);
     void establishedConnection();
 
     void enableConnectButton();

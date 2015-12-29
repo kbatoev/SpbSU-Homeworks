@@ -48,7 +48,7 @@ void Server::sessionOpened()
 
 }
 
-void Server::dealWithMessage(QString message)
+void Server::dealWithMessage(const QString &message)
 {
     emit received(message);
 }

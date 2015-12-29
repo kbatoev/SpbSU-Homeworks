@@ -21,7 +21,7 @@ Client::Client(QWidget *parent, QLabel *serverStatusLabel, QLineEdit *ipLineEdit
     connect(this->connectButton, SIGNAL(clicked()), this, SLOT(establishConnection()));
 }
 
-void Client::dealWithMessage(QString message)
+void Client::dealWithMessage(const QString &message)
 {
     if (isWaitingForFirstMessage)
     {

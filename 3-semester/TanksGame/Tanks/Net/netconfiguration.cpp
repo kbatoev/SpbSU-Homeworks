@@ -10,7 +10,7 @@ NetConfiguration::NetConfiguration(QWidget *parent, QLabel *serverStatusLabel, Q
     connect(tcpSocket, SIGNAL(readyRead()), this, SLOT(readMessage()));
 }
 
-void NetConfiguration::sendMessage(QString message)
+void NetConfiguration::sendMessage(const QString &message)
 {
     if (message != lastSentMessage)
     {
