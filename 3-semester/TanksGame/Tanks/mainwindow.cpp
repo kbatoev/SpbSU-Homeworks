@@ -137,7 +137,7 @@ void MainWindow::endGame(QColor colorOfLostTank)
     msgBox.exec();
 }
 
-void MainWindow::makeOpponentMove(QString message)
+void MainWindow::makeOpponentMove(const QString &message)
 {
     game->setCurrentInformation(message);
 }

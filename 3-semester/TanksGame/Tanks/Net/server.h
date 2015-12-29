@@ -20,7 +20,7 @@ public:
     ~Server();
 
 private slots:
-    void dealWithMessage(QString message);
+    void dealWithMessage(const QString &message);
     void establishedConnection();
 
     void sessionOpened();

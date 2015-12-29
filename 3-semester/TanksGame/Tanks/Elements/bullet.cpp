@@ -1,17 +1,11 @@
 #include "bullet.h"
 #include "game.h"
 
-Bullet::Bullet()
+Bullet::Bullet() :
+    iteration(0),
+    isReadyToBurst(false),
+    isFlying(false)
 {
-    iteration = 0;
-    bulletRadius = 5;
-    coefficient = 4.0;
-    speed = 55;
-    isReadyToBurst = false;
-    damage = 10;
-    radiusOfBurst = 40;
-    isFlying = false;
-
     timer = new QTimer();
     connect(timer, SIGNAL(timeout()), this, SLOT(updatePosition()));
     connect(timer, SIGNAL(timeout()), this, SLOT(updateStatus()));

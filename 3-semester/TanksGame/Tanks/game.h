@@ -34,7 +34,7 @@ public:
     static QString readUntilSeparator(QString message, int &startIndex);
 
     /// deals with tank accorrding to key
-    void keyPressEvent(Keys key);
+    void keyPressEvent(const Keys &key);
 
     QGraphicsScene *getScene() const;
     QPointF getPointWithXCoordinate(qreal x);
@@ -47,23 +47,23 @@ public:
     QString collectCurrentInformation();
 
     /// sets info after transmission
-    void setCurrentInformation(QString message);
+    void setCurrentInformation(const QString &message);
     void currentTankShot();
 
     /// Label sets bullet name
     QString getBulletName() const;
 
-signals:
-    void finishedMove();
-    void changedHealth(int health, QColor color);
-    void gameIsOver(QColor color);
+public slots:
+    void updateScene();
+    void setNextTank();
 
 private:
     void createTank(int xcoordinate, QColor color);
 
-public slots:
-    void updateScene();
-    void setNextTank();
+signals:
+    void finishedMove();
+    void changedHealth(int health, QColor color);
+    void gameIsOver(QColor color);
 
 private:
     QGraphicsScene *scene;

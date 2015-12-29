@@ -1,11 +1,10 @@
 #include "game.h"
 
-Game::Game(QVector<QPointF> *serverPoints)
+Game::Game(QVector<QPointF> *serverPoints) :
+    scene(new QGraphicsScene),
+    landscape(new Landscape(serverPoints)),
+    hasShot(false)
 {
-    scene = new QGraphicsScene();
-    landscape = new Landscape(serverPoints);
-    hasShot = false;
-
     createTank(startXCoordinate1, Qt::blue);
     createTank(startXCoordinate2, Qt::red);
 
@@ -58,7 +57,7 @@ QString Game::readUntilSeparator(QString message, int &startIndex)
     return result;
 }
 
-void Game::keyPressEvent(Keys key)
+void Game::keyPressEvent(const Keys &key)
 {
     Tank *tank = getCurrentTank();
     QPointF oldPoint = tank->getCenter();
@@ -187,7 +186,7 @@ QString Game::collectCurrentInformation()
     return result;
 }
 
-void Game::setCurrentInformation(QString message)
+void Game::setCurrentInformation(const QString &message)
 {
     Tank *currentTank = getCurrentTank();
     int index = 0;

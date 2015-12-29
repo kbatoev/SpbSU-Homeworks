@@ -40,7 +40,7 @@ private slots:
     void startGame();
 
     /// receives state done in another application and sets it
-    void makeOpponentMove(QString message);
+    void makeOpponentMove(const QString &message);
 
     /// gets state and sends it to another app
     void sendMessage();
