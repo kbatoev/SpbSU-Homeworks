@@ -1,14 +1,9 @@
-cntDigits :: Int -> Int
-cntDigits x
-	  | x < 10 = 1
-	  | otherwise = 1 + cntDigits (div x 10)  
-
 list179 :: [Int]
 list179 = list179
 		where
-	     	 list1 = [10 ^ (cntDigits x) + x | x <- list179]
-	     	 list7 = [7 * 10 ^ (cntDigits x) + x| x <- list179]
-	     	 list9 = [9 * 10 ^ (cntDigits x) + x| x <- list179]
+	     	 list1 = [x * 10 + 1 | x <- list179]
+	     	 list7 = [x * 10 + 7 | x <- list179]
+	     	 list9 = [x * 10 + 9 | x <- list179]
 	     	 list179 = [1, 7, 9] ++ concatBySorting list1 list7 list9
 		
 		 concatBySorting :: (Ord a) => [a] -> [a] -> [a] -> [a]
