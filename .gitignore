@@ -1,0 +1,5 @@
+*Debug/
+*.hs~
+*.vpp~*
+*.vpp.bak*
+*.pro.user*
