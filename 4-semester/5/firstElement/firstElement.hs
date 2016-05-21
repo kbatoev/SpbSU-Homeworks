@@ -13,8 +13,8 @@ findElement list = zipWithM isMore list (nextElem list) >>= \y -> zipWithM isMor
 isMore :: Maybe Int -> Maybe Int -> IO (Maybe Int)
 isMore Nothing _ = return (Nothing)
 isMore (Just value1) (Just value2) 
-									| value1 > value2 = return (Just value1)
-									| otherwise 	  = return (Nothing)
+                                    | value1 > value2 = return (Just value1)
+                                    | otherwise       = return (Nothing)
 
 nextElem :: [Maybe Int] -> [Maybe Int]
 nextElem [] = []
