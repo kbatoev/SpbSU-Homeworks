@@ -25,19 +25,20 @@ instance Show Monomial where
 
 data Polynomial = Polynomial [Monomial] 
 
-instance Show Polynomial where 
-	show (Polynomial [x])    = show x
-	show (Polynomial (x:xs)) = show x ++ " + " ++ show (Polynomial xs)
+instance Show Polynomial where
+	show (Polynomial list) = showP $ (filter isNotZero list)
+		where 
+			showP :: [Monomial] -> String
+			showP []     = "0"
+			showP [x]    = show x
+			showP (x:xs) = show x ++ " + " ++ showP xs
 
 
 simplify :: Polynomial -> Polynomial
-simplify (Polynomial list) = if length (filter isNotZero (simplifyInside list)) == 0 
-			     then Polynomial [X 0 0]
-			     else Polynomial (filter isNotZero (simplifyInside list))
-	where 
-		isNotZero :: Monomial -> Bool
-		isNotZero (X d f) = f /= 0
-
+simplify (Polynomial list) = Polynomial (filter isNotZero (simplifyInside list)) 
+		
+isNotZero :: Monomial -> Bool
+isNotZero (X d f) = f /= 0
 
 
 simplifyInside :: [Monomial] -> [Monomial]
