@@ -40,9 +40,32 @@ first :: (Int, Int) -> Int
 first (a, b) = a
 
 simplify :: Expr -> Expr
-simplify (expr1 :-: expr2) = simplify (expr1 :+: (expr2 :*: Const (-1)))
+simplify ((Const 0) :+: expr2) = simplify expr2
+simplify ((Const 0) :-: expr2) = (Const (-1)) :*: simplify expr2
+simplify ((Const 0) :*: expr2) = Const 0
+simplify ((Const 0) :/: expr2) = Const 0
+simplify (expr1 :+: (Const 0)) = simplify expr1
+simplify (expr1 :-: (Const 0)) = simplify expr1
+simplify (expr1 :*: (Const 0)) = Const 0
+simplify expr@(expr1 :*: expr2) 
+			 	| hasDivision expr == False = makeExpr $ simplify' expr
+				| otherwise                 = (simplify expr1) :*: (simplify expr2)
+simplify expr@(expr1 :+: expr2) 
+			 	| hasDivision expr == False = makeExpr $ simplify' expr
+				| otherwise                 = (simplify expr1) :+: (simplify expr2)
+simplify expr@(expr1 :-: expr2) 
+			 	| hasDivision expr == False = makeExpr $ simplify' expr
+				| otherwise                 = (simplify expr1) :-: (simplify expr2)
 simplify (expr1 :/: expr2) = (simplify expr1) :/: (simplify expr2)
 simplify expr = makeExpr $ simplify' expr
+
+hasDivision :: Expr -> Bool
+hasDivision (expr1 :/: expr2) = True
+hasDivision (Const _)         = False
+hasDivision (X _)             = False
+hasDivision (expr1 :+: expr2) = hasDivision expr1 || hasDivision expr2
+hasDivision (expr1 :-: expr2) = hasDivision expr1 || hasDivision expr2
+hasDivision (expr1 :*: expr2) = hasDivision expr1 || hasDivision expr2
 
 simplify' :: Expr -> [(Int, Int)]
 simplify' (Const c) = [(0, c)]
@@ -50,7 +73,6 @@ simplify' (X d)     = [(d, 1)]
 simplify' (expr1 :+: expr2) = add (simplify' expr1) (simplify' expr2)
 simplify' (expr1 :*: expr2) = multiply (simplify' expr1) (simplify' expr2)
 simplify' (expr1 :-: expr2) = simplify' (expr1 :+: (Const (-1) :*: expr2))
---simplify' (expr1 :/: expr2) = simplify' expr1 ++ [(-1, 0)] ++ simplify' expr2
 
 add :: [(Int, Int)] -> [(Int, Int)] -> [(Int, Int)]
 add [] expr = expr
