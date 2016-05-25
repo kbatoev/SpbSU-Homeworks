@@ -66,10 +66,12 @@ simplifyInside list@(x:xs) = (foldl1 addEqualDegreeMonomials list) : simplifyIns
 		isDifferentDegree d m = degree m /= d
 
 
+infix 6 <+>
 (<+>) :: Polynomial -> Polynomial -> Polynomial
 (Polynomial a) <+> (Polynomial b) = simplify (Polynomial (a ++ b))
 		
 
+infix 7 <*>
 (<*>) :: Polynomial -> Polynomial -> Polynomial
 (Polynomial []) <*> y                       = Polynomial []
 (Polynomial a@(x:xs)) <*> bb@(Polynomial b) = simplify (Polynomial (map (multiplyMonomials x) b)) <+> ((Polynomial xs) <*> bb)
