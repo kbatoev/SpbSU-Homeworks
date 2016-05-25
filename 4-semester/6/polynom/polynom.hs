@@ -1,3 +1,5 @@
+import Data.List as L
+
 data Monomial = X Int Int -- first value is degree, second - factor
 
 degree :: Monomial -> Int
@@ -23,10 +25,20 @@ instance Show Monomial where
 							     | otherwise = "^" ++ show d
 
 
+instance Eq Monomial where
+	(X d1 f1) == (X d2 f2) = (d1 == d2 && f1 == f2) || (f1 == 0 && f2 == 0)
+
+instance Ord Monomial where
+	m1@(X d1 f1) `compare` m2@(X d2 f2)
+					| d1 < d2 || d1 == d2 && f1 < f2 = LT
+					| m1 == m2                       = EQ
+					| otherwise                      = GT
+
+
 data Polynomial = Polynomial [Monomial] 
 
 instance Show Polynomial where
-	show (Polynomial list) = showP $ (filter isNotZero list)
+	show (Polynomial list) = showP $ sort (filter isNotZero list)
 		where 
 			showP :: [Monomial] -> String
 			showP []     = "0"
