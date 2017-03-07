@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "ListOfDegrees", "ListOfDegrees.fsproj", "{48A516E0-330E-4E20-B3F0-42E72B15C3A5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{48A516E0-330E-4E20-B3F0-42E72B15C3A5}.Debug|x86.ActiveCfg = Debug|x86
+		{48A516E0-330E-4E20-B3F0-42E72B15C3A5}.Debug|x86.Build.0 = Debug|x86
+		{48A516E0-330E-4E20-B3F0-42E72B15C3A5}.Release|x86.ActiveCfg = Release|x86
+		{48A516E0-330E-4E20-B3F0-42E72B15C3A5}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
