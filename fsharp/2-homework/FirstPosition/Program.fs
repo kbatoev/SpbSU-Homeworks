@@ -3,6 +3,6 @@
 let findFirstPosition list number =
     let rec helper newList position =
         match newList with
-        | [] -> -1
-        | x :: xs -> if x = number then position else helper xs (position + 1)
+        | [] -> None
+        | x :: xs -> if x = number then Some position else helper xs (position + 1)
     helper list 0
