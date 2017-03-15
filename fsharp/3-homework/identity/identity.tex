@@ -1,0 +1,40 @@
+\documentclass[a4paper,14pt]{article}
+\pagestyle{empty}
+\usepackage{color}
+\usepackage{mathtools}
+\usepackage{ifxetex}
+\ifxetex\usepackage{fontspec}\setmainfont[Ligatures=TeX]{CMU Serif}
+\else\usepackage[utf8]{inputenc}\usepackage[T2A]{fontenc}
+\fi
+
+\begin{document}
+\fontsize{14}{7pt}\selectfont
+\setlength{\parindent}{0cm}{\Huge Доказать, что S K K = I} 
+\bigskip
+\section*{Доказательство}
+S $\equiv$ $\lambda$x y z.x z (y z) \newline
+K $\equiv$ $\lambda$x y.x \newline
+I $\equiv$ $\lambda$x.x \newline
+\bigskip
+
+S K K = ($\lambda$x y z.x z (y z)) ($\lambda$x y.x) ($\lambda$x y.x)
+        $\xrightarrow[\alpha]{}$ \newline
+        ($\lambda$x y z.x z (y z)) ($\lambda$u v.u) ($\lambda$x y.x) 
+        $\xrightarrow[\alpha]{}$ \newline
+        ($\lambda$x y z.x z (y z)) ($\lambda$u v.u) ($\lambda$m n.m) 
+        $\xrightarrow[\beta]{}$ \newline
+        ($\lambda$y z.($\lambda$u v.u) z (y z)) ($\lambda$m n.m) 
+        $\xrightarrow[\beta]{}$ \newline
+        ($\lambda$y z.($\lambda$v.z) (y z)) ($\lambda$m n.m) 
+        $\xrightarrow[\beta]{}$ \newline
+        ($\lambda$y z.z) ($\lambda$m n.m) 
+        $\xrightarrow[\beta]{}$ \newline
+        $\lambda$z.z 
+        $\xrightarrow[\alpha]{}$ \newline
+        $\lambda$x.x = I
+        
+\bigskip
+\section*{Ч. т. д.}
+        
+\end{document}
+
