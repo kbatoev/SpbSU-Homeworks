@@ -5,6 +5,7 @@
 
 let rec mergeSort list =    
     match list with
+    | []  -> []
     | [x] -> [x]
     | _   -> let cnt = List.length list / 2
 
