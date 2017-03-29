@@ -1,0 +1,41 @@
+\documentclass[a4paper,14pt]{article}
+\pagestyle{empty}
+\usepackage{color}
+\usepackage{mathtools}
+\usepackage{ifxetex}
+\ifxetex\usepackage{fontspec}\setmainfont[Ligatures=TeX]{CMU Serif}
+\else\usepackage[utf8]{inputenc}\usepackage[T2A]{fontenc}
+\fi
+
+\begin{document}
+\fontsize{16}{22pt}\selectfont
+\setlength{\parindent}{0cm}{\Huge Выполнить бета-редукцию} 
+\bigskip
+
+\section*{Дано}
+T = (($\lambda$a.($\lambda$b.b b) ($\lambda$b.b b)) b) (($\lambda$c.(c b)) ($\lambda$a.a))
+% \bigskip
+
+\section*{Решение}
+Введем некоторые обозначения: \newline
+S = ($\lambda$a.($\lambda$b.b b) ($\lambda$b.b b)) \newline
+R = (($\lambda$c.(c b)) ($\lambda$a.a)) \newline
+Тогда  выражение примет вид: T = (S b) R \newline
+
+Упростить S сейчас нельзя. \newline
+Однако терм R -- можно: \newline
+R = ($\lambda$c.(c b)) ($\lambda$a.a)
+    $\xrightarrow[\beta]{}$ (($\lambda$a.a) b) $\xrightarrow[\beta]{}$ b \newline
+Получаем, что T = (S b) b
+
+
+S b = ($\lambda$a.($\lambda$b.b b) ($\lambda$b.b b)) b $\xrightarrow[\alpha]{}$ \newline
+        ($\lambda$a.($\lambda$d.d d) ($\lambda$d.d d)) b $\xrightarrow[\beta]{}$ 
+        ($\lambda$d.d d) ($\lambda$d.d d) \newline
+Получили, что S b -- это расходящийся комбинатор $\Omega$. \newline
+
+То есть, T = ($\lambda$d.d d) ($\lambda$d.d d) b = \newline
+(($\lambda$d.d d) ($\lambda$d.d d)) b, потому что операция аппликации левоассоциативна.
+        
+        
+\end{document}
