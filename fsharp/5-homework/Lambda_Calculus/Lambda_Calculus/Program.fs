@@ -70,15 +70,11 @@ module BetaReduction =
     | V x -> V x
     | Application (t1, t2) -> match t1 with
                              | V x -> Application (t1, reduce t2)
-                             | Application (s1, s2) -> let rec helper term = 
-                                                         if reduce term = term
-                                                         then term
-                                                         else helper (reduce term)
-                                                       let tmp1 = helper t1
-                                                       let tmp2 = helper t2
-                                                       match tmp1 with
-                                                       | Abstraction (var, s) -> reduce <| Application (tmp1, tmp2)
-                                                       | _                    -> Application (tmp1, tmp2)
+                             | Application (s1, s2) -> 
+                                                       let newt1 = reduce t1
+                                                       match newt1 with
+                                                       | Abstraction (var, s) -> reduce <| Application (newt1, t2)
+                                                       | _                    -> Application (newt1, reduce t2)
                                                        
                              | Abstraction (var, s) -> let termAfterSubstitution = substitute s var t2
                                                        reduce termAfterSubstitution

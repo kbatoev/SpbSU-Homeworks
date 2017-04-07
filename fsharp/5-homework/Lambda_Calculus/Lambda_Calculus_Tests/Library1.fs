@@ -57,3 +57,41 @@ module BetaReductionTests =
   [<Test>]
   let checkTermThatHasApplication_FarRightFromBeginning () =
     reduce termThatHasApplication_FarRightFromBeginning |> should equal (Application (Application (Application (Application (V 'x', V 'y'), V 'z'), V 'w'), V 'v'))
+
+
+  // (\x y z u. x y z u) x y z u -> x y z u
+  let term3 = Application (Application (Application (Application (Abstraction('x', Abstraction('y', Abstraction('z', Abstraction ('u', Application (Application(Application (V 'x', V 'y'), V 'z'), V 'u'))))), V 'x'), V 'y'), V 'z'), V 'u')
+  [<Test>]
+  let checkTerm3 () = 
+    reduce term3 |> should equal (Application (Application(Application (V 'x', V 'y'), V 'z'), V 'u'))
+
+  // (\x. x z) (\y. y x) -> z x
+  let term4 = Application(Abstraction('x', Application(V 'x', V 'z')), Abstraction('y', Application(V 'y', V 'x')))
+  [<Test>]
+  let checkTerm4 () =
+    reduce term4 |> should equal (Application (V 'z', V 'x'))
+
+
+  // (\u x. u x z) (\y. y x) -> (\w. w x z)
+  let term5 = Application(Abstraction('u', Abstraction('x', Application(Application (V 'u', V 'x'), V 'z'))), Abstraction('y', Application(V 'y', V 'x')))
+  [<Test>]
+  let checkTerm5 () =
+    reduce term5 |> should equal (Abstraction('w', Application(Application(V 'w', V 'x'), V 'z')))
+    
+  // (\x. \y. \x. x y) z -> \y. \x. x y
+  let helperTerm = Abstraction('y', Abstraction('x', Application(V 'x', V 'y')))
+  let term6 = Application(Abstraction('x', helperTerm), V 'z')
+  [<Test>]
+  let checkTerm6 () =
+    reduce term6 |> should equal helperTerm
+
+
+  let combinatorI = Abstraction('z', V 'z')
+  let combinatorK = Abstraction('x', Abstraction('y', V 'x'))
+  let combinatorS = Abstraction('x', Abstraction('y', Abstraction('z', Application(Application(V 'x', V 'z'), Application(V 'y', V 'z')))))
+  let term7 = Application(Application(combinatorS, combinatorK), combinatorK)
+  // S K K = I
+  [<Test>]
+  let check_whether_SKK_equals_I () =
+    reduce term7 |> should equal combinatorI
+
