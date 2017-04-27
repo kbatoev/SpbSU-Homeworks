@@ -34,6 +34,12 @@ type Node<'T when 'T :> IComparable<'T> >(v : 'T, l : Node<'T>, r : Node<'T>) =
     then value
     else right.GetMostRightValue()
 
+  member this.Exists elem = 
+    match value.CompareTo(elem) with
+    | 0 -> true
+    | 1 -> if left = null then false else left.Exists elem
+    | -1 -> if right = null then false else right.Exists elem
+    | _ -> false
   member this.Remove elem = 
     match value.CompareTo(elem) with
     | 0 -> match (left, right) with
@@ -82,7 +88,8 @@ type BinaryTree<'T when 'T :> IComparable<'T> >(newRoot : Node<'T>) =
     if root = null
     then root <- Node<'T>(elem, null, null)
     else root.Add elem
-
+  
+  member this.Exists elem = if root = null then false else root.Exists elem
   member this.IsEmpty() = root = null
   member this.Print() = 
     if root = null
@@ -148,6 +155,9 @@ let main argv =
   tree1.Add -7
   tree1.Add 3
   tree1.Print()
+
+  printfn "%A" <| tree2.Exists 29
+  printfn "%A" <| tree2.Exists 45
 
   
   0 // возвращение целочисленного кода выхода
