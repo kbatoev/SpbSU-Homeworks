@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26228.9
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "TreeIterator", "TreeIterator\TreeIterator.fsproj", "{7868FEA6-0CE9-48A8-93DB-D3DBBA1037CD}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "TreeIteratorTests", "TreeIteratorTests\TreeIteratorTests.fsproj", "{18915787-6907-4C76-897E-8FD46C3F0D47}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{7868FEA6-0CE9-48A8-93DB-D3DBBA1037CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7868FEA6-0CE9-48A8-93DB-D3DBBA1037CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7868FEA6-0CE9-48A8-93DB-D3DBBA1037CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18915787-6907-4C76-897E-8FD46C3F0D47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18915787-6907-4C76-897E-8FD46C3F0D47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18915787-6907-4C76-897E-8FD46C3F0D47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18915787-6907-4C76-897E-8FD46C3F0D47}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

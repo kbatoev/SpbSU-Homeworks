@@ -1,5 +1,6 @@
 ﻿// Дополнительные сведения о F# см. на http://fsharp.org
 // Дополнительную справку см. в проекте "Учебник по F#".
+namespace Tree
 
 open System
 open System.Collections
@@ -51,7 +52,9 @@ type Node<'T when 'T :> IComparable<'T> >(v : 'T, l : Node<'T>, r : Node<'T>) =
                           right <- left.GetRight()
                           left <- left.GetLeft()
            | (_, _)    -> value <- left.GetMostRightValue()
-                          left.Remove value
+                          if left.GetRight() = null && left.GetLeft() = null
+                          then left <- null
+                          else left.Remove value
     | 1 -> if left <> null 
            then if left.GetRight() = null && left.GetLeft() = null && left.GetValue().CompareTo(elem) = 0
                 then left <- null
@@ -85,6 +88,11 @@ type BinaryTree<'T when 'T :> IComparable<'T> >(newRoot : Node<'T>) =
     | _    -> if root.GetLeft() = null && root.GetRight() = null && root.GetValue().CompareTo(elem) = 0
               then root <- null
               else root.Remove elem
+  member this.ToList () =
+    let mutable list = []
+    for value in this do
+      list <- (value :: list)
+    List.rev list
 
   member this.Add elem =
     if root = null
@@ -136,62 +144,19 @@ and TreeIterator<'T when 'T :> IComparable<'T>>(tree : BinaryTree<'T>) =
       else firstElementWasVisited <- true
            true
 
-[<EntryPoint>]
-let main argv = 
+module MainModule = 
 
-  let tree2 = new BinaryTree<int>()
-  printfn "%A" <| tree2.IsEmpty()
+  [<EntryPoint>]
+  let main argv = 
 
-  tree2.Add 50
-  printfn "%A" <| tree2.IsEmpty()
-
-  tree2.Remove 50
-  printfn "%A" <| tree2.IsEmpty()
-
-  tree2.Print()
+    let tree1 = new BinaryTree<int> (Node<int> (4, null, null))
+    tree1.Add 2
+    tree1.Add 100
+    tree1.Print()
+    tree1.Remove 100
+    tree1.Print()
+    tree1.Add -7
+    tree1.Add 3
+    tree1.Print()
   
-  tree2.Add 50
-  tree2.Add 100
-  tree2.Print()
-
-  tree2.Add 25
-  tree2.Add 24
-  tree2.Add 26
-  tree2.Add 27
-  tree2.Add 28
-  tree2.Add 45
-  tree2.Add 30
-  tree2.Add 29
-  tree2.Add 31
-  tree2.Print()
-
-  tree2.Remove 50
-  tree2.Print()
-
-  tree2.Remove 45
-  tree2.Print()
-
-  printfn "%A" <| tree2.Exists 29
-  printfn "%A" <| tree2.Exists 45
-
-  let tree1 = new BinaryTree<int> (Node<int> (4, null, null))
-  tree1.Add 2
-  tree1.Add 100
-  tree1.Print()
-  tree1.Remove 100
-  tree1.Print()
-  tree1.Add -7
-  tree1.Add 3
-  tree1.Print()
-
-  printfn "\n"
-  let mutable enumer = (tree2:>(IEnumerable<int>)).GetEnumerator()
-                                               
-
-  //for node in (tree2:>(IEnumerable<int>)).GetEnumerator(). do
-  //printfn "%A" <| v  
-
-  for node in tree1 do
-    printfn "%A" <| node
-  
-  0 // возвращение целочисленного кода выхода
+    0 // возвращение целочисленного кода выхода
