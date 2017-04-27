@@ -89,27 +89,25 @@ type BinaryTree<'T when 'T :> IComparable<'T> >(newRoot : Node<'T>) =
     then printfn "Tree is empty"
     else root.Print()
          printf "\n"
-
+  member this.GetValue() =
+    if root = null then None else Some <| root.GetValue()
   new() =
-    BinaryTree(null)
-
-   (*
+    new BinaryTree<'T>(null)
 
   interface IEnumerator<'T> with
-    member this.Current = value :> obj
+    member this.Current = root :> obj
     member this.MoveNext () = false
     member this.Reset () = ()
     member this.Dispose () = ()
-    member this.Current = v 
+    member this.Current = root.GetValue()
   
   
-  *)
 
 
 [<EntryPoint>]
 let main argv = 
 
-  let tree2 = BinaryTree<int>()
+  let tree2 = new BinaryTree<int>()
   printfn "%A" <| tree2.IsEmpty()
 
   tree2.Add 50
@@ -141,7 +139,7 @@ let main argv =
   tree2.Remove 45
   tree2.Print()
 
-  let tree1 = BinaryTree<int> (Node<int> (4, null, null))
+  let tree1 = new BinaryTree<int> (Node<int> (4, null, null))
   tree1.Add 2
   tree1.Add 100
   tree1.Print()
