@@ -5,12 +5,93 @@ open System
 open System.Collections
 open System.Collections.Generic
 
+[<AllowNullLiteral>]
+type Node<'T when 'T :> IComparable<'T> >(v : 'T, l : Node<'T>, r : Node<'T>) =
+  let mutable value : 'T = v
+  let mutable left : Node<'T> = l
+  let mutable right : Node<'T> = r
+
+  member this.GetValue() = v
+  member this.GetLeft() = left
+  member this.GetRight() = right
+
+  member this.Print() =
+    printf "%A" value
+    if left = null
+    then printf "()"
+    else printf "("
+         left.Print()
+         printf ")"
+
+    if right = null
+    then printf "()"
+    else printf "("
+         right.Print()
+         printf ")"
+
+  member private this.GetMostRightValue() = 
+    if right = null
+    then value
+    else right.GetMostRightValue()
+
+  member this.Remove elem = 
+    match value.CompareTo(elem) with
+    | 0 -> match (left, right) with
+           | (null, _) -> value <- right.GetValue()
+                          left <- right.GetLeft()
+                          right <- right.GetRight()
+           | (_, null) -> value <- left.GetValue()
+                          right <- left.GetRight()
+                          left <- left.GetLeft()
+           | (_, _)    -> value <- left.GetMostRightValue()
+                          left.Remove value
+    | 1 -> if left <> null 
+           then if left.GetRight() = null && left.GetLeft() = null && left.GetValue().CompareTo(elem) = 0
+                then left <- null
+                else left.Remove elem
+    | -1 -> if right <> null 
+            then if right.GetRight() = null && right.GetLeft() = null && right.GetValue().CompareTo(elem) = 0
+                 then right <- null
+                 else right.Remove elem
+    | _ -> ()
+        
+  member this.Add elem =
+    match v.CompareTo(elem) with
+    | -1 -> if right = null
+            then right <- Node<'T>(elem, null, null)
+            else right.Add elem
+    | 1 -> if left = null
+           then left <- Node<'T>(elem, null, null)
+           else left.Add elem
+    | _ -> ()
+
 
 [<AllowNullLiteral>]
-type BinaryTree<'T when 'T :> IComparable<'T> >(v : 'T, l : BinaryTree<'T>, r : BinaryTree<'T>) =
-  let mutable value : Option<'T> = Some v
-  let mutable left : BinaryTree<'T> = l
-  let mutable right : BinaryTree<'T> = r
+type BinaryTree<'T when 'T :> IComparable<'T> >(newRoot : Node<'T>) =
+  let mutable root : Node<'T> = newRoot
+  let mutable size : int = 0
+
+  member this.Remove elem =
+    match root with
+    | null -> ()
+    | _    -> if root.GetLeft() = null && root.GetRight() = null && root.GetValue().CompareTo(elem) = 0
+              then root <- null
+              else root.Remove elem
+
+  member this.Add elem =
+    if root = null
+    then root <- Node<'T>(elem, null, null)
+    else root.Add elem
+
+  member this.IsEmpty() = root = null
+  member this.Print() = 
+    if root = null
+    then printfn "Tree is empty"
+    else root.Print()
+         printf "\n"
+
+  new() =
+    BinaryTree(null)
 
    (*
 
@@ -23,135 +104,52 @@ type BinaryTree<'T when 'T :> IComparable<'T> >(v : 'T, l : BinaryTree<'T>, r : 
   
   
   *)
-  member private this.getMostRightValue() =
-    match right with
-    | null -> value
-    | _    -> right.getMostRightValue()
-
-    (*
-    match (left, right) with
-    | (null, null) -> let result = value
-                      value <- None
-                      result
-    | (_, null)    -> let result = value
-                      value <- left.GetValue()
-                      right <- left.GetRight()
-                      left <- left.GetLeft()
-                      result
-    | (_,_)        -> right.getMostRightValue()
-    
-    *)
-
-  member this.GetValue () = value
-  member this.GetLeft () = left
-  member this.GetRight () = right
-
-  member this.Print () = 
-    match value with
-    | None -> printfn "Tree is empty"
-    | Some v -> printf "%A " <| v
-               
-                if left = null
-                then printf "()"
-                else  printf "("
-                      left.Print()
-                      printf ")"
-                if right = null
-                then printf "()"
-                else printf "("
-                     right.Print()
-                     printf ")"
-  member this.Add elem =
-    match value with
-    | None -> value <- Some elem
-    | Some v -> match v.CompareTo(elem) with
-                | 0 -> ()
-                | 1 -> if left = null 
-                       then left <- BinaryTree<'T>(elem, null, null)
-                       else left.Add elem
-                | -1 -> if right = null
-                        then right <- BinaryTree<'T>(elem, null, null)
-                        else right.Add elem
-                | _ -> ()
-  member this.Remove elem =
-    match value with
-    | None -> false
-    | Some v -> match v.CompareTo(elem) with
-                | 0 -> match (left, right) with 
-                       | (null, null) -> value <- None
-                       | (null, _)    -> value <- right.GetValue()
-                                         left <- right.GetLeft()
-                                         right <- right.GetRight()
-                       | (_, null)    -> value <- left.GetValue()
-                                         right <- left.GetRight()
-                                         left <- left.GetLeft()
-                       | _            -> let result = left.getMostRightValue()
-                                         left.Remove (result.Value) |> ignore
-                                         value <- result
-                       true
-                | 1 -> if left = null
-                       then false
-                       else let result = left.Remove elem
-                            match left.GetValue() with
-                            | None -> left <- null
-                            | _    -> ()
-                            result
-                | -1 -> if right = null 
-                        then false
-                        else let result = right.Remove elem
-                             match right.GetValue() with
-                             | None -> right <- null
-                             | _    -> ()
-                             result
-                | _ -> false
-                
-  new(v: 'T) =
-    BinaryTree(v, null, null)
 
 
 [<EntryPoint>]
 let main argv = 
 
-  let tree = BinaryTree<int> (4, BinaryTree<int> (2), BinaryTree<int> (100))
-  tree.Print()
-  printfn "\n100 was removed: %A" <| tree.Remove 100
-  tree.Print()
-  printf "\n"
+  let tree2 = BinaryTree<int>()
+  printfn "%A" <| tree2.IsEmpty()
+
+  tree2.Add 50
+  printfn "%A" <| tree2.IsEmpty()
+
+  tree2.Remove 50
+  printfn "%A" <| tree2.IsEmpty()
+
+  tree2.Print()
   
-  tree.Add(-7)
-  tree.Print()
-  printf "\n"
+  tree2.Add 50
+  tree2.Add 100
+  tree2.Print()
 
-  tree.Add(100)
-  tree.Print()
-  printf "\n"
+  tree2.Add 25
+  tree2.Add 24
+  tree2.Add 26
+  tree2.Add 27
+  tree2.Add 28
+  tree2.Add 45
+  tree2.Add 30
+  tree2.Add 29
+  tree2.Add 31
+  tree2.Print()
 
-  tree.Add(3)
-  tree.Print()
-  printf "\n"
+  tree2.Remove 50
+  tree2.Print()
 
-  let tree1 = BinaryTree<int> (50)
+  tree2.Remove 45
+  tree2.Print()
+
+  let tree1 = BinaryTree<int> (Node<int> (4, null, null))
+  tree1.Add 2
   tree1.Add 100
-  tree1.Add 25
-  tree1.Add 24
-  tree1.Add 26
-  tree1.Add 27
-  tree1.Add 28
-  tree1.Add 45
-  tree1.Add 30
-  tree1.Add 29
-  tree1.Add 31
   tree1.Print()
-  printf "\n"
-
-  tree1.Remove 50
+  tree1.Remove 100
   tree1.Print()
-  printf "\n"
-
-  tree1.Remove 45
+  tree1.Add -7
+  tree1.Add 3
   tree1.Print()
-  printf "\n"
-
 
   
   0 // возвращение целочисленного кода выхода
