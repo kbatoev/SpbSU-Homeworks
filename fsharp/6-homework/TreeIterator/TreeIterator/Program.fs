@@ -5,24 +5,12 @@ open System
 open System.Collections
 open System.Collections.Generic
 
-//type Node<'T> = 'T * Node<'T> * Node<'T>
 
 [<AllowNullLiteral>]
 type BinaryTree<'T when 'T :> IComparable<'T> >(v : 'T, l : BinaryTree<'T>, r : BinaryTree<'T>) =
   let mutable value : Option<'T> = Some v
   let mutable left : BinaryTree<'T> = l
   let mutable right : BinaryTree<'T> = r
-
-  (*
-  let rec helper (tree : BinaryTree<'T>) = 
-      printf "%A " <| tree.GetValue()
-      match tree.GetLeft () with
-      | None -> ()
-      | Some l -> helper l
-      match tree.GetRight () with
-      | None -> ()
-      | Some r -> helper r
-   *)
 
    (*
 
@@ -55,16 +43,29 @@ type BinaryTree<'T when 'T :> IComparable<'T> >(v : 'T, l : BinaryTree<'T>, r : 
     match value with
     | None -> printfn "Tree is empty"
     | Some v -> printf "%A " <| v
-                printf "("
+               
                 if left = null
-                then printf "null"
-                else left.Print()
-                printf ")"
-                printf "("
+                then printf "()"
+                else  printf "("
+                      left.Print()
+                      printf ")"
                 if right = null
-                then printf "null"
-                else right.Print()
-                printf ")"
+                then printf "()"
+                else printf "("
+                     right.Print()
+                     printf ")"
+  member this.Add elem =
+    match value with
+    | None -> value <- Some elem
+    | Some v -> match v.CompareTo(elem) with
+                | 0 -> ()
+                | 1 -> if left = null 
+                       then left <- BinaryTree<'T>(elem, null, null)
+                       else left.Add elem
+                | -1 -> if right = null
+                        then right <- BinaryTree<'T>(elem, null, null)
+                        else right.Add elem
+                | _ -> ()
   member this.Remove elem =
     match value with
     | None -> false
@@ -95,28 +96,49 @@ type BinaryTree<'T when 'T :> IComparable<'T> >(v : 'T, l : BinaryTree<'T>, r : 
                              result
                 | _ -> false
                 
-
-   
-  //                          then 
-    
-  //override this.GetEnumerator () = null
-
-  
-  //let leftTree : BinaryTree<'T> = null
-  //let mutable elementsList : list<'a> = []
-  //let count = List.length elementsList
-
-
+  new(v: 'T) =
+    BinaryTree(v, null, null)
 
 
 [<EntryPoint>]
 let main argv = 
 
-  let tree = BinaryTree<int> ((1), BinaryTree<int> (2, null, null), BinaryTree<int> (100, null, null))
+  let tree = BinaryTree<int> (4, BinaryTree<int> (2), BinaryTree<int> (100))
   tree.Print()
   printfn "\n100 was removed: %A" <| tree.Remove 100
   tree.Print()
+  printf "\n"
   
+  tree.Add(-7)
+  tree.Print()
+  printf "\n"
+
+  tree.Add(100)
+  tree.Print()
+  printf "\n"
+
+  tree.Add(3)
+  tree.Print()
+  printf "\n"
+
+  let tree1 = BinaryTree<int> (50)
+  tree1.Add 100
+  tree1.Add 25
+  tree1.Add 24
+  tree1.Add 26
+  tree1.Add 27
+  tree1.Add 28
+  tree1.Add 45
+  tree1.Add 30
+  tree1.Add 29
+  tree1.Add 31
+  tree1.Print()
+  printf "\n"
+
+  tree1.Remove 50
+  tree1.Print()
+  printf "\n"
+
 
   
   0 // возвращение целочисленного кода выхода
