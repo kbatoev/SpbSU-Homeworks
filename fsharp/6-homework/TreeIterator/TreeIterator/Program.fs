@@ -5,13 +5,14 @@ open System
 open System.Collections
 open System.Collections.Generic
 
+
 [<AllowNullLiteral>]
 type Node<'T when 'T :> IComparable<'T> >(v : 'T, l : Node<'T>, r : Node<'T>) =
   let mutable value : 'T = v
   let mutable left : Node<'T> = l
   let mutable right : Node<'T> = r
 
-  member this.GetValue() = v
+  member this.GetValue() = value
   member this.GetLeft() = left
   member this.GetRight() = right
 
@@ -75,7 +76,8 @@ type Node<'T when 'T :> IComparable<'T> >(v : 'T, l : Node<'T>, r : Node<'T>) =
 [<AllowNullLiteral>]
 type BinaryTree<'T when 'T :> IComparable<'T> >(newRoot : Node<'T>) =
   let mutable root : Node<'T> = newRoot
-  let mutable size : int = 0
+
+  member this.GetRoot() = root
 
   member this.Remove elem =
     match root with
@@ -101,15 +103,38 @@ type BinaryTree<'T when 'T :> IComparable<'T> >(newRoot : Node<'T>) =
   new() =
     new BinaryTree<'T>(null)
 
+  interface IEnumerable with
+    member this.GetEnumerator() = (new TreeIterator<'T>(this)) :> (IEnumerator)
+ 
+  interface IEnumerable<'T> with
+    member this.GetEnumerator () = (new TreeIterator<'T>(this)) :> (IEnumerator<'T>)
+  
+  
+and TreeIterator<'T when 'T :> IComparable<'T>>(tree : BinaryTree<'T>) = 
+  let mutable stack : Stack<Node<'T>> = Stack<Node<'T>> ()
+  let mutable cur = tree.GetRoot()
+  let mutable firstElementWasVisited = false
   interface IEnumerator<'T> with
-    member this.Current = root :> obj
-    member this.MoveNext () = false
-    member this.Reset () = ()
-    member this.Dispose () = ()
-    member this.Current = root.GetValue()
-  
-  
-
+    member this.Current = cur.GetValue()
+    member this.Reset() = cur <- tree.GetRoot()
+                          firstElementWasVisited <- false
+    member this.Dispose() = ()
+    member this.Current = (cur.GetValue()) :> obj 
+    member this.MoveNext() = 
+      if firstElementWasVisited
+      then match cur.GetLeft(), cur.GetRight(), stack.Count with
+      | (null, null, 0) -> false
+      | (null, null, _) -> cur <- stack.Pop()
+                           true
+      | (null, _, _)    -> cur <- cur.GetRight()
+                           true
+      | (_, null, _)    -> cur <- cur.GetLeft()
+                           true
+      | (_, _, _)       -> stack.Push <| cur.GetRight()
+                           cur <- cur.GetLeft()
+                           true
+      else firstElementWasVisited <- true
+           true
 
 [<EntryPoint>]
 let main argv = 
@@ -146,6 +171,9 @@ let main argv =
   tree2.Remove 45
   tree2.Print()
 
+  printfn "%A" <| tree2.Exists 29
+  printfn "%A" <| tree2.Exists 45
+
   let tree1 = new BinaryTree<int> (Node<int> (4, null, null))
   tree1.Add 2
   tree1.Add 100
@@ -156,8 +184,14 @@ let main argv =
   tree1.Add 3
   tree1.Print()
 
-  printfn "%A" <| tree2.Exists 29
-  printfn "%A" <| tree2.Exists 45
+  printfn "\n"
+  let mutable enumer = (tree2:>(IEnumerable<int>)).GetEnumerator()
+                                               
 
+  //for node in (tree2:>(IEnumerable<int>)).GetEnumerator(). do
+  //printfn "%A" <| v  
+
+  for node in tree1 do
+    printfn "%A" <| node
   
   0 // возвращение целочисленного кода выхода
