@@ -23,7 +23,12 @@ type BinaryTree<'T when 'T :> IComparable<'T> >(v : 'T, l : BinaryTree<'T>, r : 
   
   
   *)
-  member private this.getMostRightValue() = 
+  member private this.getMostRightValue() =
+    match right with
+    | null -> value
+    | _    -> right.getMostRightValue()
+
+    (*
     match (left, right) with
     | (null, null) -> let result = value
                       value <- None
@@ -33,7 +38,9 @@ type BinaryTree<'T when 'T :> IComparable<'T> >(v : 'T, l : BinaryTree<'T>, r : 
                       right <- left.GetRight()
                       left <- left.GetLeft()
                       result
-    | (_,_)        -> right.getMostRightValue()                    
+    | (_,_)        -> right.getMostRightValue()
+    
+    *)
 
   member this.GetValue () = value
   member this.GetLeft () = left
@@ -78,7 +85,9 @@ type BinaryTree<'T when 'T :> IComparable<'T> >(v : 'T, l : BinaryTree<'T>, r : 
                        | (_, null)    -> value <- left.GetValue()
                                          right <- left.GetRight()
                                          left <- left.GetLeft()
-                       | _            -> value <- left.getMostRightValue() 
+                       | _            -> let result = left.getMostRightValue()
+                                         left.Remove (result.Value) |> ignore
+                                         value <- result
                        true
                 | 1 -> if left = null
                        then false
@@ -136,6 +145,10 @@ let main argv =
   printf "\n"
 
   tree1.Remove 50
+  tree1.Print()
+  printf "\n"
+
+  tree1.Remove 45
   tree1.Print()
   printf "\n"
 
