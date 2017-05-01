@@ -29,4 +29,4 @@ module Tests =
 
   [<Test>]
   let checkExistenceOf9239 () =
-    Seq.exists (fun x -> if x = 9239 then true else false) (primeNumbersSeq ()) |> should equal true
+    Seq.exists (fun x -> x = 9239) (primeNumbersSeq ()) |> should equal true
