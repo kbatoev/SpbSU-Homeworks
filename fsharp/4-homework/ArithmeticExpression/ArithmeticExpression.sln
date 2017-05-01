@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.9
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "ArithmeticExpression", "ArithmeticExpression\ArithmeticExpression.fsproj", "{4A3E00BC-77CE-45A4-B2D5-07CEC43107C3}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "ArithmeticExpressionTest", "ArithmeticExpressionTest\ArithmeticExpressionTest.fsproj", "{7B97DEA5-4347-4F9B-AB9F-CF74B6EFB104}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4A3E00BC-77CE-45A4-B2D5-07CEC43107C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A3E00BC-77CE-45A4-B2D5-07CEC43107C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A3E00BC-77CE-45A4-B2D5-07CEC43107C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A3E00BC-77CE-45A4-B2D5-07CEC43107C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B97DEA5-4347-4F9B-AB9F-CF74B6EFB104}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B97DEA5-4347-4F9B-AB9F-CF74B6EFB104}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B97DEA5-4347-4F9B-AB9F-CF74B6EFB104}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B97DEA5-4347-4F9B-AB9F-CF74B6EFB104}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
