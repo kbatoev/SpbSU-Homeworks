@@ -1,11 +1,11 @@
-﻿namespace TreeMapTests
+﻿namespace TreeTests
 
 open BinaryTree.TreeMap
 open NUnit.Framework
 open FsUnit
 open FsCheck
 
-module TreeTests =
+module MapOperation =
 
   let checkTree (xs : Tree<int>) = (mapTree (fun x -> 3 * (x + 2)) xs) = (mapTree (fun x -> x + 6) (mapTree (fun x -> x * 3) xs))
   [<Test>]
