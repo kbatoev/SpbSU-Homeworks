@@ -9,8 +9,8 @@ module CorrectExpressions =
 
   let checkCorrectnessOfBracketsInExpression stringExpression = 
     let listOfString = List.ofSeq stringExpression
-    let isOpenBracket symbol = if symbol = '(' || symbol = '[' || symbol = '{' then true else false
-    let isCloseBracket symbol = if symbol = ')' || symbol = ']' || symbol = '}' then true else false
+    let isOpenBracket symbol = symbol = '(' || symbol = '[' || symbol = '{'
+    let isCloseBracket symbol = symbol = ')' || symbol = ']' || symbol = '}'
     let getBracketsType bracket =
       match bracket with
       | '(' -> 1
@@ -23,7 +23,7 @@ module CorrectExpressions =
 
     let rec helper list (acc : char list) =
       match list with
-      | [] -> if List.length acc = 0 then true else false
+      | [] -> List.length acc = 0
       | (x :: xs) when isOpenBracket x -> helper xs (x :: acc)
       | (x :: xs) when isCloseBracket x && List.length acc = 0 -> false 
       | (x :: xs) when isCloseBracket x && getBracketsType x = getBracketsType (List.head acc) -> helper xs (List.tail acc)
