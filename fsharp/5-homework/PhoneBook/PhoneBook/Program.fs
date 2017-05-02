@@ -31,7 +31,7 @@ module PhoneBook =
              dealWithPhoneBook <| Map.add number name book
     | "3" -> printf "Enter name: "
              let name = System.Console.ReadLine ()
-             printfn "%A" <| (Map.filter (fun k v -> if v = name then true else false) book |> Map.toList |> List.map fst)
+             printfn "%A" <| (Map.filter (fun k v -> v = name) book |> Map.toList |> List.map fst)
              dealWithPhoneBook book
     | "4" -> printf "Enter number: "
              let number = System.Console.ReadLine ()
@@ -51,19 +51,24 @@ module PhoneBook =
              writer.Close()
              printfn "Saved."
              dealWithPhoneBook book
-    | "7" -> printf "Enter name of file: "
-             let fileName = System.Console.ReadLine () 
-             let reader = 
-               seq {
-                 use reader = new StreamReader(File.OpenRead(fileName))
-                 while not reader.EndOfStream do
-                   let nameAndNumber = List.ofArray (reader.ReadLine().Split([|' '|]))
-                   let name = List.head nameAndNumber
-                   let number = List.head <| List.tail nameAndNumber
-                   yield (number, name) }
-             let newBook = Map.ofSeq reader
-             printfn "Loaded."
-             dealWithPhoneBook newBook
+    | "7" ->  printf "Enter name of file: "
+              let fileName = System.Console.ReadLine () 
+              try 
+                let reader = 
+                  seq {
+                    use reader = new StreamReader(File.OpenRead(fileName))
+                    while not reader.EndOfStream do
+                      let nameAndNumber = List.ofArray (reader.ReadLine().Split([|' '|]))
+                      let name = List.head nameAndNumber
+                      let number = List.head <| List.tail nameAndNumber
+                      yield (number, name) }
+                let newBook = Map.ofSeq reader
+                printfn "Loaded."
+                dealWithPhoneBook newBook
+              with
+              | :? System.IO.FileNotFoundException -> printfn "File not found!"
+                                                      dealWithPhoneBook book
+             
     | _   -> dealWithPhoneBook book
 
   [<EntryPoint>]
