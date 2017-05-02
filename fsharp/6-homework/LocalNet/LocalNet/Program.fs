@@ -1,13 +1,24 @@
 ﻿// Дополнительные сведения о F# см. на http://fsharp.org
 // Дополнительную справку см. в проекте "Учебник по F#".
 
+namespace Nets
+
 open Microsoft.FSharp.Collections
 
-module Program =
+module LocalNet =
 
-    type OS = Linux | Windows | MacOS
-    with member x.InfectionProbability = match x with Linux -> 20 | Windows -> 50 | MacOS -> 40
-         static member GetOS (osType :int) = match osType with 1 -> Linux | 2 -> Windows | _ -> MacOS 
+    type OS = Linux of int | Windows of int | MacOS of int
+    with
+      member x.InfectionProbability = 
+        match x with
+        | Linux probability -> probability 
+        | Windows probability -> probability
+        | MacOS probability -> probability
+      member x.GetNameOfOs () = 
+        match x with
+        | Linux _ -> "Linux"
+        | Windows _ -> "Windows"
+        | MacOS _ -> "MacOS"
 
     type Computer(os:OS, isInfected :bool) = 
         static let mutable amountOfComputers : int = 0
@@ -20,11 +31,11 @@ module Program =
         member x.Neighbors = neighbors
         member x.AddNeighbor comp = neighbors <- (comp :: neighbors)
         member x.Infected = infected
-        member x.InfectMe() = infected <- (infected || (rand.Next() % 100 <  os.InfectionProbability))
-        member x.PrintInfo() = printfn "No%d %A Infected:%A" <| number <| os <| infected 
+        member x.InfectMe() = infected <- (infected || (rand.Next() % 100 < os.InfectionProbability))
+        member x.PrintInfo() = printfn "No%d %A Infected:%A" <| number <| os.GetNameOfOs() <| infected 
         static member GetAmount = amountOfComputers
 
-    let infectNet computers =
+    let countIterationsOfNetInfection computers =
       printfn "Initial state"
       List.iter (fun (comp :Computer) -> comp.PrintInfo()) computers
       printfn ""
@@ -32,6 +43,7 @@ module Program =
         let infectedComputers = List.filter (fun (comp:Computer) -> comp.Infected) computers
         if List.length infectedComputers = List.length computers
         then printfn "All computers are infected"
+             number - 1
         else List.iter (fun (comp :Computer) -> List.iter (fun (comp2 :Computer) -> comp2.InfectMe()) comp.Neighbors) infectedComputers
              printfn "Iteration %d" <| number
              List.iter (fun (comp :Computer) -> comp.PrintInfo()) computers
@@ -39,21 +51,24 @@ module Program =
              helper <| number + 1
       helper 1
     
-    let CreateConnections (computers : Computer list) connections = 
+    let createConnections (computers : Computer list) connections = 
           List.iter (fun (f,s) -> computers.[f].AddNeighbor(computers.[s])) connections
 
-    let computers = [new Computer(Linux, false);
-                     new Computer(Windows, false);
-                     new Computer(Windows, true);
-                     new Computer(MacOS, false);
-                     new Computer(Linux, true)]
+    let computers = [new Computer(Linux 20, false);
+                     new Computer(Windows 50, false);
+                     new Computer(Windows 50, true);
+                     new Computer(MacOS 40, false);
+                     new Computer(Linux 20, true)]
 
     let connections = [(0, 1); (0, 2); (1, 0); (2, 0); (3, 4); (4, 3)]
 
+    // net is:  0 - 1   3 - 4
+    //          |
+    //          2
+
     [<EntryPoint>]
     let main argv =
-    
-        CreateConnections computers connections
-        infectNet computers
+        createConnections computers connections
+        countIterationsOfNetInfection computers |> ignore
 
         0 // возвращение целочисленного кода выхода
