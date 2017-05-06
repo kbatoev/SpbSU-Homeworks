@@ -13,9 +13,8 @@ module Square =
         let side = String.replicate n "*"
         printfn "%s" side
         let edgeSide = "*" + String.replicate (n - 2) " " + "*"
-        let total = n - 2
         let rec printEdgeSides i =
-          if i = total
+          if i = n - 2
           then ()
           else printfn "%s" edgeSide
                printEdgeSides (i + 1)
