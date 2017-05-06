@@ -35,12 +35,7 @@ module BetaReduction =
     | Application (t1, t2) -> collectFreeVariables t1 @ collectFreeVariables t2
     | Abstraction (x, s) -> x :: collectAllVariables s
 
-  let rec contains (element : char) (list : char list) = 
-    match list with
-    | [] -> false
-    | x :: xs -> if x = element then true else contains element xs
-
-  let getNewVar allVars = (List.filter (fun x -> if contains x allVars then false else true) alphabet) |> List.rev |> List.head
+  let getNewVar allVars = (List.filter (fun x -> not (List.exists ((=) x) allVars)) alphabet) |> List.rev |> List.head
 
   let rec replaceVar oldVar newVar term =
     match term with
@@ -58,7 +53,7 @@ module BetaReduction =
                             then Abstraction (x, s)
                             else let freeVarsOfTermT = collectFreeVariables termT
                                  let freeVarsOfTermS = collectFreeVariables s
-                                 if contains x freeVarsOfTermT && contains varX freeVarsOfTermS
+                                 if List.exists ((=) x) freeVarsOfTermT && List.exists ((=) varX) freeVarsOfTermS
                                  then let allVars = collectAllVariables termT @ collectAllVariables s
                                       let newVar = getNewVar allVars
                                       let newTermS = replaceVar x newVar s
@@ -69,15 +64,15 @@ module BetaReduction =
     match term with
     | V x -> V x
     | Application (t1, t2) -> match t1 with
-                             | V x -> Application (t1, reduce t2)
-                             | Application (s1, s2) -> 
+                              | V x -> Application (t1, reduce t2)
+                              | Application (s1, s2) -> 
                                                        let newt1 = reduce t1
                                                        match newt1 with
                                                        | Abstraction (var, s) -> reduce <| Application (newt1, t2)
                                                        | _                    -> Application (newt1, reduce t2)
                                                        
-                             | Abstraction (var, s) -> let termAfterSubstitution = substitute s var t2
-                                                       reduce termAfterSubstitution
+                              | Abstraction (var, s) -> let termAfterSubstitution = substitute s var t2
+                                                        reduce termAfterSubstitution
     | Abstraction (var, s) -> Abstraction (var, reduce s)
 
   [<EntryPoint>]
