@@ -5,7 +5,7 @@ namespace InfiniteSequences
 
 module NaturalNumbers =
  
-  let infSeq = Seq.concat <| Seq.map (fun y -> Seq.init y (fun z -> y)) (Seq.initInfinite (fun x -> x))
+  let infSeq = Seq.concat <| Seq.map (fun y -> Seq.init y (fun z -> y)) (Seq.initInfinite id)
   let infSeq100 = Seq.take 100 infSeq
 
   [<EntryPoint>]
