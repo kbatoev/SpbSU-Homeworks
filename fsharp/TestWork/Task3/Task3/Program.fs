@@ -7,16 +7,22 @@ exception EmptyStackException of string
 
 module StackCollection =
 
+  // stack is an abstract data type that stores elements
+  // elements removing order is LIFO (last in - first out)
   type Stack<'T>() =
     let mutable list : list<'T> = []
-
+    
+    // insert element in the head of stack
     member this.Push x = list <- (x :: list)
+    
+    // check if stack has no elements
     member this.IsEmpty () = List.isEmpty list
+    // remove element from head of stack and return it
     member this.Pop () = match list with
                          | [] -> raise (EmptyStackException ("stack is empty"))
                          | x :: xs -> list <- xs
                                       x
-
+    // return element from head of stack
     member this.Front () = match list with
                          | [] -> raise (EmptyStackException ("stack is empty"))
                          | x :: xs -> x
