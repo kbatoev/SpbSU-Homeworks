@@ -5,17 +5,6 @@ open System.Net
 open Microsoft.FSharp.Control.WebExtensions
 open System.Text.RegularExpressions
 
-let fetchAsyncThatDownladsWebPage(url:string) =
-    async {
-        try
-            let uri = new System.Uri(url)
-            let webClient = new WebClient()
-            return! webClient.AsyncDownloadString(uri)
-        with
-            | ex -> printfn "%s" (ex.Message);
-                    return ex.Message
-    }
-
 let fetchAsyncThatDownladsWebPageAndPrintsInfo(url:string) =
     async {
         try
@@ -23,23 +12,25 @@ let fetchAsyncThatDownladsWebPageAndPrintsInfo(url:string) =
             let webClient = new WebClient()
             let! html = webClient.AsyncDownloadString(uri)
             printfn "%A" <| url + " -- " + string html.Length
+            return html
         with
-            | ex -> printfn "%s" (ex.Message);
+            | ex -> printfn "%s" (ex.Message)
+                    return ex.Message
     }
 
 
-// this is pattern that finds references of type: <a href=http://someSite.someDomain
-// anySymbolBeforeFirstQuote " andThenQuote "
-// anySymbolBeforeFirstClosingBracket > andThenClosingBracket >
-let regExprForReference = @"<a\shref=\x22https?://\w+\.[a-zA-Z][^\x22]*\x22[^>]*>"
+// this is pattern that finds references of type: <a href=http://some-Site.someDomain
+// (anySymbolsBeforeFirstQuote ") andThenQuote "
+// (anySymbolsBeforeFirstClosingBracket >) andThenClosingBracket >
+let regExprForReference = @"<a\shref=\x22https?://\w[\w-]*\.[a-zA-Z]+[^\x22]*\x22[^>]*>"
 let regex = new Regex(regExprForReference)
 
 let getReferencesFromPage url =
   printfn "Page is %A" <| url
-  let contentOfUrl = fetchAsyncThatDownladsWebPage url |> Async.RunSynchronously
+  let contentOfUrl = fetchAsyncThatDownladsWebPageAndPrintsInfo url |> Async.RunSynchronously
 
   let referencesTagCollection = regex.Matches contentOfUrl
-  let siteRegExpr = @"https?://\w+\.\w[^\x22]*"
+  let siteRegExpr = @"https?://\w[\w-]*\.[a-zA-Z]+[^\x22]*"
   let siteRegex = new Regex(siteRegExpr)
 
   printfn "There are %A references" <| referencesTagCollection.Count
