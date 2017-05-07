@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26228.9
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "WebPages", "WebPages\WebPages.fsproj", "{4C9E8157-FF51-4359-96D2-A9DB0CBC0DF4}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "RegExprTests", "RegExprTests\RegExprTests.fsproj", "{953F8A19-62A3-429A-B771-C8F21A667FD7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{4C9E8157-FF51-4359-96D2-A9DB0CBC0DF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C9E8157-FF51-4359-96D2-A9DB0CBC0DF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C9E8157-FF51-4359-96D2-A9DB0CBC0DF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{953F8A19-62A3-429A-B771-C8F21A667FD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{953F8A19-62A3-429A-B771-C8F21A667FD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{953F8A19-62A3-429A-B771-C8F21A667FD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{953F8A19-62A3-429A-B771-C8F21A667FD7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
