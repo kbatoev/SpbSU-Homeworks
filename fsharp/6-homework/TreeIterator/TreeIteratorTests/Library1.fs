@@ -35,7 +35,7 @@ module Tests =
   let tree2AfterRemoving4 = tree2.Remove 4
   [<Test>]
   let checkRootRemoving () =
-    tree2AfterRemoving4.GetRoot |> should equal null 
+    tree2AfterRemoving4.Root |> should equal null 
   
   
   let tree3 = (new BinaryTree<int>()).Add(1).Add(4).Remove(4)

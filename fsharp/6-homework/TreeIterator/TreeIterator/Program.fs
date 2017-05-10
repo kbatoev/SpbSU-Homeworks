@@ -32,14 +32,18 @@ type Node<'T when 'T :> IComparable<'T> >(v : 'T, l : Node<'T>, r : Node<'T>) =
     else printf "("
          right.Print()
          printf ")"
-
-  // while possible going to right node and in the end returning its value
+  /// <summary> 
+  /// GetMostRightValue is a private property.
+  /// Its work is while possible going to right node and in the end returning its value.
+  /// </summary>
   member private this.GetMostRightValue = 
     if right = null
     then value
     else right.GetMostRightValue
   
-  // recursively check whether elem is stored in some node
+  /// <summary>
+  /// Recursively check whether elem is stored in some node.
+  /// </summary>
   member this.Exists elem = 
     match value.CompareTo(elem) with
     | 0  -> true
@@ -47,11 +51,13 @@ type Node<'T when 'T :> IComparable<'T> >(v : 'T, l : Node<'T>, r : Node<'T>) =
     | -1 -> if right = null then false else right.Exists elem
     | _  -> false
   
-  // removing elem from some node
-  // there might be 4 situations, connected with amount of node's children when elem = node.GetValue
-  // 1) no children -> node becomes null
-  // 2) 1 child -> node copies data from this child
-  // 3) 2 children -> node copies value from rightMostNode in left subNode and deletes that node
+  /// <summary>
+  /// Removing elem from some node.
+  /// There might be 3 situations, connected with amount of node's children when elem = node.GetValue
+  /// 1) no children -> node becomes null
+  /// 2) 1 child -> node copies data from this child
+  /// 3) 2 children -> node copies value from rightMostNode in left subNode and deletes that node
+  /// </summary>
   member this.Remove elem = 
     match value.CompareTo(elem) with
     | 0 -> match (left, right) with
@@ -68,8 +74,9 @@ type Node<'T when 'T :> IComparable<'T> >(v : 'T, l : Node<'T>, r : Node<'T>) =
             then this
             else Node<'T> (value, left, right.Remove elem)
     | _ -> this
-  
-  // adding element saving invariant of binary search tree
+  /// <summary>
+  /// Adding element saving invariant of binary search tree.
+  /// </summary>
   member this.Add elem =
     match value.CompareTo(elem) with
     | -1 -> if right = null
@@ -85,22 +92,28 @@ type Node<'T when 'T :> IComparable<'T> >(v : 'T, l : Node<'T>, r : Node<'T>) =
 type BinaryTree<'T when 'T :> IComparable<'T> >(newRoot : Node<'T>) =
   let root : Node<'T> = newRoot
 
-  member this.GetRoot = root
+  member this.Root = root
 
-  // returns new tree after removing element
+  /// <summary>
+  /// Returns new tree after removing element.
+  /// </summary>
   member this.Remove elem =
     match root with
     | null -> BinaryTree<'T> (null)
     | _    -> BinaryTree<'T> (root.Remove elem)
   
-  // transforming values of tree to list
+  /// <summary>
+  /// transforming values of tree to list
+  /// </summary>
   member this.ToList () =
     let mutable list = []
     for value in this do
       list <- (value :: list)
     List.rev list
   
-  // returns new tree after adding element
+  /// <summary>
+  /// Returns new tree after adding element.
+  /// </summary>
   member this.Add elem =
     if root = null
     then BinaryTree<'T> (Node<'T>(elem, null, null))
@@ -131,13 +144,13 @@ type BinaryTree<'T when 'T :> IComparable<'T> >(newRoot : Node<'T>) =
   
 and TreeIterator<'T when 'T :> IComparable<'T>>(tree : BinaryTree<'T>) = 
   let mutable stack : Stack<Node<'T>> = Stack<Node<'T>> ()
-  let mutable cur = tree.GetRoot
+  let mutable cur = tree.Root
   let mutable firstElementWasVisited = false
   
   interface IEnumerator<'T> with
     member this.Current = cur.GetValue
     
-    member this.Reset() = cur <- tree.GetRoot
+    member this.Reset() = cur <- tree.Root
                           firstElementWasVisited <- false
     
     member this.Dispose() = ()
