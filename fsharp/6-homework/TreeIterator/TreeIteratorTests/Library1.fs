@@ -24,6 +24,7 @@ module Tests =
   [<Test>]
   let checkExistenceOf100 () =
     treeWithOneElement.Exists 100 |> should equal true
+  
   [<Test>]
   let checkExistenceOf50 () =
     treeWithOneElement.Exists 50 |> should equal false
@@ -32,7 +33,7 @@ module Tests =
   tree2.Remove 4
   [<Test>]
   let checkRootRemoving () =
-    tree2.GetRoot() |> should equal null 
+    tree2.GetRoot |> should equal null 
     
   let tree3 = new BinaryTree<int>()
   tree3.Add 1
@@ -51,7 +52,6 @@ module Tests =
   let checkRemovingElementInLeftSubtree() =
     tree4.ToList() |> should equal [4; -1]
 
-
   let tree5 = new BinaryTree<double>()
   tree5.Add 5.0
   tree5.Add 4.0
@@ -60,11 +60,11 @@ module Tests =
   [<Test>]
   let removeFromMiddle() =
     tree5.ToList() |> should equal [5.0; 3.0]
+  
   [<Test>]
   let existenceOf3 () =
     tree5.Exists 3.0 |> should equal true
 
-  
   let tree6 = new BinaryTree<int>()
   tree6.Add 5
   tree6.Add 8
@@ -87,7 +87,6 @@ module Tests =
   bigTree.Add 29
   bigTree.Add 31
   bigTree.Print()
-
   bigTree.Remove 50
   [<Test>]
   let checkTransitionRightMostValue () = 
