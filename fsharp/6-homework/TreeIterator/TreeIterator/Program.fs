@@ -9,9 +9,9 @@ open System.Collections.Generic
 
 [<AllowNullLiteral>]
 type Node<'T when 'T :> IComparable<'T> >(v : 'T, l : Node<'T>, r : Node<'T>) =
-  let mutable value : 'T = v
-  let mutable left : Node<'T> = l
-  let mutable right : Node<'T> = r
+  let value : 'T = v
+  let left : Node<'T> = l
+  let right : Node<'T> = r
 
   member this.GetValue = value
   
@@ -42,10 +42,10 @@ type Node<'T when 'T :> IComparable<'T> >(v : 'T, l : Node<'T>, r : Node<'T>) =
   // recursively check whether elem is stored in some node
   member this.Exists elem = 
     match value.CompareTo(elem) with
-    | 0 -> true
-    | 1 -> if left = null then false else left.Exists elem
+    | 0  -> true
+    | 1  -> if left = null then false else left.Exists elem
     | -1 -> if right = null then false else right.Exists elem
-    | _ -> false
+    | _  -> false
   
   // removing elem from some node
   // there might be 4 situations, connected with amount of node's children when elem = node.GetValue
@@ -55,50 +55,43 @@ type Node<'T when 'T :> IComparable<'T> >(v : 'T, l : Node<'T>, r : Node<'T>) =
   member this.Remove elem = 
     match value.CompareTo(elem) with
     | 0 -> match (left, right) with
-           | (null, _) -> value <- right.GetValue
-                          left <- right.GetLeft
-                          right <- right.GetRight
-           | (_, null) -> value <- left.GetValue
-                          right <- left.GetRight
-                          left <- left.GetLeft
-           | (_, _)    -> value <- left.GetMostRightValue
-                          if left.GetRight = null && left.GetLeft = null
-                          then left <- null
-                          else left.Remove value
-    | 1 -> if left <> null 
-           then if left.GetRight = null && left.GetLeft = null && left.GetValue.CompareTo(elem) = 0
-                then left <- null
-                else left.Remove elem
-    | -1 -> if right <> null 
-            then if right.GetRight = null && right.GetLeft = null && right.GetValue.CompareTo(elem) = 0
-                 then right <- null
-                 else right.Remove elem
-    | _ -> ()
+           | (null, null) -> null
+           | (null, _) -> right
+           | (_, null) -> left
+           | (_, _)    -> let newValue = left.GetMostRightValue 
+                          new Node<'T> (newValue, left.Remove newValue, right)
+    | 1 -> if left = null 
+           then left
+           else Node<'T> (value, left.Remove elem, right)
+    
+    | -1 -> if right = null
+            then this
+            else Node<'T> (value, left, right.Remove elem)
+    | _ -> this
   
   // adding element saving invariant of binary search tree
   member this.Add elem =
-    match v.CompareTo(elem) with
+    match value.CompareTo(elem) with
     | -1 -> if right = null
-            then right <- Node<'T>(elem, null, null)
-            else right.Add elem
+            then Node<'T> (value, left, Node<'T>(elem, null, null))
+            else Node<'T> (value, left, right.Add elem)
     | 1 -> if left = null
-           then left <- Node<'T>(elem, null, null)
-           else left.Add elem
-    | _ -> ()
+           then Node<'T> (value, Node<'T>(elem, null, null), right)
+           else Node<'T> (value, left.Add elem, right)
+    | _ -> this
 
 
 [<AllowNullLiteral>]
 type BinaryTree<'T when 'T :> IComparable<'T> >(newRoot : Node<'T>) =
-  let mutable root : Node<'T> = newRoot
+  let root : Node<'T> = newRoot
 
   member this.GetRoot = root
 
+  // returns new tree after removing element
   member this.Remove elem =
     match root with
-    | null -> ()
-    | _    -> if root.GetLeft = null && root.GetRight = null && root.GetValue.CompareTo(elem) = 0
-              then root <- null
-              else root.Remove elem
+    | null -> BinaryTree<'T> (null)
+    | _    -> BinaryTree<'T> (root.Remove elem)
   
   // transforming values of tree to list
   member this.ToList () =
@@ -107,10 +100,11 @@ type BinaryTree<'T when 'T :> IComparable<'T> >(newRoot : Node<'T>) =
       list <- (value :: list)
     List.rev list
   
+  // returns new tree after adding element
   member this.Add elem =
     if root = null
-    then root <- Node<'T>(elem, null, null)
-    else root.Add elem
+    then BinaryTree<'T> (Node<'T>(elem, null, null))
+    else BinaryTree<'T> (root.Add elem)
   
   member this.Exists elem = if root = null then false else root.Exists elem
   
@@ -172,13 +166,10 @@ module MainModule =
   let main argv = 
 
     let tree1 = new BinaryTree<int> (Node<int> (4, null, null))
-    tree1.Add 2
-    tree1.Add 100
-    tree1.Print()
-    tree1.Remove 100
-    tree1.Print()
-    tree1.Add -7
-    tree1.Add 3
-    tree1.Print()
-  
+    let tree2 = tree1.Add(2).Add(100) 
+    tree2.Print()
+    let tree3 = tree2.Remove(100)
+    tree3.Print()
+    tree3.Add(-7).Add(3).Print()
+
     0 // возвращение целочисленного кода выхода
