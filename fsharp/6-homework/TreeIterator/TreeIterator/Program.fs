@@ -147,16 +147,16 @@ and TreeIterator<'T when 'T :> IComparable<'T>>(tree : BinaryTree<'T>) =
     member this.MoveNext() = 
       if firstElementWasVisited
       then match cur.GetLeft, cur.GetRight, stack.Count with
-        | (null, null, 0) -> false
-        | (null, null, _) -> cur <- stack.Pop()
-                             true
-        | (null, _, _)    -> cur <- cur.GetRight
-                             true
-        | (_, null, _)    -> cur <- cur.GetLeft
-                             true
-        | (_, _, _)       -> stack.Push <| cur.GetRight
-                             cur <- cur.GetLeft
-                             true
+            | (null, null, 0) ->  false
+            | (null, null, _) ->  cur <- stack.Pop()
+                                  true
+            | (null, _, _)    ->  cur <- cur.GetRight
+                                  true
+            | (_, null, _)    ->  cur <- cur.GetLeft
+                                  true
+            | (_, _, _)       ->  stack.Push <| cur.GetRight
+                                  cur <- cur.GetLeft
+                                  true
       else firstElementWasVisited <- true
            true
 
