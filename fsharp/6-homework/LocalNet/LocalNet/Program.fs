@@ -24,7 +24,7 @@ module LocalNet =
         static let mutable amountOfComputers : int = 0
         let number = amountOfComputers <- amountOfComputers + 1
                      amountOfComputers
-        let rand = new System.Random()
+        static let rand = new System.Random()
         let mutable infected = isInfected
         let mutable neighbors = []
         member x.Number = number
