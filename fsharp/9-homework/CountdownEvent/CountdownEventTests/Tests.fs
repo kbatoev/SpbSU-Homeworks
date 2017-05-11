@@ -7,11 +7,10 @@ open FsUnit
 open FsCheck
 
 open System.Net
-open System.Threading
 
 module Tests =
   
-  let cde1 = new MyCountdownEvent(0)
+  let cde1 = new CountdownEvent(0)
 
   [<Test>]
   let ``Checking whether cde1 with 0 count has done its job`` () =
@@ -21,19 +20,19 @@ module Tests =
   let ``cde1 can't block any thread`` () =
     cde1.Wait() |> should equal false
   
-  let cde2 = new MyCountdownEvent(2)
+  let cde2 = new CountdownEvent(2)
   [<Test>]
   let ``cde2 must continue blocking after calling its signal method `` () =
     cde2.Signal() |> should equal false
 
-  let cde3 = new MyCountdownEvent(3)
+  let cde3 = new CountdownEvent(3)
   cde3.Signal() |> ignore
   cde3.Signal() |> ignore
   [<Test>]
   let ``After 3 times signalling , sde3 stops holding threads `` () =
     cde3.Signal() |> should equal true
 
-  let cde4 = new MyCountdownEvent(4)
+  let cde4 = new CountdownEvent(4)
   let call4TimesSignalParallel () =
     let createAsync () = async {
       return cde4.Signal()
@@ -48,21 +47,16 @@ module Tests =
 
   
   let signallingFunction list =
-    
-    let cde5 = new MyCountdownEvent(List.length list)
-    Monitor.Enter cde5 
-    try 
-      let createSignallingAsync () = async {
+    let cde5 = new CountdownEvent(100000000)
+    let createSignallingAsync () = async {
         return cde5.Signal()
-      }
-      list |> List.map (fun _ -> createSignallingAsync()) |> Async.Parallel |> Async.RunSynchronously |> ignore
-      cde5.Count
-    finally 
-      Monitor.Exit cde5
+    }
+    list |> List.map (fun _ -> createSignallingAsync()) |> Async.Parallel |> Async.RunSynchronously |> ignore
+    cde5.Count
   
-  let checkCounters (list : int list) = signallingFunction list = 0 //if 100000000 - List.length list < 0 then 0 else 100000000 - List.length list
+  let checkCounters list = signallingFunction list = if 100000000 - List.length list < 0 then 0 else 100000000 - List.length list
   [<Test>]
-  let checkRaceConditions () =
+  let ``Check Race Conditions `` () =
     Check.Quick checkCounters
     
 
