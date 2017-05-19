@@ -33,15 +33,14 @@ type CountdownEvent(count) =
   /// </summary>
   member this.Signal() = 
                          if currentCount > 0
-                         then 
-                              Interlocked.Decrement(&currentCount) |> ignore
-                              if currentCount = 0 
+                         then
+                              let localCount = Interlocked.Decrement(&currentCount)
+                              if localCount = 0 
                               then let rec helper () =
                                      if manualReset.Set() then true else helper ()
                                    helper ()
                               else false
                          else true
-
 
 module MainModule =
 
