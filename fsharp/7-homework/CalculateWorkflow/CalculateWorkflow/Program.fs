@@ -27,15 +27,13 @@ module Calculator =
 
 
       match (box x) with
-      | y when (y :? int) -> let number = double <| (y :?> int)
-                             f number
-      | y when (y :? double) -> let number = y :?> double
-                                f number
-      | y when (y :? string) -> let str = y :?> string
-                                let number = convertListOfCharsToDouble (Seq.toList str) 0.0 1.0
-                                match number with
-                                | None -> None
-                                | Some n -> f n
+      | :? int as n -> let number = double <| n
+                       f number
+      | :? double as n -> f n
+      | :? string as str -> let number = convertListOfCharsToDouble (Seq.toList str) 0.0 1.0
+                            match number with
+                            | None -> None
+                            | Some n -> f n
       | _ -> None
 
     member this.Return(x) =
