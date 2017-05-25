@@ -29,15 +29,15 @@ module RegexTests =
     regex.IsMatch siteBeginningWithDigit |> should equal true
 
 
-  let siteContainningHyphen = "<a href=\"http://some-site.com/somePage\">"
+  let siteContainingHyphen = "<a href=\"http://some-site.com/somePage\">"
   [<Test>]
   let ``site can contain '-' inside`` () =
-    regex.IsMatch siteContainningHyphen |> should equal true
+    regex.IsMatch siteContainingHyphen |> should equal true
 
-  let siteContainningHyphenInTheBeginning = "<a href=\"http://-site2.com/\">"
+  let siteContainingHyphenInTheBeginning = "<a href=\"http://-site2.com/\">"
   [<Test>]
   let ``site can't begin with '-'`` () =
-    regex.IsMatch siteContainningHyphenInTheBeginning |> should equal false
+    regex.IsMatch siteContainingHyphenInTheBeginning |> should equal false
 
   let tagContainsMoreThan1Attribute = "<a href=\"http://abc.domain/somePage\" attr1=\"yellow\" attr2=\"square\">"
   [<Test>]

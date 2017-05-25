@@ -8,13 +8,14 @@ open System.Text.RegularExpressions
 
 module ExploreReferencesFromGivenURL =
 
-  let fetchAsyncThatDownladsWebPageAndPrintsInfo(url:string) =
+  let fetchAsyncThatDownladsWebPageAndPrintsInfo (url:string, isDataShown) =
       async {
           try
               let uri = new System.Uri(url)
               let webClient = new WebClient()
               let! html = webClient.AsyncDownloadString(uri)
-              printfn "%A" <| url + " -- " + string html.Length
+              if isDataShown
+              then printfn "%A" <| url + " -- " + string html.Length
               return html
           with
               | ex -> printfn "%s" (ex.Message)
@@ -30,7 +31,7 @@ module ExploreReferencesFromGivenURL =
 
   let getReferencesFromPage url =
     printfn "Page is %A" <| url
-    let contentOfUrl = fetchAsyncThatDownladsWebPageAndPrintsInfo url |> Async.RunSynchronously
+    let contentOfUrl = fetchAsyncThatDownladsWebPageAndPrintsInfo (url, false) |> Async.RunSynchronously
 
     let referencesTagCollection = regex.Matches contentOfUrl
     let siteRegExpr = @"https?://\w[\w-]*\.[a-zA-Z]+[^\x22]*"
@@ -51,5 +52,5 @@ module ExploreReferencesFromGivenURL =
       //let url = System.Console.ReadLine()
 
       let list = getReferencesFromPage url
-      list |> List.map fetchAsyncThatDownladsWebPageAndPrintsInfo |> Async.Parallel |> Async.RunSynchronously |> ignore
+      list |> List.map (fun x -> fetchAsyncThatDownladsWebPageAndPrintsInfo (x, true)) |> Async.Parallel |> Async.RunSynchronously |> ignore
       0 // возвращение целочисленного кода выхода
